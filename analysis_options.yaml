@@ -1,0 +1,65 @@
+include: package:flutter_lints/flutter.yaml
+
+# Additional information about this file can be found at
+# https://dart.dev/guides/language/analysis-options
+
+linter:
+  rules:
+    - avoid_print
+    - avoid_unnecessary_containers
+    - avoid_web_libraries_in_flutter
+    - no_logic_in_create_state
+    - prefer_const_constructors
+    - prefer_const_constructors_in_immutables
+    - prefer_const_declarations
+    - prefer_const_literals_to_create_immutables
+    - sized_box_for_whitespace
+    - use_full_hex_values_for_flutter_colors
+    - use_key_in_widget_constructors
+    - prefer_final_fields
+    - prefer_final_in_for_each
+    - prefer_final_locals
+    - prefer_is_empty
+    - prefer_is_not_empty
+    - await_only_futures
+    # custom rules
+    - avoid_returning_null_for_future
+    - cancel_subscriptions
+    - literal_only_boolean_expressions
+    - throw_in_finally
+    - unnecessary_statements
+    - always_declare_return_types
+    - always_put_control_body_on_new_line
+    # - always_put_required_named_parameters_first
+    - avoid_bool_literals_in_conditional_expressions
+    - avoid_escaping_inner_quotes
+    - avoid_multiple_declarations_per_line
+    - avoid_positional_boolean_parameters
+    - avoid_redundant_argument_values
+    - avoid_void_async
+    # - one_member_abstracts
+    - only_throw_errors
+    - parameter_assignments
+    - prefer_asserts_with_message
+    - prefer_if_null_operators
+    - prefer_null_aware_method_calls
+    # - require_trailing_commas
+    # - sort_unnamed_constructors_first
+    - unawaited_futures
+    - unnecessary_lambdas
+    - unnecessary_null_checks
+    - use_colored_box
+    - use_decorated_box
+    - use_named_constants
+    - use_string_buffers
+    - use_super_parameters
+    - use_to_and_as_if_applicable
+    # - flutter_style_todos
+    # - always_use_package_imports
+
+analyzer:
+  exclude:
+    - "**/*.g.dart"
+    - "**/*.freezed.dart"
+  errors:
+    invalid_annotation_target: ignore
