@@ -1,20 +1,17 @@
+import 'package:diploma_frontend/my_app.dart';
+import 'package:diploma_frontend/services/language_service/language_service.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MainApp());
-}
-
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
-      ),
-    );
-  }
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
+  runApp(
+    EasyLocalization(
+      supportedLocales: LanguageService.supportedLocales,
+      path: LanguageService.path,
+      fallbackLocale: LanguageService.fallbackLocale,
+      child: MyApp(),
+    ),
+  );
 }
