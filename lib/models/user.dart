@@ -14,7 +14,7 @@ class User {
     return User(
       id: json['id'],
       token: json['token'],
-      role: json['role'],
+      role: json['role'].toString().getRole(),
     );
   }
 
@@ -22,7 +22,7 @@ class User {
     return {
       'id': id,
       'token': token,
-      'role': role,
+      'role': role.getName(),
     };
   }
 }

@@ -1,3 +1,5 @@
+import 'package:diploma_frontend/services/app_state_service/app_state_service.dart';
+import 'package:diploma_frontend/services/database/database.dart';
 import 'package:flutter/material.dart';
 
 class AdminBody extends StatelessWidget {
@@ -5,8 +7,16 @@ class AdminBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.blueGrey,
+    return GestureDetector(
+      onTap: () async {
+        Database db = Database();
+        await db.clear();
+        AppStateService appStateService = AppStateService();
+        await appStateService.logIn();
+      },
+      child: Container(
+        color: Colors.blueGrey,
+      ),
     );
   }
 }

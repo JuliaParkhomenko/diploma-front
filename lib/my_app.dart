@@ -23,8 +23,11 @@ class _MyAppState extends State<MyApp> {
 
   final RoutemasterDelegate _routemasterDelegate = RoutemasterDelegate(
     routesBuilder: (context) {
-      final AppStateService appStateService =
-          Provider.of<AppStateService>(context);
+      final AppStateService appStateService = Provider.of<AppStateService>(
+        context,
+      );
+      print(appStateService.loggedInState);
+
       switch (appStateService.loggedInState) {
         case LoggedInState.admin:
           return RouteService().adminMap;
@@ -37,7 +40,7 @@ class _MyAppState extends State<MyApp> {
         case LoggedInState.loggedOut:
           return RouteService().authMap;
         default:
-          return RouteService().authMap;
+          return RouteService().directorMap;
       }
     },
   );

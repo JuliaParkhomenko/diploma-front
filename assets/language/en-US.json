@@ -1,5 +1,9 @@
 {
     "text": "Hello World!",
     "auth": "Authorization",
-    "registr":"Registration"
+    "registr":"Registration",
+    "Sign in to your account": "Sign in to your account",
+    "Forgot you password?": "Forgot you password?",
+    "Sign in": "Sign in",
+    "Incorrect email or password": "Incorrect email or password"
 }

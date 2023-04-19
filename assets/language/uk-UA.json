@@ -1,5 +1,9 @@
 {
     "text":"Привіт світ!",
     "auth": "Авторизація",
-    "registr":"Реєстрація"
+    "registr":"Реєстрація",
+    "Sign in to your account": "Вхід у свій акаунт",
+    "Forgot you password?": "Забув свій пароль?",
+    "Sign in": "Увійти",
+    "Incorrect email or password": "Неправильна пошта чи пароль"
 }

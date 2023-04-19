@@ -15,6 +15,10 @@ class AppStateService extends ChangeNotifier {
       final Database db = Database();
       final User? user = await db.getUser();
       await Future.delayed(const Duration(milliseconds: 1500));
+      if (user == null) {
+        _loggedInState = LoggedInState.loggedOut;
+        notifyListeners();
+      }
       if (user!.role == Role.director) {
         _loggedInState = LoggedInState.director;
         notifyListeners();
@@ -22,6 +26,7 @@ class AppStateService extends ChangeNotifier {
       }
       if (user.role == Role.admin) {
         _loggedInState = LoggedInState.admin;
+        print(loggedInState);
         notifyListeners();
         return;
       }
@@ -33,6 +38,7 @@ class AppStateService extends ChangeNotifier {
       _loggedInState = LoggedInState.loggedOut;
       notifyListeners();
     } catch (error) {
+      print(error);
       _loggedInState = LoggedInState.loggedOut;
       notifyListeners();
     }
