@@ -4,7 +4,7 @@ import 'package:diploma_frontend/models/user.dart';
 import 'package:diploma_frontend/services/database/database.dart';
 import 'package:flutter/material.dart';
 
-class AppStateService extends ChangeNotifier {
+class AppStateService with ChangeNotifier {
   LoggedInState _loggedInState = LoggedInState.loading;
   LoggedInState get loggedInState => _loggedInState;
 
@@ -18,6 +18,7 @@ class AppStateService extends ChangeNotifier {
       if (user == null) {
         _loggedInState = LoggedInState.loggedOut;
         notifyListeners();
+        return;
       }
       if (user!.role == Role.director) {
         _loggedInState = LoggedInState.director;
@@ -32,6 +33,7 @@ class AppStateService extends ChangeNotifier {
       }
       if (user.role == Role.manager) {
         _loggedInState = LoggedInState.manager;
+        print(loggedInState);
         notifyListeners();
         return;
       }

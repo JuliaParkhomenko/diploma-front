@@ -6,6 +6,7 @@ import 'package:diploma_frontend/services/database/database.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:diploma_frontend/constants/constants.dart' as constants;
+import 'package:provider/provider.dart';
 
 class AuthBody extends StatefulWidget {
   const AuthBody({super.key});
@@ -126,7 +127,8 @@ class _AuthBodyState extends State<AuthBody> {
       await db.addUser(user);
       final AppStateService appStateService = AppStateService();
       print("My error");
-      await appStateService.logIn();
+      //await appStateService.logIn();
+      await Provider.of<AppStateService>(context, listen: false).logIn();
     }
   }
 }
