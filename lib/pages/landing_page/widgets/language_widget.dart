@@ -1,15 +1,23 @@
 import 'package:diploma_frontend/services/language_service/language_service.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter/src/widgets/placeholder.dart';
 
 class LanguageWidget extends StatefulWidget {
-  const LanguageWidget({super.key});
+  final Function(Locale) onChange;
+  const LanguageWidget({
+    super.key,
+    required this.onChange,
+  });
 
   @override
   State<LanguageWidget> createState() => _LanguageWidgetState();
 }
 
 class _LanguageWidgetState extends State<LanguageWidget> {
+  String? value;
+
   final List<Map<String, String>> languages = [
     {
       'value': 'uk',
@@ -20,21 +28,34 @@ class _LanguageWidgetState extends State<LanguageWidget> {
       'label': 'ENG',
     },
   ];
-  String? value;
+
   @override
   Widget build(BuildContext context) {
     return DropdownButton<String>(
-      icon: Icon(
+      underline: const SizedBox(),
+      icon: const Icon(
         Icons.arrow_drop_down,
         color: Colors.white,
       ),
-      style: TextStyle(
-        color: Colors.blue,
-        fontWeight: FontWeight.bold,
-      ),
+      selectedItemBuilder: (context) {
+        return languages
+            .map<DropdownMenuItem<String>>(
+              (e) => DropdownMenuItem<String>(
+                value: e['value'],
+                child: Text(
+                  e['label']!,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            )
+            .toList();
+      },
       hint: Text(
         context.locale.countryCode! == 'UA' ? 'UA' : 'ENG',
-        style: TextStyle(
+        style: const TextStyle(
           color: Colors.white,
           fontWeight: FontWeight.bold,
         ),
@@ -46,7 +67,7 @@ class _LanguageWidgetState extends State<LanguageWidget> {
               value: e['value'],
               child: Text(
                 e['label']!,
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
                 ),
@@ -55,24 +76,14 @@ class _LanguageWidgetState extends State<LanguageWidget> {
           )
           .toList(),
       onChanged: (newValue) {
+        widget.onChange(
+          newValue == 'uk'
+              ? LanguageService.supportedLocales[0]
+              : LanguageService.supportedLocales[1],
+        );
         setState(() {
-          if (newValue != null) {
-            value = newValue;
-            print(value);
-            EasyLocalization.of(context)!.setLocale(
-              value == 'uk'
-                  ? LanguageService.supportedLocales[0]
-                  : LanguageService.supportedLocales[1],
-            );
-            // context.setLocale(
-            //   value == 'uk'
-            //       ? LanguageService.supportedLocales[0]
-            //       : LanguageService.supportedLocales[1],
-            //   //Locale('en', 'US'),
-            // );
-          }
+          value = newValue;
         });
-        setState(() {});
       },
     );
   }

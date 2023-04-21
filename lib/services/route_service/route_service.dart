@@ -16,6 +16,7 @@ class RouteService {
           ),
     },
   );
+
   final RouteMap adminMap = RouteMap(
     onUnknownRoute: (_) => const Redirect('/'),
     routes: {
@@ -24,6 +25,7 @@ class RouteService {
           ),
     },
   );
+
   final RouteMap managerMap = RouteMap(
     onUnknownRoute: (_) => const Redirect('/'),
     routes: {
@@ -32,6 +34,7 @@ class RouteService {
           ),
     },
   );
+
   final RouteMap directorMap = RouteMap(
     onUnknownRoute: (_) => const Redirect('/'),
     routes: {
@@ -40,6 +43,7 @@ class RouteService {
           ),
     },
   );
+
   final RouteMap authMap = RouteMap(
     onUnknownRoute: (_) => const Redirect('/'),
     routes: {

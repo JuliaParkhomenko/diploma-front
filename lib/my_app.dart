@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:routemaster/routemaster.dart';
 
 class MyApp extends StatefulWidget {
+  static late BuildContext context;
   const MyApp({super.key});
 
   @override
@@ -15,6 +16,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final AppStateService appStateService = AppStateService();
+
   @override
   void initState() {
     appStateService.logIn();
@@ -26,8 +28,6 @@ class _MyAppState extends State<MyApp> {
       final AppStateService appStateService = Provider.of<AppStateService>(
         context,
       );
-      print(appStateService.loggedInState);
-
       switch (appStateService.loggedInState) {
         case LoggedInState.admin:
           return RouteService().adminMap;
@@ -47,6 +47,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    MyApp.context = context;
     return ChangeNotifierProvider<AppStateService>.value(
       value: appStateService,
       child: MaterialApp.router(

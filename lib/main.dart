@@ -11,7 +11,7 @@ Future<void> main() async {
       supportedLocales: LanguageService.supportedLocales,
       path: LanguageService.path,
       fallbackLocale: LanguageService.fallbackLocale,
-      child: MyApp(),
+      child: const MyApp(),
     ),
   );
 }

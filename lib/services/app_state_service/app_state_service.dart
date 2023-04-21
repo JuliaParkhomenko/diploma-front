@@ -11,36 +11,40 @@ class AppStateService with ChangeNotifier {
   Future<void> logIn() async {
     _loggedInState = LoggedInState.loading;
     notifyListeners();
+
     try {
       final Database db = Database();
       final User? user = await db.getUser();
+
       await Future.delayed(const Duration(milliseconds: 1500));
+
       if (user == null) {
         _loggedInState = LoggedInState.loggedOut;
         notifyListeners();
         return;
       }
-      if (user!.role == Role.director) {
+
+      if (user.role == Role.director) {
         _loggedInState = LoggedInState.director;
         notifyListeners();
         return;
       }
+
       if (user.role == Role.admin) {
         _loggedInState = LoggedInState.admin;
-        print(loggedInState);
         notifyListeners();
         return;
       }
+
       if (user.role == Role.manager) {
         _loggedInState = LoggedInState.manager;
-        print(loggedInState);
         notifyListeners();
         return;
       }
+
       _loggedInState = LoggedInState.loggedOut;
       notifyListeners();
     } catch (error) {
-      print(error);
       _loggedInState = LoggedInState.loggedOut;
       notifyListeners();
     }

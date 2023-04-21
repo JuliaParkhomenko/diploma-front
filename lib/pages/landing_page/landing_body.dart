@@ -1,14 +1,19 @@
 import 'package:diploma_frontend/pages/landing_page/widgets/language_widget.dart';
 import 'package:diploma_frontend/pages/landing_page/widgets/logo_widget.dart';
-import 'package:diploma_frontend/pages/landing_page/widgets/sign_in_button.dart';
+import 'package:diploma_frontend/services/language_service/language_service.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:diploma_frontend/constants/constants.dart' as constants;
-import 'package:google_fonts/google_fonts.dart';
+import 'package:routemaster/routemaster.dart';
 
-class LandingBody extends StatelessWidget {
+class LandingBody extends StatefulWidget {
   const LandingBody({super.key});
 
+  @override
+  State<LandingBody> createState() => _LandingBodyState();
+}
+
+class _LandingBodyState extends State<LandingBody> {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
@@ -30,7 +35,7 @@ class LandingBody extends StatelessWidget {
               const SizedBox(
                 width: 60,
               ),
-              Center(
+              const Center(
                 child: LogoWidget(),
               ),
               const SizedBox(
@@ -66,8 +71,14 @@ class LandingBody extends StatelessWidget {
               const Expanded(
                 child: SizedBox(),
               ),
-              LanguageWidget(),
-              SizedBox(
+              LanguageWidget(
+                onChange: (value) {
+                  setState(() {
+                    context.setLocale(value);
+                  });
+                },
+              ),
+              const SizedBox(
                 width: 20,
               ),
             ],
@@ -81,20 +92,20 @@ class LandingBody extends StatelessWidget {
               children: [
                 Text(
                   'Accounting for products in warehouses'.tr(),
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 26,
                     fontWeight: FontWeight.bold,
                     color: constants.Colors.main,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 60,
                 ),
                 Text.rich(
                   TextSpan(
                     children: [
                       TextSpan(
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 12,
                         ),
                         text:
@@ -102,19 +113,20 @@ class LandingBody extends StatelessWidget {
                                 .tr(),
                       ),
                       TextSpan(
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
                         ),
+                        // ignore: avoid_escaping_inner_quotes
                         text: 'It\'s as simple as that!'.tr(),
                       ),
                     ],
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 75,
                 ),
-                SignInButton(),
+                signInButton(),
               ],
             ),
             Padding(
@@ -124,6 +136,32 @@ class LandingBody extends StatelessWidget {
           ],
         ),
       ],
+    );
+  }
+
+  Widget signInButton() {
+    return InkWell(
+      onTap: () => Routemaster.of(context).push('/sign-in'),
+      child: Container(
+        alignment: Alignment.center,
+        width: 150,
+        height: 40,
+        decoration: BoxDecoration(
+          color: constants.Colors.mainButton,
+          border: Border.all(
+            width: 2,
+            color: constants.Colors.mainButtonBorder,
+          ),
+          borderRadius: BorderRadius.circular(18),
+        ),
+        child: Text(
+          'Sign in'.tr().toUpperCase(),
+          style: const TextStyle(
+            color: constants.Colors.mainButtonText,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
     );
   }
 }

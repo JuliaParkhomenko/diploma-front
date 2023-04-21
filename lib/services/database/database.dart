@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class Database {
   final String _userKey = 'user';
+
   Future<void> addUser(User user) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString(
@@ -16,6 +17,7 @@ class Database {
   Future<User?> getUser() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final String? user = prefs.getString(_userKey);
+
     if (user == null) {
       return null;
     }

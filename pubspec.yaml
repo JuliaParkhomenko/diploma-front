@@ -4,7 +4,7 @@ publish_to: 'none'
 version: 0.1.0
 
 environment:
-  sdk: '>=2.19.6 <3.0.0'
+  sdk: '>=2.19.2 <3.0.0'
 
 dependencies:
   flutter:
@@ -14,7 +14,6 @@ dependencies:
   easy_localization: ^3.0.1
   shared_preferences: ^2.1.0
   http: ^0.13.5
-  google_fonts: ^4.0.3
 
 dev_dependencies:
   flutter_test:
