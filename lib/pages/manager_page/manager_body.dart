@@ -1,23 +1,320 @@
+import 'package:diploma_frontend/pages/batches_page/batches_page.dart';
+import 'package:diploma_frontend/pages/declaration_page/declaration_page.dart';
+import 'package:diploma_frontend/pages/overview_page/overview_page.dart';
+import 'package:diploma_frontend/pages/reminders_page/reminders_page.dart';
+import 'package:diploma_frontend/pages/statistics_page/statistics_page.dart';
+import 'package:diploma_frontend/pages/warehouse_page/warehouse_page.dart';
 import 'package:diploma_frontend/services/app_state_service/app_state_service.dart';
 import 'package:diploma_frontend/services/database/database.dart';
+import 'package:diploma_frontend/services/language_service/language_service.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:diploma_frontend/constants/constants.dart' as constants;
+import 'package:flutter_svg/flutter_svg.dart';
 
-class ManagerBody extends StatelessWidget {
+class ManagerBody extends StatefulWidget {
   const ManagerBody({super.key});
 
   @override
+  State<ManagerBody> createState() => _ManagerBodyState();
+}
+
+class _ManagerBodyState extends State<ManagerBody> {
+  int selectedIndex = 0;
+  final List<Widget> pages = [
+    OverviewPage(),
+    WarehousePage(),
+    BatchesPage(),
+    RemindersPage(),
+    StatisticsPage(),
+    DeclarationPage(),
+  ];
+  @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    final Size size = MediaQuery.of(context).size;
+    final List<String> pageNames = [
+      'Overview'.tr(),
+      'Warehouse'.tr(),
+      'Batches'.tr(),
+      'Reminders'.tr(),
+      'Statistics'.tr(),
+      'Declaration'.tr(),
+    ];
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Container(
+          height: size.height,
+          width: 140,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.only(
+              topRight: Radius.circular(20),
+              bottomRight: Radius.circular(20),
+            ),
+            color: constants.Colors.main.withOpacity(0.85),
+          ),
+          child: Column(
+            children: [
+              SizedBox(
+                height: 25,
+              ),
+              Image.asset(
+                'assets/images/pngwing.com.png',
+                height: 70,
+                width: 70,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                  top: 70,
+                ),
+                child: getDestination(
+                  'Overview'.tr(),
+                  Icon(
+                    Icons.home,
+                    color: Colors.white,
+                    size: 30,
+                  ),
+                  0,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                  top: 15,
+                ),
+                child: getDestination(
+                  'Warehouse'.tr(),
+                  Icon(
+                    Icons.warehouse,
+                    color: Colors.white,
+                    size: 30,
+                  ),
+                  1,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                  top: 15,
+                ),
+                child: getDestination(
+                  'Batches'.tr(),
+                  Icon(
+                    Icons.archive_outlined,
+                    color: Colors.white,
+                    size: 30,
+                  ),
+                  2,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                  top: 15,
+                ),
+                child: getDestination(
+                  'Reminders'.tr(),
+                  Icon(
+                    Icons.notification_important_outlined,
+                    color: Colors.white,
+                    size: 30,
+                  ),
+                  3,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                  top: 15,
+                ),
+                child: getDestination(
+                  'Statistics'.tr(),
+                  Icon(
+                    Icons.bar_chart_rounded,
+                    color: Colors.white,
+                    size: 30,
+                  ),
+                  4,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                  top: 15,
+                ),
+                child: getDestination(
+                  'Declaration'.tr(),
+                  Icon(
+                    Icons.article_outlined,
+                    color: Colors.white,
+                    size: 30,
+                  ),
+                  5,
+                ),
+              ),
+              const Expanded(
+                child: SizedBox(),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 30),
+                child: getDestination(
+                  'Log out'.tr(),
+                  Icon(
+                    Icons.logout,
+                    color: Colors.white,
+                    size: 30,
+                  ),
+                  -1,
+                ),
+              ),
+            ],
+          ),
+        ),
+        SizedBox(
+          height: size.height,
+          width: size.width - 140,
+          child: Column(
+            children: [
+              SizedBox(
+                height: 70,
+                width: size.width - 140,
+                child: Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        left: 20,
+                      ),
+                      child: Text(
+                        pageNames[selectedIndex],
+                        style: TextStyle(
+                          color: constants.Colors.main,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 32,
+                        ),
+                      ),
+                    ),
+                    const Expanded(
+                      child: SizedBox(
+                        height: 1,
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          context.setLocale(
+                            context.locale ==
+                                    LanguageService.supportedLocales[0]
+                                ? LanguageService.supportedLocales[1]
+                                : LanguageService.supportedLocales[0],
+                          );
+                        });
+                      },
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(4),
+                        child: SizedBox(
+                          height: 20,
+                          width: 30,
+                          child: context.locale ==
+                                  LanguageService.supportedLocales[0]
+                              ? SvgPicture.asset(
+                                  'assets/images/ukraine-flag-icon.svg',
+                                  fit: BoxFit.fill,
+                                )
+                              : SvgPicture.asset(
+                                  'assets/images/england-flag-icon.svg',
+                                  fit: BoxFit.fill),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      width: 40,
+                      height: 40,
+                      margin: EdgeInsets.symmetric(
+                        horizontal: 25,
+                      ),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: constants.Colors.notificationShape,
+                      ),
+                      child: Icon(
+                        Icons.notifications_none_outlined,
+                        size: 28,
+                        color: Color.fromARGB(200, 62, 62, 62),
+                      ),
+                    ),
+                    Container(
+                      width: 40,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: Color.fromARGB(200, 62, 62, 62),
+                          width: 2,
+                        ),
+                      ),
+                      child: Icon(
+                        Icons.person,
+                        size: 34,
+                        color: constants.Colors.mainButtonBorder,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 20,
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: size.height - 70,
+                child: pages[selectedIndex],
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget getDestination(String text, Icon icon, int index) {
+    return InkWell(
       onTap: () async {
-        Database db = Database();
-        await db.clear();
-        AppStateService appStateService = AppStateService();
-        //await appStateService.logIn();
-        await Provider.of<AppStateService>(context, listen: false).logIn();
+        if (index == -1) {
+          Database db = Database();
+          await db.clear();
+          AppStateService appStateService = AppStateService();
+          await Provider.of<AppStateService>(context, listen: false).logIn();
+        }
+        setState(() {
+          selectedIndex = index;
+        });
       },
       child: Container(
-        color: Colors.yellowAccent,
+        height: 50,
+        decoration: selectedIndex == index
+            ? BoxDecoration(
+                color: Colors.white.withOpacity(.2),
+                borderRadius: BorderRadius.circular(17),
+              )
+            : null,
+        width: 140,
+        alignment: Alignment.centerLeft,
+        child: Padding(
+          padding: const EdgeInsets.only(left: 10),
+          child: Row(
+            children: [
+              SizedBox(
+                child: icon,
+                width: 30,
+              ),
+              SizedBox(
+                width: 5,
+              ),
+              Text(
+                text,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: index == selectedIndex ? FontWeight.bold : null,
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

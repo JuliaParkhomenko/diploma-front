@@ -6,4 +6,5 @@ class Colors {
   static const Color mainButton = Color(0xfff9f6f6);
   static const Color mainButtonBorder = Color(0xffcc8805);
   static const Color mainButtonText = Color(0xfff19737);
+  static const Color notificationShape = Color(0xffe5f6e6);
 }

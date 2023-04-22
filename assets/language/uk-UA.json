@@ -8,7 +8,14 @@
     "Incorrect email or password": "Неправильна пошта чи пароль",
     "Accounting for products in warehouses": "Облік продуктів на \nскладах",
     "Our help to you in accounting for food products in warehouses. Try it. ": "Наша допомога Вам у обліку продуктів на складах. Спробуйте. ",
-    "It's as simple as that!": "Це легше, ніж здається!"
+    "It's as simple as that!": "Це легше, ніж здається!",
+    "Overview": "Огляд",
+    "Warehouse": "Склад",
+    "Batches": "Партії",
+    "Reminders": "Сповіщення",
+    "Statistics": "Статистика",
+    "Log out": "Вихід",
+    "Declaration": "Заява"
 
 
 }
