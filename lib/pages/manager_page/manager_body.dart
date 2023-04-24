@@ -1,5 +1,5 @@
 import 'package:diploma_frontend/pages/batches_page/batches_page.dart';
-import 'package:diploma_frontend/pages/declaration_page/declaration_page.dart';
+import 'package:diploma_frontend/pages/application_page/application_page.dart';
 import 'package:diploma_frontend/pages/overview_page/overview_page.dart';
 import 'package:diploma_frontend/pages/reminders_page/reminders_page.dart';
 import 'package:diploma_frontend/pages/statistics_page/statistics_page.dart';
@@ -28,7 +28,7 @@ class _ManagerBodyState extends State<ManagerBody> {
     BatchesPage(),
     RemindersPage(),
     StatisticsPage(),
-    DeclarationPage(),
+    ApplicationPage(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -39,7 +39,7 @@ class _ManagerBodyState extends State<ManagerBody> {
       'Batches'.tr(),
       'Reminders'.tr(),
       'Statistics'.tr(),
-      'Declaration'.tr(),
+      'Application'.tr(),
     ];
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -139,7 +139,7 @@ class _ManagerBodyState extends State<ManagerBody> {
                   top: 15,
                 ),
                 child: getDestination(
-                  'Declaration'.tr(),
+                  'Application'.tr(),
                   Icon(
                     Icons.article_outlined,
                     color: Colors.white,

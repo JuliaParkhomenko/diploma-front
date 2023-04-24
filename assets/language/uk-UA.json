@@ -3,7 +3,7 @@
     "auth": "Авторизація",
     "registr":"Реєстрація",
     "Sign in to your account": "Вхід у свій акаунт",
-    "Forgot you password?": "Забув свій пароль?",
+    "Forgot your password?": "Забули свій пароль?",
     "Sign in": "Увійти",
     "Incorrect email or password": "Неправильна пошта чи пароль",
     "Accounting for products in warehouses": "Облік продуктів на \nскладах",
@@ -15,7 +15,7 @@
     "Reminders": "Сповіщення",
     "Statistics": "Статистика",
     "Log out": "Вихід",
-    "Declaration": "Заява"
+    "Application": "Заява"
 
 
 }

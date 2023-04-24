@@ -20,7 +20,7 @@ class _LandingBodyState extends State<LandingBody> {
     return Column(
       children: [
         Container(
-          height: 55,
+          height: 60,
           width: size.width,
           decoration: const BoxDecoration(
             color: constants.Colors.main,
@@ -42,15 +42,17 @@ class _LandingBodyState extends State<LandingBody> {
                 width: 14,
               ),
               Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: const [
                   Text(
                     'Organized',
                     style: TextStyle(
+                      height: 2.45,
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
+                      fontFamily: 'InknutAntiqua',
                     ),
                   ),
                   Padding(
@@ -60,9 +62,11 @@ class _LandingBodyState extends State<LandingBody> {
                     child: Text(
                       'Warehouse',
                       style: TextStyle(
+                        height: 0.85,
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                         color: constants.Colors.logo,
+                        fontFamily: 'InknutAntiqua',
                       ),
                     ),
                   ),
@@ -93,9 +97,11 @@ class _LandingBodyState extends State<LandingBody> {
                 Text(
                   'Accounting for products in warehouses'.tr(),
                   style: const TextStyle(
+                    //height: 0.8,
                     fontSize: 26,
                     fontWeight: FontWeight.bold,
                     color: constants.Colors.main,
+                    fontFamily: 'OpenSans',
                   ),
                 ),
                 const SizedBox(
@@ -107,6 +113,7 @@ class _LandingBodyState extends State<LandingBody> {
                       TextSpan(
                         style: const TextStyle(
                           fontSize: 12,
+                          fontFamily: 'OpenSans',
                         ),
                         text:
                             'Our help to you in accounting for food products in warehouses. Try it. '
@@ -116,6 +123,7 @@ class _LandingBodyState extends State<LandingBody> {
                         style: const TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
+                          fontFamily: 'OpenSans',
                         ),
                         // ignore: avoid_escaping_inner_quotes
                         text: 'It\'s as simple as that!'.tr(),
@@ -159,6 +167,7 @@ class _LandingBodyState extends State<LandingBody> {
           style: const TextStyle(
             color: constants.Colors.mainButtonText,
             fontWeight: FontWeight.bold,
+            fontFamily: 'OpenSans',
           ),
         ),
       ),

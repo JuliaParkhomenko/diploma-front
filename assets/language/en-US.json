@@ -3,7 +3,7 @@
     "auth": "Authorization",
     "registr":"Registration",
     "Sign in to your account": "Sign in to your account",
-    "Forgot you password?": "Forgot you password?",
+    "Forgot your password?": "Forgot your password?",
     "Sign in": "Sign in",
     "Incorrect email or password": "Incorrect email or password",
     "Accounting for products in warehouses": "Accounting for products in \nwarehouses",
@@ -15,7 +15,7 @@
     "Reminders": "Reminders",
     "Statistics": "Statistics",
     "Log out": "Log out",
-    "Declaration": "Declaration"
+    "Application": "Application"
 
 
 

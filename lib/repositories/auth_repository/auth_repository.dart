@@ -15,10 +15,12 @@ class AuthRepository implements BaseAuthRepository {
     required String fullName,
   }) async {
     try {
-      final Uri uri = Uri.parse('https://localhost:7037/api/User/signup');
+      final Uri uri = Uri.parse(
+          'https://restaurant-warehouse.azurewebsites.net/api/User/signup'); //'https://localhost:7037/api/User/signup'
       final Map<String, String> headers = {
         'accept': '*/*',
-        'Content-Type': 'application/json',
+        'Content-Type':
+            'application/json-patch+json', //'Content-Type': 'application/json'
       };
       final body = jsonEncode({
         'email': email,
@@ -49,10 +51,12 @@ class AuthRepository implements BaseAuthRepository {
     required String password,
   }) async {
     try {
-      final Uri uri = Uri.parse('https://localhost:7037/api/User/signin');
+      final Uri uri = Uri.parse(
+          'https://restaurant-warehouse.azurewebsites.net/api/User/signin'); //'https://localhost:7037/api/User/signin'
       final Map<String, String> headers = {
         'accept': '*/*',
-        'Content-Type': 'application/json',
+        'Content-Type':
+            'application/json-patch+json', //'Content-Type': 'application/json'
       };
       final body = jsonEncode({
         'email': email,

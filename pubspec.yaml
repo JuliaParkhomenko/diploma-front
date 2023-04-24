@@ -37,3 +37,7 @@ flutter:
     - family: InknutAntiqua
       fonts:
         - asset: assets/fonts/InknutAntiqua-Bold.ttf
+    - family: OpenSans
+      fonts:
+        - asset: assets/fonts/OpenSans-SemiBold.ttf
+        - asset: assets/fonts/OpenSans-Regular.ttf

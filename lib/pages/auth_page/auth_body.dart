@@ -35,6 +35,7 @@ class _AuthBodyState extends State<AuthBody> {
               color: constants.Colors.main,
               fontSize: 30,
               fontWeight: FontWeight.bold,
+              fontFamily: 'OpenSans',
             ),
           ),
         ),
@@ -75,9 +76,10 @@ class _AuthBodyState extends State<AuthBody> {
           height: 30,
         ),
         Text(
-          'Forgot you password?',
+          'Forgot your password?'.tr(),
           style: TextStyle(
             decoration: TextDecoration.underline,
+            fontFamily: 'OpenSans',
           ),
         ),
         SizedBox(
@@ -100,7 +102,11 @@ class _AuthBodyState extends State<AuthBody> {
           ),
           child: Text(
             'Sign in'.tr().toUpperCase(),
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(
+              color: Colors.white,
+              fontFamily: 'OpenSans',
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
       ],
