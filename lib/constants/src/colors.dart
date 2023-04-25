@@ -7,4 +7,6 @@ class Colors {
   static const Color mainButtonBorder = Color(0xffcc8805);
   static const Color mainButtonText = Color(0xfff19737);
   static const Color notificationShape = Color(0xffe5f6e6);
+  static const Color managerWarehouseMain = Color(0xff72bb53);
+  static const Color subtitleTextColor = Color(0xff545554);
 }

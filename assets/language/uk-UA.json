@@ -15,7 +15,13 @@
     "Reminders": "Сповіщення",
     "Statistics": "Статистика",
     "Log out": "Вихід",
-    "Application": "Заява"
+    "Application": "Заява",
+    "Stocks": "Запаси",
+    "Product": "Продукт",
+    "Amount": "Кількість",
+    "Ordered": "Замовлено",
+    "Total": "Загалом",
+    "Search by name": "Пошук за іменем" 
 
 
 }

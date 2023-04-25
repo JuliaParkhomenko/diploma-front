@@ -1,10 +1,13 @@
+import 'package:diploma_frontend/blocs/stock/stock_cubit.dart';
 import 'package:diploma_frontend/enums/logged_in_state.dart';
+import 'package:diploma_frontend/repositories/warehouse_repository/warehouse_repository.dart';
 import 'package:diploma_frontend/services/app_state_service/app_state_service.dart';
 import 'package:diploma_frontend/services/route_service/route_service.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:routemaster/routemaster.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MyApp extends StatefulWidget {
   static late BuildContext context;
@@ -48,16 +51,25 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     MyApp.context = context;
-    return ChangeNotifierProvider<AppStateService>.value(
-      value: appStateService,
-      child: MaterialApp.router(
-        debugShowCheckedModeBanner: false,
-        locale: context.locale,
-        supportedLocales: context.supportedLocales,
-        title: 'Diploma work',
-        localizationsDelegates: context.localizationDelegates,
-        routeInformationParser: const RoutemasterParser(),
-        routerDelegate: _routemasterDelegate,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => StockCubit(
+            WarehouseRepository(),
+          ),
+        ),
+      ],
+      child: ChangeNotifierProvider<AppStateService>.value(
+        value: appStateService,
+        child: MaterialApp.router(
+          debugShowCheckedModeBanner: false,
+          locale: context.locale,
+          supportedLocales: context.supportedLocales,
+          title: 'Diploma work',
+          localizationsDelegates: context.localizationDelegates,
+          routeInformationParser: const RoutemasterParser(),
+          routerDelegate: _routemasterDelegate,
+        ),
       ),
     );
   }

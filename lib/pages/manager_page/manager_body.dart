@@ -21,7 +21,7 @@ class ManagerBody extends StatefulWidget {
 }
 
 class _ManagerBodyState extends State<ManagerBody> {
-  int selectedIndex = 0;
+  int selectedIndex = 1;
   final List<Widget> pages = [
     OverviewPage(),
     WarehousePage(),
@@ -260,9 +260,12 @@ class _ManagerBodyState extends State<ManagerBody> {
                   ],
                 ),
               ),
-              SizedBox(
-                height: size.height - 70,
-                child: pages[selectedIndex],
+              Padding(
+                padding: const EdgeInsets.only(left: 15, right: 20),
+                child: SizedBox(
+                  height: size.height - 70,
+                  child: pages[selectedIndex],
+                ),
               ),
             ],
           ),
