@@ -1,4 +1,3 @@
-import 'package:diploma_frontend/enums/role.dart';
 import 'package:diploma_frontend/models/user.dart';
 import 'package:diploma_frontend/repositories/auth_repository/auth_repository.dart';
 import 'package:diploma_frontend/services/app_state_service/app_state_service.dart';
@@ -31,7 +30,7 @@ class _AuthBodyState extends State<AuthBody> {
         Center(
           child: Text(
             'Sign in to your account'.tr(),
-            style: TextStyle(
+            style: const TextStyle(
               color: constants.Colors.main,
               fontSize: 30,
               fontWeight: FontWeight.bold,
@@ -39,7 +38,7 @@ class _AuthBodyState extends State<AuthBody> {
             ),
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 100,
         ),
         SizedBox(
@@ -47,15 +46,15 @@ class _AuthBodyState extends State<AuthBody> {
           child: TextField(
             controller: email,
             decoration: InputDecoration(
-              prefixIcon: Icon(Icons.email),
+              prefixIcon: const Icon(Icons.email),
               hintText: 'Email', // Placeholder text
-              border: OutlineInputBorder(), // Border style
+              border: const OutlineInputBorder(), // Border style
               filled: true, // Background color
               fillColor: Colors.grey[200], // Background color
             ),
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 20,
         ),
         SizedBox(
@@ -63,26 +62,26 @@ class _AuthBodyState extends State<AuthBody> {
           child: TextField(
             controller: password,
             decoration: InputDecoration(
-              prefixIcon: Icon(Icons.lock),
+              prefixIcon: const Icon(Icons.lock),
               hintText: 'Password', // Placeholder text
-              border: OutlineInputBorder(), // Border style
+              border: const OutlineInputBorder(), // Border style
               filled: true, // Background color
               fillColor: Colors.grey[200], // Background color
             ),
             obscureText: true,
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 30,
         ),
         Text(
           'Forgot your password?'.tr(),
-          style: TextStyle(
+          style: const TextStyle(
             decoration: TextDecoration.underline,
             fontFamily: 'OpenSans',
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 30,
         ),
         TextButton(
@@ -96,13 +95,13 @@ class _AuthBodyState extends State<AuthBody> {
               ),
             ),
             fixedSize: MaterialStateProperty.all(
-              Size(188, 42),
+              const Size(188, 42),
             ),
             backgroundColor: MaterialStateProperty.all(constants.Colors.main),
           ),
           child: Text(
             'Sign in'.tr().toUpperCase(),
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.white,
               fontFamily: 'OpenSans',
               fontWeight: FontWeight.bold,
@@ -131,9 +130,7 @@ class _AuthBodyState extends State<AuthBody> {
     } else {
       final Database db = Database();
       await db.addUser(user);
-      final AppStateService appStateService = AppStateService();
-      print("My error");
-      //await appStateService.logIn();
+      // ignore: use_build_context_synchronously
       await Provider.of<AppStateService>(context, listen: false).logIn();
     }
   }

@@ -1,7 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 
 class SearchTextfield extends StatelessWidget {
   final TextEditingController controller;
@@ -16,17 +14,17 @@ class SearchTextfield extends StatelessWidget {
         borderRadius: BorderRadius.circular(3),
       ),
       child: TextField(
-        style: TextStyle(
+        style: const TextStyle(
           fontSize: 14,
         ),
         controller: controller,
         decoration: InputDecoration(
-          hintStyle: TextStyle(
+          hintStyle: const TextStyle(
             fontSize: 14,
           ),
           alignLabelWithHint: true,
           hintText: 'Search by name'.tr(),
-          prefixIcon: Icon(
+          prefixIcon: const Icon(
             Icons.search,
             size: 22,
           ),

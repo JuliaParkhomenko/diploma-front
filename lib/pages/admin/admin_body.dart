@@ -10,9 +10,9 @@ class AdminBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () async {
-        Database db = Database();
+        final Database db = Database();
         await db.clear();
-        AppStateService appStateService = AppStateService();
+        // ignore: use_build_context_synchronously
         await Provider.of<AppStateService>(context, listen: false).logIn();
       },
       child: Container(

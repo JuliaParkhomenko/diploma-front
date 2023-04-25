@@ -33,7 +33,6 @@ class AuthRepository implements BaseAuthRepository {
         headers: headers,
         body: body,
       );
-      print(response.body);
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
         return User.fromJson(data);
@@ -67,7 +66,6 @@ class AuthRepository implements BaseAuthRepository {
         headers: headers,
         body: body,
       );
-      print(response.body);
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
         return User.fromJson(data);

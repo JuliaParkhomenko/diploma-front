@@ -1,5 +1,5 @@
-import 'package:diploma_frontend/pages/batches_page/batches_page.dart';
 import 'package:diploma_frontend/pages/application_page/application_page.dart';
+import 'package:diploma_frontend/pages/batches_page/batches_page.dart';
 import 'package:diploma_frontend/pages/overview_page/overview_page.dart';
 import 'package:diploma_frontend/pages/reminders_page/reminders_page.dart';
 import 'package:diploma_frontend/pages/statistics_page/statistics_page.dart';
@@ -22,14 +22,22 @@ class ManagerBody extends StatefulWidget {
 
 class _ManagerBodyState extends State<ManagerBody> {
   int selectedIndex = 1;
-  final List<Widget> pages = [
-    OverviewPage(),
-    WarehousePage(),
-    BatchesPage(),
-    RemindersPage(),
-    StatisticsPage(),
-    ApplicationPage(),
-  ];
+
+  Widget pages(int index, BuildContext context) {
+    final List<Widget> result = [
+      const OverviewPage(),
+      WarehousePage(
+        update: context.locale == LanguageService.fallbackLocale,
+      ),
+      const BatchesPage(),
+      const RemindersPage(),
+      const StatisticsPage(),
+      const ApplicationPage(),
+    ];
+
+    return result[index];
+  }
+
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
@@ -41,6 +49,7 @@ class _ManagerBodyState extends State<ManagerBody> {
       'Statistics'.tr(),
       'Application'.tr(),
     ];
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -48,7 +57,7 @@ class _ManagerBodyState extends State<ManagerBody> {
           height: size.height,
           width: 140,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.only(
+            borderRadius: const BorderRadius.only(
               topRight: Radius.circular(20),
               bottomRight: Radius.circular(20),
             ),
@@ -56,7 +65,7 @@ class _ManagerBodyState extends State<ManagerBody> {
           ),
           child: Column(
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 25,
               ),
               Image.asset(
@@ -70,7 +79,7 @@ class _ManagerBodyState extends State<ManagerBody> {
                 ),
                 child: getDestination(
                   'Overview'.tr(),
-                  Icon(
+                  const Icon(
                     Icons.home,
                     color: Colors.white,
                     size: 30,
@@ -84,7 +93,7 @@ class _ManagerBodyState extends State<ManagerBody> {
                 ),
                 child: getDestination(
                   'Warehouse'.tr(),
-                  Icon(
+                  const Icon(
                     Icons.warehouse,
                     color: Colors.white,
                     size: 30,
@@ -98,7 +107,7 @@ class _ManagerBodyState extends State<ManagerBody> {
                 ),
                 child: getDestination(
                   'Batches'.tr(),
-                  Icon(
+                  const Icon(
                     Icons.archive_outlined,
                     color: Colors.white,
                     size: 30,
@@ -112,7 +121,7 @@ class _ManagerBodyState extends State<ManagerBody> {
                 ),
                 child: getDestination(
                   'Reminders'.tr(),
-                  Icon(
+                  const Icon(
                     Icons.notification_important_outlined,
                     color: Colors.white,
                     size: 30,
@@ -126,7 +135,7 @@ class _ManagerBodyState extends State<ManagerBody> {
                 ),
                 child: getDestination(
                   'Statistics'.tr(),
-                  Icon(
+                  const Icon(
                     Icons.bar_chart_rounded,
                     color: Colors.white,
                     size: 30,
@@ -140,7 +149,7 @@ class _ManagerBodyState extends State<ManagerBody> {
                 ),
                 child: getDestination(
                   'Application'.tr(),
-                  Icon(
+                  const Icon(
                     Icons.article_outlined,
                     color: Colors.white,
                     size: 30,
@@ -155,7 +164,7 @@ class _ManagerBodyState extends State<ManagerBody> {
                 padding: const EdgeInsets.only(bottom: 30),
                 child: getDestination(
                   'Log out'.tr(),
-                  Icon(
+                  const Icon(
                     Icons.logout,
                     color: Colors.white,
                     size: 30,
@@ -182,7 +191,7 @@ class _ManagerBodyState extends State<ManagerBody> {
                       ),
                       child: Text(
                         pageNames[selectedIndex],
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: constants.Colors.main,
                           fontWeight: FontWeight.bold,
                           fontSize: 32,
@@ -218,21 +227,22 @@ class _ManagerBodyState extends State<ManagerBody> {
                                 )
                               : SvgPicture.asset(
                                   'assets/images/england-flag-icon.svg',
-                                  fit: BoxFit.fill),
+                                  fit: BoxFit.fill,
+                                ),
                         ),
                       ),
                     ),
                     Container(
                       width: 40,
                       height: 40,
-                      margin: EdgeInsets.symmetric(
+                      margin: const EdgeInsets.symmetric(
                         horizontal: 25,
                       ),
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         shape: BoxShape.circle,
                         color: constants.Colors.notificationShape,
                       ),
-                      child: Icon(
+                      child: const Icon(
                         Icons.notifications_none_outlined,
                         size: 28,
                         color: Color.fromARGB(200, 62, 62, 62),
@@ -244,17 +254,17 @@ class _ManagerBodyState extends State<ManagerBody> {
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         border: Border.all(
-                          color: Color.fromARGB(200, 62, 62, 62),
+                          color: const Color.fromARGB(200, 62, 62, 62),
                           width: 2,
                         ),
                       ),
-                      child: Icon(
+                      child: const Icon(
                         Icons.person,
                         size: 34,
                         color: constants.Colors.mainButtonBorder,
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 20,
                     ),
                   ],
@@ -264,7 +274,7 @@ class _ManagerBodyState extends State<ManagerBody> {
                 padding: const EdgeInsets.only(left: 15, right: 20),
                 child: SizedBox(
                   height: size.height - 70,
-                  child: pages[selectedIndex],
+                  child: pages(selectedIndex, context),
                 ),
               ),
             ],
@@ -278,9 +288,9 @@ class _ManagerBodyState extends State<ManagerBody> {
     return InkWell(
       onTap: () async {
         if (index == -1) {
-          Database db = Database();
+          final Database db = Database();
           await db.clear();
-          AppStateService appStateService = AppStateService();
+          // ignore: use_build_context_synchronously
           await Provider.of<AppStateService>(context, listen: false).logIn();
         }
         setState(() {
@@ -302,10 +312,10 @@ class _ManagerBodyState extends State<ManagerBody> {
           child: Row(
             children: [
               SizedBox(
-                child: icon,
                 width: 30,
+                child: icon,
               ),
-              SizedBox(
+              const SizedBox(
                 width: 5,
               ),
               Text(

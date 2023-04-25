@@ -1,8 +1,6 @@
 import 'package:diploma_frontend/services/language_service/language_service.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 
 class LanguageWidget extends StatefulWidget {
   final Function(Locale) onChange;

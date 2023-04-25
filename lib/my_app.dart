@@ -10,7 +10,6 @@ import 'package:routemaster/routemaster.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MyApp extends StatefulWidget {
-  static late BuildContext context;
   const MyApp({super.key});
 
   @override
@@ -50,7 +49,6 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    MyApp.context = context;
     return MultiBlocProvider(
       providers: [
         BlocProvider(

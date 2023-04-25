@@ -20,11 +20,9 @@ class WarehouseRepository implements BaseWarehouseRepository {
         'Authorization': 'Bearer ${user!.token}'
       };
       final response = await http.get(url, headers: headers);
-      print(response.body);
-      print(response.statusCode);
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
-        return data.map<Stock>((e) => Stock.fromJson(e)).toList();
+        return data.map<Stock>(Stock.fromJson).toList();
       }
       return null;
     } catch (e) {

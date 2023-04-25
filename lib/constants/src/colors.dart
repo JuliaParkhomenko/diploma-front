@@ -9,4 +9,5 @@ class Colors {
   static const Color notificationShape = Color(0xffe5f6e6);
   static const Color managerWarehouseMain = Color(0xff72bb53);
   static const Color subtitleTextColor = Color(0xff545554);
+  static const Color greyTable = Color(0xfff1f4f6);
 }

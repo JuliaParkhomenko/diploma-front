@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:diploma_frontend/constants/constants.dart' as constants;
 
 class WarehousePage extends StatefulWidget {
-  const WarehousePage({super.key});
+  final bool update;
+  const WarehousePage({super.key, required this.update});
 
   @override
   State<WarehousePage> createState() => _WarehousePageState();
@@ -13,12 +14,19 @@ class WarehousePage extends StatefulWidget {
 
 class _WarehousePageState extends State<WarehousePage> {
   final TextEditingController searchController = TextEditingController();
+
+  @override
+  void didChangeDependencies() {
+    setState(() {});
+    super.didChangeDependencies();
+  }
+
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     return Container(
       width: size.width,
-      padding: EdgeInsets.all(15),
+      padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(17),
         color: constants.Colors.managerWarehouseMain.withOpacity(0.6),
@@ -30,14 +38,14 @@ class _WarehousePageState extends State<WarehousePage> {
           children: [
             Text(
               '${'Warehouse'.tr()} > ${'Stocks'.tr()}',
-              style: TextStyle(
+              style: const TextStyle(
                 color: constants.Colors.subtitleTextColor,
                 fontSize: 14,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'OpenSans',
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 45,
             ),
             SizedBox(
@@ -47,7 +55,16 @@ class _WarehousePageState extends State<WarehousePage> {
                 controller: searchController,
               ),
             ),
-            Flexible(child: StocksTable()),
+            const SizedBox(
+              height: 20,
+            ),
+            SizedBox(
+              height: size.height * 0.7,
+              width: size.width * 0.7,
+              child: StocksTable(
+                update: widget.update,
+              ),
+            ),
           ],
         ),
       ),

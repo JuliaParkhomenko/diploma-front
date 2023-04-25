@@ -9,8 +9,9 @@ class StockLoading extends StockState {}
 
 class StockLoaded extends StockState {
   final List<Stock> stocks;
+  final StockFilter filter;
 
-  StockLoaded(this.stocks);
+  StockLoaded(this.stocks, this.filter);
 }
 
 class StockError extends StockState {

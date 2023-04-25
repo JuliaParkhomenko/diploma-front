@@ -1,6 +1,5 @@
 import 'package:diploma_frontend/pages/landing_page/widgets/language_widget.dart';
 import 'package:diploma_frontend/pages/landing_page/widgets/logo_widget.dart';
-import 'package:diploma_frontend/services/language_service/language_service.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:diploma_frontend/constants/constants.dart' as constants;
