@@ -13,8 +13,10 @@ class WarehouseRepository implements BaseWarehouseRepository {
   WarehouseRepository(this._database);
 
   @override
-  Future<List<Stock>?> getStockByWarehouse(
-      {required int id, required String productName}) async {
+  Future<List<Stock>?> getStockByWarehouse({
+    required int id,
+    required String productName,
+  }) async {
     try {
       final User? user = await _database.getUser();
       final Uri url = Uri.parse(

@@ -73,16 +73,18 @@ class _LanguageWidgetState extends State<LanguageWidget> {
             ),
           )
           .toList(),
-      onChanged: (newValue) {
-        widget.onChange(
-          newValue == 'uk'
-              ? ServiceLocator.languageService.supportedLocales[0]
-              : ServiceLocator.languageService.supportedLocales[1],
-        );
-        setState(() {
-          value = newValue;
-        });
-      },
+      onChanged: (_) => onChanged(_!),
     );
+  }
+
+  void onChanged(String newValue) {
+    widget.onChange(
+      newValue == 'uk'
+          ? ServiceLocator.languageService.supportedLocales[0]
+          : ServiceLocator.languageService.supportedLocales[1],
+    );
+    setState(() {
+      value = newValue;
+    });
   }
 }
