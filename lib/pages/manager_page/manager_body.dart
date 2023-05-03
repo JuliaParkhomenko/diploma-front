@@ -25,6 +25,9 @@ class ManagerBody extends StatefulWidget {
 }
 
 class _ManagerBodyState extends State<ManagerBody> {
+  int selectedIndex = 5;
+  int warehouseId = 0;
+
   @override
   void initState() {
     if (widget.list.isNotEmpty) {
@@ -36,8 +39,6 @@ class _ManagerBodyState extends State<ManagerBody> {
     super.initState();
   }
 
-  int selectedIndex = 1;
-  int warehouseId = 0;
   Widget pages(int index, BuildContext context) {
     final List<Widget> result = [
       const OverviewPage(),
@@ -317,6 +318,9 @@ class _ManagerBodyState extends State<ManagerBody> {
           await db.clear();
           // ignore: use_build_context_synchronously
           await Provider.of<AppStateService>(context, listen: false).logIn();
+        }
+        if (!mounted) {
+          return;
         }
         setState(() {
           selectedIndex = index;

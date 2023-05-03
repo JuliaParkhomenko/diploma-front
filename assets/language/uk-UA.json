@@ -21,7 +21,12 @@
     "Amount": "Кількість",
     "Ordered": "Замовлено",
     "Total": "Загалом",
-    "Search by name": "Пошук за іменем" 
+    "Search by name": "Пошук за іменем",
+    "Application for products": "Заява на продукти",
+    "Note": "Примітка",
+    "Kind": "Тип",
+    "Urgency": "Терміновість",
+    "Send": "Надіслати" 
 
 
 }
