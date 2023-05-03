@@ -1,10 +1,13 @@
+import 'package:diploma_frontend/models/warehouse.dart';
 import 'package:diploma_frontend/pages/application_page/application_page.dart';
 import 'package:diploma_frontend/pages/batches_page/batches_page.dart';
 import 'package:diploma_frontend/pages/overview_page/overview_page.dart';
 import 'package:diploma_frontend/pages/reminders_page/reminders_page.dart';
 import 'package:diploma_frontend/pages/statistics_page/statistics_page.dart';
 import 'package:diploma_frontend/pages/warehouse_page/warehouse_page.dart';
+import 'package:diploma_frontend/pages/widgets/warehouse_selector.dart';
 import 'package:diploma_frontend/services/app_state_service/app_state_service.dart';
+import 'package:diploma_frontend/services/bloc_cleaner.dart';
 import 'package:diploma_frontend/services/database/database.dart';
 import 'package:diploma_frontend/services/language_service/language_service.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -14,20 +17,33 @@ import 'package:diploma_frontend/constants/constants.dart' as constants;
 import 'package:flutter_svg/flutter_svg.dart';
 
 class ManagerBody extends StatefulWidget {
-  const ManagerBody({super.key});
+  final List<Warehouse> list;
+  const ManagerBody({super.key, required this.list});
 
   @override
   State<ManagerBody> createState() => _ManagerBodyState();
 }
 
 class _ManagerBodyState extends State<ManagerBody> {
-  int selectedIndex = 1;
+  @override
+  void initState() {
+    if (widget.list.isNotEmpty) {
+      setState(() {
+        warehouseId = widget.list.first.id;
+      });
+      BlocCleaner().changeWarehouseId(context);
+    }
+    super.initState();
+  }
 
+  int selectedIndex = 1;
+  int warehouseId = 0;
   Widget pages(int index, BuildContext context) {
     final List<Widget> result = [
       const OverviewPage(),
       WarehousePage(
         update: context.locale == LanguageService.fallbackLocale,
+        warehouseId: warehouseId,
       ),
       const BatchesPage(),
       const RemindersPage(),
@@ -202,6 +218,15 @@ class _ManagerBodyState extends State<ManagerBody> {
                       child: SizedBox(
                         height: 1,
                       ),
+                    ),
+                    WarehouseSelector(
+                      onChange: (_) {
+                        setState(() {
+                          warehouseId = _;
+                        });
+                        BlocCleaner().changeWarehouseId(context);
+                      },
+                      warehouses: widget.list,
                     ),
                     GestureDetector(
                       onTap: () {

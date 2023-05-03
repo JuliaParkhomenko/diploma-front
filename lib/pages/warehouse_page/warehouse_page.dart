@@ -6,7 +6,12 @@ import 'package:diploma_frontend/constants/constants.dart' as constants;
 
 class WarehousePage extends StatefulWidget {
   final bool update;
-  const WarehousePage({super.key, required this.update});
+  final int warehouseId;
+  const WarehousePage({
+    super.key,
+    required this.update,
+    required this.warehouseId,
+  });
 
   @override
   State<WarehousePage> createState() => _WarehousePageState();
@@ -40,7 +45,7 @@ class _WarehousePageState extends State<WarehousePage> {
               '${'Warehouse'.tr()} > ${'Stocks'.tr()}',
               style: const TextStyle(
                 color: constants.Colors.subtitleTextColor,
-                fontSize: 14,
+                fontSize: 18,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'OpenSans',
               ),
@@ -59,10 +64,11 @@ class _WarehousePageState extends State<WarehousePage> {
               height: 20,
             ),
             SizedBox(
-              height: size.height * 0.7,
+              height: size.height * 0.65,
               width: size.width * 0.7,
               child: StocksTable(
                 update: widget.update,
+                warehouseId: widget.warehouseId,
               ),
             ),
           ],

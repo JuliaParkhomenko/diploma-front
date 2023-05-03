@@ -9,10 +9,12 @@ part 'stock_state.dart';
 class StockCubit extends Cubit<StockState> {
   final WarehouseRepository _repository;
   StockCubit(this._repository) : super(StockInitial());
-  Future<void> fetchStocks(int id) async {
+
+  Future<void> fetchStocks(int id, String productName) async {
     try {
       emit(StockLoading());
-      final List<Stock>? stocks = await _repository.getStockByWarehouse(id: id);
+      final List<Stock>? stocks = await _repository.getStockByWarehouse(
+          id: id, productName: productName);
       emit(StockLoaded(stocks!, StockFilter.none));
     } catch (e) {
       emit(StockError(e.toString()));
@@ -67,5 +69,9 @@ class StockCubit extends Cubit<StockState> {
       emit(StockLoaded(list, filter));
       return;
     }
+  }
+
+  void clear() {
+    emit(StockInitial());
   }
 }

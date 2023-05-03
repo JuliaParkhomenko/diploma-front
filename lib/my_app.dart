@@ -1,4 +1,5 @@
 import 'package:diploma_frontend/blocs/stock/stock_cubit.dart';
+import 'package:diploma_frontend/blocs/warehouse/warehouse_cubit.dart';
 import 'package:diploma_frontend/enums/logged_in_state.dart';
 import 'package:diploma_frontend/repositories/warehouse_repository/warehouse_repository.dart';
 import 'package:diploma_frontend/services/app_state_service/app_state_service.dart';
@@ -53,6 +54,11 @@ class _MyAppState extends State<MyApp> {
       providers: [
         BlocProvider(
           create: (context) => StockCubit(
+            WarehouseRepository(),
+          ),
+        ),
+        BlocProvider(
+          create: (context) => WarehouseCubit(
             WarehouseRepository(),
           ),
         ),

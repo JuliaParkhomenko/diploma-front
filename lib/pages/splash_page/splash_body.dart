@@ -1,3 +1,4 @@
+import 'package:diploma_frontend/pages/widgets/loading_widget.dart';
 import 'package:flutter/material.dart';
 
 class SplashBody extends StatelessWidget {
@@ -5,8 +6,6 @@ class SplashBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: CircularProgressIndicator(),
-    );
+    return const LoadingWidget();
   }
 }

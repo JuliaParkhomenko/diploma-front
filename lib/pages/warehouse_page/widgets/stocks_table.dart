@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_bool_literals_in_conditional_expressions
+
 import 'package:diploma_frontend/blocs/stock/stock_cubit.dart';
 import 'package:diploma_frontend/enums/stocks_filter.dart';
 import 'package:diploma_frontend/models/stock.dart';
@@ -8,7 +10,12 @@ import 'package:diploma_frontend/constants/constants.dart' as constants;
 
 class StocksTable extends StatefulWidget {
   final bool update;
-  const StocksTable({super.key, required this.update});
+  final int warehouseId;
+  const StocksTable({
+    super.key,
+    required this.update,
+    required this.warehouseId,
+  });
 
   @override
   State<StocksTable> createState() => _StocksTableState();
@@ -26,14 +33,19 @@ class _StocksTableState extends State<StocksTable> {
     final Size size = MediaQuery.of(context).size;
 
     return BlocBuilder<StockCubit, StockState>(
-      builder: (BuildContext context, state) {
+      builder: (BuildContext context, StockState state) {
         if (state is StockInitial) {
           final StockCubit cubit = BlocProvider.of<StockCubit>(context);
-          cubit.fetchStocks(3);
+          cubit.fetchStocks(widget.warehouseId, '');
         }
         if (state is StockLoading) {
-          return const Center(
-            child: CircularProgressIndicator(),
+          final StockCubit cubit = BlocProvider.of<StockCubit>(context);
+          return Align(
+            alignment: Alignment.topCenter,
+            child: SizedBox(
+              height: 60,
+              child: getTableHeader(size, state, cubit),
+            ),
           );
         }
         if (state is StockError) {
@@ -43,7 +55,15 @@ class _StocksTableState extends State<StocksTable> {
         }
         if (state is StockLoaded) {
           final StockCubit cubit = BlocProvider.of<StockCubit>(context);
-
+          if (state.stocks.isEmpty) {
+            return Align(
+              alignment: Alignment.topCenter,
+              child: SizedBox(
+                height: 60,
+                child: getTableHeader(size, state, cubit),
+              ),
+            );
+          }
           return ListView.builder(
             itemCount: state.stocks.length,
             itemBuilder: (context, index) {
@@ -52,93 +72,7 @@ class _StocksTableState extends State<StocksTable> {
               if (index == 0) {
                 return Column(
                   children: [
-                    Container(
-                      height: 60,
-                      color: Colors.white,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const SizedBox(
-                            width: 20,
-                          ),
-                          InkWell(
-                            onTap: () {
-                              cubit.filterStocks(
-                                state.filter == StockFilter.productUp
-                                    ? StockFilter.productDown
-                                    : StockFilter.productUp,
-                                state.stocks,
-                              );
-                            },
-                            child: getTitle(
-                              'Product'.tr(),
-                              size,
-                              bold: true,
-                              showIcon:
-                                  (state.filter == StockFilter.productUp ||
-                                      state.filter == StockFilter.productDown),
-                              up: state.filter == StockFilter.productUp,
-                            ),
-                          ),
-                          InkWell(
-                            onTap: () {
-                              cubit.filterStocks(
-                                state.filter == StockFilter.amountUp
-                                    ? StockFilter.amountDown
-                                    : StockFilter.amountUp,
-                                state.stocks,
-                              );
-                            },
-                            child: getTitle(
-                              'Amount'.tr(),
-                              size,
-                              bold: true,
-                              showIcon:
-                                  (state.filter == StockFilter.amountDown ||
-                                      state.filter == StockFilter.amountUp),
-                              up: state.filter == StockFilter.amountUp,
-                            ),
-                          ),
-                          InkWell(
-                            onTap: () {
-                              cubit.filterStocks(
-                                state.filter == StockFilter.orderedUp
-                                    ? StockFilter.orderedDown
-                                    : StockFilter.orderedUp,
-                                state.stocks,
-                              );
-                            },
-                            child: getTitle(
-                              'Ordered'.tr(),
-                              size,
-                              bold: true,
-                              showIcon:
-                                  (state.filter == StockFilter.orderedUp ||
-                                      state.filter == StockFilter.orderedDown),
-                              up: state.filter == StockFilter.orderedUp,
-                            ),
-                          ),
-                          InkWell(
-                            onTap: () {
-                              cubit.filterStocks(
-                                state.filter == StockFilter.totalUp
-                                    ? StockFilter.totalDown
-                                    : StockFilter.totalUp,
-                                state.stocks,
-                              );
-                            },
-                            child: getTitle(
-                              'Total'.tr(),
-                              size,
-                              bold: true,
-                              showIcon: (state.filter == StockFilter.totalUp ||
-                                  state.filter == StockFilter.totalDown),
-                              up: state.filter == StockFilter.totalUp,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                    getTableHeader(size, state, cubit),
                     Container(
                       height: 60,
                       color: constants.Colors.greyTable,
@@ -208,6 +142,118 @@ class _StocksTableState extends State<StocksTable> {
         getTitle(item.orderedText, size),
         getTitle(item.total, size),
       ],
+    );
+  }
+
+  Widget getTableHeader(Size size, StockState state, StockCubit cubit) {
+    return Container(
+      alignment: Alignment.topCenter,
+      height: 60,
+      color: Colors.white,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          const SizedBox(
+            width: 20,
+          ),
+          InkWell(
+            onTap: () {
+              if (state is StockLoaded) {
+                cubit.filterStocks(
+                  state.filter == StockFilter.productUp
+                      ? StockFilter.productDown
+                      : StockFilter.productUp,
+                  state.stocks,
+                );
+              }
+            },
+            child: getTitle(
+              'Product'.tr(),
+              size,
+              bold: true,
+              showIcon: state is StockLoaded
+                  ? (state.filter == StockFilter.productUp ||
+                      state.filter == StockFilter.productDown)
+                  : false,
+              up: state is StockLoaded
+                  ? state.filter == StockFilter.productUp
+                  : false,
+            ),
+          ),
+          InkWell(
+            onTap: () {
+              if (state is StockLoaded) {
+                cubit.filterStocks(
+                  state.filter == StockFilter.amountUp
+                      ? StockFilter.amountDown
+                      : StockFilter.amountUp,
+                  state.stocks,
+                );
+              }
+            },
+            child: getTitle(
+              'Amount'.tr(),
+              size,
+              bold: true,
+              showIcon: state is StockLoaded
+                  ? (state.filter == StockFilter.amountDown ||
+                      state.filter == StockFilter.amountUp)
+                  : false,
+              up: state is StockLoaded
+                  ? state.filter == StockFilter.amountUp
+                  : false,
+            ),
+          ),
+          InkWell(
+            onTap: () {
+              if (state is StockLoaded) {
+                cubit.filterStocks(
+                  state.filter == StockFilter.orderedUp
+                      ? StockFilter.orderedDown
+                      : StockFilter.orderedUp,
+                  state.stocks,
+                );
+              }
+            },
+            child: getTitle(
+              'Ordered'.tr(),
+              size,
+              bold: true,
+              showIcon: state is StockLoaded
+                  ? (state.filter == StockFilter.orderedUp ||
+                      state.filter == StockFilter.orderedDown)
+                  : false,
+              up: state is StockLoaded
+                  ? state.filter == StockFilter.orderedUp
+                  : false,
+            ),
+          ),
+          InkWell(
+            onTap: () {
+              if (state is StockLoaded) {
+                cubit.filterStocks(
+                  state.filter == StockFilter.totalUp
+                      ? StockFilter.totalDown
+                      : StockFilter.totalUp,
+                  state.stocks,
+                );
+              }
+            },
+            child: getTitle(
+              'Total'.tr(),
+              size,
+              bold: true,
+              showIcon: state is StockLoaded
+                  ? (state.filter == StockFilter.totalUp ||
+                      state.filter == StockFilter.totalDown)
+                  : false,
+              up: state is StockLoaded
+                  ? state.filter == StockFilter.totalUp
+                  : false,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
