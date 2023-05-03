@@ -1,7 +1,6 @@
 import 'package:diploma_frontend/models/user.dart';
-import 'package:diploma_frontend/repositories/auth_repository/auth_repository.dart';
 import 'package:diploma_frontend/services/app_state_service/app_state_service.dart';
-import 'package:diploma_frontend/services/database/database.dart';
+import 'package:diploma_frontend/services/service_locator.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:diploma_frontend/constants/constants.dart' as constants;
@@ -113,8 +112,7 @@ class _AuthBodyState extends State<AuthBody> {
   }
 
   Future<void> signIn() async {
-    final AuthRepository authRepository = AuthRepository();
-    final User? user = await authRepository.signIn(
+    final User? user = await ServiceLocator.authRepository.signIn(
       email: email.text,
       password: password.text,
     );
@@ -128,8 +126,7 @@ class _AuthBodyState extends State<AuthBody> {
         ),
       );
     } else {
-      final Database db = Database();
-      await db.addUser(user);
+      await ServiceLocator.database.addUser(user);
       // ignore: use_build_context_synchronously
       await Provider.of<AppStateService>(context, listen: false).logIn();
     }

@@ -1,4 +1,4 @@
-import 'package:diploma_frontend/services/language_service/language_service.dart';
+import 'package:diploma_frontend/services/service_locator.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
@@ -76,8 +76,8 @@ class _LanguageWidgetState extends State<LanguageWidget> {
       onChanged: (newValue) {
         widget.onChange(
           newValue == 'uk'
-              ? LanguageService.supportedLocales[0]
-              : LanguageService.supportedLocales[1],
+              ? ServiceLocator.languageService.supportedLocales[0]
+              : ServiceLocator.languageService.supportedLocales[1],
         );
         setState(() {
           value = newValue;

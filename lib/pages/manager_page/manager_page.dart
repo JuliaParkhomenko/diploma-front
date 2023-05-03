@@ -15,7 +15,6 @@ class ManagerPage extends StatelessWidget {
           if (state is WarehouseInitial) {
             final WarehouseCubit cubit =
                 BlocProvider.of<WarehouseCubit>(context);
-            print('above');
             cubit.fetchWarehouses();
           }
           if (state is WarehouseLoading) {
@@ -27,7 +26,6 @@ class ManagerPage extends StatelessWidget {
             );
           }
           if (state is WarehouseLoaded) {
-            print(state.warehouses.length);
             return ManagerBody(list: state.warehouses);
           }
           return Container();

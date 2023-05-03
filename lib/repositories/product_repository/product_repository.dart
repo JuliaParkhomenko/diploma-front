@@ -7,10 +7,13 @@ import 'package:diploma_frontend/services/database/database.dart';
 import 'package:http/http.dart' as http;
 
 class ProductRepository implements BaseProductRepository {
+  final Database _database;
+  ProductRepository(this._database);
+
   @override
   Future<List<Product>?> getProducts() async {
     try {
-      final User? user = await Database().getUser();
+      final User? user = await _database.getUser();
       final Uri url = Uri.parse(
         'https://restaurant-warehouse.azurewebsites.net/api/Product/getProducts',
       );

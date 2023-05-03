@@ -1,6 +1,4 @@
 import 'package:diploma_frontend/models/warehouse.dart';
-import 'package:diploma_frontend/services/language_service/language_service.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class WarehouseSelector extends StatefulWidget {

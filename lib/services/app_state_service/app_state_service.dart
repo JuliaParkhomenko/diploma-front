@@ -5,6 +5,9 @@ import 'package:diploma_frontend/services/database/database.dart';
 import 'package:flutter/material.dart';
 
 class AppStateService with ChangeNotifier {
+  final Database _database;
+  AppStateService(this._database);
+
   LoggedInState _loggedInState = LoggedInState.loading;
   LoggedInState get loggedInState => _loggedInState;
 
@@ -13,8 +16,7 @@ class AppStateService with ChangeNotifier {
     notifyListeners();
 
     try {
-      final Database db = Database();
-      final User? user = await db.getUser();
+      final User? user = await _database.getUser();
 
       await Future.delayed(const Duration(milliseconds: 1500));
 

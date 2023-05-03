@@ -7,9 +7,7 @@ import 'package:diploma_frontend/pages/statistics_page/statistics_page.dart';
 import 'package:diploma_frontend/pages/warehouse_page/warehouse_page.dart';
 import 'package:diploma_frontend/pages/widgets/warehouse_selector.dart';
 import 'package:diploma_frontend/services/app_state_service/app_state_service.dart';
-import 'package:diploma_frontend/services/bloc_cleaner.dart';
-import 'package:diploma_frontend/services/database/database.dart';
-import 'package:diploma_frontend/services/language_service/language_service.dart';
+import 'package:diploma_frontend/services/service_locator.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -34,7 +32,7 @@ class _ManagerBodyState extends State<ManagerBody> {
       setState(() {
         warehouseId = widget.list.first.id;
       });
-      BlocCleaner().changeWarehouseId(context);
+      ServiceLocator.blocService.changeWarehouseId(context);
     }
     super.initState();
   }
@@ -43,7 +41,7 @@ class _ManagerBodyState extends State<ManagerBody> {
     final List<Widget> result = [
       const OverviewPage(),
       WarehousePage(
-        update: context.locale == LanguageService.fallbackLocale,
+        update: context.locale == ServiceLocator.languageService.fallbackLocale,
         warehouseId: warehouseId,
       ),
       const BatchesPage(),
@@ -225,7 +223,7 @@ class _ManagerBodyState extends State<ManagerBody> {
                         setState(() {
                           warehouseId = _;
                         });
-                        BlocCleaner().changeWarehouseId(context);
+                        ServiceLocator.blocService.changeWarehouseId(context);
                       },
                       warehouses: widget.list,
                     ),
@@ -234,9 +232,12 @@ class _ManagerBodyState extends State<ManagerBody> {
                         setState(() {
                           context.setLocale(
                             context.locale ==
-                                    LanguageService.supportedLocales[0]
-                                ? LanguageService.supportedLocales[1]
-                                : LanguageService.supportedLocales[0],
+                                    ServiceLocator
+                                        .languageService.supportedLocales[0]
+                                ? ServiceLocator
+                                    .languageService.supportedLocales[1]
+                                : ServiceLocator
+                                    .languageService.supportedLocales[0],
                           );
                         });
                       },
@@ -246,7 +247,8 @@ class _ManagerBodyState extends State<ManagerBody> {
                           height: 20,
                           width: 30,
                           child: context.locale ==
-                                  LanguageService.supportedLocales[0]
+                                  ServiceLocator
+                                      .languageService.supportedLocales[0]
                               ? SvgPicture.asset(
                                   'assets/images/ukraine-flag-icon.svg',
                                   fit: BoxFit.fill,
@@ -314,8 +316,7 @@ class _ManagerBodyState extends State<ManagerBody> {
     return InkWell(
       onTap: () async {
         if (index == -1) {
-          final Database db = Database();
-          await db.clear();
+          await ServiceLocator.database.clear();
           // ignore: use_build_context_synchronously
           await Provider.of<AppStateService>(context, listen: false).logIn();
         }
