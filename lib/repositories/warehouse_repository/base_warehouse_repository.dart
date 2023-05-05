@@ -1,4 +1,6 @@
+import 'package:diploma_frontend/enums/urgency.dart';
 import 'package:diploma_frontend/models/stock.dart';
+import 'package:diploma_frontend/models/storage.dart';
 import 'package:diploma_frontend/models/warehouse.dart';
 
 abstract class BaseWarehouseRepository {
@@ -8,4 +10,44 @@ abstract class BaseWarehouseRepository {
   });
 
   Future<List<Warehouse>?> getWarehouses();
+
+  Future<int?> add({
+    required String name,
+    required String address,
+    required List<String> managers, //email
+    required List<Storage> storages,
+  });
+
+  Future<void> assignManager({
+    required int warehouseId,
+    required String email,
+  });
+
+  Future<int?> addAplication({
+    required int warehouseId,
+    required int productId,
+    required int amount,
+    required String kind,
+    required Urgency urgency,
+    required String note,
+  });
+
+  // Future<List<UserAction?>> recentActions({});
 }
+
+// ————▄▀▀▀▄░————
+// ▄███▀░◐░▄▀▀▀▄░░░░░░
+// ░░▄███▀░◐░░░░▌░░░
+// ░░░▐░▄▀▀▀▄░░░▌░░░░
+// ▄███▀░◐░░░▌░░▌░░░░
+// ░░░░▌░░░░░▐▄▄▌░░░░░
+// ░░░░▌░░░░▄▀▒▒▀▀▀▀▄
+// ░░░▐░░░░▐▒▒▒▒▒▒▒▒▀▀▄
+// ░░░▐░░░░▐▄▒▒▒▒▒▒▒▒▒▒▀▄
+// ░░░░▀▄░░░░▀▄▒▒▒▒▒▒▒▒▒▒▀▄
+// ░░░░░░▀▄▄▄▄▄█▄▄▄▄▄▄▄▄▄▄▄▀▄
+// ░░░░░░░░░░░▌▌░▌▌░░░░░
+// ░░░░░░░░░░░▌▌░▌▌░░░░░
+// ░░░░░░░░░▄▄▌▌▄▌▌░░░░░
+
+

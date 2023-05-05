@@ -15,7 +15,7 @@
     "Reminders": "Сповіщення",
     "Statistics": "Статистика",
     "Log out": "Вихід",
-    "Application": "Заява",
+    "Application": "Запит",
     "Stocks": "Запаси",
     "Product": "Продукт",
     "Amount": "Кількість",
@@ -26,7 +26,7 @@
     "Note": "Примітка",
     "Kind": "Тип",
     "Urgency": "Терміновість",
-    "Send": "Надіслати" 
-
+    "Send": "Надіслати", 
+    "urgently": "терміново"
 
 }

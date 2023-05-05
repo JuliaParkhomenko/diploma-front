@@ -26,5 +26,6 @@
     "Note":"Note",
     "Kind": "Kind",
     "Urgency": "Urgency",
-    "Send": "Send"
+    "Send": "Send",
+    "urgently": "urgently"
 }
