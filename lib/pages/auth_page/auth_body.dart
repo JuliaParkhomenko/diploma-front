@@ -1,11 +1,7 @@
-import 'package:diploma_frontend/models/user.dart';
-import 'package:diploma_frontend/repositories/auth_repository/auth_repository.dart';
-import 'package:diploma_frontend/services/app_state_service/app_state_service.dart';
-import 'package:diploma_frontend/services/database/database.dart';
+import 'package:diploma_frontend/pages/auth_page/widgets/sign_in_button.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:diploma_frontend/constants/constants.dart' as constants;
-import 'package:provider/provider.dart';
 
 class AuthBody extends StatefulWidget {
   const AuthBody({super.key});
@@ -19,6 +15,7 @@ class _AuthBodyState extends State<AuthBody> {
       TextEditingController(text: 'yuliia.parkhomenko@nure.ua');
   final TextEditingController password =
       TextEditingController(text: 'Yul1234567!');
+
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
@@ -84,54 +81,11 @@ class _AuthBodyState extends State<AuthBody> {
         const SizedBox(
           height: 30,
         ),
-        TextButton(
-          onPressed: () async {
-            await signIn();
-          },
-          style: ButtonStyle(
-            shape: MaterialStatePropertyAll(
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16),
-              ),
-            ),
-            fixedSize: MaterialStateProperty.all(
-              const Size(188, 42),
-            ),
-            backgroundColor: MaterialStateProperty.all(constants.Colors.main),
-          ),
-          child: Text(
-            'Sign in'.tr().toUpperCase(),
-            style: const TextStyle(
-              color: Colors.white,
-              fontFamily: 'OpenSans',
-              fontWeight: FontWeight.bold,
-            ),
-          ),
+        SignInButton(
+          email: email,
+          password: password,
         ),
       ],
     );
-  }
-
-  Future<void> signIn() async {
-    final AuthRepository authRepository = AuthRepository();
-    final User? user = await authRepository.signIn(
-      email: email.text,
-      password: password.text,
-    );
-    if (!mounted) {
-      return;
-    }
-    if (user == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Incorrect email or password'),
-        ),
-      );
-    } else {
-      final Database db = Database();
-      await db.addUser(user);
-      // ignore: use_build_context_synchronously
-      await Provider.of<AppStateService>(context, listen: false).logIn();
-    }
   }
 }

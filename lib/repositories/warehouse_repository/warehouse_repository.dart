@@ -11,11 +11,16 @@ import 'package:diploma_frontend/enums/urgency.dart';
 import 'package:http/http.dart' as http;
 
 class WarehouseRepository implements BaseWarehouseRepository {
+  final Database _database;
+  WarehouseRepository(this._database);
+
   @override
-  Future<List<Stock>?> getStockByWarehouse(
-      {required int id, required String productName}) async {
+  Future<List<Stock>?> getStockByWarehouse({
+    required int id,
+    required String productName,
+  }) async {
     try {
-      final User? user = await Database().getUser();
+      final User? user = await _database.getUser();
       final Uri url = Uri.parse(
         'https://restaurant-warehouse.azurewebsites.net/api/Warehouse/stocksforwarehouse?warehouseId=$id&productName=$productName',
       );
@@ -41,7 +46,7 @@ class WarehouseRepository implements BaseWarehouseRepository {
   @override
   Future<List<Warehouse>?> getWarehouses() async {
     try {
-      final User? user = await Database().getUser();
+      final User? user = await _database.getUser();
       final Uri url = Uri.parse(
         'https://restaurant-warehouse.azurewebsites.net/api/Warehouse/all',
       );

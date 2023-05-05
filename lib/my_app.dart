@@ -2,10 +2,8 @@ import 'package:diploma_frontend/blocs/product/product_cubit.dart';
 import 'package:diploma_frontend/blocs/stock/stock_cubit.dart';
 import 'package:diploma_frontend/blocs/warehouse/warehouse_cubit.dart';
 import 'package:diploma_frontend/enums/logged_in_state.dart';
-import 'package:diploma_frontend/repositories/product_repository/product_repository.dart';
-import 'package:diploma_frontend/repositories/warehouse_repository/warehouse_repository.dart';
 import 'package:diploma_frontend/services/app_state_service/app_state_service.dart';
-import 'package:diploma_frontend/services/route_service/route_service.dart';
+import 'package:diploma_frontend/services/service_locator.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -20,11 +18,9 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  final AppStateService appStateService = AppStateService();
-
   @override
   void initState() {
-    appStateService.logIn();
+    ServiceLocator.appStateService.logIn();
     super.initState();
   }
 
@@ -35,17 +31,17 @@ class _MyAppState extends State<MyApp> {
       );
       switch (appStateService.loggedInState) {
         case LoggedInState.admin:
-          return RouteService().adminMap;
+          return ServiceLocator.routeService.adminMap;
         case LoggedInState.manager:
-          return RouteService().managerMap;
+          return ServiceLocator.routeService.managerMap;
         case LoggedInState.director:
-          return RouteService().directorMap;
+          return ServiceLocator.routeService.directorMap;
         case LoggedInState.loading:
-          return RouteService().loadingMap;
+          return ServiceLocator.routeService.loadingMap;
         case LoggedInState.loggedOut:
-          return RouteService().authMap;
+          return ServiceLocator.routeService.authMap;
         default:
-          return RouteService().directorMap;
+          return ServiceLocator.routeService.directorMap;
       }
     },
   );
@@ -56,22 +52,22 @@ class _MyAppState extends State<MyApp> {
       providers: [
         BlocProvider(
           create: (context) => StockCubit(
-            WarehouseRepository(),
+            ServiceLocator.warehouseRepository,
           ),
         ),
         BlocProvider(
           create: (context) => WarehouseCubit(
-            WarehouseRepository(),
+            ServiceLocator.warehouseRepository,
           ),
         ),
         BlocProvider(
           create: (context) => ProductCubit(
-            ProductRepository(),
+            ServiceLocator.productRepository,
           ),
         ),
       ],
       child: ChangeNotifierProvider<AppStateService>.value(
-        value: appStateService,
+        value: ServiceLocator.appStateService,
         child: MaterialApp.router(
           debugShowCheckedModeBanner: false,
           locale: context.locale,

@@ -11,46 +11,32 @@ class LogoWidget extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Container(
-            height: 6,
-            width: 35,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(14),
-              color: Colors.orange,
-              border: Border.all(
-                width: .4,
-              ),
-            ),
-          ),
-          const SizedBox(
-            height: 4,
-          ),
-          Container(
-            height: 6,
-            width: 35,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(14),
-              color: Colors.orange,
-              border: Border.all(
-                width: .4,
-              ),
-            ),
-          ),
-          const SizedBox(
-            height: 4,
-          ),
-          Container(
-            height: 18,
-            width: 35,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(6),
-              color: Colors.orange,
-              border: Border.all(
-                width: .4,
-              ),
-            ),
-          ),
+          _getContainer(height: 6, width: 35, radius: 14),
+          divider,
+          _getContainer(height: 6, width: 35, radius: 14),
+          divider,
+          _getContainer(height: 18, width: 35, radius: 6),
         ],
+      ),
+    );
+  }
+
+  Widget get divider => const SizedBox(height: 4);
+
+  Widget _getContainer({
+    required double height,
+    required double width,
+    required double radius,
+  }) {
+    return Container(
+      height: height,
+      width: width,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(radius),
+        color: Colors.orange,
+        border: Border.all(
+          width: .4,
+        ),
       ),
     );
   }

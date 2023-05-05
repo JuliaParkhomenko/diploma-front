@@ -41,7 +41,6 @@ class _LandingBodyState extends State<LandingBody> {
                 width: 14,
               ),
               Column(
-                //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: const [
                   Text(
@@ -75,11 +74,7 @@ class _LandingBodyState extends State<LandingBody> {
                 child: SizedBox(),
               ),
               LanguageWidget(
-                onChange: (value) {
-                  setState(() {
-                    context.setLocale(value);
-                  });
-                },
+                onChange: onLanguageChanged,
               ),
               const SizedBox(
                 width: 20,
@@ -144,6 +139,12 @@ class _LandingBodyState extends State<LandingBody> {
         ),
       ],
     );
+  }
+
+  void onLanguageChanged(Locale value) {
+    setState(() {
+      context.setLocale(value);
+    });
   }
 
   Widget signInButton() {

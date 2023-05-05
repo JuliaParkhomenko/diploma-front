@@ -48,7 +48,6 @@ class _ProductDropdownState extends State<ProductDropdown> {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: DropdownButton<String>(
-          //dropdownColor: Colors.lightGreen,
           focusColor: Colors.white10,
           isExpanded: true,
           underline: const SizedBox(),
