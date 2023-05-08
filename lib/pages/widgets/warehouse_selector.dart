@@ -1,12 +1,13 @@
+import 'package:diploma_frontend/blocs/stock/stock_cubit.dart';
+import 'package:diploma_frontend/blocs/warehouse/warehouse_cubit.dart';
 import 'package:diploma_frontend/models/warehouse.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class WarehouseSelector extends StatefulWidget {
-  final Function(int) onChange;
   final List<Warehouse> warehouses;
   const WarehouseSelector({
     super.key,
-    required this.onChange,
     required this.warehouses,
   });
 
@@ -86,7 +87,10 @@ class _WarehouseSelectorState extends State<WarehouseSelector> {
             )
             .toList(),
         onChanged: (newValue) {
-          widget.onChange(int.parse(newValue!));
+          final WarehouseCubit cubit = BlocProvider.of<WarehouseCubit>(context);
+          cubit.selectedWarehouseIndex = int.parse(newValue!);
+          final StockCubit stockCubit = BlocProvider.of<StockCubit>(context);
+          stockCubit.fetchStocks(cubit.selectedWarehouseIndex, '');
           setState(() {
             value = newValue;
           });

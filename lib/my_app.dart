@@ -1,4 +1,5 @@
 import 'package:diploma_frontend/blocs/product/product_cubit.dart';
+import 'package:diploma_frontend/blocs/specific_product/specific_product_cubit.dart';
 import 'package:diploma_frontend/blocs/stock/stock_cubit.dart';
 import 'package:diploma_frontend/blocs/warehouse/warehouse_cubit.dart';
 import 'package:diploma_frontend/enums/logged_in_state.dart';
@@ -51,19 +52,24 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(
+        BlocProvider<StockCubit>(
           create: (context) => StockCubit(
             ServiceLocator.warehouseRepository,
           ),
         ),
-        BlocProvider(
+        BlocProvider<WarehouseCubit>(
           create: (context) => WarehouseCubit(
             ServiceLocator.warehouseRepository,
           ),
         ),
-        BlocProvider(
+        BlocProvider<ProductCubit>(
           create: (context) => ProductCubit(
             ServiceLocator.productRepository,
+          ),
+        ),
+        BlocProvider<SpecificProductCubit>(
+          create: (context) => SpecificProductCubit(
+            ServiceLocator.batchRepository,
           ),
         ),
       ],

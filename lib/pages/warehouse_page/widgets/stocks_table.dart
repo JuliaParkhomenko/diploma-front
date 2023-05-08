@@ -7,13 +7,12 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:diploma_frontend/constants/constants.dart' as constants;
+import 'package:routemaster/routemaster.dart';
 
 class StocksTable extends StatefulWidget {
-  final bool update;
   final int warehouseId;
   const StocksTable({
     super.key,
-    required this.update,
     required this.warehouseId,
   });
 
@@ -22,12 +21,6 @@ class StocksTable extends StatefulWidget {
 }
 
 class _StocksTableState extends State<StocksTable> {
-  @override
-  void didChangeDependencies() {
-    setState(() {});
-    super.didChangeDependencies();
-  }
-
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
@@ -113,6 +106,8 @@ class _StocksTableState extends State<StocksTable> {
             title,
             style: TextStyle(
               fontWeight: bold ? FontWeight.bold : FontWeight.normal,
+              fontFamily: 'OpenSans',
+              color: Colors.black,
             ),
           ),
           if (showIcon)
@@ -131,17 +126,32 @@ class _StocksTableState extends State<StocksTable> {
   }
 
   Widget getItem(Stock item, Size size) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        const SizedBox(
-          width: 20,
+    return TextButton(
+      style: ButtonStyle(
+        fixedSize: MaterialStatePropertyAll(
+          Size(size.width * .72, 60),
         ),
-        getTitle(item.productName, size),
-        getTitle(item.amountText, size),
-        getTitle(item.orderedText, size),
-        getTitle(item.total, size),
-      ],
+      ),
+      onPressed: () {
+        Routemaster.of(context).push(
+          '/stocks/product/${item.productName}',
+          queryParameters: {
+            'id': item.id.toString(),
+          },
+        );
+      },
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          const SizedBox(
+            width: 20,
+          ),
+          getTitle(item.productName, size),
+          getTitle(item.amountText, size),
+          getTitle(item.orderedText, size),
+          getTitle(item.total, size),
+        ],
+      ),
     );
   }
 

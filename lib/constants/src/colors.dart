@@ -10,4 +10,5 @@ class Colors {
   static const Color managerWarehouseMain = Color(0xff72bb53);
   static const Color subtitleTextColor = Color(0xff545554);
   static const Color greyTable = Color(0xfff1f4f6);
+  //static const Color textTable = Color(0xff);
 }

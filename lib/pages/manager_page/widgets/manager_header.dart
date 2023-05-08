@@ -7,7 +7,6 @@ import 'package:diploma_frontend/constants/constants.dart' as constants;
 import 'package:flutter_svg/flutter_svg.dart';
 
 class ManagerHeader extends StatelessWidget {
-  final Function(int) onWarehouseChanged;
   final Function(bool) onLanguageChanged;
   final int selectedIndex;
   final List<Warehouse> warehouses;
@@ -17,7 +16,6 @@ class ManagerHeader extends StatelessWidget {
     required this.onLanguageChanged,
     required this.selectedIndex,
     required this.warehouses,
-    required this.onWarehouseChanged,
   });
 
   @override
@@ -48,7 +46,6 @@ class ManagerHeader extends StatelessWidget {
             ),
           ),
           WarehouseSelector(
-            onChange: onWarehouseChanged,
             warehouses: warehouses,
           ),
           GestureDetector(
