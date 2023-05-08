@@ -3,6 +3,7 @@ import 'package:diploma_frontend/blocs/stock/stock_cubit.dart';
 import 'package:diploma_frontend/blocs/warehouse/warehouse_cubit.dart';
 import 'package:diploma_frontend/enums/logged_in_state.dart';
 import 'package:diploma_frontend/services/app_state_service/app_state_service.dart';
+import 'package:diploma_frontend/services/route_service/route_service.dart';
 import 'package:diploma_frontend/services/service_locator.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -31,17 +32,17 @@ class _MyAppState extends State<MyApp> {
       );
       switch (appStateService.loggedInState) {
         case LoggedInState.admin:
-          return ServiceLocator.routeService.adminMap;
+          return RouteService().adminMap;
         case LoggedInState.manager:
-          return ServiceLocator.routeService.managerMap;
+          return RouteService().managerMap;
         case LoggedInState.director:
-          return ServiceLocator.routeService.directorMap;
+          return RouteService().directorMap;
         case LoggedInState.loading:
-          return ServiceLocator.routeService.loadingMap;
+          return RouteService().loadingMap;
         case LoggedInState.loggedOut:
-          return ServiceLocator.routeService.authMap;
+          return RouteService().authMap;
         default:
-          return ServiceLocator.routeService.directorMap;
+          return RouteService().directorMap;
       }
     },
   );
