@@ -10,7 +10,7 @@ import 'package:diploma_frontend/pages/reminders_page/reminders_page.dart';
 import 'package:diploma_frontend/pages/specific_product/specific_product_page.dart';
 import 'package:diploma_frontend/pages/splash_page/splash_page.dart';
 import 'package:diploma_frontend/pages/statistics_page/statistics_page.dart';
-import 'package:diploma_frontend/pages/warehouse_page/warehouse_page.dart';
+import 'package:diploma_frontend/pages/stocks_page/stocks_page.dart';
 import 'package:flutter/material.dart';
 import 'package:routemaster/routemaster.dart';
 
@@ -51,12 +51,12 @@ class RouteService {
             child: OverviewPage(),
           ),
       '/stocks': (route) => const MaterialPage(
-            child: WarehousePage(),
+            child: StocksPage(),
           ),
       '/stocks/product/:name': (route) => MaterialPage(
             child: SpecificProductPage(
               productName: route.pathParameters['name']!,
-              productId: int.parse(route.queryParameters['id']!),
+              stockId: int.parse(route.queryParameters['id']!),
             ),
           ),
       '/batches': (route) => const MaterialPage(

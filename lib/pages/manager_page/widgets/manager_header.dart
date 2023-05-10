@@ -31,12 +31,15 @@ class ManagerHeader extends StatelessWidget {
             padding: const EdgeInsets.only(
               left: 20,
             ),
-            child: Text(
-              constants.ManagerPagesList.generatePageNames[selectedIndex],
-              style: const TextStyle(
-                color: constants.Colors.main,
-                fontWeight: FontWeight.bold,
-                fontSize: 32,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 24.0),
+              child: Text(
+                constants.ManagerPagesList.generatePageNames[selectedIndex],
+                style: const TextStyle(
+                  color: constants.Colors.main,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 32,
+                ),
               ),
             ),
           ),

@@ -3,7 +3,7 @@ import 'package:diploma_frontend/pages/batches_page/batches_page.dart';
 import 'package:diploma_frontend/pages/overview_page/overview_page.dart';
 import 'package:diploma_frontend/pages/reminders_page/reminders_page.dart';
 import 'package:diploma_frontend/pages/statistics_page/statistics_page.dart';
-import 'package:diploma_frontend/pages/warehouse_page/warehouse_page.dart';
+import 'package:diploma_frontend/pages/stocks_page/stocks_page.dart';
 import 'package:flutter/material.dart';
 
 class DestinationPage extends StatelessWidget {
@@ -22,7 +22,7 @@ class DestinationPage extends StatelessWidget {
 
     final List<Widget> result = [
       const OverviewPage(),
-      const WarehousePage(
+      const StocksPage(
           // update: context.locale == ServiceLocator.languageService.fallbackLocale,
           // warehouseId: warehouseId,
           ),

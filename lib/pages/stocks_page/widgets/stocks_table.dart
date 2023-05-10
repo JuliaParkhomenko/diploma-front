@@ -1,5 +1,6 @@
 // ignore_for_file: avoid_bool_literals_in_conditional_expressions
 
+import 'package:diploma_frontend/blocs/specific_product/specific_product_cubit.dart';
 import 'package:diploma_frontend/blocs/stock/stock_cubit.dart';
 import 'package:diploma_frontend/enums/stocks_filter.dart';
 import 'package:diploma_frontend/models/stock.dart';
@@ -99,15 +100,19 @@ class _StocksTableState extends State<StocksTable> {
   }) {
     return Container(
       alignment: Alignment.centerLeft,
-      width: (size.width * 0.7 - 20) / 4,
+      width: (size.width * 0.72 - 24) / 4,
+      //color: Color((Random().nextDouble() * 0xFFFFFF).toInt()).withOpacity(1.0),
       child: Row(
         children: [
-          Text(
-            title,
-            style: TextStyle(
-              fontWeight: bold ? FontWeight.bold : FontWeight.normal,
-              fontFamily: 'OpenSans',
-              color: Colors.black,
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Text(
+              title,
+              style: TextStyle(
+                fontWeight: bold ? FontWeight.bold : FontWeight.normal,
+                fontFamily: 'OpenSans',
+                color: Colors.black,
+              ),
             ),
           ),
           if (showIcon)
@@ -128,11 +133,18 @@ class _StocksTableState extends State<StocksTable> {
   Widget getItem(Stock item, Size size) {
     return TextButton(
       style: ButtonStyle(
+        padding: MaterialStateProperty.all(EdgeInsets.zero),
         fixedSize: MaterialStatePropertyAll(
           Size(size.width * .72, 60),
         ),
       ),
       onPressed: () {
+        final SpecificProductCubit cubit =
+            BlocProvider.of<SpecificProductCubit>(context);
+
+        cubit.fetchBatches(
+          item.productId,
+        );
         Routemaster.of(context).push(
           '/stocks/product/${item.productName}',
           queryParameters: {
@@ -141,11 +153,10 @@ class _StocksTableState extends State<StocksTable> {
         );
       },
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const SizedBox(
-            width: 20,
-          ),
+          // const SizedBox(
+          //   width: 13,
+          // ),
           getTitle(item.productName, size),
           getTitle(item.amountText, size),
           getTitle(item.orderedText, size),
@@ -161,11 +172,10 @@ class _StocksTableState extends State<StocksTable> {
       height: 60,
       color: Colors.white,
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const SizedBox(
-            width: 20,
-          ),
+          // const SizedBox(
+          //   width: 20,
+          // ),
           InkWell(
             onTap: () {
               if (state is StockLoaded) {

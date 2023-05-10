@@ -1,19 +1,19 @@
 import 'package:diploma_frontend/blocs/warehouse/warehouse_cubit.dart';
-import 'package:diploma_frontend/pages/warehouse_page/widgets/search_textfield.dart';
-import 'package:diploma_frontend/pages/warehouse_page/widgets/stocks_table.dart';
+import 'package:diploma_frontend/pages/stocks_page/widgets/search_textfield.dart';
+import 'package:diploma_frontend/pages/stocks_page/widgets/stocks_table.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:diploma_frontend/constants/constants.dart' as constants;
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class WarehousePage extends StatefulWidget {
-  const WarehousePage({super.key});
+class StocksPage extends StatefulWidget {
+  const StocksPage({super.key});
 
   @override
-  State<WarehousePage> createState() => _WarehousePageState();
+  State<StocksPage> createState() => _StocksPageState();
 }
 
-class _WarehousePageState extends State<WarehousePage> {
+class _StocksPageState extends State<StocksPage> {
   final TextEditingController searchController = TextEditingController();
 
   @override
@@ -37,7 +37,7 @@ class _WarehousePageState extends State<WarehousePage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  '${'Warehouse'.tr()} > ${'Stocks'.tr()}',
+                  'Stocks'.tr(),
                   style: const TextStyle(
                     color: constants.Colors.subtitleTextColor,
                     fontSize: 18,

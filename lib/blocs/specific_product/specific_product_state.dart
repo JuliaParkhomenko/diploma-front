@@ -8,8 +8,8 @@ class SpecificProductInitial extends SpecificProductState {}
 class SpecificProductLoading extends SpecificProductState {}
 
 class SpecificProductLoaded extends SpecificProductState {
-  final List<Batch> products;
-  SpecificProductLoaded(this.products);
+  final List<Batch> batches;
+  SpecificProductLoaded(this.batches);
 }
 
 class SpecificProductError extends SpecificProductState {
