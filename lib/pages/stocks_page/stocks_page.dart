@@ -1,3 +1,4 @@
+import 'package:diploma_frontend/blocs/stock/stock_cubit.dart';
 import 'package:diploma_frontend/blocs/warehouse/warehouse_cubit.dart';
 import 'package:diploma_frontend/pages/stocks_page/widgets/search_textfield.dart';
 import 'package:diploma_frontend/pages/stocks_page/widgets/stocks_table.dart';
@@ -52,6 +53,12 @@ class _StocksPageState extends State<StocksPage> {
                   width: 200,
                   height: 32,
                   child: SearchTextfield(
+                    hintText: 'Search by name'.tr(context),
+                    onChanged: (value) async {
+                      final StockCubit cubit =
+                          BlocProvider.of<StockCubit>(context);
+                      await cubit.fetchStocks(3, value);
+                    },
                     controller: searchController,
                   ),
                 ),

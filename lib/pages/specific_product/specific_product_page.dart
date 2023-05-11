@@ -1,3 +1,4 @@
+import 'package:diploma_frontend/pages/specific_product/widgets/product_search_row.dart';
 import 'package:diploma_frontend/pages/specific_product/widgets/specific_product_table.dart';
 import 'package:diploma_frontend/services/language_service/app_localization.dart';
 import 'package:flutter/material.dart';
@@ -36,6 +37,15 @@ class SpecificProductPage extends StatelessWidget {
                 fontWeight: FontWeight.bold,
                 fontFamily: 'OpenSans',
               ),
+            ),
+            const SizedBox(
+              height: 45,
+            ),
+            ProductSearchRow(
+              productId: stockId,
+            ),
+            const SizedBox(
+              height: 20,
             ),
             SpecificProductTable(
               stockId: stockId,

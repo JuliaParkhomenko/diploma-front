@@ -77,7 +77,7 @@ class _StocksTableState extends State<StocksTable> {
               } else {
                 return Container(
                   height: 60,
-                  color: index ~/ 2 == 0
+                  color: index % 2 != 0
                       ? Colors.white
                       : constants.Colors.greyTable,
                   child: getItem(item, size),
@@ -115,16 +115,20 @@ class _StocksTableState extends State<StocksTable> {
               ),
             ),
           ),
-          if (showIcon)
-            const Expanded(
-              child: SizedBox(),
-            ),
+          const Expanded(
+            child: SizedBox(),
+          ),
           if (showIcon)
             Icon(
               up ? Icons.arrow_upward : Icons.arrow_downward,
               color: const Color.fromARGB(255, 255, 179, 0),
             ),
-          if (showIcon) const SizedBox(width: 15),
+          if (!showIcon && title == 'Product'.tr(context))
+            Icon(
+              Icons.arrow_downward,
+              color: Colors.grey.withOpacity(.8),
+            ),
+          const SizedBox(width: 15),
         ],
       ),
     );

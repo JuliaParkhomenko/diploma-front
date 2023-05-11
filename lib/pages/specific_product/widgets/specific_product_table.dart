@@ -1,5 +1,8 @@
+// ignore_for_file: avoid_bool_literals_in_conditional_expressions
+
 import 'package:diploma_frontend/blocs/specific_product/specific_product_cubit.dart';
 import 'package:diploma_frontend/enums/action_status.dart';
+import 'package:diploma_frontend/enums/specific_product_filter.dart';
 import 'package:diploma_frontend/models/batch.dart';
 import 'package:diploma_frontend/services/language_service/app_localization.dart';
 import 'package:flutter/material.dart';
@@ -66,6 +69,7 @@ class _SpecificProductTableState extends State<SpecificProductTable> {
                       getTableHeader(size, state, cubit),
                       Container(
                         height: 60,
+                        width: size.width,
                         color: constants.Colors.greyTable,
                         child: getItem(item, size),
                       ),
@@ -74,7 +78,7 @@ class _SpecificProductTableState extends State<SpecificProductTable> {
                 } else {
                   return Container(
                     height: 60,
-                    color: index ~/ 2 == 0
+                    color: index % 2 != 0
                         ? Colors.white
                         : constants.Colors.greyTable,
                     child: getItem(item, size),
@@ -139,9 +143,6 @@ class _SpecificProductTableState extends State<SpecificProductTable> {
       onPressed: () {},
       child: Row(
         children: [
-          // const SizedBox(
-          //   width: 13,
-          // ),
           getTitle(item.id.toString(), size),
           getTitle(item.kind, size),
           getTitle(item.maker, size),
@@ -161,51 +162,74 @@ class _SpecificProductTableState extends State<SpecificProductTable> {
       color: Colors.white,
       child: Row(
         children: [
-          // const SizedBox(
-          //   width: 20,
-          // ),
           InkWell(
             onTap: () {
               if (state is SpecificProductLoaded) {
-                // cubit.filterBatches(
-                //   state.filter == StockFilter.productUp
-                //       ? StockFilter.productDown
-                //       : StockFilter.productUp,
-                //   state.stocks,
-                // );
+                cubit.filterBatches(
+                  state.filter == SpecificProductFilter.idDown
+                      ? SpecificProductFilter.idUp
+                      : SpecificProductFilter.idDown,
+                  state.batches,
+                );
               }
             },
-            child: getTitle('Batch'.tr(context), size,
-                bold: true, showIcon: state is SpecificProductLoaded),
+            child: getTitle(
+              'Batch'.tr(context),
+              size,
+              bold: true,
+              showIcon: state is SpecificProductLoaded
+                  ? state.filter == SpecificProductFilter.idUp ||
+                      state.filter == SpecificProductFilter.idDown
+                  : false,
+              up: state is SpecificProductLoaded
+                  ? state.filter == SpecificProductFilter.idUp
+                  : false,
+            ),
           ),
+          getTitle('Kind'.tr(context), size, bold: true),
+          getTitle('Maker'.tr(context), size, bold: true),
+          getTitle('Status'.tr(context), size, bold: true),
           InkWell(
             onTap: () {
-              if (state is SpecificProductLoaded) {}
+              if (state is SpecificProductLoaded) {
+                cubit.filterBatches(
+                  state.filter == SpecificProductFilter.amountDown
+                      ? SpecificProductFilter.amountUp
+                      : SpecificProductFilter.amountDown,
+                  state.batches,
+                );
+              }
             },
-            child: getTitle('Kind'.tr(context), size,
-                bold: true, showIcon: state is SpecificProductLoaded),
-          ),
-          InkWell(
-            onTap: () {
-              if (state is SpecificProductLoaded) {}
-            },
-            child: getTitle('Maker'.tr(context), size,
-                bold: true, showIcon: state is SpecificProductLoaded),
-          ),
-          InkWell(
-            onTap: () {},
-            child: getTitle('Status'.tr(context), size,
-                bold: true, showIcon: state is SpecificProductLoaded),
-          ),
-          InkWell(
-            onTap: () {},
             child: getTitle('Amount'.tr(context), size,
-                bold: true, showIcon: state is SpecificProductLoaded),
+                bold: true,
+                showIcon: state is SpecificProductLoaded
+                    ? (state.filter == SpecificProductFilter.amountUp ||
+                        state.filter == SpecificProductFilter.amountDown)
+                    : false,
+                up: state is SpecificProductLoaded
+                    ? state.filter == SpecificProductFilter.amountUp
+                    : false),
           ),
           InkWell(
-            onTap: () {},
+            onTap: () {
+              if (state is SpecificProductLoaded) {
+                cubit.filterBatches(
+                  state.filter == SpecificProductFilter.expirationDown
+                      ? SpecificProductFilter.expirationUp
+                      : SpecificProductFilter.expirationDown,
+                  state.batches,
+                );
+              }
+            },
             child: getTitle('Expiration date'.tr(context), size,
-                bold: true, showIcon: state is SpecificProductLoaded),
+                bold: true,
+                showIcon: state is SpecificProductLoaded
+                    ? (state.filter == SpecificProductFilter.expirationUp ||
+                        state.filter == SpecificProductFilter.expirationDown)
+                    : false,
+                up: state is SpecificProductLoaded
+                    ? state.filter == SpecificProductFilter.expirationUp
+                    : false),
           ),
         ],
       ),

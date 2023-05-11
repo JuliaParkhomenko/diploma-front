@@ -9,7 +9,8 @@ class SpecificProductLoading extends SpecificProductState {}
 
 class SpecificProductLoaded extends SpecificProductState {
   final List<Batch> batches;
-  SpecificProductLoaded(this.batches);
+  final SpecificProductFilter filter;
+  SpecificProductLoaded(this.batches, this.filter);
 }
 
 class SpecificProductError extends SpecificProductState {

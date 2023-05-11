@@ -1,11 +1,15 @@
-import 'package:diploma_frontend/blocs/stock/stock_cubit.dart';
-import 'package:diploma_frontend/services/language_service/app_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SearchTextfield extends StatelessWidget {
+  final String hintText;
+  final Function(String) onChanged;
   final TextEditingController controller;
-  const SearchTextfield({super.key, required this.controller});
+  const SearchTextfield({
+    super.key,
+    required this.hintText,
+    required this.controller,
+    required this.onChanged,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -16,10 +20,7 @@ class SearchTextfield extends StatelessWidget {
         borderRadius: BorderRadius.circular(3),
       ),
       child: TextField(
-        onChanged: (value) async {
-          final StockCubit cubit = BlocProvider.of<StockCubit>(context);
-          await cubit.fetchStocks(3, value);
-        },
+        onChanged: onChanged,
         style: const TextStyle(
           fontSize: 14,
         ),
@@ -29,7 +30,7 @@ class SearchTextfield extends StatelessWidget {
             fontSize: 14,
           ),
           alignLabelWithHint: true,
-          hintText: 'Search by name'.tr(context),
+          hintText: hintText,
           prefixIcon: const Icon(
             Icons.search,
             size: 22,
