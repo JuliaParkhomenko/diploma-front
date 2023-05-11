@@ -24,7 +24,7 @@ class ApplicationPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Application for products'.tr(),
+              'Application for ordering products'.tr(),
               style: const TextStyle(
                 color: constants.Colors.subtitleTextColor,
                 fontSize: 18,
