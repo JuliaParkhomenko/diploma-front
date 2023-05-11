@@ -28,5 +28,9 @@
     "Urgency": "Urgency",
     "Send": "Send",
     "urgently": "urgently",
-    "Stock": "Stock"
+    "Stock": "Stock",
+    "Status": "Status",
+    "Batch": "Batch",
+    "Maker": "Maker",
+    "Expiration date": "Expiration date"
 }
