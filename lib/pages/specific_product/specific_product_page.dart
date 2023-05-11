@@ -1,5 +1,5 @@
 import 'package:diploma_frontend/pages/specific_product/widgets/specific_product_table.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:diploma_frontend/services/language_service/app_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:diploma_frontend/constants/constants.dart' as constants;
 
@@ -29,7 +29,7 @@ class SpecificProductPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              '${'Stocks'.tr()} > ${'Stock'.tr()} ($productName)',
+              '${'Stocks'.tr(context)} > ${'Stock'.tr(context)} ($productName)',
               style: const TextStyle(
                 color: constants.Colors.subtitleTextColor,
                 fontSize: 18,

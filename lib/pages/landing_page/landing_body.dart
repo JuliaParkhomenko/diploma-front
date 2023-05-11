@@ -1,6 +1,6 @@
 import 'package:diploma_frontend/pages/landing_page/widgets/language_widget.dart';
 import 'package:diploma_frontend/pages/landing_page/widgets/logo_widget.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:diploma_frontend/services/language_service/app_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:diploma_frontend/constants/constants.dart' as constants;
 import 'package:routemaster/routemaster.dart';
@@ -28,21 +28,21 @@ class _LandingBodyState extends State<LandingBody> {
               bottomRight: Radius.circular(12),
             ),
           ),
-          child: Row(
+          child: const Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const SizedBox(
+              SizedBox(
                 width: 60,
               ),
-              const Center(
+              Center(
                 child: LogoWidget(),
               ),
-              const SizedBox(
+              SizedBox(
                 width: 14,
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
+                children: [
                   Text(
                     'Organized',
                     style: TextStyle(
@@ -70,13 +70,11 @@ class _LandingBodyState extends State<LandingBody> {
                   ),
                 ],
               ),
-              const Expanded(
+              Expanded(
                 child: SizedBox(),
               ),
-              LanguageWidget(
-                onChange: onLanguageChanged,
-              ),
-              const SizedBox(
+              LanguageWidget(),
+              SizedBox(
                 width: 20,
               ),
             ],
@@ -89,7 +87,7 @@ class _LandingBodyState extends State<LandingBody> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Accounting for products in warehouses'.tr(),
+                  'Accounting for products in warehouses'.tr(context),
                   style: const TextStyle(
                     //height: 0.8,
                     fontSize: 26,
@@ -111,7 +109,7 @@ class _LandingBodyState extends State<LandingBody> {
                         ),
                         text:
                             'Our help to you in accounting for food products in warehouses. Try it. '
-                                .tr(),
+                                .tr(context),
                       ),
                       TextSpan(
                         style: const TextStyle(
@@ -120,7 +118,7 @@ class _LandingBodyState extends State<LandingBody> {
                           fontFamily: 'OpenSans',
                         ),
                         // ignore: avoid_escaping_inner_quotes
-                        text: 'It\'s as simple as that!'.tr(),
+                        text: 'It\'s as simple as that!'.tr(context),
                       ),
                     ],
                   ),
@@ -141,12 +139,6 @@ class _LandingBodyState extends State<LandingBody> {
     );
   }
 
-  void onLanguageChanged(Locale value) {
-    setState(() {
-      context.setLocale(value);
-    });
-  }
-
   Widget signInButton() {
     return InkWell(
       onTap: () => Routemaster.of(context).push('/sign-in'),
@@ -163,7 +155,7 @@ class _LandingBodyState extends State<LandingBody> {
           borderRadius: BorderRadius.circular(18),
         ),
         child: Text(
-          'Sign in'.tr().toUpperCase(),
+          'Sign in'.tr(context).toUpperCase(),
           style: const TextStyle(
             color: constants.Colors.mainButtonText,
             fontWeight: FontWeight.bold,

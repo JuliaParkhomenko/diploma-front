@@ -1,19 +1,17 @@
+import 'package:diploma_frontend/blocs/localization/localization_cubit.dart';
 import 'package:diploma_frontend/models/warehouse.dart';
 import 'package:diploma_frontend/pages/widgets/warehouse_selector.dart';
-import 'package:diploma_frontend/services/service_locator.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:diploma_frontend/constants/constants.dart' as constants;
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class ManagerHeader extends StatelessWidget {
-  final Function(bool) onLanguageChanged;
   final int selectedIndex;
   final List<Warehouse> warehouses;
 
   const ManagerHeader({
     super.key,
-    required this.onLanguageChanged,
     required this.selectedIndex,
     required this.warehouses,
   });
@@ -34,7 +32,8 @@ class ManagerHeader extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.only(left: 24.0),
               child: Text(
-                constants.ManagerPagesList.generatePageNames[selectedIndex],
+                constants.ManagerPagesList.generatePageNames(
+                    context)[selectedIndex],
                 style: const TextStyle(
                   color: constants.Colors.main,
                   fontWeight: FontWeight.bold,
@@ -51,25 +50,35 @@ class ManagerHeader extends StatelessWidget {
           WarehouseSelector(
             warehouses: warehouses,
           ),
-          GestureDetector(
-            onTap: () => onLanguageChanged(true),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(4),
-              child: SizedBox(
-                height: 20,
-                width: 30,
-                child: context.locale ==
-                        ServiceLocator.languageService.supportedLocales[0]
-                    ? SvgPicture.asset(
-                        'assets/images/ukraine-flag-icon.svg',
-                        fit: BoxFit.fill,
-                      )
-                    : SvgPicture.asset(
-                        'assets/images/england-flag-icon.svg',
-                        fit: BoxFit.fill,
-                      ),
-              ),
-            ),
+          BlocBuilder<LocalizationCubit, LocalizationState>(
+            builder: (context, state) {
+              if (state is ChangeLocalState) {
+                return GestureDetector(
+                  onTap: () async {
+                    await BlocProvider.of<LocalizationCubit>(context)
+                        .changeLanguage(
+                            state.locale == const Locale('uk') ? 'en' : 'uk');
+                  },
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(4),
+                    child: SizedBox(
+                      height: 20,
+                      width: 30,
+                      child: state.locale == const Locale('uk')
+                          ? SvgPicture.asset(
+                              'assets/images/ukraine-flag-icon.svg',
+                              fit: BoxFit.fill,
+                            )
+                          : SvgPicture.asset(
+                              'assets/images/england-flag-icon.svg',
+                              fit: BoxFit.fill,
+                            ),
+                    ),
+                  ),
+                );
+              }
+              return Container();
+            },
           ),
           Container(
             width: 40,

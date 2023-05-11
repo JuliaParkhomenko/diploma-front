@@ -2,7 +2,6 @@ import 'package:diploma_frontend/models/warehouse.dart';
 import 'package:diploma_frontend/pages/manager_page/widgets/manager_header.dart';
 import 'package:diploma_frontend/pages/manager_page/widgets/navbar.dart';
 import 'package:diploma_frontend/services/service_locator.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:routemaster/routemaster.dart';
 
@@ -48,7 +47,6 @@ class _ManagerBodyState extends State<ManagerBody> {
           child: Column(
             children: [
               ManagerHeader(
-                onLanguageChanged: (_) => changeLanguage(),
                 selectedIndex: indexedPage.index,
                 warehouses: widget.list,
               ),
@@ -66,15 +64,5 @@ class _ManagerBodyState extends State<ManagerBody> {
         ),
       ],
     );
-  }
-
-  void changeLanguage() {
-    setState(() {
-      context.setLocale(
-        context.locale == ServiceLocator.languageService.supportedLocales[0]
-            ? ServiceLocator.languageService.supportedLocales[1]
-            : ServiceLocator.languageService.supportedLocales[0],
-      );
-    });
   }
 }

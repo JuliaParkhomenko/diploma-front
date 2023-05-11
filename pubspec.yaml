@@ -9,9 +9,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
   routemaster: ^1.0.1
   provider: ^6.0.5
-  easy_localization: ^3.0.1
   shared_preferences: ^2.1.0
   http: ^0.13.5
   flutter_svg: ^2.0.5
@@ -30,8 +31,8 @@ flutter:
   assets:
     - assets/
     - assets/language/
-    - assets/language/en-US.json
-    - assets/language/uk-UA.json
+    - assets/language/en.json
+    - assets/language/uk.json
     - assets/images/
     - assets/images/ukraine-flag-icon.svg
     - assets/images/england-flag-icon.svg

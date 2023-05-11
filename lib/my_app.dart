@@ -1,13 +1,15 @@
+import 'package:diploma_frontend/blocs/localization/localization_cubit.dart';
 import 'package:diploma_frontend/blocs/product/product_cubit.dart';
 import 'package:diploma_frontend/blocs/specific_product/specific_product_cubit.dart';
 import 'package:diploma_frontend/blocs/stock/stock_cubit.dart';
 import 'package:diploma_frontend/blocs/warehouse/warehouse_cubit.dart';
 import 'package:diploma_frontend/enums/logged_in_state.dart';
 import 'package:diploma_frontend/services/app_state_service/app_state_service.dart';
+import 'package:diploma_frontend/services/language_service/app_localization.dart';
 import 'package:diploma_frontend/services/route_service/route_service.dart';
 import 'package:diploma_frontend/services/service_locator.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:routemaster/routemaster.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -75,14 +77,39 @@ class _MyAppState extends State<MyApp> {
       ],
       child: ChangeNotifierProvider<AppStateService>.value(
         value: ServiceLocator.appStateService,
-        child: MaterialApp.router(
-          debugShowCheckedModeBanner: false,
-          locale: context.locale,
-          supportedLocales: context.supportedLocales,
-          title: 'Diploma work',
-          localizationsDelegates: context.localizationDelegates,
-          routeInformationParser: const RoutemasterParser(),
-          routerDelegate: _routemasterDelegate,
+        child: BlocBuilder<LocalizationCubit, LocalizationState>(
+          builder: (context, state) {
+            if (state is ChangeLocalState) {
+              return MaterialApp.router(
+                debugShowCheckedModeBanner: false,
+                supportedLocales: const [
+                  Locale('uk', ''),
+                  Locale('en', ''),
+                ],
+                title: 'Diploma work',
+                localizationsDelegates: const [
+                  AppLocalization.delegate,
+                  GlobalMaterialLocalizations.delegate,
+                  GlobalWidgetsLocalizations.delegate,
+                  GlobalCupertinoLocalizations.delegate
+                ],
+                localeResolutionCallback: (current, supported) {
+                  for (final locale in supported) {
+                    if (current != null &&
+                        current.languageCode == locale.languageCode) {
+                      return current;
+                    }
+                  }
+                  return supported.first;
+                },
+                routeInformationParser: const RoutemasterParser(),
+                routerDelegate: _routemasterDelegate,
+                locale: state.locale,
+              );
+            } else {
+              return Container();
+            }
+          },
         ),
       ),
     );

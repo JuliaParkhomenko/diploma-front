@@ -1,5 +1,5 @@
 import 'package:diploma_frontend/pages/auth_page/widgets/sign_in_button.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:diploma_frontend/services/language_service/app_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:diploma_frontend/constants/constants.dart' as constants;
 
@@ -26,7 +26,7 @@ class _AuthBodyState extends State<AuthBody> {
         ),
         Center(
           child: Text(
-            'Sign in to your account'.tr(),
+            'Sign in to your account'.tr(context),
             style: const TextStyle(
               color: constants.Colors.main,
               fontSize: 30,
@@ -72,7 +72,7 @@ class _AuthBodyState extends State<AuthBody> {
           height: 30,
         ),
         Text(
-          'Forgot your password?'.tr(),
+          'Forgot your password?'.tr(context),
           style: const TextStyle(
             decoration: TextDecoration.underline,
             fontFamily: 'OpenSans',

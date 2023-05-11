@@ -8,6 +8,7 @@ import 'package:diploma_frontend/models/warehouse.dart';
 import 'package:diploma_frontend/repositories/warehouse_repository/base_warehouse_repository.dart';
 import 'package:diploma_frontend/services/database/database.dart';
 import 'package:diploma_frontend/enums/urgency.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class WarehouseRepository implements BaseWarehouseRepository {
@@ -120,6 +121,7 @@ class WarehouseRepository implements BaseWarehouseRepository {
     required String kind,
     required Urgency urgency,
     required String note,
+    required BuildContext context,
   }) async {
     try {
       final User? user = await Database().getUser();
@@ -139,7 +141,8 @@ class WarehouseRepository implements BaseWarehouseRepository {
         'productId': productId,
         'amount': amount,
         'kind': kind,
-        'urgency': urgency.getUrgency(),
+        // ignore: use_build_context_synchronously
+        'urgency': urgency.getUrgency(context),
         'note': note,
       });
 

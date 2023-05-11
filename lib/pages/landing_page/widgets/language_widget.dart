@@ -1,12 +1,11 @@
-import 'package:diploma_frontend/services/service_locator.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:diploma_frontend/blocs/localization/localization_cubit.dart';
+import 'package:diploma_frontend/services/language_service/language_service.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LanguageWidget extends StatefulWidget {
-  final Function(Locale) onChange;
   const LanguageWidget({
     super.key,
-    required this.onChange,
   });
 
   @override
@@ -52,7 +51,7 @@ class _LanguageWidgetState extends State<LanguageWidget> {
             .toList();
       },
       hint: Text(
-        context.locale.countryCode! == 'UA' ? 'UA' : 'ENG',
+        LanguageService.getCachedLocale() == 'ua' ? 'UA' : 'ENG',
         style: const TextStyle(
           color: Colors.white,
           fontWeight: FontWeight.bold,
@@ -77,12 +76,9 @@ class _LanguageWidgetState extends State<LanguageWidget> {
     );
   }
 
-  void onChanged(String newValue) {
-    widget.onChange(
-      newValue == 'uk'
-          ? ServiceLocator.languageService.supportedLocales[0]
-          : ServiceLocator.languageService.supportedLocales[1],
-    );
+  Future<void> onChanged(String newValue) async {
+    await BlocProvider.of<LocalizationCubit>(context).changeLanguage(newValue);
+
     setState(() {
       value = newValue;
     });

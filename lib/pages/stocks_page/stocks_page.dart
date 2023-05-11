@@ -1,7 +1,7 @@
 import 'package:diploma_frontend/blocs/warehouse/warehouse_cubit.dart';
 import 'package:diploma_frontend/pages/stocks_page/widgets/search_textfield.dart';
 import 'package:diploma_frontend/pages/stocks_page/widgets/stocks_table.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:diploma_frontend/services/language_service/app_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:diploma_frontend/constants/constants.dart' as constants;
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -37,7 +37,7 @@ class _StocksPageState extends State<StocksPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Stocks'.tr(),
+                  'Stocks'.tr(context),
                   style: const TextStyle(
                     color: constants.Colors.subtitleTextColor,
                     fontSize: 18,

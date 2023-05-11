@@ -2,6 +2,7 @@ import 'package:diploma_frontend/enums/urgency.dart';
 import 'package:diploma_frontend/models/stock.dart';
 import 'package:diploma_frontend/models/storage.dart';
 import 'package:diploma_frontend/models/warehouse.dart';
+import 'package:flutter/material.dart';
 
 abstract class BaseWarehouseRepository {
   Future<List<Stock>?> getStockByWarehouse({
@@ -30,6 +31,7 @@ abstract class BaseWarehouseRepository {
     required String kind,
     required Urgency urgency,
     required String note,
+    required BuildContext context,
   });
 
   // Future<List<UserAction?>> recentActions({});

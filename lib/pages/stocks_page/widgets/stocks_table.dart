@@ -4,7 +4,7 @@ import 'package:diploma_frontend/blocs/specific_product/specific_product_cubit.d
 import 'package:diploma_frontend/blocs/stock/stock_cubit.dart';
 import 'package:diploma_frontend/enums/stocks_filter.dart';
 import 'package:diploma_frontend/models/stock.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:diploma_frontend/services/language_service/app_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:diploma_frontend/constants/constants.dart' as constants;
@@ -188,7 +188,7 @@ class _StocksTableState extends State<StocksTable> {
               }
             },
             child: getTitle(
-              'Product'.tr(),
+              'Product'.tr(context),
               size,
               bold: true,
               showIcon: state is StockLoaded
@@ -212,7 +212,7 @@ class _StocksTableState extends State<StocksTable> {
               }
             },
             child: getTitle(
-              'Amount'.tr(),
+              'Amount'.tr(context),
               size,
               bold: true,
               showIcon: state is StockLoaded
@@ -236,7 +236,7 @@ class _StocksTableState extends State<StocksTable> {
               }
             },
             child: getTitle(
-              'Ordered'.tr(),
+              'Ordered'.tr(context),
               size,
               bold: true,
               showIcon: state is StockLoaded
@@ -260,7 +260,7 @@ class _StocksTableState extends State<StocksTable> {
               }
             },
             child: getTitle(
-              'Total'.tr(),
+              'Total'.tr(context),
               size,
               bold: true,
               showIcon: state is StockLoaded

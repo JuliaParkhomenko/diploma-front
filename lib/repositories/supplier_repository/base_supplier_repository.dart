@@ -1,6 +1,7 @@
 import 'package:diploma_frontend/enums/action_status.dart';
 import 'package:diploma_frontend/models/supply.dart';
 import 'package:diploma_frontend/models/supply_condition.dart';
+import 'package:flutter/material.dart';
 
 abstract class BaseSupplierRepository {
   Future<int?> add({
@@ -18,6 +19,7 @@ abstract class BaseSupplierRepository {
     required int minAmount,
     required int maxAmount,
     required List<SupplyCondition> addSupplyConditions,
+    required BuildContext context,
   });
 
   Future<List<Supply>?> all();

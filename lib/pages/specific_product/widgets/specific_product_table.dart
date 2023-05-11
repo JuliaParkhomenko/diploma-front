@@ -1,7 +1,7 @@
 import 'package:diploma_frontend/blocs/specific_product/specific_product_cubit.dart';
 import 'package:diploma_frontend/enums/action_status.dart';
 import 'package:diploma_frontend/models/batch.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:diploma_frontend/services/language_service/app_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:diploma_frontend/constants/constants.dart' as constants;
@@ -145,7 +145,7 @@ class _SpecificProductTableState extends State<SpecificProductTable> {
           getTitle(item.id.toString(), size),
           getTitle(item.kind, size),
           getTitle(item.maker, size),
-          getTitle(item.status.getActionStatus(), size),
+          getTitle(item.status.getActionStatus(context), size),
           getTitle(item.amount.toString(), size),
           getTitle(item.expirationDate.toString().substring(0, 11), size),
         ],
@@ -175,36 +175,36 @@ class _SpecificProductTableState extends State<SpecificProductTable> {
                 // );
               }
             },
-            child: getTitle('Batch'.tr(), size,
+            child: getTitle('Batch'.tr(context), size,
                 bold: true, showIcon: state is SpecificProductLoaded),
           ),
           InkWell(
             onTap: () {
               if (state is SpecificProductLoaded) {}
             },
-            child: getTitle('Kind'.tr(), size,
+            child: getTitle('Kind'.tr(context), size,
                 bold: true, showIcon: state is SpecificProductLoaded),
           ),
           InkWell(
             onTap: () {
               if (state is SpecificProductLoaded) {}
             },
-            child: getTitle('Maker'.tr(), size,
+            child: getTitle('Maker'.tr(context), size,
                 bold: true, showIcon: state is SpecificProductLoaded),
           ),
           InkWell(
             onTap: () {},
-            child: getTitle('Status'.tr(), size,
+            child: getTitle('Status'.tr(context), size,
                 bold: true, showIcon: state is SpecificProductLoaded),
           ),
           InkWell(
             onTap: () {},
-            child: getTitle('Amount'.tr(), size,
+            child: getTitle('Amount'.tr(context), size,
                 bold: true, showIcon: state is SpecificProductLoaded),
           ),
           InkWell(
             onTap: () {},
-            child: getTitle('Expiration date'.tr(), size,
+            child: getTitle('Expiration date'.tr(context), size,
                 bold: true, showIcon: state is SpecificProductLoaded),
           ),
         ],

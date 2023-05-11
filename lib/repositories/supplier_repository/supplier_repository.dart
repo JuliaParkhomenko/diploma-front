@@ -7,6 +7,7 @@ import 'package:diploma_frontend/enums/action_status.dart';
 import 'package:diploma_frontend/models/user.dart';
 import 'package:diploma_frontend/repositories/supplier_repository/base_supplier_repository.dart';
 import 'package:diploma_frontend/services/database/database.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class SupplierRepository implements BaseSupplierRepository {
@@ -61,6 +62,7 @@ class SupplierRepository implements BaseSupplierRepository {
     required int minAmount,
     required int maxAmount,
     required List<SupplyCondition> addSupplyConditions,
+    required BuildContext context,
   }) async {
     try {
       final User? user = await _database.getUser();
@@ -77,7 +79,7 @@ class SupplierRepository implements BaseSupplierRepository {
 
       final body = jsonEncode({
         'supplierId': supplierId,
-        'status': status.getActionStatus(),
+        'status': status.getActionStatus(context),
         'startDate': startDate,
         'endDate': endDate,
         'minAmount': minAmount,

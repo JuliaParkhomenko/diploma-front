@@ -1,4 +1,5 @@
 import 'package:diploma_frontend/enums/action_status.dart';
+import 'package:flutter/material.dart';
 
 class Batch {
   final int id;
@@ -34,12 +35,12 @@ class Batch {
     );
   }
 
-  Map<String, dynamic> toJson() {
+  Map<String, dynamic> toJson(BuildContext context) {
     return {
       'id': id,
       'kind': kind,
       'maker': maker,
-      'status': status.getActionStatus(),
+      'status': status.getActionStatus(context),
       'amount': amount,
       'productionDate': productionDate.toIso8601String(),
       'expirationDate': expirationDate.toIso8601String(),

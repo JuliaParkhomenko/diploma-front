@@ -1,4 +1,5 @@
-import 'package:easy_localization/easy_localization.dart';
+import 'package:diploma_frontend/services/language_service/app_localization.dart';
+import 'package:flutter/material.dart';
 
 enum ActionType {
   batch,
@@ -19,14 +20,14 @@ extension ActionTypeConverter on String {
 }
 
 extension ActionTypeToString on ActionType {
-  String getActionType() {
+  String getActionType(BuildContext context) {
     switch (this) {
       case ActionType.batch:
-        return 'batch'.tr();
+        return 'batch'.tr(context);
       case ActionType.application:
-        return 'application'.tr();
+        return 'application'.tr(context);
       default:
-        return 'batch'.tr();
+        return 'batch'.tr(context);
     }
   }
 }

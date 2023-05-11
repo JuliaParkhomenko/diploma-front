@@ -1,5 +1,5 @@
 import 'package:diploma_frontend/services/app_state_service/app_state_service.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:diploma_frontend/services/language_service/app_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:diploma_frontend/constants/constants.dart' as constants;
@@ -34,7 +34,7 @@ class SignInButton extends StatelessWidget {
         backgroundColor: MaterialStateProperty.all(constants.Colors.main),
       ),
       child: Text(
-        'Sign in'.tr().toUpperCase(),
+        'Sign in'.tr(context).toUpperCase(),
         style: const TextStyle(
           color: Colors.white,
           fontFamily: 'OpenSans',

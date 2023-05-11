@@ -1,5 +1,5 @@
 import 'package:diploma_frontend/blocs/stock/stock_cubit.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:diploma_frontend/services/language_service/app_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -29,7 +29,7 @@ class SearchTextfield extends StatelessWidget {
             fontSize: 14,
           ),
           alignLabelWithHint: true,
-          hintText: 'Search by name'.tr(),
+          hintText: 'Search by name'.tr(context),
           prefixIcon: const Icon(
             Icons.search,
             size: 22,

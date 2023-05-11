@@ -10,8 +10,9 @@ class AdminBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () async {
-        await ServiceLocator.database.clear();
-        await Provider.of<AppStateService>(context, listen: false).logIn();
+        await ServiceLocator.database.clear().then((value) async {
+          await Provider.of<AppStateService>(context, listen: false).logIn();
+        });
       },
       child: Container(
         color: Colors.blueGrey,

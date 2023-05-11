@@ -1,4 +1,5 @@
-import 'package:easy_localization/easy_localization.dart';
+import 'package:diploma_frontend/services/language_service/app_localization.dart';
+import 'package:flutter/material.dart';
 
 enum ActionStatus {
   ordered,
@@ -34,24 +35,24 @@ extension ActionStatusConverter on String {
 }
 
 extension ActionStatusToString on ActionStatus {
-  String getActionStatus() {
+  String getActionStatus(BuildContext context) {
     switch (this) {
       case ActionStatus.ordered:
-        return 'ordered'.tr();
+        return 'ordered'.tr(context);
       case ActionStatus.recieved:
-        return 'recieved'.tr();
+        return 'recieved'.tr(context);
       case ActionStatus.used:
-        return 'used'.tr();
+        return 'used'.tr(context);
       case ActionStatus.writtenOff:
-        return 'written off'.tr();
+        return 'written off'.tr(context);
       case ActionStatus.sent:
-        return 'sent'.tr();
+        return 'sent'.tr(context);
       case ActionStatus.confirmed:
-        return 'confirmed'.tr();
+        return 'confirmed'.tr(context);
       case ActionStatus.canceled:
-        return 'canceled'.tr();
+        return 'canceled'.tr(context);
       default:
-        return 'ordered'.tr();
+        return 'ordered'.tr(context);
     }
   }
 }

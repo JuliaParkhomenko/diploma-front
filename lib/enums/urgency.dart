@@ -1,4 +1,5 @@
-import 'package:easy_localization/easy_localization.dart';
+import 'package:diploma_frontend/services/language_service/app_localization.dart';
+import 'package:flutter/material.dart';
 
 enum Urgency {
   urgently,
@@ -19,14 +20,14 @@ extension UrgencyConverter on String {
 }
 
 extension UrgencyToString on Urgency {
-  String getUrgency() {
+  String getUrgency(BuildContext context) {
     switch (this) {
       case Urgency.urgently:
-        return 'urgently'.tr();
+        return 'urgently'.tr(context);
       case Urgency.notUrgent:
-        return 'not urgent'.tr();
+        return 'not urgent'.tr(context);
       default:
-        return 'urgently'.tr();
+        return 'urgently'.tr(context);
     }
   }
 }
