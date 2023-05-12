@@ -51,7 +51,7 @@ class _LanguageWidgetState extends State<LanguageWidget> {
             .toList();
       },
       hint: Text(
-        LanguageService.getCachedLocale() == 'ua' ? 'UA' : 'ENG',
+        LanguageService.getCachedLocale() == 'eng' ? 'ENG' : 'UA',
         style: const TextStyle(
           color: Colors.white,
           fontWeight: FontWeight.bold,

@@ -19,6 +19,9 @@ dependencies:
   flutter_bloc: ^8.1.2
   bloc: ^8.1.1
   loading_animation_widget: ^1.2.0+4
+  textfield_datepicker: ^0.2.0
+  translit: ^2.0.1
+  intl: ^0.18.0
 
 dev_dependencies:
   flutter_test:

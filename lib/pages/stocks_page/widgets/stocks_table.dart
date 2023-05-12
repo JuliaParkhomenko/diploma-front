@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:diploma_frontend/constants/constants.dart' as constants;
 import 'package:routemaster/routemaster.dart';
+import 'package:translit/translit.dart';
 
 class StocksTable extends StatefulWidget {
   final int warehouseId;
@@ -150,7 +151,7 @@ class _StocksTableState extends State<StocksTable> {
           item.productId,
         );
         Routemaster.of(context).push(
-          '/stocks/product/${item.productName}',
+          '/stocks/product/${Translit().toTranslit(source: item.productName)}',
           queryParameters: {
             'id': item.id.toString(),
           },

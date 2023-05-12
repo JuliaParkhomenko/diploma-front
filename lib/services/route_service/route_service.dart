@@ -5,7 +5,9 @@ import 'package:diploma_frontend/pages/batches_page/batches_page.dart';
 import 'package:diploma_frontend/pages/director_page/director_page.dart';
 import 'package:diploma_frontend/pages/landing_page/landing_page.dart';
 import 'package:diploma_frontend/pages/manager_page/manager_page.dart';
+import 'package:diploma_frontend/pages/ordered_batch_page/ordered_batch_page.dart';
 import 'package:diploma_frontend/pages/overview_page/overview_page.dart';
+import 'package:diploma_frontend/pages/received_batch_page/received_batch_page.dart';
 import 'package:diploma_frontend/pages/reminders_page/reminders_page.dart';
 import 'package:diploma_frontend/pages/specific_product/specific_product_page.dart';
 import 'package:diploma_frontend/pages/splash_page/splash_page.dart';
@@ -53,10 +55,22 @@ class RouteService {
       '/stocks': (route) => const MaterialPage(
             child: StocksPage(),
           ),
-      '/stocks/product/:name': (route) => MaterialPage(
-            child: SpecificProductPage(
-              productName: route.pathParameters['name']!,
-              stockId: int.parse(route.queryParameters['id']!),
+      '/stocks/product/:name': (route) {
+        return MaterialPage(
+          child: SpecificProductPage(
+            productName: route.pathParameters['name']!,
+            stockId: int.parse(route.queryParameters['id']!),
+          ),
+        );
+      },
+      '/stocks/product/:name/batch/:id': (route) => MaterialPage(
+            child: OrderedBatchPage(
+              batchId: int.parse(route.pathParameters['id']!),
+            ),
+          ),
+      '/stocks/product/:name/received/:id': (route) => MaterialPage(
+            child: ReceivedBatchPage(
+              batchId: int.parse(route.pathParameters['id']!),
             ),
           ),
       '/batches': (route) => const MaterialPage(

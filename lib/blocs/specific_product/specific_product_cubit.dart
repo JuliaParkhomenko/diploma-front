@@ -12,6 +12,8 @@ class SpecificProductCubit extends Cubit<SpecificProductState> {
   final BatchRepository _repository;
   SpecificProductCubit(this._repository) : super(SpecificProductInitial());
 
+  late Batch? batch;
+
   Future<void> fetchBatches(
     int productId, {
     String batchId = '',

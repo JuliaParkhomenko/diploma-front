@@ -1,3 +1,4 @@
+import 'package:diploma_frontend/blocs/batch/batch_cubit.dart';
 import 'package:diploma_frontend/blocs/localization/localization_cubit.dart';
 import 'package:diploma_frontend/blocs/product/product_cubit.dart';
 import 'package:diploma_frontend/blocs/specific_product/specific_product_cubit.dart';
@@ -54,6 +55,11 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider<BatchCubit>(
+          create: (context) => BatchCubit(
+            ServiceLocator.batchRepository,
+          ),
+        ),
         BlocProvider<StockCubit>(
           create: (context) => StockCubit(
             ServiceLocator.warehouseRepository,

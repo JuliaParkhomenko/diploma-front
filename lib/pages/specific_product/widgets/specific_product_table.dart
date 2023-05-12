@@ -1,5 +1,6 @@
 // ignore_for_file: avoid_bool_literals_in_conditional_expressions
 
+import 'package:diploma_frontend/blocs/batch/batch_cubit.dart';
 import 'package:diploma_frontend/blocs/specific_product/specific_product_cubit.dart';
 import 'package:diploma_frontend/enums/action_status.dart';
 import 'package:diploma_frontend/enums/specific_product_filter.dart';
@@ -8,6 +9,7 @@ import 'package:diploma_frontend/services/language_service/app_localization.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:diploma_frontend/constants/constants.dart' as constants;
+import 'package:routemaster/routemaster.dart';
 
 class SpecificProductTable extends StatefulWidget {
   final int stockId;
@@ -27,7 +29,6 @@ class _SpecificProductTableState extends State<SpecificProductTable> {
 
     return BlocBuilder<SpecificProductCubit, SpecificProductState>(
       builder: (BuildContext context, SpecificProductState state) {
-        if (state is SpecificProductInitial) {}
         if (state is SpecificProductLoading) {
           final SpecificProductCubit cubit =
               BlocProvider.of<SpecificProductCubit>(context);
@@ -71,7 +72,7 @@ class _SpecificProductTableState extends State<SpecificProductTable> {
                         height: 60,
                         width: size.width,
                         color: constants.Colors.greyTable,
-                        child: getItem(item, size),
+                        child: getItem(item, size, state),
                       ),
                     ],
                   );
@@ -81,7 +82,7 @@ class _SpecificProductTableState extends State<SpecificProductTable> {
                     color: index % 2 != 0
                         ? Colors.white
                         : constants.Colors.greyTable,
-                    child: getItem(item, size),
+                    child: getItem(item, size, state),
                   );
                 }
               },
@@ -132,7 +133,7 @@ class _SpecificProductTableState extends State<SpecificProductTable> {
     );
   }
 
-  Widget getItem(Batch item, Size size) {
+  Widget getItem(Batch item, Size size, SpecificProductState state) {
     return TextButton(
       style: ButtonStyle(
         padding: MaterialStateProperty.all(EdgeInsets.zero),
@@ -140,7 +141,26 @@ class _SpecificProductTableState extends State<SpecificProductTable> {
           Size(size.width * .72, 60),
         ),
       ),
-      onPressed: () {},
+      onPressed: () {
+        if (state is SpecificProductLoaded) {
+          final SpecificProductCubit cubit =
+              BlocProvider.of<SpecificProductCubit>(context);
+          cubit.batch = item;
+        }
+
+        final BatchCubit batchCubit = BlocProvider.of(context);
+        batchCubit.clear();
+
+        if (item.status.name.toLowerCase().contains('ordered')) {
+          Routemaster.of(context).push(
+            '/stocks/product/${Routemaster.of(context).currentRoute.pathParameters['name']}/batch/${item.id}',
+          );
+        } else {
+          Routemaster.of(context).push(
+            '/stocks/product/${Routemaster.of(context).currentRoute.pathParameters['name']}/received/${item.id}',
+          );
+        }
+      },
       child: Row(
         children: [
           getTitle(item.id.toString(), size),
