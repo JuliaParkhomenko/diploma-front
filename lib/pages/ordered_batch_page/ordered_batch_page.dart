@@ -44,7 +44,6 @@ class OrderedBatchPage extends StatelessWidget {
             const BatchView(),
             const SizedBox(height: 64),
             Text(
-              //TODO add receiving a batch to lang files
               'Receiving a batch'.tr(context),
               style: const TextStyle(
                 color: constants.Colors.subtitleTextColor,

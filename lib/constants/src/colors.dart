@@ -8,7 +8,8 @@ class Colors {
   static const Color mainButtonText = Color(0xfff19737);
   static const Color notificationShape = Color(0xffe5f6e6);
   static const Color managerWarehouseMain = Color(0xff72bb53);
-  static const Color subtitleTextColor = Color(0xff545554);
+  static const Color subtitleTextColor = Color.fromARGB(255, 80, 81, 80);
   static const Color greyTable = Color(0xfff1f4f6);
+  static const Color label = Color.fromARGB(255, 80, 81, 80);
   //static const Color textTable = Color(0xff);
 }

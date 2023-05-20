@@ -39,7 +39,7 @@ class _ReceivedBatchActionWidgetState extends State<ReceivedBatchActionWidget> {
           children: [
             Center(
               child: Text(
-                'Actions'.tr(context),
+                'Action'.tr(context),
                 style: const TextStyle(
                   color: constants.Colors.subtitleTextColor,
                   fontSize: 18,
@@ -95,9 +95,16 @@ class _ReceivedBatchActionWidgetState extends State<ReceivedBatchActionWidget> {
               ),
             ),
             const Expanded(
-              child: SizedBox(),
+              child: SizedBox(
+                height: 10,
+              ),
             ),
-            WriteOffAllButton(id: widget.batch.id),
+            Center(
+              child: WriteOffAllButton(id: widget.batch.id),
+            ),
+            const SizedBox(
+              height: 40,
+            ),
           ],
         ),
       ),

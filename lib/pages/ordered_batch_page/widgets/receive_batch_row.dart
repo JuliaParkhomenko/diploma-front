@@ -1,11 +1,13 @@
 import 'package:diploma_frontend/pages/ordered_batch_page/widgets/date_picker_textfield.dart';
 import 'package:diploma_frontend/pages/ordered_batch_page/widgets/receive_batch_button.dart';
 import 'package:diploma_frontend/services/language_service/app_localization.dart';
+import 'package:diploma_frontend/constants/constants.dart' as constants;
 import 'package:flutter/material.dart';
 import 'package:routemaster/routemaster.dart';
 
 class ReceiveBatchRow extends StatefulWidget {
-  const ReceiveBatchRow({super.key});
+  final int? batchId;
+  const ReceiveBatchRow({super.key, this.batchId});
 
   @override
   State<ReceiveBatchRow> createState() => _ReceiveBatchRowState();
@@ -38,11 +40,16 @@ class _ReceiveBatchRowState extends State<ReceiveBatchRow> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    //TODO add to lang files, add style
                     Text(
                       'Production date'.tr(context),
+                      style: const TextStyle(
+                        color: constants.Colors.label,
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'OpenSans',
+                      ),
                     ),
-                    const SizedBox(height: 8),
+                    const SizedBox(height: 5),
                     Container(
                       decoration: BoxDecoration(
                         color: Colors.white,
@@ -62,11 +69,16 @@ class _ReceiveBatchRowState extends State<ReceiveBatchRow> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    //TODO add style
                     Text(
                       'Expiration date'.tr(context),
+                      style: const TextStyle(
+                        color: constants.Colors.label,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14,
+                        fontFamily: 'OpenSans',
+                      ),
                     ),
-                    const SizedBox(height: 8),
+                    const SizedBox(height: 5),
                     SizedBox(
                       width: 200,
                       height: 32,
@@ -82,11 +94,16 @@ class _ReceiveBatchRowState extends State<ReceiveBatchRow> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    //TODO add to lang files, add style
                     Text(
                       'Expiration date reminder (days)'.tr(context),
+                      style: const TextStyle(
+                        color: constants.Colors.label,
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'OpenSans',
+                      ),
                     ),
-                    const SizedBox(height: 8),
+                    const SizedBox(height: 5),
                     Container(
                       height: 32,
                       width: 200,
@@ -120,8 +137,10 @@ class _ReceiveBatchRowState extends State<ReceiveBatchRow> {
             Align(
               alignment: Alignment.centerRight,
               child: ReceiveBatchButton(
-                batchId: int.parse(
-                    Routemaster.of(context).currentRoute.pathParameters['id']!),
+                batchId: widget.batchId ??
+                    int.parse(Routemaster.of(context)
+                        .currentRoute
+                        .pathParameters['id']!),
                 expirationDate: expDate,
                 productionDate: prodDate,
                 notificationDate: int.parse(reminders.text),

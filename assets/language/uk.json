@@ -32,5 +32,19 @@
     "Status": "Статус",
     "Batch": "Партія",
     "Maker": "Виробник",
-    "Expiration date": "Термін придатності"
+    "Expiration date": "Термін придатності",
+    "Production date": "Дата виготовлення",
+    "Date": "Дата",
+    "History": "Історія",
+    "Event": "Подія",
+    "Remaining": "Залишок",
+    "Use": "Використати",
+    "Action": "Дія",
+    "Ordered batches": "Замовлені партії",
+    "Order date": "Дата замовлення",
+    "Receiving a batch": "Отримання партії",
+    "Write off all": "Списати все",
+    "Expiration date reminder (days)": "Нагадування про термін придатності (дні)",
+    "Receive batch": "Отримати партію",
+    "Batch №{BATCH_ID} has successfully received!": "Партія №{BATCH_ID} успішно отримана!"
 }

@@ -140,24 +140,27 @@ class _LandingBodyState extends State<LandingBody> {
   }
 
   Widget signInButton() {
-    return InkWell(
-      onTap: () => Routemaster.of(context).push('/sign-in'),
+    return TextButton(
+      onPressed: () => Routemaster.of(context).push('/sign-in'),
+      style: ButtonStyle(
+        backgroundColor: MaterialStateProperty.all(constants.Colors.mainButton),
+        foregroundColor:
+            MaterialStateProperty.all(constants.Colors.mainButtonText),
+        side: MaterialStateProperty.all(const BorderSide(
+          width: 2,
+          color: constants.Colors.mainButtonBorder,
+        )),
+        shape: MaterialStateProperty.all(RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(18),
+        )),
+      ),
       child: Container(
         alignment: Alignment.center,
         width: 150,
         height: 40,
-        decoration: BoxDecoration(
-          color: constants.Colors.mainButton,
-          border: Border.all(
-            width: 2,
-            color: constants.Colors.mainButtonBorder,
-          ),
-          borderRadius: BorderRadius.circular(18),
-        ),
         child: Text(
           'Sign in'.tr(context).toUpperCase(),
           style: const TextStyle(
-            color: constants.Colors.mainButtonText,
             fontWeight: FontWeight.bold,
             fontFamily: 'OpenSans',
           ),

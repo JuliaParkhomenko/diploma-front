@@ -23,7 +23,6 @@ class BatchView extends StatelessWidget {
               getTitle(size, 'Maker'.tr(context), bold: true),
               getTitle(size, 'Status'.tr(context), bold: true),
               getTitle(size, 'Amount'.tr(context), bold: true),
-              //TODO add order date to lang files
               getTitle(size, 'Order date'.tr(context), bold: true),
             ],
           ),
@@ -42,7 +41,6 @@ class BatchView extends StatelessWidget {
                     getTitle(size, cubit.batch!.maker),
                     getTitle(size, cubit.batch!.status.name),
                     getTitle(size, cubit.batch!.amount.toString()),
-                    //TODO add order date to lang files
                     getTitle(
                         size,
                         cubit.batch!.expirationDate

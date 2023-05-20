@@ -21,7 +21,7 @@ class UseBatchButton extends StatelessWidget {
           border: Border.all(),
           borderRadius: BorderRadius.circular(10),
         ),
-        //TODO add to lang, style
+        //TODO add style
         child: Text(
           'Use'.tr(context),
           style: const TextStyle(color: Colors.white),

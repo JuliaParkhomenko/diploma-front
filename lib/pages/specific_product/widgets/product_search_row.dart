@@ -1,6 +1,7 @@
 import 'package:diploma_frontend/blocs/specific_product/specific_product_cubit.dart';
 import 'package:diploma_frontend/pages/specific_product/widgets/product_status_dropdown.dart';
 import 'package:diploma_frontend/pages/stocks_page/widgets/search_textfield.dart';
+import 'package:diploma_frontend/constants/constants.dart' as constants;
 import 'package:diploma_frontend/services/language_service/app_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -131,11 +132,10 @@ class _ProductSearchRowState extends State<ProductSearchRow> {
               status: status,
             );
           },
-          //TODO change ICON
           child: const Icon(
-            Icons.disabled_by_default,
+            Icons.close_rounded,
             size: 32,
-            color: Colors.red,
+            color: constants.Colors.subtitleTextColor,
           ),
         ),
       ],

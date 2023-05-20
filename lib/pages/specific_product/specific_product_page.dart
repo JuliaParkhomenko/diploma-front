@@ -46,7 +46,7 @@ class SpecificProductPage extends StatelessWidget {
               productId: stockId,
             ),
             const SizedBox(
-              height: 20,
+              height: 15,
             ),
             SpecificProductTable(
               stockId: stockId,

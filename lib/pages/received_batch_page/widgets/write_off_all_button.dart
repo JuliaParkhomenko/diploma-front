@@ -29,7 +29,7 @@ class WriteOffAllButton extends StatelessWidget {
           border: Border.all(),
           borderRadius: BorderRadius.circular(10),
         ),
-        //TODO add to lang, style
+        //TODO add style
         child: Text(
           'Write off all'.tr(context),
           style: const TextStyle(color: Colors.white),

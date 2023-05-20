@@ -31,7 +31,7 @@ class DatePickerTextField extends StatelessWidget {
             fontSize: 14,
           ),
           alignLabelWithHint: true,
-          //TODO add to lang file
+          //TODO add to lang file (what I should to add to lang file)
           suffixIcon: const Icon(Icons.calendar_today),
           contentPadding: const EdgeInsets.only(left: 8),
           border: OutlineInputBorder(

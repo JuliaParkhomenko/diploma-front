@@ -1,3 +1,4 @@
+import 'package:diploma_frontend/blocs/ordered_batches/ordered_batches_cubit.dart';
 import 'package:diploma_frontend/blocs/stock/stock_cubit.dart';
 import 'package:diploma_frontend/blocs/warehouse/warehouse_cubit.dart';
 import 'package:diploma_frontend/models/warehouse.dart';
@@ -27,6 +28,9 @@ class _WarehouseSelectorState extends State<WarehouseSelector> {
         'label': i.name,
       });
     }
+    final OrderedBatchesCubit orderedBatchesCubit =
+        BlocProvider.of<OrderedBatchesCubit>(context);
+    orderedBatchesCubit.fetchBatch(widget.warehouses.first.id);
     super.initState();
   }
 
@@ -91,6 +95,9 @@ class _WarehouseSelectorState extends State<WarehouseSelector> {
           cubit.selectedWarehouseIndex = int.parse(newValue!);
           final StockCubit stockCubit = BlocProvider.of<StockCubit>(context);
           stockCubit.fetchStocks(cubit.selectedWarehouseIndex, '');
+          final OrderedBatchesCubit orderedBatchesCubit =
+              BlocProvider.of<OrderedBatchesCubit>(context);
+          orderedBatchesCubit.fetchBatch(int.parse(newValue));
           setState(() {
             value = newValue;
           });

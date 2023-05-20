@@ -32,5 +32,19 @@
     "Status": "Status",
     "Batch": "Batch",
     "Maker": "Maker",
-    "Expiration date": "Expiration date"
+    "Expiration date": "Expiration date",
+    "Production date": "Production date",
+    "Date": "Date",
+    "History": "History",
+    "Event": "Event",
+    "Remaining": "Remaining",
+    "Use": "Use",
+    "Action": "Action",
+    "Ordered batches": "Ordered batches",
+    "Order date": "Order date",
+    "Receiving a batch": "Receiving a batch",
+    "Write off all": "Write off all",
+    "Expiration date reminder (days)": "Expiration date reminder (days)",
+    "Receive batch": "Receive batch",
+    "Batch №{BATCH_ID} has successfully received!": "Batch №{BATCH_ID} has successfully received!"
 }

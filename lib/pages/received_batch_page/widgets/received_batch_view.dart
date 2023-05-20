@@ -22,7 +22,6 @@ class ReceivedBatchView extends StatelessWidget {
             getTitle(size, 'Maker'.tr(context), bold: true),
             getTitle(size, 'Status'.tr(context), bold: true),
             getTitle(size, 'Amount'.tr(context), bold: true),
-            //TODO add order date to lang files
             getTitle(size, 'Production date'.tr(context), bold: true),
             getTitle(size, 'Expiration date'.tr(context), bold: true),
           ],
