@@ -16,10 +16,10 @@ class BatchHistoryWidget extends StatelessWidget {
     final Size size = MediaQuery.of(context).size;
 
     return Padding(
-      padding: const EdgeInsets.only(top: 8.0, right: 32),
+      padding: const EdgeInsets.only(top: 8.0, right: 8),
       child: Container(
         width: size.width * .6,
-        height: size.height * .6,
+        height: size.height * .522,
         padding: const EdgeInsets.all(15),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(17),

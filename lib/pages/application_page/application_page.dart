@@ -1,4 +1,6 @@
+import 'package:diploma_frontend/blocs/kind/kind_cubit.dart';
 import 'package:diploma_frontend/blocs/product/product_cubit.dart';
+import 'package:diploma_frontend/pages/application_page/widgets/kind_dropdown.dart';
 import 'package:diploma_frontend/pages/application_page/widgets/product_dropdown.dart';
 import 'package:diploma_frontend/services/language_service/app_localization.dart';
 import 'package:flutter/material.dart';
@@ -64,7 +66,11 @@ class ApplicationPage extends StatelessWidget {
                   }
                   if (state is ProductLoaded) {
                     return ProductDropdown(
-                      onChange: (_) {},
+                      onChange: (_) {
+                        final KindCubit cubit =
+                            BlocProvider.of<KindCubit>(context);
+                        cubit.fetchKind(_);
+                      },
                       products: state.products,
                     );
                   }
@@ -81,6 +87,47 @@ class ApplicationPage extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                     fontFamily: 'OpenSans',
                   ),
+                ),
+                const Expanded(
+                  child: SizedBox(),
+                ),
+                //TODO: implement function
+                BlocBuilder<KindCubit, KindState>(builder: (context, state) {
+                  if (state is KindLoading) {
+                    return KindDropdown(
+                      onChange: (_) {},
+                      kinds: const [],
+                    );
+                  }
+                  if (state is KindError) {
+                    return const Text('Error on server :)');
+                  }
+                  if (state is KindLoaded) {
+                    return KindDropdown(
+                      onChange: (_) {},
+                      kinds: state.kinds,
+                    );
+                  }
+                  return Container();
+                }),
+                const Expanded(
+                  child: SizedBox(),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Text(
+                  'Amount'.tr(context),
+                  style: const TextStyle(
+                    color: constants.Colors.subtitleTextColor,
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'OpenSans',
+                  ),
+                ),
+                const Expanded(
+                  child: SizedBox(),
                 ),
               ],
             ),

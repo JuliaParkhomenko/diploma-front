@@ -27,8 +27,8 @@ class _ReceivedBatchActionWidgetState extends State<ReceivedBatchActionWidget> {
     return Padding(
       padding: const EdgeInsets.only(top: 8.0),
       child: Container(
-        width: size.width * .3 - 15, //TODO change -15 if overflowed
-        height: size.height * .6,
+        width: size.width * .3, //TODO change -15 if overflowed
+        height: size.height * .522,
         padding: const EdgeInsets.all(15),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(17),

@@ -35,4 +35,30 @@ class ProductRepository implements BaseProductRepository {
       return null;
     }
   }
+
+  @override
+  Future<List<String>?> getKinds({required int productId}) async {
+    try {
+      final User? user = await _database.getUser();
+      final Uri url = Uri.parse(
+        'https://restaurant-warehouse.azurewebsites.net/api/Product/getKinds?productId=$productId',
+      );
+      final Map<String, String> headers = {
+        'accept': '*/*',
+        'Content-Type': 'application/json-patch+json',
+        'Authorization': 'Bearer ${user!.token}'
+      };
+      final response = await http.get(url, headers: headers);
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        return data.map<String>((e) {
+          return e.toString();
+        }).toList();
+      }
+      return null;
+    } catch (e) {
+      log(e.toString());
+      return null;
+    }
+  }
 }

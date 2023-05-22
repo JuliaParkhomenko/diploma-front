@@ -1,4 +1,5 @@
 import 'package:diploma_frontend/blocs/batch/batch_cubit.dart';
+import 'package:diploma_frontend/blocs/kind/kind_cubit.dart';
 import 'package:diploma_frontend/blocs/localization/localization_cubit.dart';
 import 'package:diploma_frontend/blocs/ordered_batches/ordered_batches_cubit.dart';
 import 'package:diploma_frontend/blocs/product/product_cubit.dart';
@@ -84,6 +85,11 @@ class _MyAppState extends State<MyApp> {
         BlocProvider<OrderedBatchesCubit>(
           create: (context) => OrderedBatchesCubit(
             ServiceLocator.batchRepository,
+          ),
+        ),
+        BlocProvider<KindCubit>(
+          create: (context) => KindCubit(
+            ServiceLocator.productRepository,
           ),
         ),
       ],
