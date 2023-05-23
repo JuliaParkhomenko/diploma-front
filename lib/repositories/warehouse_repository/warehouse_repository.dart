@@ -147,6 +147,8 @@ class WarehouseRepository implements BaseWarehouseRepository {
       });
 
       final response = await http.post(url, headers: headers, body: body);
+      print(productId);
+      print(urgency);
 
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);

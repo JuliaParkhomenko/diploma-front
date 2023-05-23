@@ -1,30 +1,27 @@
+import 'package:diploma_frontend/enums/urgency.dart';
+import 'package:diploma_frontend/services/language_service/app_localization.dart';
 import 'package:flutter/material.dart';
 
-class KindDropdown extends StatefulWidget {
+class UrgencyDropDown extends StatefulWidget {
   final Function(String) onChange;
-  final List<String> kinds;
-  const KindDropdown({
+
+  const UrgencyDropDown({
     super.key,
     required this.onChange,
-    required this.kinds,
   });
 
   @override
-  State<KindDropdown> createState() => _KindDropdownState();
+  State<UrgencyDropDown> createState() => _UrgencyDropDownState();
 }
 
-class _KindDropdownState extends State<KindDropdown> {
+class _UrgencyDropDownState extends State<UrgencyDropDown> {
   String? value;
-
-  final List<Map<String, String>> kinds = [];
+  final List<String> urgency = [Urgency.notUrgent.name, Urgency.urgently.name];
+  final List<Map<String, String>> products = [];
   @override
   void initState() {
-    if (widget.kinds.isEmpty || widget.kinds.first == '') {
-      return;
-    }
-    widget.kinds.insert(0, '');
-    for (final i in widget.kinds) {
-      kinds.add({
+    for (final i in urgency) {
+      products.add({
         'value': i,
         'label': i,
       });
@@ -33,13 +30,15 @@ class _KindDropdownState extends State<KindDropdown> {
   }
 
   @override
+  void didUpdateWidget(covariant UrgencyDropDown oldWidget) {
+    setState(() {
+      value = null;
+    });
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
   Widget build(BuildContext context) {
-    if (widget.kinds.isEmpty) {
-      return Container();
-    }
-    if (widget.kinds.length == 1) {
-      return Text(widget.kinds.first);
-    }
     return Container(
       height: 40,
       width: 200,
@@ -63,12 +62,12 @@ class _KindDropdownState extends State<KindDropdown> {
             ),
           ),
           selectedItemBuilder: (context) {
-            return kinds
+            return products
                 .map<DropdownMenuItem<String>>(
                   (e) => DropdownMenuItem<String>(
                     value: e['value'],
                     child: Text(
-                      e['label']!,
+                      e['label']!.tr(context),
                       style: const TextStyle(
                         color: Colors.black,
                         fontSize: 14,
@@ -80,20 +79,20 @@ class _KindDropdownState extends State<KindDropdown> {
                 .toList();
           },
           hint: Text(
-            widget.kinds.first,
+            'Urgency'.tr(context),
             style: const TextStyle(
-              color: Colors.black,
+              //color: Colors.black87,
               fontSize: 14,
               fontFamily: 'OpenSans',
             ),
           ),
           value: value,
-          items: kinds
+          items: products
               .map<DropdownMenuItem<String>>(
                 (e) => DropdownMenuItem<String>(
                   value: e['value'],
                   child: Text(
-                    e['label']!,
+                    e['label']!.tr(context),
                     style: const TextStyle(
                       //color: Colors.black,
                       fontFamily: 'OpenSans',
@@ -114,18 +113,3 @@ class _KindDropdownState extends State<KindDropdown> {
     );
   }
 }
-
-// ————▄▀▀▀▄░————
-// ▄███▀░◐░▄▀▀▀▄░░░░░░
-// ░░▄███▀░◐░░░░▌░░░
-// ░░░▐░▄▀▀▀▄░░░▌░░░░
-// ▄███▀░◐░░░▌░░▌░░░░
-// ░░░░▌░░░░░▐▄▄▌░░░░░
-// ░░░░▌░░░░▄▀▒▒▀▀▀▀▄
-// ░░░▐░░░░▐▒▒▒▒▒▒▒▒▀▀▄
-// ░░░▐░░░░▐▄▒▒▒▒▒▒▒▒▒▒▀▄
-// ░░░░▀▄░░░░▀▄▒▒▒▒▒▒▒▒▒▒▀▄
-// ░░░░░░▀▄▄▄▄▄█▄▄▄▄▄▄▄▄▄▄▄▀▄
-// ░░░░░░░░░░░▌▌░▌▌░░░░░
-// ░░░░░░░░░░░▌▌░▌▌░░░░░
-// ░░░░░░░░░▄▄▌▌▄▌▌░░░░░

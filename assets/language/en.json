@@ -28,6 +28,7 @@
     "Urgency": "Urgency",
     "Send": "Send",
     "urgently": "urgently",
+    "notUrgent": "not urgent",
     "Stock": "Stock",
     "Status": "Status",
     "Batch": "Batch",
@@ -46,5 +47,7 @@
     "Write off all": "Write off all",
     "Expiration date reminder (days)": "Expiration date reminder (days)",
     "Receive batch": "Receive batch",
-    "Batch №{BATCH_ID} has successfully received!": "Batch №{BATCH_ID} has successfully received!"
+    "Batch №{BATCH_ID} has successfully received!": "Batch №{BATCH_ID} has successfully received!",
+    "Kg" : "Kg",
+    "L": "L"
 }

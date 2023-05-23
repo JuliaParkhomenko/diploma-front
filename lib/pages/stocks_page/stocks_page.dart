@@ -47,7 +47,7 @@ class _StocksPageState extends State<StocksPage> {
                   ),
                 ),
                 const SizedBox(
-                  height: 45,
+                  height: 32,
                 ),
                 SizedBox(
                   width: 200,
