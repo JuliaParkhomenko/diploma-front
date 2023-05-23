@@ -49,5 +49,6 @@
     "Receive batch": "Receive batch",
     "Batch №{BATCH_ID} has successfully received!": "Batch №{BATCH_ID} has successfully received!",
     "Kg" : "Kg",
-    "L": "L"
+    "L": "L",
+    "Application sent successfully": "Application sent successfully"
 }

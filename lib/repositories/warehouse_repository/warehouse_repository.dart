@@ -127,7 +127,7 @@ class WarehouseRepository implements BaseWarehouseRepository {
       final User? user = await Database().getUser();
 
       final Uri url = Uri.parse(
-        'https://restaurant-warehouse.azurewebsites.net/api/Warehouse/addAplication',
+        'https://restaurant-warehouse.azurewebsites.net/api/Warehouse/addApplication',
       );
 
       final Map<String, String> headers = {

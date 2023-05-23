@@ -316,6 +316,9 @@ class _ApplicationPageState extends State<ApplicationPage> {
                   kind: kind,
                   urgency: urgency,
                   note: noteController.text,
+                  onTap: (_) {
+                    setState(() {});
+                  },
                 ),
               ),
             ),
