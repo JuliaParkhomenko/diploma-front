@@ -8,10 +8,8 @@ import 'package:diploma_frontend/constants/constants.dart' as constants;
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class OverviewRecentActions extends StatefulWidget {
-  //final Warehouse warehouse;
   const OverviewRecentActions({
     super.key,
-    //required this.warehouse,
   });
 
   @override
@@ -19,18 +17,6 @@ class OverviewRecentActions extends StatefulWidget {
 }
 
 class _OverviewRecentActionsState extends State<OverviewRecentActions> {
-  @override
-  void didChangeDependencies() {
-    //Yuliia: it used to be Batches page
-    final WarehouseCubit warehouseCubit = BlocProvider.of(context);
-    final UserActionCubit cubit = BlocProvider.of(context);
-    cubit.fetchUserActions(
-      //Yuliia: it used to be fetchBatch
-      warehouseCubit.selectedWarehouseIndex,
-    );
-    super.didChangeDependencies();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -47,24 +33,22 @@ class _OverviewRecentActionsState extends State<OverviewRecentActions> {
         ),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(15),
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Recent actions'.tr(context),
-                style: const TextStyle(
-                  color: constants.Colors.subtitleTextColor,
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'OpenSans',
-                ),
+        padding: const EdgeInsets.all(31),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Recent actions'.tr(context),
+              style: const TextStyle(
+                color: constants.Colors.subtitleTextColor,
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                fontFamily: 'OpenSans',
               ),
-              const SizedBox(height: 32),
-              BlocBuilder<UserActionCubit, UserActionState>(
-                  builder: (context, state) {
+            ),
+            const SizedBox(height: 32),
+            BlocBuilder<UserActionCubit, UserActionState>(
+              builder: (context, state) {
                 if (state is UserActionInitial) {
                   final UserActionCubit cubit =
                       BlocProvider.of<UserActionCubit>(context);
@@ -73,23 +57,27 @@ class _OverviewRecentActionsState extends State<OverviewRecentActions> {
                         .selectedWarehouseIndex,
                   );
                 }
+
                 if (state is UserActionLoading) {
-                  return const LoadingWidget();
+                  return const OverviewRecentActionsTable(
+                    actions: [],
+                  );
                 }
+
                 if (state is UserActionError) {
                   return const Text('Error on server :)');
                 }
+
                 if (state is UserActionLoaded) {
-                  final UserActionCubit cubit =
-                      BlocProvider.of<UserActionCubit>(context);
                   return OverviewRecentActionsTable(
                     actions: state.userActions,
                   );
                 }
+
                 return Container();
-              }),
-            ],
-          ),
+              },
+            ),
+          ],
         ),
       ),
     );

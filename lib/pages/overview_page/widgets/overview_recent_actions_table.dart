@@ -50,7 +50,7 @@ class OverviewRecentActionsTable extends StatelessWidget {
                     getTitle(
                       size,
                       userAction.type == ActionType.batch
-                          ? ('${userAction.action.getActionStatus(context).tr(context)} ${userAction.amount} ${userAction.productMeasurement} ${userAction.productName}')
+                          ? ('${userAction.action.getActionStatus(context)} ${userAction.amount} ${userAction.productMeasurement} ${userAction.productName}')
                           : userAction.action
                               .getActionStatus(context)
                               .tr(context),

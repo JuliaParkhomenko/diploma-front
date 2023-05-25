@@ -1,5 +1,6 @@
 import 'package:diploma_frontend/blocs/ordered_batches/ordered_batches_cubit.dart';
 import 'package:diploma_frontend/blocs/stock/stock_cubit.dart';
+import 'package:diploma_frontend/blocs/user_action/user_action_cubit.dart';
 import 'package:diploma_frontend/blocs/warehouse/warehouse_cubit.dart';
 import 'package:diploma_frontend/models/warehouse.dart';
 import 'package:flutter/material.dart';
@@ -97,6 +98,11 @@ class _WarehouseSelectorState extends State<WarehouseSelector> {
           stockCubit.fetchStocks(cubit.selectedWarehouseIndex, '');
           final OrderedBatchesCubit orderedBatchesCubit =
               BlocProvider.of<OrderedBatchesCubit>(context);
+          final UserActionCubit userActionCubit =
+              BlocProvider.of<UserActionCubit>(context);
+          userActionCubit.fetchUserActions(
+            BlocProvider.of<WarehouseCubit>(context).selectedWarehouseIndex,
+          );
           orderedBatchesCubit.fetchBatch(int.parse(newValue));
           setState(() {
             value = newValue;
