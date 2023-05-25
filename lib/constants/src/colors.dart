@@ -11,5 +11,8 @@ class Colors {
   static const Color subtitleTextColor = Color.fromARGB(255, 80, 81, 80);
   static const Color greyTable = Color(0xfff1f4f6);
   static const Color label = Color.fromARGB(255, 80, 81, 80);
+  static const Color overviewRecentActionsColor = Color(0xffda8615);
+  static const Color overviewReminderColor = Color(0xff45b24f);
+  static const Color overviewOrderedBatchesColor = Color(0xff349303);
   //static const Color textTable = Color(0xff);
 }

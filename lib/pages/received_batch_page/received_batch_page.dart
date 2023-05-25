@@ -30,7 +30,7 @@ class ReceivedBatchPage extends StatelessWidget {
         if (state is BatchError) {
           return Center(
             child: Text(state.error),
-          );
+          ); //Center
         }
 
         if (state is BatchLoaded) {

@@ -1,6 +1,7 @@
 import 'package:diploma_frontend/enums/urgency.dart';
 import 'package:diploma_frontend/models/stock.dart';
 import 'package:diploma_frontend/models/storage.dart';
+import 'package:diploma_frontend/models/user_action.dart';
 import 'package:diploma_frontend/models/warehouse.dart';
 import 'package:flutter/material.dart';
 
@@ -34,7 +35,9 @@ abstract class BaseWarehouseRepository {
     required BuildContext context,
   });
 
-  // Future<List<UserAction?>> recentActions({});
+  Future<List<UserAction>?> recentActions({
+    required int warehouseId,
+  });
 }
 
 // ————▄▀▀▀▄░————

@@ -5,6 +5,7 @@ import 'package:diploma_frontend/blocs/ordered_batches/ordered_batches_cubit.dar
 import 'package:diploma_frontend/blocs/product/product_cubit.dart';
 import 'package:diploma_frontend/blocs/specific_product/specific_product_cubit.dart';
 import 'package:diploma_frontend/blocs/stock/stock_cubit.dart';
+import 'package:diploma_frontend/blocs/user_action/user_action_cubit.dart';
 import 'package:diploma_frontend/blocs/warehouse/warehouse_cubit.dart';
 import 'package:diploma_frontend/enums/logged_in_state.dart';
 import 'package:diploma_frontend/services/app_state_service/app_state_service.dart';
@@ -90,6 +91,11 @@ class _MyAppState extends State<MyApp> {
         BlocProvider<KindCubit>(
           create: (context) => KindCubit(
             ServiceLocator.productRepository,
+          ),
+        ),
+        BlocProvider<UserActionCubit>(
+          create: (context) => UserActionCubit(
+            ServiceLocator.warehouseRepository,
           ),
         ),
       ],

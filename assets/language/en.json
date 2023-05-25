@@ -50,5 +50,8 @@
     "Batch №{BATCH_ID} has successfully received!": "Batch №{BATCH_ID} has successfully received!",
     "Kg" : "Kg",
     "L": "L",
-    "Application sent successfully": "Application sent successfully"
+    "Application sent successfully": "Application sent successfully",
+    "Recent actions": "Recent actions",
+    "User": "User",
+    "Action with": "Action with"
 }

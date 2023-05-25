@@ -50,5 +50,8 @@
     "Batch №{BATCH_ID} has successfully received!": "Партія №{BATCH_ID} успішно отримана!",
     "Kg" : "Кг",
     "L": "Л",
-    "Application sent successfully": "Заявка успішно надіслана"
+    "Application sent successfully": "Заявка успішно надіслана",
+    "Recent actions": "Нещодавні дії",
+    "User": "Користувач",
+    "Action with": "Дія з"
 }

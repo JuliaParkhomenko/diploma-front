@@ -45,7 +45,8 @@ class OrderedBatchPage extends StatelessWidget {
             const SizedBox(height: 64),
             Text(
               'Receiving a batch'.tr(context),
-              style: const TextStyle(
+              // ignore: prefer_const_constructors
+              style: TextStyle(
                 color: constants.Colors.subtitleTextColor,
                 fontSize: 18,
                 fontWeight: FontWeight.bold,

@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:diploma_frontend/models/stock.dart';
 import 'package:diploma_frontend/models/storage.dart';
 import 'package:diploma_frontend/models/user.dart';
+import 'package:diploma_frontend/models/user_action.dart';
 import 'package:diploma_frontend/models/warehouse.dart';
 import 'package:diploma_frontend/repositories/warehouse_repository/base_warehouse_repository.dart';
 import 'package:diploma_frontend/services/database/database.dart';
@@ -188,6 +189,34 @@ class WarehouseRepository implements BaseWarehouseRepository {
       await http.post(url, headers: headers, body: body);
     } catch (e) {
       log(e.toString());
+    }
+  }
+
+  @override
+  Future<List<UserAction>?> recentActions({
+    required int warehouseId,
+  }) async {
+    try {
+      final User? user = await _database.getUser();
+      final Uri url = Uri.parse(
+        'https://restaurant-warehouse.azurewebsites.net/api/Warehouse/recentActions?warehouseId=$warehouseId',
+      );
+      final Map<String, String> headers = {
+        'accept': '*/*',
+        'Content-Type': 'application/json-patch+json',
+        'Authorization': 'Bearer ${user!.token}'
+      };
+      final response = await http.get(url, headers: headers);
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        return data.map<UserAction>((e) {
+          return UserAction.fromJson(e);
+        }).toList();
+      }
+      return null;
+    } catch (e) {
+      log(e.toString());
+      return null;
     }
   }
 }
