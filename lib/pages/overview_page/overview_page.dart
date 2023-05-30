@@ -1,7 +1,7 @@
+import 'package:diploma_frontend/pages/overview_page/widgets/overview_ordered_batches.dart';
 import 'package:diploma_frontend/pages/overview_page/widgets/overview_recent_actions.dart';
+import 'package:diploma_frontend/pages/overview_page/widgets/overview_reminder.dart';
 import 'package:flutter/material.dart';
-
-import 'package:diploma_frontend/constants/constants.dart' as constants;
 
 class OverviewPage extends StatelessWidget {
   const OverviewPage({super.key});
@@ -15,7 +15,7 @@ class OverviewPage extends StatelessWidget {
         borderRadius: BorderRadius.circular(17),
         //color: Colors.white,
       ),
-      child: Row(
+      child: const Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           // TODO: Yuliia`s question. Should I add const?
@@ -25,33 +25,10 @@ class OverviewPage extends StatelessWidget {
           //   width: 900,
           // ),
           Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(17),
-                    gradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      colors: [
-                        constants.Colors.overviewReminderColor.withOpacity(0.2),
-                        constants.Colors.overviewReminderColor.withOpacity(0.7),
-                      ],
-                    )),
-              ),
-              Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(17),
-                    gradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      colors: [
-                        constants.Colors.overviewOrderedBatchesColor
-                            .withOpacity(0.2),
-                        constants.Colors.overviewOrderedBatchesColor
-                            .withOpacity(0.7),
-                      ],
-                    )),
-              ),
+              OverviewReminder(),
+              OverviewOrderedBatches(),
             ],
           )
         ],

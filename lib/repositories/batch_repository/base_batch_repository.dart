@@ -1,4 +1,5 @@
 import 'package:diploma_frontend/models/batch.dart';
+import 'package:diploma_frontend/models/expiring_batch.dart';
 import 'package:diploma_frontend/models/ordered_batch.dart';
 
 abstract class BaseBatchRepository {
@@ -19,5 +20,10 @@ abstract class BaseBatchRepository {
     required String productName,
     required String batchId,
     required String kind,
+  });
+
+  Future<List<ExpiringBatch>?> expiringBatches({
+    required int warehouseId,
+    required int amount,
   });
 }

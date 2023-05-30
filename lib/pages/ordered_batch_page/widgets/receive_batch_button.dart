@@ -42,7 +42,7 @@ class ReceiveBatchButton extends StatelessWidget {
           orderedBatchCubit.clear();
           final WarehouseCubit warehouseCubit = BlocProvider.of(context);
           await orderedBatchCubit
-              .fetchBatch(warehouseCubit.selectedWarehouseIndex);
+              .fetchBatches(warehouseCubit.selectedWarehouseIndex);
           showInfoPrikol(
               'Batch №{BATCH_ID} has successfully received!'
                   .tr(context)

@@ -10,7 +10,7 @@ class OrderedBatchesCubit extends Cubit<OrderedBatchesState> {
   OrderedBatchesCubit(this._repository) : super(OrderedBatchesInitial());
   OrderedBatch? orderedBatch;
 
-  Future<void> fetchBatch(
+  Future<void> fetchBatches(
     int id, {
     String productName = '',
     String batchId = '',

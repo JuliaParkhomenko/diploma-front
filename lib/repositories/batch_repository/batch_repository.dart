@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'package:diploma_frontend/models/batch.dart';
+import 'package:diploma_frontend/models/expiring_batch.dart';
 import 'package:diploma_frontend/models/ordered_batch.dart';
 import 'package:diploma_frontend/models/user.dart';
 import 'package:diploma_frontend/repositories/batch_repository/base_batch_repository.dart';
@@ -182,6 +183,38 @@ class BatchRepository implements BaseBatchRepository {
         final data = jsonDecode(response.body);
         return data.map<OrderedBatch>((e) {
           return OrderedBatch.fromJson(e);
+        }).toList();
+      }
+      return null;
+    } catch (e) {
+      log(e.toString());
+      return null;
+    }
+  }
+
+  @override
+  Future<List<ExpiringBatch>?> expiringBatches({
+    required int warehouseId,
+    required int amount,
+  }) async {
+    try {
+      final User? user = await _database.getUser();
+
+      final Uri url = Uri.parse(
+        'https://restaurant-warehouse.azurewebsites.net/api/Batch/expiringBatches?warehouseId=$warehouseId&amount=$amount',
+      );
+
+      final Map<String, String> headers = {
+        'accept': '*/*',
+        'Content-Type': 'application/json-patch+json',
+        'Authorization': 'Bearer ${user!.token}'
+      };
+
+      final response = await http.get(url, headers: headers);
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        return data.map<ExpiringBatch>((e) {
+          return ExpiringBatch.fromJson(e);
         }).toList();
       }
       return null;

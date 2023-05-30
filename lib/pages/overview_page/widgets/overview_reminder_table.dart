@@ -1,15 +1,14 @@
-import 'package:diploma_frontend/enums/action_status.dart';
-import 'package:diploma_frontend/enums/action_type.dart';
-import 'package:diploma_frontend/models/user_action.dart';
+import 'package:diploma_frontend/models/expiring_batch.dart';
 import 'package:diploma_frontend/services/language_service/app_localization.dart';
+import 'package:diploma_frontend/utils/date_time_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:diploma_frontend/constants/constants.dart' as constants;
 
-class OverviewRecentActionsTable extends StatelessWidget {
-  final List<UserAction> actions;
-  const OverviewRecentActionsTable({
+class OverviewReminderTable extends StatelessWidget {
+  final List<ExpiringBatch> expiringBatches;
+  const OverviewReminderTable({
     super.key,
-    required this.actions,
+    required this.expiringBatches,
   });
 
   @override
@@ -25,19 +24,18 @@ class OverviewRecentActionsTable extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              getTitle(size, 'User'.tr(context), bold: true),
-              getTitle(size, 'Action'.tr(context), bold: true),
-              getTitle(size, 'Action with'.tr(context), bold: true),
-              getTitle(size, 'Date'.tr(context), bold: true),
+              getTitle(size, 'Product'.tr(context), bold: true),
+              getTitle(size, 'Use in days'.tr(context), bold: true),
+              getTitle(size, 'Expiration date'.tr(context), bold: true),
             ],
           ),
         ),
         SizedBox(
-          height: 504, //(size.height - 132) * .4,
+          height: 168, //(size.height - 132) * .4,
           child: ListView.builder(
-            itemCount: actions.length,
+            itemCount: expiringBatches.length,
             itemBuilder: (context, index) {
-              final UserAction userAction = actions[index];
+              final ExpiringBatch expiringBatch = expiringBatches[index];
 
               return Container(
                 width: size.width * .72,
@@ -46,18 +44,16 @@ class OverviewRecentActionsTable extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    getTitle(size, userAction.userFullName),
+                    getTitle(size, expiringBatch.productName),
                     getTitle(
                       size,
-                      userAction.type == ActionType.batch
-                          ? ('${userAction.action.getActionStatus(context)} ${userAction.amount} ${userAction.productMeasurement} ${userAction.productName}')
-                          : userAction.action
-                              .getActionStatus(context)
-                              .tr(context),
+                      expiringBatch.expirationDate.differenceInDays(),
                     ),
-                    getTitle(size,
-                        '${userAction.type.getActionType(context).tr(context)} ${userAction.targetId}'),
-                    getTitle(size, userAction.date.toString().split('.')[0]),
+                    getTitle(
+                        size,
+                        expiringBatch.expirationDate
+                            .toString()
+                            .substring(0, 10)),
                   ],
                 ),
               );
@@ -71,7 +67,7 @@ class OverviewRecentActionsTable extends StatelessWidget {
   Widget getTitle(Size size, String title, {bool bold = false}) {
     return SizedBox(
       height: 56,
-      width: size.width * .4 / 4,
+      width: size.width * .3 / 3,
       child: Align(
         child: Text(
           title,

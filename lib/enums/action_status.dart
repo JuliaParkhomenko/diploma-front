@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 enum ActionStatus {
   ordered,
-  recieved,
+  received,
   used,
   writtenOff,
   sent,
@@ -17,7 +17,7 @@ extension ActionStatusConverter on String {
       case 'ordered':
         return ActionStatus.ordered;
       case 'received':
-        return ActionStatus.recieved;
+        return ActionStatus.received;
       case 'used':
         return ActionStatus.used;
       case 'written off':
@@ -39,8 +39,8 @@ extension ActionStatusToString on ActionStatus {
     switch (this) {
       case ActionStatus.ordered:
         return 'ordered'.tr(context);
-      case ActionStatus.recieved:
-        return 'recieved'.tr(context);
+      case ActionStatus.received:
+        return 'received'.tr(context);
       case ActionStatus.used:
         return 'used'.tr(context);
       case ActionStatus.writtenOff:

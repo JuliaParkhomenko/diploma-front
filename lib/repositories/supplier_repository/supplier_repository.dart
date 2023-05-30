@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:diploma_frontend/models/supplier.dart';
 import 'package:diploma_frontend/models/supply_condition.dart';
-import 'package:diploma_frontend/models/supply.dart';
 import 'package:diploma_frontend/enums/action_status.dart';
 import 'package:diploma_frontend/models/user.dart';
 import 'package:diploma_frontend/repositories/supplier_repository/base_supplier_repository.dart';
@@ -103,12 +103,14 @@ class SupplierRepository implements BaseSupplierRepository {
   }
 
   @override
-  Future<List<Supply>?> all() async {
+  Future<List<Supplier>?> all({
+    required String name,
+  }) async {
     try {
       final User? user = await _database.getUser();
 
       final Uri url = Uri.parse(
-        'https://restaurant-warehouse.azurewebsites.net/api/Supplier/all',
+        'https://restaurant-warehouse.azurewebsites.net/api/Supplier/all?name=$name',
       );
 
       final Map<String, String> headers = {
@@ -121,8 +123,8 @@ class SupplierRepository implements BaseSupplierRepository {
 
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
-        return data.map<Supply>((json) {
-          return Supply.fromJson(json);
+        return data.map<Supplier>((json) {
+          return Supplier.fromJson(json);
         }).toList();
       }
 
@@ -130,6 +132,48 @@ class SupplierRepository implements BaseSupplierRepository {
     } catch (e) {
       log(e.toString());
       return null;
+    }
+  }
+
+  @override
+  Future<void> edit({
+    required int id,
+    required String name,
+    required String address,
+    required String email,
+    required String phoneNum,
+  }) async {
+    try {
+      final User? user = await _database.getUser();
+
+      final Uri url = Uri.parse(
+        'https://restaurant-warehouse.azurewebsites.net/api/Supplier/edit',
+      );
+
+      final Map<String, String> headers = {
+        'accept': '*/*',
+        'Content-Type': 'application/json-patch+json',
+        'Authorization': 'Bearer ${user!.token}'
+      };
+
+      final body = jsonEncode({
+        'id': id,
+        'name': name,
+        'address': address,
+        'email': email,
+        'phoneNum': phoneNum,
+      });
+      print(body);
+      final response = await http.post(url, headers: headers, body: body);
+
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        return data['id'];
+      }
+      return;
+    } catch (e) {
+      log(e.toString());
+      return;
     }
   }
 }

@@ -1,5 +1,5 @@
 import 'package:diploma_frontend/enums/action_status.dart';
-import 'package:diploma_frontend/models/supply.dart';
+import 'package:diploma_frontend/models/supplier.dart';
 import 'package:diploma_frontend/models/supply_condition.dart';
 import 'package:flutter/material.dart';
 
@@ -22,5 +22,15 @@ abstract class BaseSupplierRepository {
     required BuildContext context,
   });
 
-  Future<List<Supply>?> all();
+  Future<List<Supplier>?> all({
+    required String name,
+  });
+
+  Future<void> edit({
+    required int id,
+    required String name,
+    required String address,
+    required String email,
+    required String phoneNum,
+  });
 }

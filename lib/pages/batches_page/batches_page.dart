@@ -26,7 +26,7 @@ class _BatchesPageState extends State<BatchesPage> {
   void didChangeDependencies() {
     final WarehouseCubit warehouseCubit = BlocProvider.of(context);
     final OrderedBatchesCubit cubit = BlocProvider.of(context);
-    cubit.fetchBatch(
+    cubit.fetchBatches(
       warehouseCubit.selectedWarehouseIndex,
       productName: productController.text,
       batchId: batchController.text,
@@ -150,7 +150,7 @@ class _BatchesPageState extends State<BatchesPage> {
 
   void search(OrderedBatchesCubit cubit) {
     final WarehouseCubit warehouseCubit = BlocProvider.of(context);
-    cubit.fetchBatch(
+    cubit.fetchBatches(
       warehouseCubit.selectedWarehouseIndex,
       productName: productController.text,
       batchId: batchController.text,

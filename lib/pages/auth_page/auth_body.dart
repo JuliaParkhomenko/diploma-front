@@ -12,9 +12,9 @@ class AuthBody extends StatefulWidget {
 
 class _AuthBodyState extends State<AuthBody> {
   final TextEditingController email =
-      TextEditingController(text: 'yuliia.parkhomenko@nure.ua');
+      TextEditingController(text: 'parhomylia@gmail.com');
   final TextEditingController password =
-      TextEditingController(text: 'Yul1234567!');
+      TextEditingController(text: 'Yul!1234567');
 
   @override
   Widget build(BuildContext context) {

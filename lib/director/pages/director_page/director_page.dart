@@ -1,4 +1,4 @@
-import 'package:diploma_frontend/pages/director_page/director_body.dart';
+import 'package:diploma_frontend/director/pages/director_page/director_body.dart';
 import 'package:flutter/material.dart';
 
 class DirectorPage extends StatelessWidget {

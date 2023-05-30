@@ -31,7 +31,7 @@ class _WarehouseSelectorState extends State<WarehouseSelector> {
     }
     final OrderedBatchesCubit orderedBatchesCubit =
         BlocProvider.of<OrderedBatchesCubit>(context);
-    orderedBatchesCubit.fetchBatch(widget.warehouses.first.id);
+    orderedBatchesCubit.fetchBatches(widget.warehouses.first.id);
     super.initState();
   }
 
@@ -103,7 +103,7 @@ class _WarehouseSelectorState extends State<WarehouseSelector> {
           userActionCubit.fetchUserActions(
             BlocProvider.of<WarehouseCubit>(context).selectedWarehouseIndex,
           );
-          orderedBatchesCubit.fetchBatch(int.parse(newValue));
+          orderedBatchesCubit.fetchBatches(int.parse(newValue));
           setState(() {
             value = newValue;
           });
