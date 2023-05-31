@@ -1,3 +1,4 @@
+import 'package:diploma_frontend/director/pages/add_new_contract/add_new_contract_page.dart';
 import 'package:diploma_frontend/director/pages/applications_page/applications_page.dart';
 import 'package:diploma_frontend/director/pages/contracts_page/contracts_page.dart';
 import 'package:diploma_frontend/director/pages/overview_page/overview_page.dart'
@@ -8,23 +9,23 @@ import 'package:diploma_frontend/director/pages/suppliers_page/suppliers_page.da
 import 'package:diploma_frontend/director/pages/supplies_page/supplies_page.dart';
 import 'package:diploma_frontend/director/pages/warehouses_page/warehouses_page.dart'
     as directorWarehousesPage;
-import 'package:diploma_frontend/pages/admin/admin_page.dart';
-import 'package:diploma_frontend/pages/application_page/application_page.dart';
-import 'package:diploma_frontend/pages/auth_page/auth_page.dart';
-import 'package:diploma_frontend/pages/batches_page/batches_page.dart';
+import 'package:diploma_frontend/manager/pages/admin/admin_page.dart';
+import 'package:diploma_frontend/manager/pages/application_page/application_page.dart';
+import 'package:diploma_frontend/manager/pages/auth_page/auth_page.dart';
+import 'package:diploma_frontend/manager/pages/batches_page/batches_page.dart';
 import 'package:diploma_frontend/director/pages/director_page/director_page.dart';
-import 'package:diploma_frontend/pages/landing_page/landing_page.dart';
-import 'package:diploma_frontend/pages/manager_page/manager_page.dart';
-import 'package:diploma_frontend/pages/ordered_batch_page/ordered_batch_page.dart';
-import 'package:diploma_frontend/pages/overview_page/overview_page.dart'
+import 'package:diploma_frontend/manager/pages/landing_page/landing_page.dart';
+import 'package:diploma_frontend/manager/pages/manager_page/manager_page.dart';
+import 'package:diploma_frontend/manager/pages/ordered_batch_page/ordered_batch_page.dart';
+import 'package:diploma_frontend/manager/pages/overview_page/overview_page.dart'
     as managerOverviewPage;
-import 'package:diploma_frontend/pages/received_batch_page/received_batch_page.dart';
-import 'package:diploma_frontend/pages/reminders_page/reminders_page.dart';
-import 'package:diploma_frontend/pages/specific_product/specific_product_page.dart';
-import 'package:diploma_frontend/pages/splash_page/splash_page.dart';
-import 'package:diploma_frontend/pages/statistics_page/statistics_page.dart'
+import 'package:diploma_frontend/manager/pages/received_batch_page/received_batch_page.dart';
+import 'package:diploma_frontend/manager/pages/reminders_page/reminders_page.dart';
+import 'package:diploma_frontend/manager/pages/specific_product/specific_product_page.dart';
+import 'package:diploma_frontend/manager/pages/splash_page/splash_page.dart';
+import 'package:diploma_frontend/manager/pages/statistics_page/statistics_page.dart'
     as managerStatisticsPage;
-import 'package:diploma_frontend/pages/stocks_page/stocks_page.dart';
+import 'package:diploma_frontend/manager/pages/stocks_page/stocks_page.dart';
 import 'package:flutter/material.dart';
 import 'package:routemaster/routemaster.dart';
 
@@ -128,6 +129,9 @@ class RouteService {
       },
       '/contracts': (route) => const MaterialPage(
             child: ContractsPage(),
+          ),
+      '/contracts/add': (route) => const MaterialPage(
+            child: AddNewContractPage(),
           ),
       '/supplies': (route) => const MaterialPage(
             child: SuppliesPage(),

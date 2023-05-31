@@ -14,16 +14,14 @@ dependencies:
   routemaster: ^1.0.1
   provider: ^6.0.5
   shared_preferences: ^2.1.0
-  http: ^0.13.5
+  http: ^1.0.0
   flutter_svg: ^2.0.5
   flutter_bloc: ^8.1.2
   bloc: ^8.1.1
   loading_animation_widget: ^1.2.0+4
-  textfield_datepicker: ^0.2.0
   translit: ^2.0.1
   intl: ^0.18.0
   
-
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -1,6 +1,7 @@
 import 'package:diploma_frontend/enums/action_status.dart';
 import 'package:diploma_frontend/models/supplier.dart';
 import 'package:diploma_frontend/models/supply_condition.dart';
+import 'package:diploma_frontend/models/supply_contract.dart';
 import 'package:flutter/material.dart';
 
 abstract class BaseSupplierRepository {
@@ -32,5 +33,12 @@ abstract class BaseSupplierRepository {
     required String address,
     required String email,
     required String phoneNum,
+  });
+
+  Future<List<SupplyContract>?> supplierContracts({
+    required bool old,
+    String productName = '',
+    String supplierName = '',
+    String maker = '',
   });
 }

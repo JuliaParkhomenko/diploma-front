@@ -1,5 +1,5 @@
 import 'package:diploma_frontend/blocs/supplier/supplier_cubit.dart';
-import 'package:diploma_frontend/pages/widgets/info_overlay.dart';
+import 'package:diploma_frontend/manager/pages/widgets/info_overlay.dart';
 import 'package:diploma_frontend/services/language_service/app_localization.dart';
 import 'package:diploma_frontend/services/service_locator.dart';
 import 'package:flutter/material.dart';

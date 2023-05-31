@@ -9,6 +9,7 @@ import 'package:diploma_frontend/models/warehouse.dart';
 import 'package:diploma_frontend/repositories/warehouse_repository/base_warehouse_repository.dart';
 import 'package:diploma_frontend/services/database/database.dart';
 import 'package:diploma_frontend/enums/urgency.dart';
+import 'package:diploma_frontend/services/service_locator.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -37,6 +38,9 @@ class WarehouseRepository implements BaseWarehouseRepository {
         return data.map<Stock>((e) {
           return Stock.fromJson(e);
         }).toList();
+      } else if (response.statusCode == 401) {
+        await ServiceLocator.database.clear();
+        await ServiceLocator.appStateService.logIn();
       }
       return null;
     } catch (e) {
@@ -63,6 +67,9 @@ class WarehouseRepository implements BaseWarehouseRepository {
         return data.map<Warehouse>((e) {
           return Warehouse.fromJson(e);
         }).toList();
+      } else if (response.statusCode == 401) {
+        await ServiceLocator.database.clear();
+        await ServiceLocator.appStateService.logIn();
       }
       return null;
     } catch (e) {
@@ -105,6 +112,9 @@ class WarehouseRepository implements BaseWarehouseRepository {
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
         return data['id'];
+      } else if (response.statusCode == 401) {
+        await ServiceLocator.database.clear();
+        await ServiceLocator.appStateService.logIn();
       }
 
       return null;
@@ -148,12 +158,13 @@ class WarehouseRepository implements BaseWarehouseRepository {
       });
 
       final response = await http.post(url, headers: headers, body: body);
-      print(productId);
-      print(urgency);
 
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
         return data['id'];
+      } else if (response.statusCode == 401) {
+        await ServiceLocator.database.clear();
+        await ServiceLocator.appStateService.logIn();
       }
 
       return null;
@@ -186,7 +197,11 @@ class WarehouseRepository implements BaseWarehouseRepository {
         'email': email,
       });
 
-      await http.post(url, headers: headers, body: body);
+      final response = await http.post(url, headers: headers, body: body);
+      if (response.statusCode == 401) {
+        await ServiceLocator.database.clear();
+        await ServiceLocator.appStateService.logIn();
+      }
     } catch (e) {
       log(e.toString());
     }
@@ -212,6 +227,9 @@ class WarehouseRepository implements BaseWarehouseRepository {
         return data.map<UserAction>((e) {
           return UserAction.fromJson(e);
         }).toList();
+      } else if (response.statusCode == 401) {
+        await ServiceLocator.database.clear();
+        await ServiceLocator.appStateService.logIn();
       }
       return null;
     } catch (e) {

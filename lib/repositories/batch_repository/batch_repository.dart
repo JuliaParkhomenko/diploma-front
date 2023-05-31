@@ -6,6 +6,7 @@ import 'package:diploma_frontend/models/ordered_batch.dart';
 import 'package:diploma_frontend/models/user.dart';
 import 'package:diploma_frontend/repositories/batch_repository/base_batch_repository.dart';
 import 'package:diploma_frontend/services/database/database.dart';
+import 'package:diploma_frontend/services/service_locator.dart';
 import 'package:http/http.dart' as http;
 
 class BatchRepository implements BaseBatchRepository {
@@ -38,6 +39,9 @@ class BatchRepository implements BaseBatchRepository {
         return data.map<Batch>((e) {
           return Batch.fromJson(e);
         }).toList();
+      } else if (response.statusCode == 401) {
+        await ServiceLocator.database.clear();
+        await ServiceLocator.appStateService.logIn();
       }
       return null;
     } catch (e) {
@@ -77,6 +81,9 @@ class BatchRepository implements BaseBatchRepository {
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
         return data['id'];
+      } else if (response.statusCode == 401) {
+        await ServiceLocator.database.clear();
+        await ServiceLocator.appStateService.logIn();
       }
 
       return null;
@@ -105,6 +112,9 @@ class BatchRepository implements BaseBatchRepository {
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
         return Batch.fromJson(data);
+      } else if (response.statusCode == 401) {
+        await ServiceLocator.database.clear();
+        await ServiceLocator.appStateService.logIn();
       }
 
       return null;
@@ -131,7 +141,12 @@ class BatchRepository implements BaseBatchRepository {
 
       final body = jsonEncode({'batchId': id, 'amount': amount});
 
-      await http.post(url, headers: headers, body: body);
+      final response = await http.post(url, headers: headers, body: body);
+
+      if (response.statusCode == 401) {
+        await ServiceLocator.database.clear();
+        await ServiceLocator.appStateService.logIn();
+      }
     } catch (_) {
       log(_.toString());
     }
@@ -152,7 +167,12 @@ class BatchRepository implements BaseBatchRepository {
         'Authorization': 'Bearer ${user!.token}'
       };
 
-      await http.get(url, headers: headers);
+      final response = await http.get(url, headers: headers);
+
+      if (response.statusCode == 401) {
+        await ServiceLocator.database.clear();
+        await ServiceLocator.appStateService.logIn();
+      }
     } catch (_) {
       log(_.toString());
     }
@@ -184,6 +204,9 @@ class BatchRepository implements BaseBatchRepository {
         return data.map<OrderedBatch>((e) {
           return OrderedBatch.fromJson(e);
         }).toList();
+      } else if (response.statusCode == 401) {
+        await ServiceLocator.database.clear();
+        await ServiceLocator.appStateService.logIn();
       }
       return null;
     } catch (e) {
@@ -216,6 +239,9 @@ class BatchRepository implements BaseBatchRepository {
         return data.map<ExpiringBatch>((e) {
           return ExpiringBatch.fromJson(e);
         }).toList();
+      } else if (response.statusCode == 401) {
+        await ServiceLocator.database.clear();
+        await ServiceLocator.appStateService.logIn();
       }
       return null;
     } catch (e) {

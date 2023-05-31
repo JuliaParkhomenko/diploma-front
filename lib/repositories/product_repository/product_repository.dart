@@ -4,6 +4,7 @@ import 'package:diploma_frontend/models/product.dart';
 import 'package:diploma_frontend/models/user.dart';
 import 'package:diploma_frontend/repositories/product_repository/base_product_repository.dart';
 import 'package:diploma_frontend/services/database/database.dart';
+import 'package:diploma_frontend/services/service_locator.dart';
 import 'package:http/http.dart' as http;
 
 class ProductRepository implements BaseProductRepository {
@@ -28,6 +29,9 @@ class ProductRepository implements BaseProductRepository {
         return data.map<Product>((e) {
           return Product.fromJson(e);
         }).toList();
+      } else if (response.statusCode == 401) {
+        await ServiceLocator.database.clear();
+        await ServiceLocator.appStateService.logIn();
       }
       return null;
     } catch (e) {
@@ -54,6 +58,9 @@ class ProductRepository implements BaseProductRepository {
         return data.map<String>((e) {
           return e.toString();
         }).toList();
+      } else if (response.statusCode == 401) {
+        await ServiceLocator.database.clear();
+        await ServiceLocator.appStateService.logIn();
       }
       return null;
     } catch (e) {

@@ -6,12 +6,14 @@ class SupplyContract {
   final DateTime startDate;
   final DateTime endDate;
   final int minAmount;
+  final String supplierName;
   final int maxAmount;
   final List<SupplyCondition> supplyCondition;
 
   SupplyContract({
-    required this.supplyCondition,
     required this.id,
+    required this.supplierName,
+    required this.supplyCondition,
     required this.supplierId,
     required this.startDate,
     required this.endDate,
@@ -21,13 +23,14 @@ class SupplyContract {
 
   factory SupplyContract.fromJson(Map<String, dynamic> json) {
     return SupplyContract(
-      supplyCondition: json['supplyCondition'].map((e) {
+      supplyCondition: json['supplyConditions'].map<SupplyCondition>((e) {
         return SupplyCondition.fromJson(e);
       }).toList(),
       id: json['id'],
       supplierId: json['supplierId'],
-      startDate: json['startDate'].toIso8601String(),
-      endDate: json['endDate'].toIso8601String(),
+      supplierName: json['supplierName'],
+      startDate: DateTime.parse(json['startDate']),
+      endDate: DateTime.parse(json['endDate']),
       maxAmount: json['maxAmount'],
       minAmount: json['minAmount'],
     );

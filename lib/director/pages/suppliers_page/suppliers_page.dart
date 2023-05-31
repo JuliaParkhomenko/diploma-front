@@ -1,7 +1,7 @@
 import 'package:diploma_frontend/blocs/supplier/supplier_cubit.dart';
 import 'package:diploma_frontend/constants/constants.dart' as constants;
 import 'package:diploma_frontend/director/pages/suppliers_page/widgets/suppliers_table.dart';
-import 'package:diploma_frontend/pages/stocks_page/widgets/search_textfield.dart';
+import 'package:diploma_frontend/manager/pages/stocks_page/widgets/search_textfield.dart';
 import 'package:diploma_frontend/services/language_service/app_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,8 +21,6 @@ class _SuppliersPageState extends State<SuppliersPage> {
     return BlocBuilder<SupplierCubit, SupplierState>(
       buildWhen: (previous, current) => previous != current,
       builder: (context, state) {
-        final SupplierCubit cubit = BlocProvider.of(context);
-
         return Container(
           width: size.width,
           padding: const EdgeInsets.all(15),

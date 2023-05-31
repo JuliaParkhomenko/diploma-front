@@ -7,6 +7,7 @@ import 'package:diploma_frontend/blocs/product/product_cubit.dart';
 import 'package:diploma_frontend/blocs/specific_product/specific_product_cubit.dart';
 import 'package:diploma_frontend/blocs/stock/stock_cubit.dart';
 import 'package:diploma_frontend/blocs/supplier/supplier_cubit.dart';
+import 'package:diploma_frontend/blocs/supply_contracts/supply_contracts_cubit.dart';
 import 'package:diploma_frontend/blocs/user_action/user_action_cubit.dart';
 import 'package:diploma_frontend/blocs/warehouse/warehouse_cubit.dart';
 import 'package:diploma_frontend/enums/logged_in_state.dart';
@@ -107,6 +108,11 @@ class _MyAppState extends State<MyApp> {
         ),
         BlocProvider<SupplierCubit>(
           create: (context) => SupplierCubit(
+            ServiceLocator.supplierRepository,
+          ),
+        ),
+        BlocProvider<SupplyContractsCubit>(
+          create: (context) => SupplyContractsCubit(
             ServiceLocator.supplierRepository,
           ),
         ),
