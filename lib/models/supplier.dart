@@ -22,4 +22,8 @@ class Supplier {
       phoneNum: json['phoneNum'],
     );
   }
+
+  factory Supplier.empty() {
+    return Supplier(id: 0, name: '', address: '', email: '', phoneNum: '');
+  }
 }

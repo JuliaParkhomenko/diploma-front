@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:diploma_frontend/models/application.dart';
 import 'package:diploma_frontend/models/stock.dart';
 import 'package:diploma_frontend/models/storage.dart';
 import 'package:diploma_frontend/models/user.dart';
@@ -235,6 +236,67 @@ class WarehouseRepository implements BaseWarehouseRepository {
     } catch (e) {
       log(e.toString());
       return null;
+    }
+  }
+
+  @override
+  Future<List<Application>?> getApplications({
+    String warehouseName = '',
+    required bool past,
+  }) async {
+    try {
+      final User? user = await _database.getUser();
+      final Uri url = Uri.parse(
+        'https://restaurant-warehouse.azurewebsites.net/api/Warehouse/getApplications?past=$past&warehouseName=$warehouseName',
+      );
+      final Map<String, String> headers = {
+        'accept': '*/*',
+        'Content-Type': 'application/json-patch+json',
+        'Authorization': 'Bearer ${user!.token}'
+      };
+      final response = await http.get(url, headers: headers);
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        return data.map<Application>((e) {
+          return Application.fromJson(e);
+        }).toList();
+      } else if (response.statusCode == 401) {
+        await ServiceLocator.database.clear();
+        await ServiceLocator.appStateService.logIn();
+      }
+      return null;
+    } catch (e) {
+      log(e.toString());
+      return null;
+    }
+  }
+
+  @override
+  Future<void> declineApplications({required List<int> ids}) async {
+    try {
+      final User? user = await _database.getUser();
+      final Uri url = Uri.parse(
+        'https://restaurant-warehouse.azurewebsites.net/api/Warehouse/declineApplication',
+      );
+
+      final Map<String, String> headers = {
+        'accept': '*/*',
+        'Content-Type': 'application/json-patch+json',
+        'Authorization': 'Bearer ${user!.token}'
+      };
+
+      final body = jsonEncode({
+        'applicationIds': ids,
+      });
+
+      final response = await http.post(url, headers: headers, body: body);
+
+      if (response.statusCode == 401) {
+        await ServiceLocator.database.clear();
+        await ServiceLocator.appStateService.logIn();
+      }
+    } catch (e) {
+      log(e.toString());
     }
   }
 }

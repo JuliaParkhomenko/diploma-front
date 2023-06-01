@@ -1,4 +1,6 @@
+import 'package:diploma_frontend/blocs/application/application_cubit.dart';
 import 'package:diploma_frontend/blocs/batch/batch_cubit.dart';
+import 'package:diploma_frontend/blocs/batch_supply/batch_supply_cubit.dart';
 import 'package:diploma_frontend/blocs/expiring_batches/expiring_batches_cubit.dart';
 import 'package:diploma_frontend/blocs/kind/kind_cubit.dart';
 import 'package:diploma_frontend/blocs/localization/localization_cubit.dart';
@@ -86,9 +88,19 @@ class _MyAppState extends State<MyApp> {
             ServiceLocator.batchRepository,
           ),
         ),
+        BlocProvider<BatchSupplyCubit>(
+          create: (context) => BatchSupplyCubit(
+            ServiceLocator.batchRepository,
+          ),
+        ),
         BlocProvider<OrderedBatchesCubit>(
           create: (context) => OrderedBatchesCubit(
             ServiceLocator.batchRepository,
+          ),
+        ),
+        BlocProvider<ApplicationCubit>(
+          create: (context) => ApplicationCubit(
+            ServiceLocator.warehouseRepository,
           ),
         ),
         BlocProvider<KindCubit>(

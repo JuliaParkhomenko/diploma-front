@@ -87,22 +87,27 @@ class _ContractsFiltersState extends State<ContractsFilters> {
           ),
         ),
         const SizedBox(width: 30),
-        Switch(
-          value: old,
-          onChanged: (value) {
-            setState(() {
-              old = value;
-            });
+        Row(
+          children: [
+            Text(old ? 'Past' : 'Active'),
+            Switch(
+              value: old,
+              onChanged: (value) {
+                setState(() {
+                  old = value;
+                });
 
-            widget.onChanged(value);
+                widget.onChanged(value);
 
-            cubit.featchContracts(
-              old: value,
-              productName: product,
-              supplierName: name,
-              maker: maker,
-            );
-          },
+                cubit.featchContracts(
+                  old: value,
+                  productName: product,
+                  supplierName: name,
+                  maker: maker,
+                );
+              },
+            ),
+          ],
         ),
         const Expanded(
           child: SizedBox(),

@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 mixin DirectorPagesList {
   static List<String> generatePageNames(BuildContext context) => [
         'Overview'.tr(context),
-        'Warehouses'.tr(context),
         'Suppliers'.tr(context),
         'Contracts'.tr(context),
         'Supplies'.tr(context),

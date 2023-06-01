@@ -1,4 +1,5 @@
 import 'package:diploma_frontend/enums/urgency.dart';
+import 'package:diploma_frontend/models/application.dart';
 import 'package:diploma_frontend/models/stock.dart';
 import 'package:diploma_frontend/models/storage.dart';
 import 'package:diploma_frontend/models/user_action.dart';
@@ -38,6 +39,13 @@ abstract class BaseWarehouseRepository {
   Future<List<UserAction>?> recentActions({
     required int warehouseId,
   });
+
+  Future<List<Application>?> getApplications({
+    String warehouseName = '',
+    required bool past,
+  });
+
+  Future<void> declineApplications({required List<int> ids});
 }
 
 // ————▄▀▀▀▄░————

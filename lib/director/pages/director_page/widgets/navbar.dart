@@ -56,7 +56,7 @@ class _NavBarState extends State<NavBar> {
           ),
           DestinationWidget(
             text: pageNames[1],
-            icon: Icons.warehouse,
+            icon: Icons.perm_contact_cal_outlined,
             pageIndex: 1,
             onIndexChanged: widget.onIndexChanged,
             selectedIndex: indexedPage.index,
@@ -64,7 +64,7 @@ class _NavBarState extends State<NavBar> {
           ),
           DestinationWidget(
             text: pageNames[2],
-            icon: Icons.perm_contact_cal_outlined,
+            icon: Icons.file_copy_outlined,
             pageIndex: 2,
             onIndexChanged: widget.onIndexChanged,
             selectedIndex: indexedPage.index,
@@ -72,7 +72,7 @@ class _NavBarState extends State<NavBar> {
           ),
           DestinationWidget(
             text: pageNames[3],
-            icon: Icons.file_copy_outlined,
+            icon: Icons.archive_outlined,
             pageIndex: 3,
             onIndexChanged: widget.onIndexChanged,
             selectedIndex: indexedPage.index,
@@ -80,7 +80,7 @@ class _NavBarState extends State<NavBar> {
           ),
           DestinationWidget(
             text: pageNames[4],
-            icon: Icons.archive_outlined,
+            icon: Icons.article_outlined,
             pageIndex: 4,
             onIndexChanged: widget.onIndexChanged,
             selectedIndex: indexedPage.index,
@@ -88,16 +88,8 @@ class _NavBarState extends State<NavBar> {
           ),
           DestinationWidget(
             text: pageNames[5],
-            icon: Icons.article_outlined,
-            pageIndex: 5,
-            onIndexChanged: widget.onIndexChanged,
-            selectedIndex: indexedPage.index,
-            padding: 15,
-          ),
-          DestinationWidget(
-            text: pageNames[6],
             icon: Icons.bar_chart_rounded,
-            pageIndex: 6,
+            pageIndex: 5,
             onIndexChanged: widget.onIndexChanged,
             selectedIndex: indexedPage.index,
             padding: 15,

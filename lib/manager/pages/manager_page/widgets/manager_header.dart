@@ -80,22 +80,7 @@ class ManagerHeader extends StatelessWidget {
               return Container();
             },
           ),
-          Container(
-            width: 40,
-            height: 40,
-            margin: const EdgeInsets.symmetric(
-              horizontal: 25,
-            ),
-            decoration: const BoxDecoration(
-              shape: BoxShape.circle,
-              color: constants.Colors.notificationShape,
-            ),
-            child: const Icon(
-              Icons.notifications_none_outlined,
-              size: 28,
-              color: Color.fromARGB(200, 62, 62, 62),
-            ),
-          ),
+          const SizedBox(width: 40),
           Container(
             width: 40,
             height: 40,

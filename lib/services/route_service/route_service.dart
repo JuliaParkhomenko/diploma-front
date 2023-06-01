@@ -7,8 +7,6 @@ import 'package:diploma_frontend/director/pages/statistics_page/statistics_page.
     as directorStatisticsPage;
 import 'package:diploma_frontend/director/pages/suppliers_page/suppliers_page.dart';
 import 'package:diploma_frontend/director/pages/supplies_page/supplies_page.dart';
-import 'package:diploma_frontend/director/pages/warehouses_page/warehouses_page.dart'
-    as directorWarehousesPage;
 import 'package:diploma_frontend/manager/pages/admin/admin_page.dart';
 import 'package:diploma_frontend/manager/pages/application_page/application_page.dart';
 import 'package:diploma_frontend/manager/pages/auth_page/auth_page.dart';
@@ -108,7 +106,6 @@ class RouteService {
             child: DirectorPage(),
             paths: [
               '/overview',
-              '/warehouses',
               '/suppliers',
               '/contracts',
               '/supplies',
@@ -118,9 +115,6 @@ class RouteService {
           ),
       '/overview': (route) => const MaterialPage(
             child: directorOverviewPage.OverviewPage(),
-          ),
-      '/warehouses': (route) => const MaterialPage(
-            child: directorWarehousesPage.WarehousesPage(),
           ),
       '/suppliers': (route) {
         return const MaterialPage(

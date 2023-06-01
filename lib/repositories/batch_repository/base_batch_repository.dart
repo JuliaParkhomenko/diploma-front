@@ -1,4 +1,5 @@
 import 'package:diploma_frontend/models/batch.dart';
+import 'package:diploma_frontend/models/batch_supply.dart';
 import 'package:diploma_frontend/models/expiring_batch.dart';
 import 'package:diploma_frontend/models/ordered_batch.dart';
 
@@ -25,5 +26,10 @@ abstract class BaseBatchRepository {
   Future<List<ExpiringBatch>?> expiringBatches({
     required int warehouseId,
     required int amount,
+  });
+
+  Future<List<BatchSupply>?> getSupplies({
+    String productName = '',
+    String warehouseName = '',
   });
 }

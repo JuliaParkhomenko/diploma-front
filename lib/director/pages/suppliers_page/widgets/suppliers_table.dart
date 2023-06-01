@@ -54,32 +54,34 @@ class _SuppliersTableState extends State<SuppliersTable> {
               ),
             );
           }
-          return ListView.builder(
-            itemCount: state.suppliers.length,
-            itemBuilder: (context, index) {
-              final Supplier item = state.suppliers[index];
+          return Flexible(
+            child: ListView.builder(
+              itemCount: state.suppliers.length,
+              itemBuilder: (context, index) {
+                final Supplier item = state.suppliers[index];
 
-              if (index == 0) {
-                return Column(
-                  children: [
-                    getTableHeader(size, state, cubit),
-                    Container(
-                      height: 60,
-                      color: constants.Colors.greyTable,
-                      child: getItem(item, size),
-                    ),
-                  ],
-                );
-              } else {
-                return Container(
-                  height: 60,
-                  color: index % 2 != 0
-                      ? Colors.white
-                      : constants.Colors.greyTable,
-                  child: getItem(item, size),
-                );
-              }
-            },
+                if (index == 0) {
+                  return Column(
+                    children: [
+                      getTableHeader(size, state, cubit),
+                      Container(
+                        height: 60,
+                        color: constants.Colors.greyTable,
+                        child: getItem(item, size),
+                      ),
+                    ],
+                  );
+                } else {
+                  return Container(
+                    height: 60,
+                    color: index % 2 != 0
+                        ? Colors.white
+                        : constants.Colors.greyTable,
+                    child: getItem(item, size),
+                  );
+                }
+              },
+            ),
           );
         }
         return Container();
