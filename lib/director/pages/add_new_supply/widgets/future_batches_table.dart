@@ -6,14 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:diploma_frontend/constants/constants.dart' as constants;
 
-class ContractsTable extends StatefulWidget {
-  const ContractsTable({super.key});
+class FutureBatchesTable extends StatefulWidget {
+  const FutureBatchesTable({super.key});
 
   @override
-  State<ContractsTable> createState() => _ContractsTableState();
+  State<FutureBatchesTable> createState() => _FutureBatchesTableState();
 }
 
-class _ContractsTableState extends State<ContractsTable> {
+class _FutureBatchesTableState extends State<FutureBatchesTable> {
   int? selectedId;
   @override
   Widget build(BuildContext context) {

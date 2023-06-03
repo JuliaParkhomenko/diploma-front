@@ -111,7 +111,7 @@ class _ApplicationTableState extends State<ApplicationTable> {
   }) {
     return Container(
       alignment: Alignment.centerLeft,
-      width: (size.width * 0.72 - 24) / 5,
+      width: (size.width * 0.72 - 24) / 6,
       //color: Color((Random().nextDouble() * 0xFFFFFF).toInt()).withOpacity(1.0),
       child: Row(
         children: [

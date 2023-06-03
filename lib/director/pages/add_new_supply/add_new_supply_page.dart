@@ -1,6 +1,7 @@
 import 'package:diploma_frontend/blocs/supplier/supplier_cubit.dart';
 import 'package:diploma_frontend/director/pages/add_new_contract/widgets/suppliers_dropdown.dart';
 import 'package:diploma_frontend/manager/pages/ordered_batch_page/widgets/date_picker_textfield.dart';
+import 'package:diploma_frontend/models/application.dart';
 import 'package:diploma_frontend/models/supplier.dart';
 import 'package:diploma_frontend/services/language_service/app_localization.dart';
 import 'package:flutter/material.dart';
@@ -8,14 +9,16 @@ import 'package:diploma_frontend/constants/constants.dart' as constants;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:routemaster/routemaster.dart';
 
-class AddNewContractPage extends StatefulWidget {
-  const AddNewContractPage({super.key});
+List<Application> chosenApplications = [];
+
+class AddNewSupplyPage extends StatefulWidget {
+  const AddNewSupplyPage({super.key});
 
   @override
-  State<AddNewContractPage> createState() => _AddNewContractPageState();
+  State<AddNewSupplyPage> createState() => _AddNewSupplyPageState();
 }
 
-class _AddNewContractPageState extends State<AddNewContractPage> {
+class _AddNewSupplyPageState extends State<AddNewSupplyPage> {
   final TextEditingController startDate = TextEditingController();
   final TextEditingController endDate = TextEditingController();
 
@@ -38,7 +41,7 @@ class _AddNewContractPageState extends State<AddNewContractPage> {
             InkWell(
               onTap: () => Routemaster.of(context).history.back(),
               child: Text(
-                '${'Active contracts'.tr(context)} > ${'Adding a new contract'.tr(context)}',
+                '${(chosenApplications == [] ? "Suppliers" : "Applications").tr(context)} > ${'Adding a new supply'.tr(context)}',
                 style: const TextStyle(
                   color: constants.Colors.subtitleTextColor,
                   fontSize: 18,

@@ -1,6 +1,7 @@
 import 'package:diploma_frontend/repositories/auth_repository/auth_repository.dart';
 import 'package:diploma_frontend/repositories/batch_repository/batch_repository.dart';
 import 'package:diploma_frontend/repositories/product_repository/product_repository.dart';
+import 'package:diploma_frontend/repositories/statistics/statistics_repository.dart';
 import 'package:diploma_frontend/repositories/supplier_repository/supplier_repository.dart';
 import 'package:diploma_frontend/repositories/warehouse_repository/warehouse_repository.dart';
 import 'package:diploma_frontend/services/app_state_service/app_state_service.dart';
@@ -17,6 +18,8 @@ class ServiceLocator {
       WarehouseRepository(database);
   static BatchRepository batchRepository = BatchRepository(database);
   static SupplierRepository supplierRepository = SupplierRepository(database);
+  static StatisticsRepository statisticsRepository =
+      StatisticsRepository(database);
 
   // Services
   static AppStateService appStateService = AppStateService(database);
