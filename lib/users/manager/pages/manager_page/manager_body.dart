@@ -4,6 +4,7 @@ import 'package:diploma_frontend/users/manager/pages/manager_page/widgets/navbar
 import 'package:diploma_frontend/services/service_locator.dart';
 import 'package:flutter/material.dart';
 import 'package:routemaster/routemaster.dart';
+import 'package:diploma_frontend/constants/constants.dart' as constants;
 
 class ManagerBody extends StatefulWidget {
   final List<Warehouse> list;
@@ -41,9 +42,14 @@ class _ManagerBodyState extends State<ManagerBody> {
           },
         ),
         //! header
-        SizedBox(
+        Container(
+          margin: const EdgeInsets.only(top: 10, right: 15, bottom: 10),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(16),
+          ),
           height: size.height,
-          width: size.width - 140,
+          width: size.width - 185,
           child: Column(
             children: [
               ManagerHeader(
@@ -51,9 +57,20 @@ class _ManagerBodyState extends State<ManagerBody> {
                 warehouses: widget.list,
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 15, right: 20),
-                child: SizedBox(
-                  height: size.height - 70,
+                padding: const EdgeInsets.only(
+                  left: 15,
+                  right: 20,
+                  bottom: 10,
+                ),
+                child: Container(
+                  width: size.width,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(17),
+                    color:
+                        constants.Colors.managerWarehouseMain.withOpacity(0.6),
+                  ),
+                  height: size.height - 105,
+                  padding: const EdgeInsets.all(15),
                   child: PageStackNavigator(
                     stack: indexedPage.currentStack,
                   ),

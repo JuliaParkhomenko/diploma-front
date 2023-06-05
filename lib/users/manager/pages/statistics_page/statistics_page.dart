@@ -28,91 +28,83 @@ class _StatisticsPageState extends State<StatisticsPage> {
         if (state is StatisticsInitial) {
           cubit.fetchStatistics();
         }
+
         if (state is StatisticsLoaded) {
-          return Container(
-            width: size.width,
-            padding: const EdgeInsets.all(15),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(17),
-              color: constants.Colors.managerWarehouseMain.withOpacity(0.6),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Statistics'.tr(context),
-                    style: const TextStyle(
-                      color: constants.Colors.subtitleTextColor,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'OpenSans',
-                    ),
+          return Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Statistics'.tr(context),
+                  style: const TextStyle(
+                    color: constants.Colors.subtitleTextColor,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'OpenSans',
                   ),
-                  const SizedBox(
-                    height: 32,
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        'Product'.tr(context),
-                        style: const TextStyle(
-                          color: constants.Colors.subtitleTextColor,
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'OpenSans',
-                        ),
+                ),
+                const SizedBox(
+                  height: 32,
+                ),
+                Row(
+                  children: [
+                    Text(
+                      'Product'.tr(context),
+                      style: const TextStyle(
+                        color: constants.Colors.subtitleTextColor,
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'OpenSans',
                       ),
-                      // const SizedBox(
-                      //   width: 20,
-                      // ),
-                      BlocBuilder<ProductCubit, ProductState>(
-                          builder: (context, state) {
-                        if (state is ProductInitial) {
-                          final ProductCubit cubit =
-                              BlocProvider.of<ProductCubit>(context);
-                          cubit.fetchProducts();
-                        }
-                        if (state is ProductLoading) {
-                          return ProductDropdown(
-                            onChange: (_) {},
-                            products: const [],
-                          );
-                        }
-                        if (state is ProductError) {
-                          return const Text('Error on server :)');
-                        }
-                        if (state is ProductLoaded) {
-                          return ProductDropdown(
-                            onChange: (productInd) {
-                              //print(productInd);
-                              setState(() {
-                                //TODO: index!=id
-                                currentProduct = state.products.firstWhere(
-                                    (element) => element.id == productInd);
-                              });
-                            },
-                            products: state.products,
-                          );
-                        }
-                        return Container();
-                      }),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  SizedBox(
-                    height: size.height * 0.65,
-                    width: size.width * 0.72,
-                    child: LineChartWidget(
-                      isShowingMainData: true,
-                      statistics: state.statistics,
                     ),
+                    BlocBuilder<ProductCubit, ProductState>(
+                        builder: (context, state) {
+                      if (state is ProductInitial) {
+                        final ProductCubit cubit =
+                            BlocProvider.of<ProductCubit>(context);
+                        cubit.fetchProducts();
+                      }
+                      if (state is ProductLoading) {
+                        return ProductDropdown(
+                          onChange: (_) {},
+                          products: const [],
+                        );
+                      }
+                      if (state is ProductError) {
+                        return const Text('Error on server :)');
+                      }
+                      if (state is ProductLoaded) {
+                        return ProductDropdown(
+                          onChange: (productInd) {
+                            setState(() {
+                              //TODO: index!=id
+                              currentProduct = state.products.firstWhere(
+                                  (element) => element.id == productInd);
+                            });
+                          },
+                          products: state.products,
+                        );
+                      }
+                      return Container();
+                    }),
+                  ],
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                SizedBox(
+                  height: size.height * 0.65,
+                  width: size.width * 0.72,
+                  child: LineChartWidget(
+                    update: (p0) {
+                      setState(() {});
+                    },
+                    isShowingMainData: true,
+                    statistics: state.statistics,
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           );
         }

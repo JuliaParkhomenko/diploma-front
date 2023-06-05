@@ -187,7 +187,11 @@ class _AddNewContractPageState extends State<AddNewContractPage> {
           SupplyConditionsTable(
             update: update,
           ),
+          const Expanded(
+            child: SizedBox(),
+          ),
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               TextButton(
                 onPressed: () async {
@@ -240,8 +244,10 @@ class _AddNewContractPageState extends State<AddNewContractPage> {
                   overlayColor: MaterialStateProperty.all(
                     Colors.green.withOpacity(0.7),
                   ),
-                  backgroundColor:
-                      MaterialStateProperty.all(constants.Colors.main),
+                  backgroundColor: MaterialStateProperty.all(
+                      supplyConditions.isEmpty
+                          ? const Color.fromARGB(255, 100, 100, 100)
+                          : constants.Colors.main),
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),

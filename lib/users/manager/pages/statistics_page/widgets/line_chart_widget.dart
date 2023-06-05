@@ -3,18 +3,33 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:diploma_frontend/constants/constants.dart' as constants;
 
-class LineChartWidget extends StatelessWidget {
+class LineChartWidget extends StatefulWidget {
+  final Function(bool) update;
   final Statistics statistics;
-  int i = 0;
-  LineChartWidget(
-      {super.key, required this.isShowingMainData, required this.statistics});
+  const LineChartWidget({
+    super.key,
+    required this.isShowingMainData,
+    required this.update,
+    required this.statistics,
+  });
 
   final bool isShowingMainData;
 
   @override
+  State<LineChartWidget> createState() => _LineChartWidgetState();
+}
+
+class _LineChartWidgetState extends State<LineChartWidget> {
+  @override
+  void didChangeDependencies() {
+    setState(() {});
+    super.didChangeDependencies();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return LineChart(
-      isShowingMainData ? sampleData1 : sampleData2,
+      widget.isShowingMainData ? sampleData1 : sampleData2,
       swapAnimationDuration: const Duration(milliseconds: 250),
     );
   }
@@ -102,11 +117,12 @@ class LineChartWidget extends StatelessWidget {
       fontSize: 14,
     );
     String text;
-    double maxValue = (statistics.used > statistics.ordered)
-        ? statistics.used
-        : statistics.ordered;
-    maxValue =
-        maxValue > statistics.writtenOff ? maxValue : statistics.writtenOff;
+    double maxValue = (widget.statistics.used > widget.statistics.ordered)
+        ? widget.statistics.used
+        : widget.statistics.ordered;
+    maxValue = maxValue > widget.statistics.writtenOff
+        ? maxValue
+        : widget.statistics.writtenOff;
     switch (value.toInt()) {
       case 1:
         text = (maxValue / 6).round().toString();
@@ -216,14 +232,10 @@ class LineChartWidget extends StatelessWidget {
           show: false,
           color: constants.Colors.managerStatisticsOrderedLine,
         ),
-        spots: [
-          FlSpot(1, statistics.orderedList[i++].amount),
-          FlSpot(3, statistics.orderedList[i++].amount),
-          FlSpot(7, statistics.orderedList[i++].amount),
-          FlSpot(10, statistics.orderedList[i++].amount),
-          FlSpot(12, statistics.orderedList[i++].amount),
-          FlSpot(13, statistics.orderedList[i++].amount),
-        ],
+        spots: List.generate(
+          widget.statistics.orderedList.length,
+          (index) => FlSpot(1, widget.statistics.orderedList[index].amount),
+        ),
       );
 
   LineChartBarData get lineChartBarData1_3 => LineChartBarData(
@@ -297,77 +309,4 @@ class LineChartWidget extends StatelessWidget {
           FlSpot(13, 4.5),
         ],
       );
-}
-
-class LineChartSample1 extends StatefulWidget {
-  final Statistics statistics;
-  const LineChartSample1({super.key, required this.statistics});
-
-  @override
-  State<StatefulWidget> createState() => LineChartSample1State();
-}
-
-class LineChartSample1State extends State<LineChartSample1> {
-  late bool isShowingMainData;
-
-  @override
-  void initState() {
-    super.initState();
-    isShowingMainData = true;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return AspectRatio(
-      aspectRatio: 1.23,
-      child: Stack(
-        children: <Widget>[
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              const SizedBox(
-                height: 37,
-              ),
-              const Text(
-                'Monthly Sales',
-                style: TextStyle(
-                  color: Color(0xFF50E4FF),
-                  fontSize: 32,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 2,
-                ),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(
-                height: 37,
-              ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.only(right: 16, left: 6),
-                  child: LineChartWidget(
-                    isShowingMainData: isShowingMainData,
-                    statistics: widget.statistics,
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-            ],
-          ),
-          IconButton(
-            icon: Icon(
-              Icons.refresh,
-              color: Colors.white.withOpacity(isShowingMainData ? 1.0 : 0.5),
-            ),
-            onPressed: () {
-              setState(() {
-                isShowingMainData = !isShowingMainData;
-              });
-            },
-          )
-        ],
-      ),
-    );
-  }
 }
