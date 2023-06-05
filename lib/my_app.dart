@@ -20,6 +20,7 @@ import 'package:diploma_frontend/services/route_service/route_service.dart';
 import 'package:diploma_frontend/services/service_locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 import 'package:routemaster/routemaster.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -43,6 +44,7 @@ class _MyAppState extends State<MyApp> {
       final AppStateService appStateService = Provider.of<AppStateService>(
         context,
       );
+
       switch (appStateService.loggedInState) {
         case LoggedInState.admin:
           return RouteService().adminMap;
@@ -135,42 +137,47 @@ class _MyAppState extends State<MyApp> {
           ),
         ),
       ],
-      child: ChangeNotifierProvider<AppStateService>.value(
-        value: ServiceLocator.appStateService,
-        child: BlocBuilder<LocalizationCubit, LocalizationState>(
-          builder: (context, state) {
-            if (state is ChangeLocalState) {
-              return MaterialApp.router(
-                debugShowCheckedModeBanner: false,
-                supportedLocales: const [
-                  Locale('uk', ''),
-                  Locale('en', ''),
-                ],
-                title: 'Diploma work',
-                localizationsDelegates: const [
-                  AppLocalization.delegate,
-                  GlobalMaterialLocalizations.delegate,
-                  GlobalWidgetsLocalizations.delegate,
-                  GlobalCupertinoLocalizations.delegate
-                ],
-                localeResolutionCallback: (current, supported) {
-                  for (final locale in supported) {
-                    if (current != null &&
-                        current.languageCode == locale.languageCode) {
-                      return current;
-                    }
-                  }
-                  return supported.first;
-                },
-                routeInformationParser: const RoutemasterParser(),
-                routerDelegate: _routemasterDelegate,
-                locale: state.locale,
-              );
-            } else {
-              return Container();
-            }
-          },
-        ),
+      child: FutureBuilder(
+        future: GetIt.instance.allReady(),
+        builder: (_, snapshot) {
+          return ChangeNotifierProvider<AppStateService>.value(
+            value: ServiceLocator.appStateService,
+            child: BlocBuilder<LocalizationCubit, LocalizationState>(
+              builder: (context, state) {
+                if (state is ChangeLocalState) {
+                  return MaterialApp.router(
+                    debugShowCheckedModeBanner: false,
+                    supportedLocales: const [
+                      Locale('uk', ''),
+                      Locale('en', ''),
+                    ],
+                    title: 'Diploma work',
+                    localizationsDelegates: const [
+                      AppLocalization.delegate,
+                      GlobalMaterialLocalizations.delegate,
+                      GlobalWidgetsLocalizations.delegate,
+                      GlobalCupertinoLocalizations.delegate
+                    ],
+                    localeResolutionCallback: (current, supported) {
+                      for (final locale in supported) {
+                        if (current != null &&
+                            current.languageCode == locale.languageCode) {
+                          return current;
+                        }
+                      }
+                      return supported.first;
+                    },
+                    routeInformationParser: const RoutemasterParser(),
+                    routerDelegate: _routemasterDelegate,
+                    locale: state.locale,
+                  );
+                } else {
+                  return Container();
+                }
+              },
+            ),
+          );
+        },
       ),
     );
   }

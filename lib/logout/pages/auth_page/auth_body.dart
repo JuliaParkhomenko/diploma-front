@@ -1,4 +1,4 @@
-import 'package:diploma_frontend/manager/pages/auth_page/widgets/sign_in_button.dart';
+import 'package:diploma_frontend/logout/pages/auth_page/widgets/sign_in_button.dart';
 import 'package:diploma_frontend/services/language_service/app_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:diploma_frontend/constants/constants.dart' as constants;
