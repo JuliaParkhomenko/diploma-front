@@ -9,10 +9,10 @@ import 'package:diploma_frontend/director/pages/suppliers_page/suppliers_page.da
 import 'package:diploma_frontend/director/pages/supplies_page/supplies_page.dart';
 import 'package:diploma_frontend/manager/pages/admin/admin_page.dart';
 import 'package:diploma_frontend/manager/pages/application_page/application_page.dart';
-import 'package:diploma_frontend/manager/pages/auth_page/auth_page.dart';
+import 'package:diploma_frontend/logout/pages/auth_page/auth_page.dart';
 import 'package:diploma_frontend/manager/pages/batches_page/batches_page.dart';
 import 'package:diploma_frontend/director/pages/director_page/director_page.dart';
-import 'package:diploma_frontend/manager/pages/landing_page/landing_page.dart';
+import 'package:diploma_frontend/logout/pages/landing_page/landing_page.dart';
 import 'package:diploma_frontend/manager/pages/manager_page/manager_page.dart';
 import 'package:diploma_frontend/manager/pages/ordered_batch_page/ordered_batch_page.dart';
 import 'package:diploma_frontend/manager/pages/overview_page/overview_page.dart'
