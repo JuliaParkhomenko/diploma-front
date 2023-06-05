@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 class DialogTextfield extends StatelessWidget {
+  final String initialValue;
   final String hintText;
   final Function(String) onChanged;
-  final TextEditingController controller;
   const DialogTextfield({
     super.key,
+    required this.initialValue,
     required this.hintText,
-    required this.controller,
     required this.onChanged,
   });
 
@@ -19,12 +19,12 @@ class DialogTextfield extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(3),
       ),
-      child: TextField(
+      child: TextFormField(
+        initialValue: initialValue,
         style: const TextStyle(
           fontSize: 14,
         ),
         onChanged: onChanged,
-        controller: controller,
         decoration: InputDecoration(
           enabledBorder: const OutlineInputBorder(),
           hintStyle: const TextStyle(

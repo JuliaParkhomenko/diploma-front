@@ -3,11 +3,9 @@ import 'package:flutter/material.dart';
 class SearchTextfield extends StatelessWidget {
   final String hintText;
   final Function(String) onChanged;
-  final TextEditingController controller;
   const SearchTextfield({
     super.key,
     required this.hintText,
-    required this.controller,
     required this.onChanged,
   });
 
@@ -24,7 +22,6 @@ class SearchTextfield extends StatelessWidget {
         style: const TextStyle(
           fontSize: 14,
         ),
-        controller: controller,
         decoration: InputDecoration(
           hintStyle: const TextStyle(
             fontSize: 14,

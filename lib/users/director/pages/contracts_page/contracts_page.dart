@@ -16,50 +16,40 @@ class _ContractsPageState extends State<ContractsPage> {
 
   @override
   Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
-
-    return Container(
-      width: size.width,
+    return Padding(
       padding: const EdgeInsets.all(15),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(17),
-        color: constants.Colors.managerWarehouseMain.withOpacity(0.6),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(15),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              !activeContracts
-                  ? 'Active contracts'.tr(context)
-                  : 'Past contracts'.tr(context),
-              style: const TextStyle(
-                color: constants.Colors.subtitleTextColor,
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-                fontFamily: 'OpenSans',
-              ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            !activeContracts
+                ? 'Active contracts'.tr(context)
+                : 'Past contracts'.tr(context),
+            style: const TextStyle(
+              color: constants.Colors.subtitleTextColor,
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              fontFamily: 'OpenSans',
             ),
-            const SizedBox(
-              height: 32,
-            ),
-            ContractsFilters(
-              old: activeContracts,
-              onChanged: (value) {
-                setState(() {
-                  activeContracts = value;
-                });
-              },
-            ),
-            const SizedBox(
-              height: 16,
-            ),
-            // DO NOT REMOVE
-            // ignore: prefer_const_constructors
-            ContractsTable(),
-          ],
-        ),
+          ),
+          const SizedBox(
+            height: 32,
+          ),
+          ContractsFilters(
+            old: activeContracts,
+            onChanged: (value) {
+              setState(() {
+                activeContracts = value;
+              });
+            },
+          ),
+          const SizedBox(
+            height: 16,
+          ),
+          // DO NOT REMOVE
+          // ignore: prefer_const_constructors
+          ContractsTable(),
+        ],
       ),
     );
   }

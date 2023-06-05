@@ -6,26 +6,7 @@ import 'package:diploma_frontend/services/language_service/app_localization.dart
 import 'package:flutter/material.dart';
 import 'package:diploma_frontend/constants/constants.dart' as constants;
 
-List<SupplyCondition> supplyConditions = [
-  SupplyCondition(
-      id: 5,
-      productName: 'Картопля',
-      productMeasurement: 'кг',
-      kind: 'kind',
-      maker: 'maker',
-      pricePerUnit: 15,
-      minAmount: 25,
-      maxAmount: 100),
-  SupplyCondition(
-      id: 7,
-      productName: 'Борошно',
-      productMeasurement: 'кг',
-      kind: 'kind',
-      maker: 'maker',
-      pricePerUnit: 27,
-      minAmount: 30,
-      maxAmount: 150)
-];
+List<SupplyCondition> supplyConditions = [];
 
 class SupplyConditionsTable extends StatefulWidget {
   final bool update;

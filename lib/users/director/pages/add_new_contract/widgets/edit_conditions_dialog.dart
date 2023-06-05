@@ -36,19 +36,9 @@ class EditConditionDialog extends StatefulWidget {
 }
 
 class _EditConditionDialogState extends State<EditConditionDialog> {
-  String productName = '';
   int productId = -1;
-  late final TextEditingController minBatchController =
-      TextEditingController(text: widget.minBatch.toString());
-  late final TextEditingController maxBatchController =
-      TextEditingController(text: widget.maxBatch.toString());
-  late final TextEditingController kindController =
-      TextEditingController(text: widget.kind);
-  late final TextEditingController makerController =
-      TextEditingController(text: widget.maker);
-  late final TextEditingController pricePerUnitController =
-      TextEditingController(text: widget.pricePerUnit.toString());
 
+  late String productName = widget.product;
   late String kind = widget.kind;
   late String maker = widget.maker;
   late double? minBatch = widget.minBatch;
@@ -102,9 +92,6 @@ class _EditConditionDialogState extends State<EditConditionDialog> {
                             fontFamily: 'OpenSans',
                           ),
                         ),
-                        // const SizedBox(
-                        //   width: 20,
-                        // ),
                         SizedBox(
                           width: 200,
                           height: 42,
@@ -131,8 +118,8 @@ class _EditConditionDialogState extends State<EditConditionDialog> {
                           width: 200,
                           height: 42,
                           child: DialogTextfield(
+                            initialValue: minBatch.toString(),
                             hintText: 'Min batch'.tr(context),
-                            controller: minBatchController,
                             onChanged: (_) {
                               setState(() {
                                 minBatch = double.tryParse(_);
@@ -140,13 +127,6 @@ class _EditConditionDialogState extends State<EditConditionDialog> {
                             },
                           ),
                         ),
-                        // const SizedBox(
-                        //   width: 20,
-                        // ),
-
-                        // const SizedBox(
-                        //   width: 40,
-                        // ),
                       ],
                     ),
                   ),
@@ -175,15 +155,12 @@ class _EditConditionDialogState extends State<EditConditionDialog> {
                             fontFamily: 'OpenSans',
                           ),
                         ),
-                        // const SizedBox(
-                        //   width: 20,
-                        // ),
                         SizedBox(
                           width: 200,
                           height: 42,
                           child: DialogTextfield(
+                            initialValue: kind,
                             hintText: 'Kind'.tr(context),
-                            controller: kindController,
                             onChanged: (_) {
                               setState(() {
                                 kind = _;
@@ -212,8 +189,8 @@ class _EditConditionDialogState extends State<EditConditionDialog> {
                           width: 200,
                           height: 42,
                           child: DialogTextfield(
+                            initialValue: maxBatch.toString(),
                             hintText: 'Max batch'.tr(context),
-                            controller: maxBatchController,
                             onChanged: (_) {
                               setState(() {
                                 maxBatch = double.tryParse(_);
@@ -221,13 +198,6 @@ class _EditConditionDialogState extends State<EditConditionDialog> {
                             },
                           ),
                         ),
-                        // const SizedBox(
-                        //   width: 20,
-                        // ),
-
-                        // const SizedBox(
-                        //   width: 40,
-                        // ),
                       ],
                     ),
                   ),
@@ -256,15 +226,12 @@ class _EditConditionDialogState extends State<EditConditionDialog> {
                             fontFamily: 'OpenSans',
                           ),
                         ),
-                        // const SizedBox(
-                        //   width: 20,
-                        // ),
                         SizedBox(
                           width: 200,
                           height: 42,
                           child: DialogTextfield(
+                            initialValue: maker,
                             hintText: 'Maker'.tr(context),
-                            controller: makerController,
                             onChanged: (_) {
                               setState(() {
                                 maker = _;
@@ -293,8 +260,8 @@ class _EditConditionDialogState extends State<EditConditionDialog> {
                           width: 200,
                           height: 42,
                           child: DialogTextfield(
+                            initialValue: pricePerUnit.toString(),
                             hintText: 'Price per unit'.tr(context),
-                            controller: pricePerUnitController,
                             onChanged: (_) {
                               setState(() {
                                 maxBatch = double.tryParse(_);
@@ -302,13 +269,6 @@ class _EditConditionDialogState extends State<EditConditionDialog> {
                             },
                           ),
                         ),
-                        // const SizedBox(
-                        //   width: 20,
-                        // ),
-
-                        // const SizedBox(
-                        //   width: 40,
-                        // ),
                       ],
                     ),
                   ),
@@ -325,16 +285,14 @@ class _EditConditionDialogState extends State<EditConditionDialog> {
                 child: EditButton(
                   dialogName: widget.dialogName,
                   onTap: () {
-                    print(productName);
                     final SupplyCondition supplyCondition = SupplyCondition(
                       productId: productId,
                       productName: productName,
-                      kind: kindController.text,
-                      maker: makerController.text,
-                      minAmount: double.tryParse(minBatchController.text) ?? 0,
-                      maxAmount: double.tryParse(maxBatchController.text) ?? 0,
-                      pricePerUnit:
-                          double.tryParse(pricePerUnitController.text) ?? 0,
+                      kind: kind,
+                      maker: maker,
+                      minAmount: minBatch ?? 0,
+                      maxAmount: maxBatch ?? 0,
+                      pricePerUnit: pricePerUnit ?? 0,
                       id: DateTime.now().millisecondsSinceEpoch,
                       productMeasurement: '',
                     );
@@ -379,10 +337,10 @@ class _EditConditionDialogState extends State<EditConditionDialog> {
         if (state is ProductLoaded) {
           if (productId == -1 && productName != '') {
             productId = state.products
-                .firstWhere((element) => element.name == widget.product)
+                .firstWhere((element) => element.name == productName)
                 .id;
             productName = state.products
-                .firstWhere((element) => element.name == widget.product)
+                .firstWhere((element) => element.name == productName)
                 .name;
           }
 

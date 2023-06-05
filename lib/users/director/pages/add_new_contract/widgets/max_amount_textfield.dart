@@ -3,11 +3,9 @@ import 'package:flutter/material.dart';
 class MaxAmountTextfield extends StatelessWidget {
   final String hintText;
   final Function(int) onChanged;
-  final TextEditingController controller;
   const MaxAmountTextfield({
     super.key,
     required this.hintText,
-    required this.controller,
     required this.onChanged,
   });
 
@@ -30,7 +28,6 @@ class MaxAmountTextfield extends StatelessWidget {
         style: const TextStyle(
           fontSize: 14,
         ),
-        controller: controller,
         decoration: InputDecoration(
           hintStyle: const TextStyle(
             fontSize: 14,

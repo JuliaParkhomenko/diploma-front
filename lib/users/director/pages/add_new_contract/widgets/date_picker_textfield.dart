@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 class DatePickerTextField extends StatelessWidget {
-  final TextEditingController controller;
   final Function(DateTime) onDateTimeChanged;
+  final TextEditingController controller;
+
   const DatePickerTextField({
     super.key,
     required this.controller,
@@ -50,7 +51,7 @@ class DatePickerTextField extends StatelessWidget {
       lastDate: DateTime(2101),
     );
     if (picked != null) {
-      controller.text = picked.toString().substring(0, 10);
+      controller.text = picked.toIso8601String().substring(0, 10);
       onDateTimeChanged(picked);
     }
   }

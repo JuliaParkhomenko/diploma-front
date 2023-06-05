@@ -3,7 +3,6 @@ import 'dart:developer';
 
 import 'package:diploma_frontend/models/supplier.dart';
 import 'package:diploma_frontend/models/supply_condition.dart';
-import 'package:diploma_frontend/enums/action_status.dart';
 import 'package:diploma_frontend/models/supply_contract.dart';
 import 'package:diploma_frontend/models/user.dart';
 import 'package:diploma_frontend/repositories/supplier_repository/base_supplier_repository.dart';
@@ -61,7 +60,6 @@ class SupplierRepository implements BaseSupplierRepository {
   @override
   Future<int?> addcontract({
     required int supplierId,
-    required ActionStatus status,
     required DateTime startDate,
     required DateTime endDate,
     required int minAmount,
@@ -81,17 +79,18 @@ class SupplierRepository implements BaseSupplierRepository {
         'Content-Type': 'application/json-patch+json',
         'Authorization': 'Bearer ${user!.token}'
       };
+      final List<Map<String, dynamic>> conditions =
+          addSupplyConditions.map((SupplyCondition e) {
+        return e.newConditionsToJson();
+      }).toList();
 
       final body = jsonEncode({
         'supplierId': supplierId,
-        'status': status.getActionStatus(context),
-        'startDate': startDate,
-        'endDate': endDate,
+        'startDate': startDate.toIso8601String(),
+        'endDate': endDate.toIso8601String(),
         'minAmount': minAmount,
         'maxAmount': maxAmount,
-        'addSupplyConditions': addSupplyConditions.map((SupplyCondition e) {
-          return e.toJson();
-        }).toList(),
+        'addSupplyConditions': conditions,
       });
 
       final response = await http.post(url, headers: headers, body: body);

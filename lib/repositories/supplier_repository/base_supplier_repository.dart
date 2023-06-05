@@ -1,4 +1,3 @@
-import 'package:diploma_frontend/enums/action_status.dart';
 import 'package:diploma_frontend/models/supplier.dart';
 import 'package:diploma_frontend/models/supply_condition.dart';
 import 'package:diploma_frontend/models/supply_contract.dart';
@@ -14,7 +13,6 @@ abstract class BaseSupplierRepository {
 
   Future<int?> addcontract({
     required int supplierId,
-    required ActionStatus status,
     required DateTime startDate,
     required DateTime endDate,
     required int minAmount,

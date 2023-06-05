@@ -1,4 +1,6 @@
 import 'package:diploma_frontend/blocs/supplier/supplier_cubit.dart';
+import 'package:diploma_frontend/blocs/supply_contracts/supply_contracts_cubit.dart';
+import 'package:diploma_frontend/services/service_locator.dart';
 import 'package:diploma_frontend/users/director/pages/add_new_contract/widgets/date_picker_textfield.dart';
 import 'package:diploma_frontend/users/director/pages/add_new_contract/widgets/edit_conditions_dialog.dart';
 import 'package:diploma_frontend/users/director/pages/add_new_contract/widgets/max_amount_textfield.dart';
@@ -20,151 +22,34 @@ class AddNewContractPage extends StatefulWidget {
 }
 
 class _AddNewContractPageState extends State<AddNewContractPage> {
-  final TextEditingController startDate = TextEditingController();
-  final TextEditingController endDate = TextEditingController();
-  final TextEditingController minamountController = TextEditingController();
-  final TextEditingController maxamountController = TextEditingController();
-
   bool update = false;
+
+  int minAmount = 0;
+  int maxAmount = 0;
+
+  late final TextEditingController startDate = TextEditingController(
+    text: DateTime.now().toIso8601String().substring(0, 10),
+  );
+  final TextEditingController endDate = TextEditingController(
+    text: DateTime.now()
+        .add(const Duration(days: 1))
+        .toIso8601String()
+        .substring(0, 10),
+  );
+
+  int supplierId = 0;
 
   @override
   Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
-
-    return Container(
-      width: size.width,
+    return Padding(
       padding: const EdgeInsets.all(15),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(17),
-        color: constants.Colors.managerWarehouseMain.withOpacity(0.6),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(15),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            InkWell(
-              onTap: () => Routemaster.of(context).history.back(),
-              child: Text(
-                '${'Active contracts'.tr(context)} > ${'Adding a new contract'.tr(context)}',
-                style: const TextStyle(
-                  color: constants.Colors.subtitleTextColor,
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'OpenSans',
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 32,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Supplier'.tr(context),
-                      style: const TextStyle(
-                        color: constants.Colors.subtitleTextColor,
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'OpenSans',
-                      ),
-                    ),
-                    suppliers(context),
-                  ],
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Start date'.tr(context),
-                      style: const TextStyle(
-                        color: constants.Colors.subtitleTextColor,
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'OpenSans',
-                      ),
-                    ),
-                    DatePickerTextField(
-                      controller: startDate,
-                      onDateTimeChanged: (_) {},
-                    ),
-                  ],
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'End date'.tr(context),
-                      style: const TextStyle(
-                        color: constants.Colors.subtitleTextColor,
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'OpenSans',
-                      ),
-                    ),
-                    DatePickerTextField(
-                      controller: endDate,
-                      onDateTimeChanged: (_) {},
-                    ),
-                  ],
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Min amount'.tr(context),
-                      style: const TextStyle(
-                        color: constants.Colors.subtitleTextColor,
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'OpenSans',
-                      ),
-                    ),
-                    SizedBox(
-                      width: 200,
-                      height: 42,
-                      child: MinAmountTextfield(
-                        hintText: 'Amount'.tr(context),
-                        controller: minamountController,
-                        onChanged: (_) {},
-                      ),
-                    ),
-                  ],
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Max amount'.tr(context),
-                      style: const TextStyle(
-                        color: constants.Colors.subtitleTextColor,
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'OpenSans',
-                      ),
-                    ),
-                    SizedBox(
-                      width: 200,
-                      height: 42,
-                      child: MaxAmountTextfield(
-                        hintText: 'Amount'.tr(context),
-                        controller: maxamountController,
-                        onChanged: (_) {},
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 32,
-            ),
-            Text(
-              'Supply conditions'.tr(context),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          InkWell(
+            onTap: () => Routemaster.of(context).history.back(),
+            child: Text(
+              '${'Active contracts'.tr(context)} > ${'Adding a new contract'.tr(context)}',
               style: const TextStyle(
                 color: constants.Colors.subtitleTextColor,
                 fontSize: 18,
@@ -172,45 +57,146 @@ class _AddNewContractPageState extends State<AddNewContractPage> {
                 fontFamily: 'OpenSans',
               ),
             ),
-            const SizedBox(
-              height: 32,
+          ),
+          const SizedBox(
+            height: 32,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Supplier'.tr(context),
+                    style: const TextStyle(
+                      color: constants.Colors.subtitleTextColor,
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'OpenSans',
+                    ),
+                  ),
+                  suppliers(context),
+                ],
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Start date'.tr(context),
+                    style: const TextStyle(
+                      color: constants.Colors.subtitleTextColor,
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'OpenSans',
+                    ),
+                  ),
+                  DatePickerTextField(
+                    controller: startDate,
+                    onDateTimeChanged: (_) {
+                      startDate.text = _.toIso8601String().substring(0, 10);
+                    },
+                  ),
+                ],
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'End date'.tr(context),
+                    style: const TextStyle(
+                      color: constants.Colors.subtitleTextColor,
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'OpenSans',
+                    ),
+                  ),
+                  DatePickerTextField(
+                    controller: endDate,
+                    onDateTimeChanged: (_) {
+                      endDate.text = _.toIso8601String().substring(0, 10);
+                    },
+                  ),
+                ],
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Min amount'.tr(context),
+                    style: const TextStyle(
+                      color: constants.Colors.subtitleTextColor,
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'OpenSans',
+                    ),
+                  ),
+                  SizedBox(
+                    width: 200,
+                    height: 42,
+                    child: MinAmountTextfield(
+                      hintText: 'Amount'.tr(context),
+                      onChanged: (_) {
+                        minAmount = _;
+                      },
+                    ),
+                  ),
+                ],
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Max amount'.tr(context),
+                    style: const TextStyle(
+                      color: constants.Colors.subtitleTextColor,
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'OpenSans',
+                    ),
+                  ),
+                  SizedBox(
+                    width: 200,
+                    height: 42,
+                    child: MaxAmountTextfield(
+                      hintText: 'Amount'.tr(context),
+                      onChanged: (_) {
+                        maxAmount = _;
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 32,
+          ),
+          Text(
+            'Supply conditions'.tr(context),
+            style: const TextStyle(
+              color: constants.Colors.subtitleTextColor,
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              fontFamily: 'OpenSans',
             ),
-            SupplyConditionsTable(
-              update: update,
-            ),
-            InkWell(
-              onTap: () async {
-                await showDialog(
-                  useRootNavigator: true,
-                  context: context,
-                  builder: (context) {
-                    return Dialog(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8)),
-                      child: EditConditionDialog(
-                        product: '',
-                        kind: '',
-                        maker: '',
-                        minBatch: 0,
-                        maxBatch: 0,
-                        pricePerUnit: 0,
-                        dialogName: 'Adding supply condition',
-                        onChange: (editedSupplyCondition) {
-                          supplyConditions.add(editedSupplyCondition);
-                          setState(() {
-                            update = true;
-                          });
-                        },
-                      ),
-                    );
-                  },
-                );
-              },
-              child: TextButton(
-                onPressed: () async {},
+          ),
+          const SizedBox(
+            height: 32,
+          ),
+          SupplyConditionsTable(
+            update: update,
+          ),
+          Row(
+            children: [
+              TextButton(
+                onPressed: () async {
+                  await showAddDialog();
+                },
                 style: ButtonStyle(
-                  overlayColor:
-                      MaterialStateProperty.all(Colors.green.withOpacity(0.7)),
+                  overlayColor: MaterialStateProperty.all(
+                    Colors.green.withOpacity(0.7),
+                  ),
                   backgroundColor:
                       MaterialStateProperty.all(constants.Colors.main),
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -225,15 +211,87 @@ class _AddNewContractPageState extends State<AddNewContractPage> {
                   height: 40,
                   width: 160,
                   child: Text(
-                    'Add new'.tr(context),
+                    'Add condition'.tr(context),
                     style: const TextStyle(color: Colors.white),
                   ),
                 ),
               ),
-            ),
-          ],
-        ),
+              TextButton(
+                onPressed: () async {
+                  await ServiceLocator.supplierRepository.addcontract(
+                    supplierId: supplierId,
+                    startDate:
+                        DateTime.tryParse(startDate.text) ?? DateTime.now(),
+                    endDate: DateTime.tryParse(endDate.text) ??
+                        DateTime.now().add(
+                          const Duration(days: 1),
+                        ),
+                    minAmount: minAmount,
+                    maxAmount: maxAmount,
+                    addSupplyConditions: supplyConditions,
+                    context: context,
+                  );
+                  supplyConditions.clear();
+                  final SupplyContractsCubit cubit = BlocProvider.of(context);
+                  await cubit.featchContracts(old: false);
+                  await Routemaster.of(context).pop();
+                },
+                style: ButtonStyle(
+                  overlayColor: MaterialStateProperty.all(
+                    Colors.green.withOpacity(0.7),
+                  ),
+                  backgroundColor:
+                      MaterialStateProperty.all(constants.Colors.main),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      side: const BorderSide(),
+                    ),
+                  ),
+                ),
+                child: Container(
+                  alignment: Alignment.center,
+                  height: 40,
+                  width: 160,
+                  child: Text(
+                    'Add contract'.tr(context),
+                    style: const TextStyle(color: Colors.white),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
+    );
+  }
+
+  Future<void> showAddDialog() async {
+    await showDialog(
+      useRootNavigator: true,
+      context: context,
+      builder: (context) {
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: EditConditionDialog(
+            product: '',
+            kind: '',
+            maker: '',
+            minBatch: 0,
+            maxBatch: 0,
+            pricePerUnit: 0,
+            dialogName: 'Adding supply condition',
+            onChange: (editedSupplyCondition) {
+              supplyConditions.add(editedSupplyCondition);
+              setState(() {
+                update = true;
+              });
+            },
+          ),
+        );
+      },
     );
   }
 
@@ -263,7 +321,9 @@ class _AddNewContractPageState extends State<AddNewContractPage> {
 
         if (state is SupplierLoaded) {
           return SuppliersDropdown(
-            onChange: (_) {},
+            onChange: (_) {
+              supplierId = _;
+            },
             suppliers: state.suppliers,
           );
         }
