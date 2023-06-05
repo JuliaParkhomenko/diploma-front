@@ -2,10 +2,12 @@ import 'package:diploma_frontend/models/product.dart';
 import 'package:flutter/material.dart';
 
 class ProductsDropdown extends StatefulWidget {
+  final String initialValue;
   final Function(int) onChange;
   final List<Product> products;
   const ProductsDropdown({
     super.key,
+    required this.initialValue,
     required this.onChange,
     required this.products,
   });
@@ -15,11 +17,12 @@ class ProductsDropdown extends StatefulWidget {
 }
 
 class _ProductsDropdownState extends State<ProductsDropdown> {
-  String? value;
+  late String? value = widget.initialValue == '' ? null : widget.initialValue;
 
   final List<Map<String, String>> products = [];
   @override
   void initState() {
+    print(value);
     for (final i in widget.products) {
       products.add({
         'value': i.id.toString(),

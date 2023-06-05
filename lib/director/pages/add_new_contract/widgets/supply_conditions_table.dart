@@ -28,8 +28,10 @@ List<SupplyCondition> supplyConditions = [
 ];
 
 class SupplyConditionsTable extends StatefulWidget {
+  final bool update;
   const SupplyConditionsTable({
     super.key,
+    required this.update,
   });
 
   @override
@@ -37,6 +39,14 @@ class SupplyConditionsTable extends StatefulWidget {
 }
 
 class _SupplyConditionsTableState extends State<SupplyConditionsTable> {
+  @override
+  void didUpdateWidget(covariant SupplyConditionsTable oldWidget) {
+    setState(() {
+      supplyConditions;
+    });
+    super.didUpdateWidget(oldWidget);
+  }
+
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
@@ -60,6 +70,7 @@ class _SupplyConditionsTableState extends State<SupplyConditionsTable> {
               children: [
                 getTableHeader(size),
                 Container(
+                  width: size.width,
                   height: 60,
                   color: constants.Colors.greyTable,
                   child: getItem(item, size, index),
@@ -134,7 +145,6 @@ class _SupplyConditionsTableState extends State<SupplyConditionsTable> {
                   pricePerUnit: item.pricePerUnit,
                   dialogName: 'Editing supply condition',
                   onChange: (SupplyCondition editedSupplyCondition) {
-                    print(editedSupplyCondition.productName);
                     setState(() {
                       supplyConditions[index] = editedSupplyCondition;
                     });

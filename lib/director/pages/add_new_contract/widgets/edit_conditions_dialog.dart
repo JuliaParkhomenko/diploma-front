@@ -36,8 +36,8 @@ class EditConditionDialog extends StatefulWidget {
 }
 
 class _EditConditionDialogState extends State<EditConditionDialog> {
-  Product currentProduct =
-      Product(id: -1, categoryId: -1, name: '', measurement: '', stocks: []);
+  String productName = '';
+  int productId = -1;
   late final TextEditingController minBatchController =
       TextEditingController(text: widget.minBatch.toString());
   late final TextEditingController maxBatchController =
@@ -325,9 +325,10 @@ class _EditConditionDialogState extends State<EditConditionDialog> {
                 child: EditButton(
                   dialogName: widget.dialogName,
                   onTap: () {
+                    print(productName);
                     final SupplyCondition supplyCondition = SupplyCondition(
-                      productId: currentProduct.id,
-                      productName: currentProduct.name,
+                      productId: productId,
+                      productName: productName,
                       kind: kindController.text,
                       maker: makerController.text,
                       minAmount: double.tryParse(minBatchController.text) ?? 0,
@@ -366,6 +367,7 @@ class _EditConditionDialogState extends State<EditConditionDialog> {
 
         if (state is ProductLoading) {
           return ProductsDropdown(
+            initialValue: widget.product,
             onChange: (_) {},
             products: [
               Product.empty(),
@@ -375,12 +377,32 @@ class _EditConditionDialogState extends State<EditConditionDialog> {
         }
 
         if (state is ProductLoaded) {
-          currentProduct = state.products
-              .firstWhere((element) => element.name == widget.product);
+          if (productId == -1 && productName != '') {
+            productId = state.products
+                .firstWhere((element) => element.name == widget.product)
+                .id;
+            productName = state.products
+                .firstWhere((element) => element.name == widget.product)
+                .name;
+          }
+
+          if (productName == '') {
+            productName = state.products.first.name;
+          }
+
           return ProductsDropdown(
+            initialValue: widget.product == ''
+                ? ''
+                : state.products
+                    .firstWhere(
+                      (element) => element.name == widget.product,
+                    )
+                    .id
+                    .toString(),
             onChange: (productInd) {
               setState(() {
-                currentProduct = state.products[productInd];
+                productId = state.products[productInd - 1].id;
+                productName = state.products[productInd - 1].name;
               });
             },
             products: state.products,

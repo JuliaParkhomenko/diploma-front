@@ -1,5 +1,6 @@
 import 'package:diploma_frontend/blocs/supplier/supplier_cubit.dart';
 import 'package:diploma_frontend/director/pages/add_new_contract/widgets/date_picker_textfield.dart';
+import 'package:diploma_frontend/director/pages/add_new_contract/widgets/edit_conditions_dialog.dart';
 import 'package:diploma_frontend/director/pages/add_new_contract/widgets/max_amount_textfield.dart';
 import 'package:diploma_frontend/director/pages/add_new_contract/widgets/min_amount_textfield.dart';
 import 'package:diploma_frontend/director/pages/add_new_contract/widgets/suppliers_dropdown.dart';
@@ -23,6 +24,8 @@ class _AddNewContractPageState extends State<AddNewContractPage> {
   final TextEditingController endDate = TextEditingController();
   final TextEditingController minamountController = TextEditingController();
   final TextEditingController maxamountController = TextEditingController();
+
+  bool update = false;
 
   @override
   Widget build(BuildContext context) {
@@ -172,7 +175,39 @@ class _AddNewContractPageState extends State<AddNewContractPage> {
             const SizedBox(
               height: 32,
             ),
-            const SupplyConditionsTable(),
+            SupplyConditionsTable(
+              update: update,
+            ),
+            InkWell(
+              onTap: () async {
+                await showDialog(
+                  useRootNavigator: true,
+                  context: context,
+                  builder: (context) {
+                    return Dialog(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8)),
+                      child: EditConditionDialog(
+                        product: '',
+                        kind: '',
+                        maker: '',
+                        minBatch: 0,
+                        maxBatch: 0,
+                        pricePerUnit: 0,
+                        dialogName: 'Adding supply condition',
+                        onChange: (editedSupplyCondition) {
+                          supplyConditions.add(editedSupplyCondition);
+                          setState(() {
+                            update = true;
+                          });
+                        },
+                      ),
+                    );
+                  },
+                );
+              },
+              child: const Text('Add new'),
+            ),
           ],
         ),
       ),
