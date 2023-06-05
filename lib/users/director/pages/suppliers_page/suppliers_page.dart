@@ -75,11 +75,7 @@ class SuppliersPage extends StatelessWidget {
                             onTap: () async {
                               await openDefaultDialog(
                                 EditSupplierDialog(
-                                  supplierId: item.id,
-                                  name: item.name,
-                                  address: item.address,
-                                  email: item.email,
-                                  phoneNumber: item.phoneNum,
+                                  supplier: item,
                                 ),
                                 context,
                               );

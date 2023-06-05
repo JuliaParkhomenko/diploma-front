@@ -1,3 +1,4 @@
+import 'package:diploma_frontend/models/supplier.dart';
 import 'package:diploma_frontend/users/director/pages/suppliers_page/widgets/dialog_textfield.dart';
 import 'package:diploma_frontend/users/director/pages/suppliers_page/widgets/edit_button.dart';
 import 'package:diploma_frontend/services/language_service/app_localization.dart';
@@ -5,18 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:diploma_frontend/constants/constants.dart' as constants;
 
 class EditSupplierDialog extends StatefulWidget {
-  final int supplierId;
-  final String name;
-  final String address;
-  final String email;
-  final String phoneNumber;
+  final Supplier supplier;
   const EditSupplierDialog({
     super.key,
-    required this.supplierId,
-    required this.name,
-    required this.address,
-    required this.email,
-    required this.phoneNumber,
+    required this.supplier,
   });
 
   @override
@@ -25,17 +18,17 @@ class EditSupplierDialog extends StatefulWidget {
 
 class _EditSupplierDialogState extends State<EditSupplierDialog> {
   late final TextEditingController nameController =
-      TextEditingController(text: widget.name);
+      TextEditingController(text: widget.supplier.name);
   late final TextEditingController addressController =
-      TextEditingController(text: widget.address);
+      TextEditingController(text: widget.supplier.address);
   late final TextEditingController emailController =
-      TextEditingController(text: widget.email);
+      TextEditingController(text: widget.supplier.email);
   late final TextEditingController phoneController =
-      TextEditingController(text: widget.phoneNumber);
-  late String name = widget.name;
-  late String address = widget.address;
-  late String email = widget.email;
-  late String phoneNumber = widget.phoneNumber;
+      TextEditingController(text: widget.supplier.phoneNum);
+  late String name = widget.supplier.name;
+  late String address = widget.supplier.address;
+  late String email = widget.supplier.email;
+  late String phoneNumber = widget.supplier.phoneNum;
 
   @override
   Widget build(BuildContext context) {
@@ -84,9 +77,6 @@ class _EditSupplierDialogState extends State<EditSupplierDialog> {
                             fontFamily: 'OpenSans',
                           ),
                         ),
-                        // const SizedBox(
-                        //   width: 20,
-                        // ),
                         SizedBox(
                           width: 200,
                           height: 42,
@@ -130,13 +120,6 @@ class _EditSupplierDialogState extends State<EditSupplierDialog> {
                             },
                           ),
                         ),
-                        // const SizedBox(
-                        //   width: 20,
-                        // ),
-
-                        // const SizedBox(
-                        //   width: 40,
-                        // ),
                       ],
                     ),
                   ),
@@ -165,9 +148,6 @@ class _EditSupplierDialogState extends State<EditSupplierDialog> {
                             fontFamily: 'OpenSans',
                           ),
                         ),
-                        // const SizedBox(
-                        //   width: 20,
-                        // ),
                         SizedBox(
                           width: 200,
                           height: 42,
@@ -198,9 +178,6 @@ class _EditSupplierDialogState extends State<EditSupplierDialog> {
                             fontFamily: 'OpenSans',
                           ),
                         ),
-                        // const SizedBox(
-                        //   width: 20,
-                        // ),
                         SizedBox(
                           width: 200,
                           height: 42,
@@ -228,14 +205,12 @@ class _EditSupplierDialogState extends State<EditSupplierDialog> {
               child: Align(
                 alignment: Alignment.centerRight,
                 child: EditButton(
-                  supplierId: widget.supplierId,
+                  supplierId: widget.supplier.id,
                   name: nameController.text,
                   address: addressController.text,
                   email: emailController.text,
                   phone: phoneController.text,
-                  onTap: (_) {
-                    setState(() {});
-                  },
+                  onTap: (_) {},
                 ),
               ),
             ),
