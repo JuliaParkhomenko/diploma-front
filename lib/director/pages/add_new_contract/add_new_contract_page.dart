@@ -206,7 +206,30 @@ class _AddNewContractPageState extends State<AddNewContractPage> {
                   },
                 );
               },
-              child: const Text('Add new'),
+              child: TextButton(
+                onPressed: () async {},
+                style: ButtonStyle(
+                  overlayColor:
+                      MaterialStateProperty.all(Colors.green.withOpacity(0.7)),
+                  backgroundColor:
+                      MaterialStateProperty.all(constants.Colors.main),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      side: const BorderSide(),
+                    ),
+                  ),
+                ),
+                child: Container(
+                  alignment: Alignment.center,
+                  height: 40,
+                  width: 160,
+                  child: Text(
+                    'Add new'.tr(context),
+                    style: const TextStyle(color: Colors.white),
+                  ),
+                ),
+              ),
             ),
           ],
         ),
