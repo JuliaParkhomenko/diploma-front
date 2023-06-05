@@ -2,36 +2,28 @@ import 'package:diploma_frontend/models/supplier.dart';
 import 'package:diploma_frontend/users/director/pages/suppliers_page/widgets/dialog_textfield.dart';
 import 'package:diploma_frontend/users/director/pages/suppliers_page/widgets/edit_button.dart';
 import 'package:diploma_frontend/services/language_service/app_localization.dart';
+import 'package:diploma_frontend/validators/edit_supplier_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:diploma_frontend/constants/constants.dart' as constants;
+import 'package:get_it/get_it.dart';
 
-class EditSupplierDialog extends StatefulWidget {
+class EditSupplierDialog extends StatelessWidget {
   final Supplier supplier;
+
   const EditSupplierDialog({
     super.key,
     required this.supplier,
   });
 
   @override
-  State<EditSupplierDialog> createState() => _EditSupplierDialogState();
-}
-
-class _EditSupplierDialogState extends State<EditSupplierDialog> {
-  late final TextEditingController nameController =
-      TextEditingController(text: widget.supplier.name);
-  late final TextEditingController addressController =
-      TextEditingController(text: widget.supplier.address);
-  late final TextEditingController emailController =
-      TextEditingController(text: widget.supplier.email);
-  late final TextEditingController phoneController =
-      TextEditingController(text: widget.supplier.phoneNum);
-  late String name = widget.supplier.name;
-  late String address = widget.supplier.address;
-  late String email = widget.supplier.email;
-  late String phoneNumber = widget.supplier.phoneNum;
-
-  @override
   Widget build(BuildContext context) {
+    final EditSupplierValidator validator =
+        GetIt.instance<EditSupplierValidator>();
+    validator.emailSink.add(supplier.email);
+    validator.nameSink.add(supplier.name);
+    validator.phoneNumberSink.add(supplier.phoneNum);
+    validator.addressSink.add(supplier.address);
+
     final Size size = MediaQuery.of(context).size;
     return Container(
       width: size.width * 0.55,
@@ -80,13 +72,16 @@ class _EditSupplierDialogState extends State<EditSupplierDialog> {
                         SizedBox(
                           width: 200,
                           height: 42,
-                          child: DialogTextfield(
-                            hintText: "Name",
-                            controller: nameController,
-                            onChanged: (_) {
-                              setState(() {
-                                name = _;
-                              });
+                          child: StreamBuilder(
+                            stream: validator.name,
+                            builder: (_, snapshot) {
+                              return DialogTextfield(
+                                valid: snapshot.error == null,
+                                initialValue: supplier.name,
+                                hintText: 'Name',
+                                onChanged: (value) =>
+                                    validator.nameSink.add(value),
+                              );
                             },
                           ),
                         ),
@@ -110,13 +105,16 @@ class _EditSupplierDialogState extends State<EditSupplierDialog> {
                         SizedBox(
                           width: 200,
                           height: 42,
-                          child: DialogTextfield(
-                            hintText: "Address",
-                            controller: addressController,
-                            onChanged: (_) {
-                              setState(() {
-                                address = _;
-                              });
+                          child: StreamBuilder(
+                            stream: validator.address,
+                            builder: (_, snapshot) {
+                              return DialogTextfield(
+                                valid: snapshot.error == null,
+                                hintText: 'Address',
+                                initialValue: supplier.address,
+                                onChanged: (value) =>
+                                    validator.addressSink.add(value),
+                              );
                             },
                           ),
                         ),
@@ -151,13 +149,16 @@ class _EditSupplierDialogState extends State<EditSupplierDialog> {
                         SizedBox(
                           width: 200,
                           height: 42,
-                          child: DialogTextfield(
-                            hintText: 'Email'.tr(context),
-                            controller: emailController,
-                            onChanged: (_) {
-                              setState(() {
-                                email = _;
-                              });
+                          child: StreamBuilder(
+                            stream: validator.email,
+                            builder: (_, snapshot) {
+                              return DialogTextfield(
+                                valid: snapshot.error == null,
+                                hintText: 'Email'.tr(context),
+                                initialValue: supplier.email,
+                                onChanged: (value) =>
+                                    validator.emailSink.add(value),
+                              );
                             },
                           ),
                         ),
@@ -181,13 +182,16 @@ class _EditSupplierDialogState extends State<EditSupplierDialog> {
                         SizedBox(
                           width: 200,
                           height: 42,
-                          child: DialogTextfield(
-                            hintText: 'Phone number'.tr(context),
-                            controller: phoneController,
-                            onChanged: (_) {
-                              setState(() {
-                                phoneNumber = _;
-                              });
+                          child: StreamBuilder(
+                            stream: validator.phoneNumber,
+                            builder: (_, snapshot) {
+                              return DialogTextfield(
+                                valid: snapshot.error == null,
+                                hintText: 'Phone number'.tr(context),
+                                initialValue: supplier.phoneNum,
+                                onChanged: (value) =>
+                                    validator.phoneNumberSink.add(value),
+                              );
                             },
                           ),
                         ),
@@ -204,13 +208,24 @@ class _EditSupplierDialogState extends State<EditSupplierDialog> {
               width: 1000,
               child: Align(
                 alignment: Alignment.centerRight,
-                child: EditButton(
-                  supplierId: widget.supplier.id,
-                  name: nameController.text,
-                  address: addressController.text,
-                  email: emailController.text,
-                  phone: phoneController.text,
-                  onTap: (_) {},
+                child: StreamBuilder(
+                  stream: validator.validData,
+                  builder: (_, snapshot) {
+                    return EditButton(
+                      valid: snapshot.error == null,
+                      onTap: () async {
+                        if (snapshot.error != null) {
+                          return;
+                        }
+
+                        await validator
+                            .editSupplier(id: supplier.id, context: context)
+                            .then((_) {
+                          Navigator.pop(context);
+                        });
+                      },
+                    );
+                  },
                 ),
               ),
             ),

@@ -2,10 +2,10 @@ import 'package:diploma_frontend/blocs/supplier/supplier_cubit.dart';
 import 'package:diploma_frontend/constants/constants.dart' as constants;
 import 'package:diploma_frontend/models/supplier.dart';
 import 'package:diploma_frontend/users/director/pages/suppliers_page/widgets/edit_supplier_dialog.dart';
-import 'package:diploma_frontend/users/director/pages/suppliers_page/widgets/suppliers_table.dart';
 import 'package:diploma_frontend/users/manager/pages/stocks_page/widgets/search_textfield.dart';
 import 'package:diploma_frontend/services/language_service/app_localization.dart';
 import 'package:diploma_frontend/utils/open_default_dialog.dart';
+import 'package:diploma_frontend/widgets/default_table/default_custom_table.dart';
 import 'package:diploma_frontend/widgets/default_table/default_table_header.dart';
 import 'package:diploma_frontend/widgets/default_table/default_table_item.dart';
 import 'package:flutter/material.dart';
@@ -66,7 +66,7 @@ class SuppliersPage extends StatelessWidget {
               }
 
               return state is SupplierLoaded
-                  ? SuppliersTable(
+                  ? DefaultCustomTable(
                       items: List.generate(
                         state.suppliers.length,
                         (index) {

@@ -9,6 +9,7 @@ import 'package:diploma_frontend/services/bloc_service/bloc_service.dart';
 import 'package:diploma_frontend/services/database/database.dart';
 import 'package:diploma_frontend/services/language_service/language_service.dart';
 import 'package:diploma_frontend/services/route_service/route_service.dart';
+import 'package:diploma_frontend/validators/edit_supplier_validator.dart';
 import 'package:diploma_frontend/validators/sign_in_validator.dart';
 import 'package:get_it/get_it.dart';
 
@@ -69,6 +70,8 @@ class ServiceLocator {
     });
 
     locator.registerSingleton<SignInValidator>(SignInValidator());
+
+    locator.registerSingleton<EditSupplierValidator>(EditSupplierValidator());
   }
 
   // Repositories

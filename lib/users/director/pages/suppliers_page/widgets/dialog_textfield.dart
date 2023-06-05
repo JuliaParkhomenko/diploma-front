@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 class DialogTextfield extends StatelessWidget {
   final String hintText;
   final Function(String) onChanged;
-  final TextEditingController controller;
+  final String initialValue;
+  final bool valid;
   const DialogTextfield({
     super.key,
+    required this.valid,
     required this.hintText,
-    required this.controller,
+    required this.initialValue,
     required this.onChanged,
   });
 
@@ -19,14 +21,23 @@ class DialogTextfield extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(3),
       ),
-      child: TextField(
+      child: TextFormField(
+        initialValue: initialValue,
         style: const TextStyle(
           fontSize: 14,
         ),
         onChanged: onChanged,
-        controller: controller,
         decoration: InputDecoration(
-          enabledBorder: const OutlineInputBorder(),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: valid ? Colors.black : Colors.redAccent,
+            ),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: valid ? Colors.black : Colors.redAccent,
+            ),
+          ),
           hintStyle: const TextStyle(
             fontSize: 14,
             fontFamily: 'OpenSans',
