@@ -32,6 +32,9 @@ class SuppliesPage extends StatelessWidget {
                 fontFamily: 'OpenSans',
               ),
             ),
+            const SizedBox(
+              height: 17,
+            ),
             const SuppliesFilters(),
             const SuppliesTable(),
           ],

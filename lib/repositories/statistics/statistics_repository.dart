@@ -12,7 +12,7 @@ class StatisticsRepository implements BaseStatisticsRepository {
   StatisticsRepository(this._database);
 
   @override
-  Future<List<Statistics>?> product({
+  Future<Statistics?> product({
     int? warehouseId,
     int? productId,
     DateTime? dateFrom,
@@ -59,19 +59,7 @@ class StatisticsRepository implements BaseStatisticsRepository {
       print(response.body);
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
-        final List<Statistics> result = [];
-        for (final i in data) {
-          result.add(Statistics(
-            ordered: i.ordered,
-            used: i.used,
-            writtenOff: i.writtenOff,
-            orderedList: i.orderedList,
-            usedList: i.usedList,
-            writtenOffList: i.writtenOffList,
-          ));
-        }
-        print(data.toString());
-        return result;
+        return Statistics.fromJson(data);
       }
       if (response.statusCode == 401) {
         await ServiceLocator.database.clear();

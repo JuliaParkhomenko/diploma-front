@@ -14,5 +14,6 @@ class Colors {
   static const Color overviewRecentActionsColor = Color(0xffda8615);
   static const Color overviewReminderColor = Color(0xff45b24f);
   static const Color overviewOrderedBatchesColor = Color(0xff349303);
+  static const Color managerStatisticsOrderedLine = Color(0xFFFF3AF2);
   //static const Color textTable = Color(0xff);
 }

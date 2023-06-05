@@ -1,26 +1,26 @@
-import 'package:diploma_frontend/models/supplier.dart';
+import 'package:diploma_frontend/models/product.dart';
 import 'package:flutter/material.dart';
 
-class SuppliersDropdown extends StatefulWidget {
+class ProductsDropdown extends StatefulWidget {
   final Function(int) onChange;
-  final List<Supplier> suppliers;
-  const SuppliersDropdown({
+  final List<Product> products;
+  const ProductsDropdown({
     super.key,
     required this.onChange,
-    required this.suppliers,
+    required this.products,
   });
 
   @override
-  State<SuppliersDropdown> createState() => _SuppliersDropdownState();
+  State<ProductsDropdown> createState() => _ProductsDropdownState();
 }
 
-class _SuppliersDropdownState extends State<SuppliersDropdown> {
+class _ProductsDropdownState extends State<ProductsDropdown> {
   String? value;
 
   final List<Map<String, String>> products = [];
   @override
   void initState() {
-    for (final i in widget.suppliers) {
+    for (final i in widget.products) {
       products.add({
         'value': i.id.toString(),
         'label': i.name,
@@ -31,14 +31,14 @@ class _SuppliersDropdownState extends State<SuppliersDropdown> {
 
   @override
   Widget build(BuildContext context) {
-    if (widget.suppliers.isEmpty) {
+    if (widget.products.isEmpty) {
       return Container();
     }
-    if (widget.suppliers.length == 1) {
-      return Text(widget.suppliers.first.name);
+    if (widget.products.length == 1) {
+      return Text(widget.products.first.name);
     }
     return Container(
-      height: 42,
+      height: 40,
       width: 200,
       decoration: BoxDecoration(
         color: Colors.white,
@@ -79,7 +79,7 @@ class _SuppliersDropdownState extends State<SuppliersDropdown> {
                 .toList();
           },
           hint: Text(
-            widget.suppliers.first.name,
+            widget.products.first.name,
             style: const TextStyle(
               color: Colors.black,
               fontSize: 14,

@@ -21,7 +21,7 @@ class StatisticsCubit extends Cubit<StatisticsState> {
   }) async {
     try {
       emit(StatisticsLoading());
-      final List<Statistics>? statistics = await _repository.product(
+      final Statistics? statistics = await _repository.product(
         warehouseId: warehouseId,
         productId: productId,
         dateFrom: dateFrom,

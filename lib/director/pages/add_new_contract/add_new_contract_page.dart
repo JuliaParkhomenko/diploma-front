@@ -1,6 +1,9 @@
 import 'package:diploma_frontend/blocs/supplier/supplier_cubit.dart';
+import 'package:diploma_frontend/director/pages/add_new_contract/widgets/date_picker_textfield.dart';
+import 'package:diploma_frontend/director/pages/add_new_contract/widgets/max_amount_textfield.dart';
+import 'package:diploma_frontend/director/pages/add_new_contract/widgets/min_amount_textfield.dart';
 import 'package:diploma_frontend/director/pages/add_new_contract/widgets/suppliers_dropdown.dart';
-import 'package:diploma_frontend/manager/pages/ordered_batch_page/widgets/date_picker_textfield.dart';
+import 'package:diploma_frontend/director/pages/add_new_contract/widgets/supply_conditions_table.dart';
 import 'package:diploma_frontend/models/supplier.dart';
 import 'package:diploma_frontend/services/language_service/app_localization.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +21,8 @@ class AddNewContractPage extends StatefulWidget {
 class _AddNewContractPageState extends State<AddNewContractPage> {
   final TextEditingController startDate = TextEditingController();
   final TextEditingController endDate = TextEditingController();
+  final TextEditingController minamountController = TextEditingController();
+  final TextEditingController maxamountController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -47,20 +52,38 @@ class _AddNewContractPageState extends State<AddNewContractPage> {
                 ),
               ),
             ),
+            const SizedBox(
+              height: 32,
+            ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       'Supplier'.tr(context),
+                      style: const TextStyle(
+                        color: constants.Colors.subtitleTextColor,
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'OpenSans',
+                      ),
                     ),
                     suppliers(context),
                   ],
                 ),
                 Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       'Start date'.tr(context),
+                      style: const TextStyle(
+                        color: constants.Colors.subtitleTextColor,
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'OpenSans',
+                      ),
                     ),
                     DatePickerTextField(
                       controller: startDate,
@@ -69,9 +92,16 @@ class _AddNewContractPageState extends State<AddNewContractPage> {
                   ],
                 ),
                 Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       'End date'.tr(context),
+                      style: const TextStyle(
+                        color: constants.Colors.subtitleTextColor,
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'OpenSans',
+                      ),
                     ),
                     DatePickerTextField(
                       controller: endDate,
@@ -79,8 +109,70 @@ class _AddNewContractPageState extends State<AddNewContractPage> {
                     ),
                   ],
                 ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Min amount'.tr(context),
+                      style: const TextStyle(
+                        color: constants.Colors.subtitleTextColor,
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'OpenSans',
+                      ),
+                    ),
+                    SizedBox(
+                      width: 200,
+                      height: 42,
+                      child: MinAmountTextfield(
+                        hintText: 'Amount'.tr(context),
+                        controller: minamountController,
+                        onChanged: (_) {},
+                      ),
+                    ),
+                  ],
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Max amount'.tr(context),
+                      style: const TextStyle(
+                        color: constants.Colors.subtitleTextColor,
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'OpenSans',
+                      ),
+                    ),
+                    SizedBox(
+                      width: 200,
+                      height: 42,
+                      child: MaxAmountTextfield(
+                        hintText: 'Amount'.tr(context),
+                        controller: maxamountController,
+                        onChanged: (_) {},
+                      ),
+                    ),
+                  ],
+                ),
               ],
             ),
+            const SizedBox(
+              height: 32,
+            ),
+            Text(
+              'Supply conditions'.tr(context),
+              style: const TextStyle(
+                color: constants.Colors.subtitleTextColor,
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                fontFamily: 'OpenSans',
+              ),
+            ),
+            const SizedBox(
+              height: 32,
+            ),
+            const SupplyConditionsTable(),
           ],
         ),
       ),
@@ -104,7 +196,7 @@ class _AddNewContractPageState extends State<AddNewContractPage> {
         if (state is SupplierLoading) {
           return SuppliersDropdown(
             onChange: (_) {},
-            products: [
+            suppliers: [
               Supplier.empty(),
               Supplier.empty(),
             ],
@@ -114,7 +206,7 @@ class _AddNewContractPageState extends State<AddNewContractPage> {
         if (state is SupplierLoaded) {
           return SuppliersDropdown(
             onChange: (_) {},
-            products: state.suppliers,
+            suppliers: state.suppliers,
           );
         }
 

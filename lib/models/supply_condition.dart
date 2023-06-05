@@ -5,8 +5,9 @@ class SupplyCondition {
   final String kind;
   final String maker;
   final double pricePerUnit;
-  final int minAmount;
-  final int maxAmount;
+  final double minAmount;
+  final double maxAmount;
+  final int productId;
 
   SupplyCondition({
     required this.id,
@@ -17,6 +18,7 @@ class SupplyCondition {
     required this.pricePerUnit,
     required this.minAmount,
     required this.maxAmount,
+    this.productId = -1,
   });
 
   factory SupplyCondition.fromJson(Map<String, dynamic> json) {
@@ -44,4 +46,19 @@ class SupplyCondition {
       'maxAmount': maxAmount,
     };
   }
+
+  Map<String, dynamic> newConditionsToJson() {
+    return {
+      'productId': productId,
+      'kind': kind,
+      'maker': maker,
+      'pricePerUnit': pricePerUnit,
+      'minAmount': minAmount,
+      'maxAmount': maxAmount,
+    };
+  }
+
+  //  factory SupplyCondition.empty() {
+  //   return SupplyCondition(id: -1, productName: '', productMeasurement: '', kind: '', maker: '', pricePerUnit: -1, minAmount: -1, maxAmount: -1, );
+  // }
 }

@@ -7,7 +7,6 @@ class Product {
   final String name;
   final String measurement;
   final List<Stock> stocks;
-  final List<dynamic>? supplyConditions;
 
   Product({
     required this.id,
@@ -16,7 +15,6 @@ class Product {
     required this.name,
     required this.measurement,
     required this.stocks,
-    this.supplyConditions,
   });
 
   factory Product.fromJson(Map<String, dynamic> json) {
@@ -28,6 +26,16 @@ class Product {
       stocks: json['stocks'].map<Stock>((e) {
         return Stock.fromJson(e);
       }).toList(),
+    );
+  }
+
+  factory Product.empty() {
+    return Product(
+      id: -1,
+      name: '',
+      categoryId: -1,
+      measurement: '',
+      stocks: [],
     );
   }
 }

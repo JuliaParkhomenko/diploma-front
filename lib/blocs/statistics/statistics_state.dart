@@ -8,7 +8,7 @@ class StatisticsInitial extends StatisticsState {}
 class StatisticsLoading extends StatisticsState {}
 
 class StatisticsLoaded extends StatisticsState {
-  final List<Statistics> statistics;
+  final Statistics statistics;
   StatisticsLoaded(this.statistics);
 }
 

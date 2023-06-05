@@ -1,10 +1,12 @@
 import 'package:diploma_frontend/models/statistics.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:diploma_frontend/constants/constants.dart' as constants;
 
 class LineChartWidget extends StatelessWidget {
-  final List<Statistics> statistics;
-  const LineChartWidget(
+  final Statistics statistics;
+  int i = 0;
+  LineChartWidget(
       {super.key, required this.isShowingMainData, required this.statistics});
 
   final bool isShowingMainData;
@@ -100,21 +102,29 @@ class LineChartWidget extends StatelessWidget {
       fontSize: 14,
     );
     String text;
+    double maxValue = (statistics.used > statistics.ordered)
+        ? statistics.used
+        : statistics.ordered;
+    maxValue =
+        maxValue > statistics.writtenOff ? maxValue : statistics.writtenOff;
     switch (value.toInt()) {
       case 1:
-        text = '1m';
+        text = (maxValue / 6).round().toString();
         break;
       case 2:
-        text = '2m';
+        text = (maxValue / 5).round().toString();
+        {}
         break;
       case 3:
-        text = '3m';
+        text = (maxValue / 4).round().toString();
+        {}
         break;
       case 4:
-        text = '5m';
+        text = (maxValue / 2).round().toString();
+        {}
         break;
       case 5:
-        text = '6m';
+        text = maxValue.toString();
         break;
       default:
         return Container();
@@ -198,21 +208,21 @@ class LineChartWidget extends StatelessWidget {
 
   LineChartBarData get lineChartBarData1_2 => LineChartBarData(
         isCurved: true,
-        color: const Color(0xFFFF3AF2),
+        color: constants.Colors.managerStatisticsOrderedLine,
         barWidth: 8,
         isStrokeCapRound: true,
         dotData: FlDotData(show: false),
         belowBarData: BarAreaData(
           show: false,
-          color: const Color(0xFFFF3AF2).withOpacity(0),
+          color: constants.Colors.managerStatisticsOrderedLine,
         ),
-        spots: const [
-          FlSpot(1, 1),
-          FlSpot(3, 2.8),
-          FlSpot(7, 1.2),
-          FlSpot(10, 2.8),
-          FlSpot(12, 2.6),
-          FlSpot(13, 3.9),
+        spots: [
+          FlSpot(1, statistics.orderedList[i++].amount),
+          FlSpot(3, statistics.orderedList[i++].amount),
+          FlSpot(7, statistics.orderedList[i++].amount),
+          FlSpot(10, statistics.orderedList[i++].amount),
+          FlSpot(12, statistics.orderedList[i++].amount),
+          FlSpot(13, statistics.orderedList[i++].amount),
         ],
       );
 
@@ -290,7 +300,7 @@ class LineChartWidget extends StatelessWidget {
 }
 
 class LineChartSample1 extends StatefulWidget {
-  final List<Statistics> statistics;
+  final Statistics statistics;
   const LineChartSample1({super.key, required this.statistics});
 
   @override

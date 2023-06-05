@@ -1,7 +1,7 @@
 import 'package:diploma_frontend/models/statistics.dart';
 
 abstract class BaseStatisticsRepository {
-  Future<List<Statistics>?> product({
+  Future<Statistics?> product({
     int? warehouseId,
     int? productId,
     DateTime? dateFrom,

@@ -107,7 +107,7 @@ class _AddNewSupplyPageState extends State<AddNewSupplyPage> {
         if (state is SupplierLoading) {
           return SuppliersDropdown(
             onChange: (_) {},
-            products: [
+            suppliers: [
               Supplier.empty(),
               Supplier.empty(),
             ],
@@ -117,7 +117,7 @@ class _AddNewSupplyPageState extends State<AddNewSupplyPage> {
         if (state is SupplierLoaded) {
           return SuppliersDropdown(
             onChange: (_) {},
-            products: state.suppliers,
+            suppliers: state.suppliers,
           );
         }
 
