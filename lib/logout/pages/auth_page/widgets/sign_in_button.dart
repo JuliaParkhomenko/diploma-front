@@ -1,44 +1,26 @@
-import 'package:diploma_frontend/services/app_state_service/app_state_service.dart';
 import 'package:diploma_frontend/services/language_service/app_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:diploma_frontend/constants/constants.dart' as constants;
 
-class SignInButton extends StatefulWidget {
-  final TextEditingController email;
-  final TextEditingController password;
+class SignInButton extends StatelessWidget {
+  final bool tapped;
+  final bool valid;
+  final Function() onPressed;
 
   const SignInButton({
     super.key,
-    required this.email,
-    required this.password,
+    required this.onPressed,
+    required this.tapped,
+    required this.valid,
   });
 
   @override
-  State<SignInButton> createState() => _SignInButtonState();
-}
-
-class _SignInButtonState extends State<SignInButton> {
-  bool tapped = false;
-  @override
   Widget build(BuildContext context) {
+    print(valid);
     return IgnorePointer(
       ignoring: tapped,
       child: TextButton(
-        onPressed: () async {
-          setState(() {
-            tapped = true;
-          });
-          final AppStateService service =
-              Provider.of<AppStateService>(context, listen: false);
-          await service.signIn(
-              context, widget.email.text, widget.password.text);
-          if (mounted) {
-            setState(() {
-              tapped = false;
-            });
-          }
-        },
+        onPressed: onPressed,
         style: ButtonStyle(
           shape: MaterialStatePropertyAll(
             RoundedRectangleBorder(
@@ -49,7 +31,9 @@ class _SignInButtonState extends State<SignInButton> {
             const Size(188, 42),
           ),
           backgroundColor: MaterialStateProperty.all(
-            tapped ? Colors.grey : constants.Colors.main,
+            tapped
+                ? Colors.grey
+                : (valid ? constants.Colors.main : Colors.redAccent),
           ),
         ),
         child: Text(
