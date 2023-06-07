@@ -1,9 +1,10 @@
 import 'package:diploma_frontend/blocs/supply_contracts/supply_contracts_cubit.dart';
-import 'package:diploma_frontend/users/director/pages/contracts_page/widgets/add_contract_button.dart';
 import 'package:diploma_frontend/users/manager/pages/stocks_page/widgets/search_textfield.dart';
 import 'package:diploma_frontend/services/language_service/app_localization.dart';
+import 'package:diploma_frontend/widgets/default_add_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:routemaster/routemaster.dart';
 
 class ContractsFilters extends StatefulWidget {
   final Function(bool) onChanged;
@@ -109,7 +110,12 @@ class _ContractsFiltersState extends State<ContractsFilters> {
         const Expanded(
           child: SizedBox(),
         ),
-        const AddContractButton(),
+        DefaultAddButton(
+          buttonText: 'Add new',
+          onTap: () {
+            Routemaster.of(context).push('/contracts/add');
+          },
+        ),
       ],
     );
   }

@@ -1,4 +1,5 @@
 import 'package:diploma_frontend/users/director/pages/add_new_contract/add_new_contract_page.dart';
+import 'package:diploma_frontend/users/director/pages/add_new_supply/add_new_supply_page.dart';
 import 'package:diploma_frontend/users/director/pages/applications_page/applications_page.dart';
 import 'package:diploma_frontend/users/director/pages/contracts_page/contracts_page.dart';
 import 'package:diploma_frontend/users/director/pages/overview_page/overview_page.dart'
@@ -129,6 +130,9 @@ class RouteService {
           ),
       '/supplies': (route) => const MaterialPage(
             child: SuppliesPage(),
+          ),
+      '/supplies/add': (route) => const MaterialPage(
+            child: AddNewSupplyPage(),
           ),
       '/applications': (route) => const MaterialPage(
             child: ApplicationsPage(),

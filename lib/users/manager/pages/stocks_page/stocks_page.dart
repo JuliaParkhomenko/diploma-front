@@ -25,54 +25,46 @@ class _StocksPageState extends State<StocksPage> {
       builder: (context, state) {
         final WarehouseCubit cubit = BlocProvider.of(context);
 
-        return Container(
-          width: size.width,
-          padding: const EdgeInsets.all(15),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(17),
-            color: constants.Colors.managerWarehouseMain.withOpacity(0.6),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Stocks'.tr(context),
-                  style: const TextStyle(
-                    color: constants.Colors.subtitleTextColor,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'OpenSans',
-                  ),
+        return Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Stocks'.tr(context),
+                style: const TextStyle(
+                  color: constants.Colors.subtitleTextColor,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'OpenSans',
                 ),
-                const SizedBox(
-                  height: 32,
+              ),
+              const SizedBox(
+                height: 32,
+              ),
+              SizedBox(
+                width: 200,
+                height: 32,
+                child: SearchTextfield(
+                  hintText: 'Search by name'.tr(context),
+                  onChanged: (value) async {
+                    final StockCubit cubit =
+                        BlocProvider.of<StockCubit>(context);
+                    await cubit.fetchStocks(3, value);
+                  },
                 ),
-                SizedBox(
-                  width: 200,
-                  height: 32,
-                  child: SearchTextfield(
-                    hintText: 'Search by name'.tr(context),
-                    onChanged: (value) async {
-                      final StockCubit cubit =
-                          BlocProvider.of<StockCubit>(context);
-                      await cubit.fetchStocks(3, value);
-                    },
-                  ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              SizedBox(
+                height: size.height * 0.65,
+                width: size.width * 0.72,
+                child: StocksTable(
+                  warehouseId: cubit.selectedWarehouseIndex,
                 ),
-                const SizedBox(
-                  height: 20,
-                ),
-                SizedBox(
-                  height: size.height * 0.65,
-                  width: size.width * 0.72,
-                  child: StocksTable(
-                    warehouseId: cubit.selectedWarehouseIndex,
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         );
       },

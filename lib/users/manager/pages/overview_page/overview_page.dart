@@ -9,30 +9,23 @@ class OverviewPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
-    return Container(
-      width: size.width,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(17),
-        //color: Colors.white,
-      ),
-      child: const Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          // TODO: Yuliia`s question. Should I add const?
-          // ignore: prefer_const_constructors
-          OverviewRecentActions(),
-          // SizedBox(
-          //   width: 900,
-          // ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              OverviewReminder(),
-              OverviewOrderedBatches(),
-            ],
-          )
-        ],
-      ),
+    return const Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        // TODO: Yuliia`s question. Should I add const?
+        // ignore: prefer_const_constructors
+        OverviewRecentActions(),
+        // SizedBox(
+        //   width: 900,
+        // ),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            OverviewReminder(),
+            OverviewOrderedBatches(),
+          ],
+        )
+      ],
     );
   }
 }

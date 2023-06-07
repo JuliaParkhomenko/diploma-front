@@ -42,103 +42,95 @@ class _BatchesPageState extends State<BatchesPage> {
     return BlocBuilder<OrderedBatchesCubit, OrderedBatchesState>(
       builder: (context, state) {
         final OrderedBatchesCubit cubit = BlocProvider.of(context);
-        return Container(
-          width: size.width,
-          padding: const EdgeInsets.all(15),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(17),
-            color: constants.Colors.managerWarehouseMain.withOpacity(0.6),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Ordered batches'.tr(context),
-                  style: const TextStyle(
-                    color: constants.Colors.subtitleTextColor,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'OpenSans',
-                  ),
+        return Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Ordered batches'.tr(context),
+                style: const TextStyle(
+                  color: constants.Colors.subtitleTextColor,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'OpenSans',
                 ),
-                const SizedBox(height: 32),
-                Row(
-                  children: [
-                    SizedBox(
-                      height: 32,
-                      width: 200,
-                      child: SearchTextfield(
-                        hintText: 'Product'.tr(context),
-                        onChanged: (value) {
-                          search(cubit);
-                        },
-                      ),
-                    ),
-                    const SizedBox(width: 16),
-                    SizedBox(
-                      height: 32,
-                      width: 200,
-                      child: SearchTextfield(
-                        hintText: 'Batch'.tr(context),
-                        onChanged: (value) {
-                          search(cubit);
-                        },
-                      ),
-                    ),
-                    const SizedBox(width: 16),
-                    SizedBox(
-                      height: 32,
-                      width: 200,
-                      child: SearchTextfield(
-                        hintText: 'Kind'.tr(context),
-                        onChanged: (value) {
-                          search(cubit);
-                        },
-                      ),
-                    ),
-                    const SizedBox(width: 16),
-                    InkWell(
-                      onTap: () async {
-                        productController.clear();
-                        kindController.clear();
-                        batchController.clear();
+              ),
+              const SizedBox(height: 32),
+              Row(
+                children: [
+                  SizedBox(
+                    height: 32,
+                    width: 200,
+                    child: SearchTextfield(
+                      hintText: 'Product'.tr(context),
+                      onChanged: (value) {
                         search(cubit);
                       },
-                      child: const Icon(
-                        Icons.close_rounded,
-                        size: 32,
-                        color: constants.Colors.subtitleTextColor,
-                      ),
                     ),
-                  ],
-                ),
-                const SizedBox(height: 16),
-                OrderedBatchesView(
-                  onClick: (value) {
-                    if (value) {
-                      setState(() {});
-                    }
-                  },
-                ),
-                const SizedBox(height: 16),
-                Text(
-                  'Receiving a batch'.tr(context),
-                  style: const TextStyle(
-                    color: constants.Colors.subtitleTextColor,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'OpenSans',
                   ),
-                ),
-                const SizedBox(height: 32),
-                if (cubit.orderedBatch != null)
-                  ReceiveBatchRow(
-                    batchId: cubit.orderedBatch!.batchId,
+                  const SizedBox(width: 16),
+                  SizedBox(
+                    height: 32,
+                    width: 200,
+                    child: SearchTextfield(
+                      hintText: 'Batch'.tr(context),
+                      onChanged: (value) {
+                        search(cubit);
+                      },
+                    ),
                   ),
-              ],
-            ),
+                  const SizedBox(width: 16),
+                  SizedBox(
+                    height: 32,
+                    width: 200,
+                    child: SearchTextfield(
+                      hintText: 'Kind'.tr(context),
+                      onChanged: (value) {
+                        search(cubit);
+                      },
+                    ),
+                  ),
+                  const SizedBox(width: 16),
+                  InkWell(
+                    onTap: () async {
+                      productController.clear();
+                      kindController.clear();
+                      batchController.clear();
+                      search(cubit);
+                    },
+                    child: const Icon(
+                      Icons.close_rounded,
+                      size: 32,
+                      color: constants.Colors.subtitleTextColor,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 16),
+              OrderedBatchesView(
+                onClick: (value) {
+                  if (value) {
+                    setState(() {});
+                  }
+                },
+              ),
+              const SizedBox(height: 16),
+              Text(
+                'Receiving a batch'.tr(context),
+                style: const TextStyle(
+                  color: constants.Colors.subtitleTextColor,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'OpenSans',
+                ),
+              ),
+              const SizedBox(height: 32),
+              if (cubit.orderedBatch != null)
+                ReceiveBatchRow(
+                  batchId: cubit.orderedBatch!.batchId,
+                ),
+            ],
           ),
         );
       },

@@ -4,7 +4,11 @@ import 'package:flutter/material.dart';
 
 import 'package:diploma_frontend/constants/constants.dart' as constants;
 
-void showInfoPrikol(String text, BuildContext context) {
+void showInfoPrikol(
+  String text,
+  BuildContext context, {
+  Color prikolColor = constants.Colors.managerWarehouseMain,
+}) {
   late final OverlayEntry overlay;
   final StreamController<double> opacity = StreamController<double>();
   double shototamOpasity = 1;
@@ -22,8 +26,7 @@ void showInfoPrikol(String text, BuildContext context) {
                 height: 100,
                 width: 200,
                 decoration: BoxDecoration(
-                  color: constants.Colors.managerWarehouseMain
-                      .withOpacity(snapshot.data ?? 1),
+                  color: prikolColor.withOpacity(snapshot.data ?? 1),
                   borderRadius: BorderRadius.circular(12),
                   border: Border.all(),
                 ),

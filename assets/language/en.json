@@ -96,5 +96,12 @@
     "Price": "Price",
     "Submit": "Submit",
     "Add conditions": "Add conditions",
-    "Price per unit": "Price per unit"
+    "Price per unit": "Price per unit",
+    "There is no supplyConditions in contract!": "There is no supplyConditions in contract!",
+    "Search by warehouse": "Search by warehouse",
+    "Supply №": "Supply №",
+    "Supply date":"Supply date",
+    "Product name": "Product name",
+    "Warehouse name": "Warehouse name",
+    "Adding a new supply": "Adding a new supply"
 }

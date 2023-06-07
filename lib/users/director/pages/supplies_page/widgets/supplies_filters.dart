@@ -1,9 +1,10 @@
 import 'package:diploma_frontend/blocs/batch_supply/batch_supply_cubit.dart';
-import 'package:diploma_frontend/users/director/pages/contracts_page/widgets/add_contract_button.dart';
 import 'package:diploma_frontend/users/manager/pages/stocks_page/widgets/search_textfield.dart';
 import 'package:diploma_frontend/services/language_service/app_localization.dart';
+import 'package:diploma_frontend/widgets/default_add_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:routemaster/routemaster.dart';
 
 class SuppliesFilters extends StatefulWidget {
   const SuppliesFilters({
@@ -59,7 +60,12 @@ class _SuppliesFiltersState extends State<SuppliesFilters> {
           const Expanded(
             child: SizedBox(),
           ),
-          const AddContractButton(),
+          DefaultAddButton(
+            buttonText: 'Add new',
+            onTap: () {
+              Routemaster.of(context).push('/supplies/add');
+            },
+          ),
         ],
       ),
     );

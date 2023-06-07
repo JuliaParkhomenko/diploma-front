@@ -9,6 +9,7 @@ import 'package:diploma_frontend/users/director/pages/add_new_contract/widgets/s
 import 'package:diploma_frontend/users/director/pages/add_new_contract/widgets/supply_conditions_table.dart';
 import 'package:diploma_frontend/models/supplier.dart';
 import 'package:diploma_frontend/services/language_service/app_localization.dart';
+import 'package:diploma_frontend/users/manager/pages/widgets/info_overlay.dart';
 import 'package:flutter/material.dart';
 import 'package:diploma_frontend/constants/constants.dart' as constants;
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -222,6 +223,13 @@ class _AddNewContractPageState extends State<AddNewContractPage> {
               ),
               TextButton(
                 onPressed: () async {
+                  if (supplyConditions.isEmpty) {
+                    return showInfoPrikol(
+                      'There is no supplyConditions in contract!'.tr(context),
+                      context,
+                      prikolColor: Colors.red,
+                    );
+                  }
                   await ServiceLocator.supplierRepository.addcontract(
                     supplierId: supplierId,
                     startDate:
@@ -288,7 +296,7 @@ class _AddNewContractPageState extends State<AddNewContractPage> {
             minBatch: 0,
             maxBatch: 0,
             pricePerUnit: 0,
-            dialogName: 'Adding supply condition',
+            dialogName: 'Adding contract condition',
             onChange: (editedSupplyCondition) {
               supplyConditions.add(editedSupplyCondition);
               setState(() {

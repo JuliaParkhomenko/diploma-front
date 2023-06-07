@@ -18,41 +18,33 @@ class SpecificProductPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
 
-    return Container(
-      width: size.width,
-      padding: const EdgeInsets.all(15),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(17),
-        color: constants.Colors.managerWarehouseMain.withOpacity(0.6),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              '${'Stocks'.tr(context)} > ${'Stock'.tr(context)} (${Translit().unTranslit(source: productName)})',
-              style: const TextStyle(
-                color: constants.Colors.subtitleTextColor,
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-                fontFamily: 'OpenSans',
-              ),
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            '${'Stocks'.tr(context)} > ${'Stock'.tr(context)} (${Translit().unTranslit(source: productName)})',
+            style: const TextStyle(
+              color: constants.Colors.subtitleTextColor,
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              fontFamily: 'OpenSans',
             ),
-            const SizedBox(
-              height: 45,
-            ),
-            ProductSearchRow(
-              productId: stockId,
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            SpecificProductTable(
-              stockId: stockId,
-            ),
-          ],
-        ),
+          ),
+          const SizedBox(
+            height: 45,
+          ),
+          ProductSearchRow(
+            productId: stockId,
+          ),
+          const SizedBox(
+            height: 15,
+          ),
+          SpecificProductTable(
+            stockId: stockId,
+          ),
+        ],
       ),
     );
   }

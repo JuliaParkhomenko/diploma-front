@@ -1,9 +1,9 @@
 import 'package:diploma_frontend/blocs/supplier/supplier_cubit.dart';
 import 'package:diploma_frontend/users/director/pages/add_new_contract/widgets/suppliers_dropdown.dart';
-import 'package:diploma_frontend/users/manager/pages/ordered_batch_page/widgets/date_picker_textfield.dart';
 import 'package:diploma_frontend/models/application.dart';
 import 'package:diploma_frontend/models/supplier.dart';
 import 'package:diploma_frontend/services/language_service/app_localization.dart';
+import 'package:diploma_frontend/widgets/default_add_button.dart';
 import 'package:flutter/material.dart';
 import 'package:diploma_frontend/constants/constants.dart' as constants;
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,73 +19,49 @@ class AddNewSupplyPage extends StatefulWidget {
 }
 
 class _AddNewSupplyPageState extends State<AddNewSupplyPage> {
-  final TextEditingController startDate = TextEditingController();
-  final TextEditingController endDate = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
 
-    return Container(
-      width: size.width,
+    return Padding(
       padding: const EdgeInsets.all(15),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(17),
-        color: constants.Colors.managerWarehouseMain.withOpacity(0.6),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(15),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            InkWell(
-              onTap: () => Routemaster.of(context).history.back(),
-              child: Text(
-                '${(chosenApplications == [] ? "Suppliers" : "Applications").tr(context)} > ${'Adding a new supply'.tr(context)}',
-                style: const TextStyle(
-                  color: constants.Colors.subtitleTextColor,
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'OpenSans',
-                ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          InkWell(
+            onTap: () => Routemaster.of(context).history.back(),
+            child: Text(
+              '${(chosenApplications == [] ? "Suppliers" : "Applications").tr(context)} > ${'Adding a new supply'.tr(context)}',
+              style: const TextStyle(
+                color: constants.Colors.subtitleTextColor,
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                fontFamily: 'OpenSans',
               ),
             ),
-            Row(
-              children: [
-                Column(
-                  children: [
-                    Text(
-                      'Supplier'.tr(context),
-                    ),
-                    suppliers(context),
-                  ],
-                ),
-                Column(
-                  children: [
-                    Text(
-                      'Start date'.tr(context),
-                    ),
-                    DatePickerTextField(
-                      controller: startDate,
-                      onDateTimeChanged: (_) {},
-                    ),
-                  ],
-                ),
-                Column(
-                  children: [
-                    Text(
-                      'End date'.tr(context),
-                    ),
-                    DatePickerTextField(
-                      controller: endDate,
-                      onDateTimeChanged: (_) {},
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ],
-        ),
+          ),
+          const SizedBox(
+            height: 32,
+          ),
+          Row(
+            children: [
+              Column(
+                children: [
+                  Text(
+                    'Supplier'.tr(context),
+                  ),
+                  suppliers(context),
+                ],
+              ),
+              DefaultAddButton(
+                buttonText: 'Add new',
+                onTap: () async {
+                  await showAddDialog();
+                },
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
@@ -122,6 +98,34 @@ class _AddNewSupplyPageState extends State<AddNewSupplyPage> {
         }
 
         return Container();
+      },
+    );
+  }
+
+  Future<void> showAddDialog() async {
+    await showDialog(
+      useRootNavigator: true,
+      context: context,
+      builder: (context) {
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8),
+          ),
+          /*child: AddSupplyBatchDialog(
+            productName: '',
+            warehouseName: '',
+            price: 0,
+            amount: 0,
+            deviationPercentage: 0,
+            dialogName: 'Adding supply batch',
+            onChange: (editedSupplyCondition) {
+              supplyConditions.add(editedSupplyCondition);
+              setState(() {
+                update = true;
+              });
+            },
+          ),*/
+        );
       },
     );
   }

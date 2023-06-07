@@ -96,5 +96,12 @@
     "Price": "Ціна",
     "Submit": "Надіслати",
     "Add conditions": "Додати умови",
-    "Price per unit": "Ціна за одиницю"
+    "Price per unit": "Ціна за одиницю",
+    "There is no supplyConditions in contract!":"Наразі ще немає жодного контракту!",
+    "Search by warehouse": "Пошук за складом",
+    "Supply №": "Поставка №",
+    "Supply date":"Дата створення поставки",
+    "Product name": "Назва продукту",
+    "Warehouse name": "Назва складу",
+    "Adding a new supply": "Створення нової поставки"
 }
