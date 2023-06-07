@@ -66,8 +66,9 @@ class _ManagerBodyState extends State<ManagerBody> {
                   width: size.width,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(17),
-                    color:
-                        constants.Colors.managerWarehouseMain.withOpacity(0.6),
+                    color: getColor(indexedPage.index)
+                        ? constants.Colors.managerWarehouseMain.withOpacity(0.6)
+                        : null,
                   ),
                   height: size.height - 105,
                   padding: const EdgeInsets.all(15),
@@ -81,5 +82,17 @@ class _ManagerBodyState extends State<ManagerBody> {
         ),
       ],
     );
+  }
+
+  bool getColor(int index) {
+    if (index == 0) {
+      return false;
+    }
+
+    if (Routemaster.of(context).currentRoute.path.contains('received')) {
+      return false;
+    }
+
+    return true;
   }
 }

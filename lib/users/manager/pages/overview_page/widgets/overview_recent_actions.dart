@@ -6,16 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:diploma_frontend/constants/constants.dart' as constants;
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class OverviewRecentActions extends StatefulWidget {
-  const OverviewRecentActions({
-    super.key,
-  });
+class OverviewRecentActions extends StatelessWidget {
+  const OverviewRecentActions({super.key});
 
-  @override
-  State<OverviewRecentActions> createState() => _OverviewRecentActionsState();
-}
-
-class _OverviewRecentActionsState extends State<OverviewRecentActions> {
   @override
   Widget build(BuildContext context) {
     return Container(

@@ -8,20 +8,15 @@ class OverviewPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
     return const Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        // TODO: Yuliia`s question. Should I add const?
-        // ignore: prefer_const_constructors
         OverviewRecentActions(),
-        // SizedBox(
-        //   width: 900,
-        // ),
         Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             OverviewReminder(),
+            SizedBox(height: 16),
             OverviewOrderedBatches(),
           ],
         )

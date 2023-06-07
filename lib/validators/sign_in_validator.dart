@@ -19,7 +19,7 @@ class SignInValidator {
   Sink<String> get sinkPassword => _password.sink;
 
   Stream<bool> get submitValid =>
-      Rx.combineLatest2(email, password, (e, m) => true);
+      Rx.combineLatest2(email, password, (e, m) => true).asBroadcastStream();
 
   final StreamController<bool> _tapStreamController = StreamController<bool>()
     ..add(false);

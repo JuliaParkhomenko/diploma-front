@@ -19,8 +19,10 @@ class OverviewRecentActionsTable extends StatelessWidget {
     return Column(
       //Yuliia: it used to be receivedHistoryWidget
       children: [
+        // const DefaultTableHeader(
+        //     headers: ['User', 'Action', 'Action with', 'Date']),
         Container(
-          width: size.width * .72,
+          width: size.width,
           color: constants.Colors.greyTable,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -33,14 +35,13 @@ class OverviewRecentActionsTable extends StatelessWidget {
           ),
         ),
         SizedBox(
-          height: 504, //(size.height - 132) * .4,
+          height: 504,
           child: ListView.builder(
             itemCount: actions.length,
             itemBuilder: (context, index) {
               final UserAction userAction = actions[index];
 
               return Container(
-                width: size.width * .72,
                 color:
                     index % 2 == 0 ? Colors.white : constants.Colors.greyTable,
                 child: Row(
@@ -57,7 +58,7 @@ class OverviewRecentActionsTable extends StatelessWidget {
                     ),
                     getTitle(size,
                         '${userAction.type.getActionType(context).tr(context)} ${userAction.targetId}'),
-                    getTitle(size, userAction.date.toString().split('.')[0]),
+                    getTitle(size, userAction.date.toString().substring(0, 10)),
                   ],
                 ),
               );

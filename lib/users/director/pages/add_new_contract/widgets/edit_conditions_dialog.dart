@@ -264,7 +264,7 @@ class _EditConditionDialogState extends State<EditConditionDialog> {
                             hintText: 'Price per unit'.tr(context),
                             onChanged: (_) {
                               setState(() {
-                                maxBatch = double.tryParse(_);
+                                pricePerUnit = double.tryParse(_);
                               });
                             },
                           ),

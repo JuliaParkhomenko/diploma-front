@@ -19,8 +19,10 @@ class OverviewReminder extends StatefulWidget {
 class _OverviewReminderState extends State<OverviewReminder> {
   @override
   Widget build(BuildContext context) {
+    final Size size = MediaQuery.of(context).size;
+
     return Container(
-      width: 550,
+      width: (size.width * .9) / 2,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(17),
         gradient: LinearGradient(

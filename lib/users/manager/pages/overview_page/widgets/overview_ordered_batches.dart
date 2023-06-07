@@ -19,74 +19,78 @@ class OverviewOrderedBatches extends StatefulWidget {
 class _OverviewOrderedBatchesState extends State<OverviewOrderedBatches> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 550,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(17),
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            constants.Colors.overviewOrderedBatchesColor.withOpacity(0.2),
-            constants.Colors.overviewOrderedBatchesColor.withOpacity(0.7),
-          ],
+    final Size size = MediaQuery.of(context).size;
+
+    return Expanded(
+      child: Container(
+        width: (size.width * .9) / 2,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(17),
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              constants.Colors.overviewOrderedBatchesColor.withOpacity(0.2),
+              constants.Colors.overviewOrderedBatchesColor.withOpacity(0.7),
+            ],
+          ),
         ),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(31),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Ordered batches'.tr(context),
-                  style: const TextStyle(
-                    color: constants.Colors.subtitleTextColor,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'OpenSans',
+        child: Padding(
+          padding: const EdgeInsets.all(31),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Ordered batches'.tr(context),
+                    style: const TextStyle(
+                      color: constants.Colors.subtitleTextColor,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'OpenSans',
+                    ),
                   ),
-                ),
-                const Align(
-                  alignment: Alignment.topRight,
-                  child: OrderedBatchesViewMoreButton(),
-                ),
-              ],
-            ),
-            const SizedBox(height: 22),
-            BlocBuilder<OrderedBatchesCubit, OrderedBatchesState>(
-              builder: (context, state) {
-                if (state is OrderedBatchesInitial) {
-                  final OrderedBatchesCubit cubit =
-                      BlocProvider.of<OrderedBatchesCubit>(context);
-                  cubit.fetchBatches(
-                    BlocProvider.of<WarehouseCubit>(context)
-                        .selectedWarehouseIndex,
-                  );
-                }
+                  const Align(
+                    alignment: Alignment.topRight,
+                    child: OrderedBatchesViewMoreButton(),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 22),
+              BlocBuilder<OrderedBatchesCubit, OrderedBatchesState>(
+                builder: (context, state) {
+                  if (state is OrderedBatchesInitial) {
+                    final OrderedBatchesCubit cubit =
+                        BlocProvider.of<OrderedBatchesCubit>(context);
+                    cubit.fetchBatches(
+                      BlocProvider.of<WarehouseCubit>(context)
+                          .selectedWarehouseIndex,
+                    );
+                  }
 
-                if (state is OrderedBatchesLoading) {
-                  return const OverviewOrderedBatchesTable(
-                    orderedBatches: [],
-                  );
-                }
+                  if (state is OrderedBatchesLoading) {
+                    return const OverviewOrderedBatchesTable(
+                      orderedBatches: [],
+                    );
+                  }
 
-                if (state is OrderedBatchesError) {
-                  return const Text('Error on server :)');
-                }
+                  if (state is OrderedBatchesError) {
+                    return const Text('Error on server :)');
+                  }
 
-                if (state is OrderedBatchesLoaded) {
-                  return OverviewOrderedBatchesTable(
-                    orderedBatches: state.orderedBatches,
-                  );
-                }
+                  if (state is OrderedBatchesLoaded) {
+                    return OverviewOrderedBatchesTable(
+                      orderedBatches: state.orderedBatches,
+                    );
+                  }
 
-                return Container();
-              },
-            ),
-          ],
+                  return Container();
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );
