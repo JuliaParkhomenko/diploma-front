@@ -71,7 +71,7 @@ class _ManagerBodyState extends State<ManagerBody> {
                         : null,
                   ),
                   height: size.height - 105,
-                  padding: const EdgeInsets.all(15),
+                  padding: getPadding(),
                   child: PageStackNavigator(
                     stack: indexedPage.currentStack,
                   ),
@@ -82,6 +82,14 @@ class _ManagerBodyState extends State<ManagerBody> {
         ),
       ],
     );
+  }
+
+  EdgeInsets getPadding() {
+    if (Routemaster.of(context).currentRoute.fullPath.contains('overview')) {
+      return EdgeInsets.zero;
+    }
+
+    return const EdgeInsets.all(15);
   }
 
   bool getColor(int index) {
