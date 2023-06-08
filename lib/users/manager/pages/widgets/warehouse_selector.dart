@@ -1,3 +1,4 @@
+import 'package:diploma_frontend/blocs/expiring_batches/expiring_batches_cubit.dart';
 import 'package:diploma_frontend/blocs/ordered_batches/ordered_batches_cubit.dart';
 import 'package:diploma_frontend/blocs/stock/stock_cubit.dart';
 import 'package:diploma_frontend/blocs/user_action/user_action_cubit.dart';
@@ -32,6 +33,9 @@ class _WarehouseSelectorState extends State<WarehouseSelector> {
     final OrderedBatchesCubit orderedBatchesCubit =
         BlocProvider.of<OrderedBatchesCubit>(context);
     orderedBatchesCubit.fetchBatches(widget.warehouses.first.id);
+    final UserActionCubit userActionCubit =
+        BlocProvider.of<UserActionCubit>(context);
+    userActionCubit.fetchUserActions(widget.warehouses.first.id);
     super.initState();
   }
 
@@ -94,6 +98,11 @@ class _WarehouseSelectorState extends State<WarehouseSelector> {
         onChanged: (newValue) {
           final WarehouseCubit cubit = BlocProvider.of<WarehouseCubit>(context);
           cubit.selectedWarehouseIndex = int.parse(newValue!);
+          final ExpiringBatchesCubit expiringBatchesCubit =
+              BlocProvider.of<ExpiringBatchesCubit>(context);
+          expiringBatchesCubit.fetchExpiringBatches(
+              BlocProvider.of<WarehouseCubit>(context).selectedWarehouseIndex,
+              0);
           final StockCubit stockCubit = BlocProvider.of<StockCubit>(context);
           stockCubit.fetchStocks(cubit.selectedWarehouseIndex, '');
           final OrderedBatchesCubit orderedBatchesCubit =

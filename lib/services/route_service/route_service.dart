@@ -1,7 +1,8 @@
-import 'package:diploma_frontend/users/director/pages/add_new_contract/add_new_contract_page.dart';
-import 'package:diploma_frontend/users/director/pages/add_new_supply/add_new_supply_page.dart';
+import 'package:diploma_frontend/users/director/pages/add_new_contract_page/add_new_contract_page.dart';
+import 'package:diploma_frontend/users/director/pages/add_new_supply_page/add_new_supply_page.dart';
 import 'package:diploma_frontend/users/director/pages/applications_page/applications_page.dart';
 import 'package:diploma_frontend/users/director/pages/contracts_page/contracts_page.dart';
+import 'package:diploma_frontend/users/director/pages/expiring_contracts_page/expiring_contracts_page.dart';
 import 'package:diploma_frontend/users/director/pages/overview_page/overview_page.dart'
     as directorOverviewPage;
 import 'package:diploma_frontend/users/director/pages/statistics_page/statistics_page.dart'
@@ -117,6 +118,9 @@ class RouteService {
       '/overview': (route) => const MaterialPage(
             child: directorOverviewPage.OverviewPage(),
           ),
+      '/overview/expiringContracts': (route) => const MaterialPage(
+            child: ExpiringContractsPage(),
+          ),
       '/suppliers': (route) {
         return const MaterialPage(
           child: SuppliersPage(),
@@ -128,6 +132,9 @@ class RouteService {
       '/contracts/add': (route) => const MaterialPage(
             child: AddNewContractPage(),
           ),
+      // '/contracts/expiringContracts': (route) => const MaterialPage(
+      //       child: ExpiringContractsPage(),
+      //     ),
       '/supplies': (route) => const MaterialPage(
             child: SuppliesPage(),
           ),

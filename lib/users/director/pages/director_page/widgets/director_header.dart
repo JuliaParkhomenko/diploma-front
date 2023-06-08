@@ -1,5 +1,6 @@
 import 'package:diploma_frontend/blocs/localization/localization_cubit.dart';
 import 'package:diploma_frontend/models/warehouse.dart';
+import 'package:diploma_frontend/users/manager/pages/widgets/warehouse_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:diploma_frontend/constants/constants.dart' as constants;
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -46,6 +47,10 @@ class DirectorHeader extends StatelessWidget {
               height: 1,
             ),
           ),
+          if (selectedIndex == 0)
+            WarehouseSelector(
+              warehouses: warehouses,
+            ),
           BlocBuilder<LocalizationCubit, LocalizationState>(
             builder: (context, state) {
               if (state is ChangeLocalState) {

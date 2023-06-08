@@ -1,28 +1,29 @@
-import 'package:diploma_frontend/blocs/expiring_batches/expiring_batches_cubit.dart';
-import 'package:diploma_frontend/blocs/warehouse/warehouse_cubit.dart';
-import 'package:diploma_frontend/users/manager/pages/overview_page/widgets/overview_reminder_table.dart';
-import 'package:diploma_frontend/users/manager/pages/overview_page/widgets/reminder_view_more_button.dart';
+import 'package:diploma_frontend/blocs/expiring_contracts/expiring_contracts_cubit.dart';
 import 'package:diploma_frontend/services/language_service/app_localization.dart';
+import 'package:diploma_frontend/users/director/pages/overview_page/widgets/expiring_contracts_view_more_button.dart';
+import 'package:diploma_frontend/users/director/pages/overview_page/widgets/overview_expiring_contracts_table.dart';
 import 'package:flutter/material.dart';
 import 'package:diploma_frontend/constants/constants.dart' as constants;
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:routemaster/routemaster.dart';
 
-class OverviewReminder extends StatefulWidget {
-  const OverviewReminder({
+class OverviewExpiringContracts extends StatefulWidget {
+  const OverviewExpiringContracts({
     super.key,
   });
 
   @override
-  State<OverviewReminder> createState() => _OverviewReminderState();
+  State<OverviewExpiringContracts> createState() =>
+      _OverviewExpiringContractsState();
 }
 
-class _OverviewReminderState extends State<OverviewReminder> {
+class _OverviewExpiringContractsState extends State<OverviewExpiringContracts> {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
 
     return Container(
-      width: (size.width * .61) / 2,
+      width: (size.width * .65) / 2,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(17),
         gradient: LinearGradient(
@@ -48,7 +49,7 @@ class _OverviewReminderState extends State<OverviewReminder> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Reminder'.tr(context),
+                  'Expiring contracts'.tr(context),
                   style: const TextStyle(
                     color: constants.Colors.subtitleTextColor,
                     fontSize: 18,
@@ -56,37 +57,42 @@ class _OverviewReminderState extends State<OverviewReminder> {
                     fontFamily: 'OpenSans',
                   ),
                 ),
-                const Align(
+                Align(
                   alignment: Alignment.topRight,
-                  child: ReminderViewMoreButton(),
+                  child: ExpiringContractsViewMoreButton(
+                    onTap: () {
+                      Routemaster.of(context)
+                          .push('/overview/expiringContracts');
+                    },
+                  ),
                 ),
               ],
             ),
             const SizedBox(height: 20),
-            BlocBuilder<ExpiringBatchesCubit, ExpiringBatchesState>(
+            BlocBuilder<ExpiringContractsCubit, ExpiringContractsState>(
               builder: (context, state) {
-                if (state is ExpiringBatchesInitial) {
-                  final ExpiringBatchesCubit cubit =
-                      BlocProvider.of<ExpiringBatchesCubit>(context);
-                  cubit.fetchExpiringBatches(
-                      BlocProvider.of<WarehouseCubit>(context)
-                          .selectedWarehouseIndex,
-                      0);
-                }
-
-                if (state is ExpiringBatchesLoading) {
-                  return const OverviewReminderTable(
-                    expiringBatches: [],
+                if (state is ExpiringContractsInitial) {
+                  final ExpiringContractsCubit cubit =
+                      BlocProvider.of<ExpiringContractsCubit>(context);
+                  cubit.clear();
+                  cubit.featchExpiringContracts(
+                    limit: 10,
                   );
                 }
 
-                if (state is ExpiringBatchesError) {
+                if (state is ExpiringContractsLoading) {
+                  return const OverviewExpiringContractsTable(
+                    expiringContracts: [],
+                  );
+                }
+
+                if (state is ExpiringContractsError) {
                   return const Text('Error on server :)');
                 }
 
-                if (state is ExpiringBatchesLoaded) {
-                  return OverviewReminderTable(
-                    expiringBatches: state.expiringBatches,
+                if (state is ExpiringContractsLoaded) {
+                  return OverviewExpiringContractsTable(
+                    expiringContracts: state.expiringContracts,
                   );
                 }
 

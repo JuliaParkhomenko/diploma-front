@@ -13,6 +13,7 @@
     "Warehouse": "Warehouse",
     "Batches": "Batches",
     "Reminders": "Reminders",
+    "Reminder": "Reminder",
     "Statistics": "Statistics",
     "Log out": "Log out",
     "Application": "Application",
@@ -53,7 +54,7 @@
     "Application sent successfully": "Application sent successfully",
     "Recent actions": "Recent actions",
     "User": "User",
-    "Action with": "Action with",
+    "Object of action": "Object of action",
     "ordered":"ordered",
     "application": "application",
     "batch": "batch",
@@ -103,5 +104,7 @@
     "Supply date":"Supply date",
     "Product name": "Product name",
     "Warehouse name": "Warehouse name",
-    "Adding a new supply": "Adding a new supply"
+    "Adding a new supply": "Adding a new supply",
+    "Contract number": "Contract number",
+    "Expiring contracts": "Expiring contracts"
 }

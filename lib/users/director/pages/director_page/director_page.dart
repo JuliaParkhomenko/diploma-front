@@ -1,6 +1,9 @@
+import 'package:diploma_frontend/blocs/warehouse/warehouse_cubit.dart';
 import 'package:diploma_frontend/users/director/pages/director_page/widgets/director_header.dart';
 import 'package:diploma_frontend/users/director/pages/director_page/widgets/navbar.dart';
+import 'package:diploma_frontend/users/manager/pages/widgets/loading_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:routemaster/routemaster.dart';
 import 'package:diploma_frontend/constants/constants.dart' as constants;
 
@@ -33,9 +36,35 @@ class DirectorPage extends StatelessWidget {
             width: size.width - 185,
             child: Column(
               children: [
-                DirectorHeader(
-                  selectedIndex: indexedPage.index,
-                  warehouses: const [],
+                BlocBuilder<WarehouseCubit, WarehouseState>(
+                  builder: (context, state) {
+                    if (state is WarehouseInitial) {
+                      final WarehouseCubit cubit =
+                          BlocProvider.of<WarehouseCubit>(context);
+                      cubit.fetchWarehouses();
+                    }
+                    if (state is WarehouseLoading) {
+                      return const LoadingWidget();
+                    }
+                    if (state is WarehouseError) {
+                      const Center(
+                        child: Text('Error on server :('),
+                      );
+                    }
+                    if (state is WarehouseLoading) {
+                      return DirectorHeader(
+                        selectedIndex: indexedPage.index,
+                        warehouses: const [],
+                      );
+                    }
+                    if (state is WarehouseLoaded) {
+                      return DirectorHeader(
+                        selectedIndex: indexedPage.index,
+                        warehouses: state.warehouses,
+                      );
+                    }
+                    return Container();
+                  },
                 ),
                 Padding(
                   padding: const EdgeInsets.only(
@@ -43,19 +72,27 @@ class DirectorPage extends StatelessWidget {
                     right: 20,
                     bottom: 10,
                   ),
-                  child: Container(
-                    width: size.width,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(17),
-                      color: constants.Colors.managerWarehouseMain
-                          .withOpacity(0.6),
-                    ),
-                    height: size.height - 105,
-                    padding: const EdgeInsets.all(15),
-                    child: PageStackNavigator(
-                      stack: indexedPage.currentStack,
-                    ),
-                  ),
+                  child: showContainer(context)
+                      ? Container(
+                          width: size.width,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(17),
+                            color: constants.Colors.managerWarehouseMain
+                                .withOpacity(0.6),
+                          ),
+                          height: size.height - 105,
+                          padding: const EdgeInsets.all(15),
+                          child: PageStackNavigator(
+                            stack: indexedPage.currentStack,
+                          ),
+                        )
+                      : SizedBox(
+                          height: size.height - 105,
+                          width: size.width,
+                          child: PageStackNavigator(
+                            stack: indexedPage.currentStack,
+                          ),
+                        ),
                 ),
               ],
             ),
@@ -63,5 +100,13 @@ class DirectorPage extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  bool showContainer(BuildContext context) {
+    if (Routemaster.of(context).currentRoute.fullPath.contains('overview')) {
+      return false;
+    } else {
+      return true;
+    }
   }
 }

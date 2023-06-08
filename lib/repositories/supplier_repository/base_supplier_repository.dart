@@ -1,3 +1,4 @@
+import 'package:diploma_frontend/models/expiring_contracts.dart';
 import 'package:diploma_frontend/models/supplier.dart';
 import 'package:diploma_frontend/models/supply_condition.dart';
 import 'package:diploma_frontend/models/supply_contract.dart';
@@ -38,5 +39,9 @@ abstract class BaseSupplierRepository {
     String productName = '',
     String supplierName = '',
     String maker = '',
+  });
+
+  Future<List<ExpiringContract>?> expiringContracts({
+    required int limit,
   });
 }

@@ -49,7 +49,7 @@ class EditSupplierValidator {
   final _validateName = StreamTransformer<String, String>.fromHandlers(
     handleData: (value, sink) {
       if (value.isNotEmpty) {
-        if (value.length < 2 || value.length > 20) {
+        if (value.length < 2 || value.length > 40) {
           sink.addError('Validation error');
         } else {
           sink.add(value);

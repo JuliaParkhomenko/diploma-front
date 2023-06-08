@@ -12,6 +12,7 @@ class OverviewPage extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         OverviewRecentActions(),
+        SizedBox(width: 16),
         Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

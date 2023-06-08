@@ -13,6 +13,7 @@
     "Warehouse": "Склад",
     "Batches": "Партії",
     "Reminders": "Сповіщення",
+    "Reminder": "Сповіщення",
     "Statistics": "Статистика",
     "Log out": "Вихід",
     "Application": "Запит",
@@ -53,7 +54,7 @@
     "Application sent successfully": "Заявка успішно надіслана",
     "Recent actions": "Нещодавні дії",
     "User": "Користувач",
-    "Action with": "Дія з",
+    "Object of action": "Об'єкт дії",
     "ordered":"замовлено",
     "application": "запит",
     "batch": "партія",
@@ -103,5 +104,7 @@
     "Supply date":"Дата створення поставки",
     "Product name": "Назва продукту",
     "Warehouse name": "Назва складу",
-    "Adding a new supply": "Створення нової поставки"
+    "Adding a new supply": "Створення нової поставки",
+    "Contract number": "Номер контракту",
+    "Expiring contracts": "Контракти, що закінчуються"
 }

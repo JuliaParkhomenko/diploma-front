@@ -40,7 +40,7 @@ class OverviewRecentActionsTable extends StatelessWidget {
             itemCount: actions.length,
             itemBuilder: (context, index) {
               final UserAction userAction = actions[index];
-
+              print(actions.length);
               return Container(
                 color:
                     index % 2 == 0 ? Colors.white : constants.Colors.greyTable,

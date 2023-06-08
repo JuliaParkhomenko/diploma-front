@@ -1,5 +1,5 @@
 import 'package:diploma_frontend/blocs/supplier/supplier_cubit.dart';
-import 'package:diploma_frontend/users/director/pages/add_new_contract/widgets/suppliers_dropdown.dart';
+import 'package:diploma_frontend/users/director/pages/add_new_contract_page/widgets/suppliers_dropdown.dart';
 import 'package:diploma_frontend/models/application.dart';
 import 'package:diploma_frontend/models/supplier.dart';
 import 'package:diploma_frontend/services/language_service/app_localization.dart';

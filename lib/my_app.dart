@@ -2,6 +2,7 @@ import 'package:diploma_frontend/blocs/application/application_cubit.dart';
 import 'package:diploma_frontend/blocs/batch/batch_cubit.dart';
 import 'package:diploma_frontend/blocs/batch_supply/batch_supply_cubit.dart';
 import 'package:diploma_frontend/blocs/expiring_batches/expiring_batches_cubit.dart';
+import 'package:diploma_frontend/blocs/expiring_contracts/expiring_contracts_cubit.dart';
 import 'package:diploma_frontend/blocs/kind/kind_cubit.dart';
 import 'package:diploma_frontend/blocs/localization/localization_cubit.dart';
 import 'package:diploma_frontend/blocs/ordered_batches/ordered_batches_cubit.dart';
@@ -133,6 +134,11 @@ class _MyAppState extends State<MyApp> {
         ),
         BlocProvider<SupplyContractsCubit>(
           create: (context) => SupplyContractsCubit(
+            ServiceLocator.supplierRepository,
+          ),
+        ),
+        BlocProvider<ExpiringContractsCubit>(
+          create: (context) => ExpiringContractsCubit(
             ServiceLocator.supplierRepository,
           ),
         ),

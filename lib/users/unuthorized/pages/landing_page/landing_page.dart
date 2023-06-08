@@ -100,7 +100,7 @@ class LandingPage extends StatelessWidget {
                       children: [
                         TextSpan(
                           style: const TextStyle(
-                            fontSize: 12,
+                            fontSize: 14,
                             fontFamily: 'OpenSans',
                           ),
                           text:
@@ -109,7 +109,7 @@ class LandingPage extends StatelessWidget {
                         ),
                         TextSpan(
                           style: const TextStyle(
-                            fontSize: 12,
+                            fontSize: 14,
                             fontWeight: FontWeight.bold,
                             fontFamily: 'OpenSans',
                           ),

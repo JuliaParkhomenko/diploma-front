@@ -27,13 +27,14 @@ class DefaultTableItem extends StatelessWidget {
           items.length,
           (index) => Container(
             alignment: Alignment.centerLeft,
-            width: (size.width * 0.72 - 24) / items.length,
+            width: (size.width * 0.72) / items.length,
             child: Row(
               children: [
                 Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Text(
                     items[index],
+                    //overflow: TextOverflow.ellipsis,
                     style: const TextStyle(
                       fontWeight: FontWeight.normal,
                       fontFamily: 'OpenSans',

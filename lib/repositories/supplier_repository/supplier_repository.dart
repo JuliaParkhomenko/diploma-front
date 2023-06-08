@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:diploma_frontend/models/expiring_contracts.dart';
 import 'package:diploma_frontend/models/supplier.dart';
 import 'package:diploma_frontend/models/supply_condition.dart';
 import 'package:diploma_frontend/models/supply_contract.dart';
@@ -215,6 +216,41 @@ class SupplierRepository implements BaseSupplierRepository {
         final data = jsonDecode(response.body);
         return data.map<SupplyContract>((e) {
           return SupplyContract.fromJson(e);
+        }).toList();
+      } else if (response.statusCode == 401) {
+        await ServiceLocator.database.clear();
+        await ServiceLocator.appStateService.logIn();
+      }
+      return null;
+    } catch (e) {
+      log(e.toString());
+      return null;
+    }
+  }
+
+  @override
+  Future<List<ExpiringContract>?> expiringContracts({
+    required int limit,
+  }) async {
+    try {
+      final User? user = await _database.getUser();
+
+      final Uri url = Uri.parse(
+        'https://restaurant-warehouse.azurewebsites.net/api/Supplier/expiringContracts?limit=$limit',
+      );
+
+      final Map<String, String> headers = {
+        'accept': '*/*',
+        'Content-Type': 'application/json-patch+json',
+        'Authorization': 'Bearer ${user!.token}'
+      };
+
+      final response = await http.get(url, headers: headers);
+
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        return data.map<ExpiringContract>((e) {
+          return ExpiringContract.fromJson(e);
         }).toList();
       } else if (response.statusCode == 401) {
         await ServiceLocator.database.clear();

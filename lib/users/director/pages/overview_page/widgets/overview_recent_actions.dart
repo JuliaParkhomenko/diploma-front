@@ -1,7 +1,7 @@
 import 'package:diploma_frontend/blocs/user_action/user_action_cubit.dart';
 import 'package:diploma_frontend/blocs/warehouse/warehouse_cubit.dart';
-import 'package:diploma_frontend/users/manager/pages/overview_page/widgets/overview_recent_actions_table.dart';
 import 'package:diploma_frontend/services/language_service/app_localization.dart';
+import 'package:diploma_frontend/users/director/pages/overview_page/widgets/overview_recent_actions_table.dart';
 import 'package:flutter/material.dart';
 import 'package:diploma_frontend/constants/constants.dart' as constants;
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,8 +12,6 @@ class OverviewRecentActions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.zero,
-      padding: const EdgeInsets.all(0),
       width: 800,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(17),

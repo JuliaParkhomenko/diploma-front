@@ -27,7 +27,7 @@ class ReminderViewMoreButton extends StatelessWidget {
       ),
       child: Container(
         alignment: Alignment.center,
-        height: 40,
+        height: 37,
         width: 160,
         child: Text(
           'View more'.tr(context),

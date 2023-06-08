@@ -1,20 +1,18 @@
 import 'package:diploma_frontend/services/language_service/app_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:diploma_frontend/constants/constants.dart' as constants;
-import 'package:routemaster/routemaster.dart';
 
-class OrderedBatchesViewMoreButton extends StatelessWidget {
-  const OrderedBatchesViewMoreButton({
+class ExpiringContractsViewMoreButton extends StatelessWidget {
+  final Function() onTap;
+  const ExpiringContractsViewMoreButton({
     super.key,
+    required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      onPressed: () async {
-        final indexedPage = IndexedPage.of(context);
-        indexedPage.index = 2;
-      },
+      onPressed: onTap,
       style: ButtonStyle(
         overlayColor: MaterialStateProperty.all(Colors.green.withOpacity(0.7)),
         backgroundColor: MaterialStateProperty.all(constants.Colors.main),
@@ -28,7 +26,7 @@ class OrderedBatchesViewMoreButton extends StatelessWidget {
       child: Container(
         alignment: Alignment.center,
         height: 37,
-        width: 160,
+        width: 140,
         child: Text(
           'View more'.tr(context),
           style: const TextStyle(color: Colors.white),

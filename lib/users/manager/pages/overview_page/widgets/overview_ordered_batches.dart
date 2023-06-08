@@ -23,7 +23,7 @@ class _OverviewOrderedBatchesState extends State<OverviewOrderedBatches> {
 
     return Expanded(
       child: Container(
-        width: (size.width * .9) / 2,
+        width: (size.width * .61) / 2,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(17),
           gradient: LinearGradient(
@@ -36,7 +36,12 @@ class _OverviewOrderedBatchesState extends State<OverviewOrderedBatches> {
           ),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(31),
+          padding: const EdgeInsets.only(
+            left: 31,
+            right: 31,
+            bottom: 20,
+            top: 31,
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

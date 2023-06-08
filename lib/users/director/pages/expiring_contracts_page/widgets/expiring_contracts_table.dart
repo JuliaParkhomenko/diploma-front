@@ -6,14 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:diploma_frontend/constants/constants.dart' as constants;
 
-class ContractsTable extends StatefulWidget {
-  const ContractsTable({super.key});
+class ExpiringContractsTable extends StatefulWidget {
+  const ExpiringContractsTable({super.key});
 
   @override
-  State<ContractsTable> createState() => _ContractsTableState();
+  State<ExpiringContractsTable> createState() => _ExpiringContractsTableState();
 }
 
-class _ContractsTableState extends State<ContractsTable> {
+class _ExpiringContractsTableState extends State<ExpiringContractsTable> {
   int? selectedId;
   @override
   Widget build(BuildContext context) {
@@ -233,7 +233,7 @@ class _ContractsTableState extends State<ContractsTable> {
         style: ButtonStyle(
           padding: MaterialStateProperty.all(EdgeInsets.zero),
           fixedSize: MaterialStatePropertyAll(
-            Size(size.width * .72 - 20, 60),
+            Size(size.width * .72, 60),
           ),
           backgroundColor: const MaterialStatePropertyAll(
             Color(0xfff8a636),

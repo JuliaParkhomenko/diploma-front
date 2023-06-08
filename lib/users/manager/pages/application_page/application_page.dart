@@ -24,7 +24,7 @@ class ApplicationPage extends StatefulWidget {
 class _ApplicationPageState extends State<ApplicationPage> {
   final TextEditingController amountController = TextEditingController();
   final TextEditingController noteController = TextEditingController();
-  String kind = '';
+  String? kind;
   Urgency urgency = Urgency.notUrgent;
 
   Product currentProduct =
@@ -306,11 +306,27 @@ class _ApplicationPageState extends State<ApplicationPage> {
                     .selectedWarehouseIndex,
                 productId: currentProduct.id,
                 amount: int.tryParse(amountController.text) ?? 0,
-                kind: kind,
+                kind: kind ?? '',
                 urgency: urgency,
                 note: noteController.text,
                 onTap: (_) {
-                  setState(() {});
+                  final KindCubit kindCubit =
+                      BlocProvider.of<KindCubit>(context);
+                  kindCubit.fetchKind(1);
+                  final ProductCubit productCubit =
+                      BlocProvider.of<ProductCubit>(context);
+                  noteController.clear();
+                  amountController.clear();
+                  kind = '';
+                  setState(() {
+                    currentProduct = Product(
+                        id: 1,
+                        categoryId: 1,
+                        name: '',
+                        measurement: '',
+                        stocks: []);
+                  });
+                  productCubit.fetchProducts();
                 },
               ),
             ),

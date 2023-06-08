@@ -18,7 +18,7 @@ class OverviewOrderedBatchesTable extends StatelessWidget {
       //Yuliia: it used to be receivedHistoryWidget
       children: [
         Container(
-          width: size.width * .72,
+          width: size.width * .61,
           color: constants.Colors.greyTable,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -30,14 +30,14 @@ class OverviewOrderedBatchesTable extends StatelessWidget {
           ),
         ),
         SizedBox(
-          height: 146, //(size.height - 132) * .4,
+          height: 100, //(size.height - 132) * .4,
           child: ListView.builder(
             itemCount: orderedBatches.length,
             itemBuilder: (context, index) {
               final OrderedBatch orderedBatch = orderedBatches[index];
 
               return Container(
-                width: size.width * .72,
+                width: size.width * .61,
                 color:
                     index % 2 == 0 ? Colors.white : constants.Colors.greyTable,
                 child: Row(
@@ -62,8 +62,8 @@ class OverviewOrderedBatchesTable extends StatelessWidget {
 
   Widget getTitle(Size size, String title, {bool bold = false}) {
     return SizedBox(
-      height: 56,
-      width: size.width * .2 / 2,
+      height: 50,
+      width: size.width * .17 / 2,
       child: Align(
         child: Text(
           title,

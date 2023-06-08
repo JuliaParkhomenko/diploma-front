@@ -1,7 +1,7 @@
 import 'package:diploma_frontend/blocs/product/product_cubit.dart';
-import 'package:diploma_frontend/users/director/pages/add_new_contract/widgets/dialog_textfield.dart';
-import 'package:diploma_frontend/users/director/pages/add_new_contract/widgets/edit_button.dart';
-import 'package:diploma_frontend/users/director/pages/add_new_contract/widgets/products_dropdown.dart';
+import 'package:diploma_frontend/users/director/pages/add_new_contract_page/widgets/dialog_textfield.dart';
+import 'package:diploma_frontend/users/director/pages/add_new_contract_page/widgets/edit_button.dart';
+import 'package:diploma_frontend/users/director/pages/add_new_contract_page/widgets/products_dropdown.dart';
 import 'package:diploma_frontend/users/manager/pages/widgets/info_overlay.dart';
 import 'package:diploma_frontend/models/product.dart';
 import 'package:diploma_frontend/models/supply_condition.dart';

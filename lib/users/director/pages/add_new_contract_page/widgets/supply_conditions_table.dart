@@ -1,6 +1,6 @@
 // ignore_for_file: avoid_bool_literals_in_conditional_expressions
 
-import 'package:diploma_frontend/users/director/pages/add_new_contract/widgets/edit_conditions_dialog.dart';
+import 'package:diploma_frontend/users/director/pages/add_new_contract_page/widgets/edit_conditions_dialog.dart';
 import 'package:diploma_frontend/models/supply_condition.dart';
 import 'package:diploma_frontend/services/language_service/app_localization.dart';
 import 'package:flutter/material.dart';

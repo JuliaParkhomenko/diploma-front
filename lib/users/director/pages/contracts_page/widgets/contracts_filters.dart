@@ -34,23 +34,23 @@ class _ContractsFiltersState extends State<ContractsFilters> {
     final SupplyContractsCubit cubit = BlocProvider.of(context);
     return Row(
       children: [
-        SizedBox(
-          height: 32,
-          width: 200,
-          child: SearchTextfield(
-            hintText: 'Search by supplier name'.tr(context),
-            onChanged: (value) {
-              name = value;
-              cubit.featchContracts(
-                old: widget.old,
-                productName: product,
-                supplierName: name,
-                maker: maker,
-              );
-            },
-          ),
-        ),
-        const SizedBox(width: 30),
+        // SizedBox(
+        //   height: 32,
+        //   width: 200,
+        //   child: SearchTextfield(
+        //     hintText: 'Search by supplier name'.tr(context),
+        //     onChanged: (value) {
+        //       name = value;
+        //       cubit.featchContracts(
+        //         old: widget.old,
+        //         productName: product,
+        //         supplierName: name,
+        //         maker: maker,
+        //       );
+        //     },
+        //   ),
+        // ),
+        // const SizedBox(width: 30),
         SizedBox(
           height: 32,
           width: 200,
