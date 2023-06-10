@@ -23,7 +23,7 @@ class _OverviewOrderedBatchesState extends State<OverviewOrderedBatches> {
 
     return Expanded(
       child: Container(
-        width: (size.width * .61) / 2,
+        width: (size.width * .66) / 2,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(17),
           gradient: LinearGradient(

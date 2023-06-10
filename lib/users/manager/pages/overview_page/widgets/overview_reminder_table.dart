@@ -66,7 +66,7 @@ class OverviewReminderTable extends StatelessWidget {
 
   Widget getTitle(Size size, String title, {bool bold = false}) {
     return SizedBox(
-      height: 54,
+      height: 56,
       width: size.width * .21 / 3,
       child: Align(
         child: Text(

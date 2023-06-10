@@ -22,7 +22,7 @@ class _OverviewReminderState extends State<OverviewReminder> {
     final Size size = MediaQuery.of(context).size;
 
     return Container(
-      width: (size.width * .61) / 2,
+      width: (size.width * .66) / 2,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(17),
         gradient: LinearGradient(

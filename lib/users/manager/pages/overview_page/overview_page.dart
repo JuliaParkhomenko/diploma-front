@@ -12,12 +12,12 @@ class OverviewPage extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         OverviewRecentActions(),
-        SizedBox(width: 16),
+        SizedBox(width: 8),
         Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             OverviewReminder(),
-            SizedBox(height: 16),
+            SizedBox(height: 8),
             OverviewOrderedBatches(),
           ],
         )

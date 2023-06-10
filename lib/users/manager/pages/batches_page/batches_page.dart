@@ -65,6 +65,7 @@ class _BatchesPageState extends State<BatchesPage> {
                     child: SearchTextfield(
                       hintText: 'Product'.tr(context),
                       onChanged: (value) {
+                        productController.text = value;
                         search(cubit);
                       },
                     ),
@@ -76,6 +77,7 @@ class _BatchesPageState extends State<BatchesPage> {
                     child: SearchTextfield(
                       hintText: 'Batch'.tr(context),
                       onChanged: (value) {
+                        batchController.text = value;
                         search(cubit);
                       },
                     ),
@@ -87,6 +89,7 @@ class _BatchesPageState extends State<BatchesPage> {
                     child: SearchTextfield(
                       hintText: 'Kind'.tr(context),
                       onChanged: (value) {
+                        kindController.text = value;
                         search(cubit);
                       },
                     ),

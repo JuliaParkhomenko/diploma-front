@@ -30,7 +30,7 @@ class OverviewOrderedBatchesTable extends StatelessWidget {
           ),
         ),
         SizedBox(
-          height: 100, //(size.height - 132) * .4,
+          height: 110, //(size.height - 132) * .4,
           child: ListView.builder(
             itemCount: orderedBatches.length,
             itemBuilder: (context, index) {
@@ -62,7 +62,7 @@ class OverviewOrderedBatchesTable extends StatelessWidget {
 
   Widget getTitle(Size size, String title, {bool bold = false}) {
     return SizedBox(
-      height: 50,
+      height: 56,
       width: size.width * .17 / 2,
       child: Align(
         child: Text(
