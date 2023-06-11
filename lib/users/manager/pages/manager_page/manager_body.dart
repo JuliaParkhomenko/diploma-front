@@ -88,6 +88,9 @@ class _ManagerBodyState extends State<ManagerBody> {
     if (Routemaster.of(context).currentRoute.fullPath.contains('overview')) {
       return EdgeInsets.zero;
     }
+    if (Routemaster.of(context).currentRoute.fullPath.contains('received')) {
+      return EdgeInsets.zero;
+    }
 
     return const EdgeInsets.all(15);
   }
