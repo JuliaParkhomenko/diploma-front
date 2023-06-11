@@ -29,9 +29,15 @@ class EditButton extends StatelessWidget {
         alignment: Alignment.center,
         height: 40,
         width: 160,
-        child: Text(
-          dialogName.tr(context),
-          style: const TextStyle(color: Colors.white),
+        child: Center(
+          child: Text(
+            dialogName.tr(context),
+            style: const TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontFamily: 'OpenSans',
+            ),
+          ),
         ),
       ),
     );

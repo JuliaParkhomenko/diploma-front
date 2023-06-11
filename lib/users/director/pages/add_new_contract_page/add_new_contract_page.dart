@@ -216,7 +216,7 @@ class _AddNewContractPageState extends State<AddNewContractPage> {
                   height: 40,
                   width: 160,
                   child: Text(
-                    'Add condition'.tr(context),
+                    'Add conditions'.tr(context),
                     style: const TextStyle(color: Colors.white),
                   ),
                 ),

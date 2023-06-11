@@ -1,41 +1,38 @@
-import 'package:diploma_frontend/models/stock.dart';
+import 'package:diploma_frontend/models/category.dart';
 
 class Product {
   final int id;
-  final int categoryId;
-  final String? category;
+  final Category category;
   final String name;
   final String measurement;
-  final List<Stock> stocks;
 
   Product({
     required this.id,
-    required this.categoryId,
-    this.category,
+    required this.category,
     required this.name,
     required this.measurement,
-    required this.stocks,
   });
 
   factory Product.fromJson(Map<String, dynamic> json) {
     return Product(
-      id: json['id'],
-      categoryId: json['categoryId'],
-      name: json['name'],
-      measurement: json['measurement'],
-      stocks: json['stocks'].map<Stock>((e) {
-        return Stock.fromJson(e);
-      }).toList(),
+      id: json['id'] as int,
+      category: Category.fromJson(json['category']),
+      name: json['name'] as String,
+      measurement: json['measurement'] as String,
     );
   }
 
   factory Product.empty() {
     return Product(
       id: -1,
+      category: Category(
+        id: -1,
+        name: '',
+        minTemp: -1,
+        maxTemp: -1,
+      ),
       name: '',
-      categoryId: -1,
       measurement: '',
-      stocks: [],
     );
   }
 }

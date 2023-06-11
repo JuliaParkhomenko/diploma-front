@@ -1,5 +1,6 @@
 import 'package:diploma_frontend/blocs/product/product_cubit.dart';
 import 'package:diploma_frontend/blocs/statistics/statistics_cubit.dart';
+import 'package:diploma_frontend/models/category.dart';
 import 'package:diploma_frontend/users/manager/pages/statistics_page/widgets/line_chart_widget.dart';
 import 'package:diploma_frontend/users/manager/pages/statistics_page/widgets/product_dropdown.dart';
 import 'package:diploma_frontend/models/product.dart';
@@ -16,8 +17,12 @@ class StatisticsPage extends StatefulWidget {
 }
 
 class _StatisticsPageState extends State<StatisticsPage> {
-  Product currentProduct =
-      Product(id: 1, categoryId: 1, name: '', measurement: '', stocks: []);
+  Product currentProduct = Product(
+    id: 1,
+    category: Category(id: 1, name: '', minTemp: -1, maxTemp: -1),
+    name: '',
+    measurement: '',
+  );
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;

@@ -2,6 +2,7 @@ import 'package:diploma_frontend/blocs/kind/kind_cubit.dart';
 import 'package:diploma_frontend/blocs/product/product_cubit.dart';
 import 'package:diploma_frontend/blocs/warehouse/warehouse_cubit.dart';
 import 'package:diploma_frontend/enums/urgency.dart';
+import 'package:diploma_frontend/models/category.dart';
 import 'package:diploma_frontend/models/product.dart';
 import 'package:diploma_frontend/users/manager/pages/application_page/widgets/amount_textfield.dart';
 import 'package:diploma_frontend/users/manager/pages/application_page/widgets/kind_dropdown.dart';
@@ -27,8 +28,17 @@ class _ApplicationPageState extends State<ApplicationPage> {
   String? kind;
   Urgency urgency = Urgency.notUrgent;
 
-  Product currentProduct =
-      Product(id: 1, categoryId: 1, name: '', measurement: '', stocks: []);
+  Product currentProduct = Product(
+    id: 1,
+    category: Category(
+      id: 1,
+      name: '',
+      minTemp: 0,
+      maxTemp: 0,
+    ),
+    name: '',
+    measurement: '',
+  );
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
@@ -320,11 +330,16 @@ class _ApplicationPageState extends State<ApplicationPage> {
                   kind = '';
                   setState(() {
                     currentProduct = Product(
+                      id: 1,
+                      category: Category(
                         id: 1,
-                        categoryId: 1,
                         name: '',
-                        measurement: '',
-                        stocks: []);
+                        minTemp: 0,
+                        maxTemp: 0,
+                      ),
+                      name: '',
+                      measurement: '',
+                    );
                   });
                   productCubit.fetchProducts();
                 },

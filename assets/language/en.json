@@ -87,6 +87,8 @@
     "End date": "End date",
     "Min amount": "Min amount",
     "Max amount": "Max amount",
+    "Max batch": "Max batch",
+    "Min batch": "Min batch",
     "Search by supplier name": "Search by supplier name",
     "Search by product": "Search by product",
     "Search by maker": "Search by maker",
@@ -106,5 +108,12 @@
     "Warehouse name": "Warehouse name",
     "Adding a new supply": "Adding a new supply",
     "Contract number": "Contract number",
-    "Expiring contracts": "Expiring contracts"
+    "Expiring contracts": "Expiring contracts",
+    "Add contract":"Add contract",
+    "Active": "Active",
+    "Past": "Past",
+    "Min amount batch":"Min amount batch",
+    "Max amount batch":"Max amount batch",
+    "Adding contract condition": "Adding contract condition",
+    "Order": "Order"
 }

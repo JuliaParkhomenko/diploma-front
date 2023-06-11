@@ -85,8 +85,10 @@
     "Supplier name": "Ім'я постачальника",
     "Start date": "Дата початку",
     "End date": "Дата закінчення",
-    "Min amount": "Мін сума",
-    "Max amount": "Maкс сума",
+    "Min amount": "Мін кількість",
+    "Max amount": "Maкс кількість",
+    "Max batch": "Maкс обсяг партії",
+    "Min batch": "Мін обсяг партії",
     "Search by supplier name": "Пошук за назвою постачальника",
     "Search by product": "Пошук за товаром",
     "Search by maker": "Пошук за виробником",
@@ -106,5 +108,12 @@
     "Warehouse name": "Назва складу",
     "Adding a new supply": "Створення нової поставки",
     "Contract number": "Номер контракту",
-    "Expiring contracts": "Контракти, що закінчуються"
+    "Expiring contracts": "Контракти, що закінчуються",
+    "Add contract":"Додати контракт",
+    "Active": "Активні",
+    "Past": "Минулі",
+    "Min amount batch":"Мін обсяг партії",
+    "Max amount batch":"Макс обсяг партії",
+    "Adding contract condition": "Додавання умов контракту",
+    "Order": "Замовити"
 }
