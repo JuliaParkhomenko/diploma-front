@@ -18,4 +18,11 @@ class ProductCubit extends Cubit<ProductState> {
       emit(ProductError(e.toString()));
     }
   }
+
+  Future<void> addProduct(Product product) async {
+    try {
+      await _repository.addProduct(product: product);
+      await fetchProducts();
+    } catch (_) {}
+  }
 }
