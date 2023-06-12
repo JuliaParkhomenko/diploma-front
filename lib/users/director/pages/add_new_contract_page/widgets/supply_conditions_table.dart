@@ -116,7 +116,8 @@ class _SupplyConditionsTableState extends State<SupplyConditionsTable> {
             builder: (context) {
               return Dialog(
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8)),
+                  borderRadius: BorderRadius.circular(8),
+                ),
                 child: EditConditionDialog(
                   product: item.productName,
                   kind: item.kind,

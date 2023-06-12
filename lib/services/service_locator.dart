@@ -3,6 +3,7 @@ import 'package:diploma_frontend/repositories/batch_repository/batch_repository.
 import 'package:diploma_frontend/repositories/product_repository/product_repository.dart';
 import 'package:diploma_frontend/repositories/statistics/statistics_repository.dart';
 import 'package:diploma_frontend/repositories/supplier_repository/supplier_repository.dart';
+import 'package:diploma_frontend/repositories/user_repository/user_repository.dart';
 import 'package:diploma_frontend/repositories/warehouse_repository/warehouse_repository.dart';
 import 'package:diploma_frontend/services/app_state_service/app_state_service.dart';
 import 'package:diploma_frontend/services/bloc_service/bloc_service.dart';
@@ -45,6 +46,12 @@ class ServiceLocator {
       ),
     );
 
+    locator.registerSingleton<UserRepository>(
+      UserRepository(
+        GetIt.instance<Database>(),
+      ),
+    );
+
     locator.registerSingleton<SupplierRepository>(
       SupplierRepository(
         GetIt.instance<Database>(),
@@ -69,7 +76,7 @@ class ServiceLocator {
       return service;
     });
 
-    locator.registerSingleton<SignInValidator>(SignInValidator());
+    locator.registerFactory<SignInValidator>(SignInValidator.new);
 
     locator.registerSingleton<EditSupplierValidator>(EditSupplierValidator());
   }
@@ -86,6 +93,7 @@ class ServiceLocator {
       GetIt.instance<SupplierRepository>();
   static StatisticsRepository get statisticsRepository =>
       GetIt.instance<StatisticsRepository>();
+  static UserRepository get userRepository => GetIt.instance<UserRepository>();
 
   // Services
   static AppStateService get appStateService =>

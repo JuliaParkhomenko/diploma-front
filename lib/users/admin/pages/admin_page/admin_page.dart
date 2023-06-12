@@ -1,4 +1,4 @@
-import 'package:diploma_frontend/users/admin/admin_body.dart';
+import 'package:diploma_frontend/users/admin/pages/admin_page/admin_body.dart';
 import 'package:flutter/material.dart';
 
 class AdminPage extends StatelessWidget {

@@ -7,7 +7,7 @@ enum Role {
 extension RoleConverter on String {
   Role getRole() {
     switch (this) {
-      case 'admin':
+      case 'Admin':
         return Role.admin;
       case 'manager':
         return Role.manager;
@@ -23,7 +23,7 @@ extension RoleToString on Role {
   String getName() {
     switch (this) {
       case Role.admin:
-        return 'admin';
+        return 'Admin';
       case Role.manager:
         return 'manager';
       case Role.director:

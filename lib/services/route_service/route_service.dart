@@ -1,3 +1,6 @@
+import 'package:diploma_frontend/users/admin/pages/products_page/products_page.dart';
+import 'package:diploma_frontend/users/admin/pages/users_page/users_page.dart';
+import 'package:diploma_frontend/users/admin/pages/warehouses_page/warehouses_page.dart';
 import 'package:diploma_frontend/users/director/pages/add_new_contract_page/add_new_contract_page.dart';
 import 'package:diploma_frontend/users/director/pages/add_new_supply_page/add_new_supply_page.dart';
 import 'package:diploma_frontend/users/director/pages/applications_page/applications_page.dart';
@@ -9,7 +12,7 @@ import 'package:diploma_frontend/users/director/pages/statistics_page/statistics
     as directorStatisticsPage;
 import 'package:diploma_frontend/users/director/pages/suppliers_page/suppliers_page.dart';
 import 'package:diploma_frontend/users/director/pages/supplies_page/supplies_page.dart';
-import 'package:diploma_frontend/users/admin/admin_page.dart';
+import 'package:diploma_frontend/users/admin/pages/admin_page/admin_page.dart';
 import 'package:diploma_frontend/users/manager/pages/application_page/application_page.dart';
 import 'package:diploma_frontend/users/unuthorized/pages/auth_page/auth_page.dart';
 import 'package:diploma_frontend/users/manager/pages/batches_page/batches_page.dart';
@@ -42,8 +45,18 @@ class RouteService {
   final RouteMap adminMap = RouteMap(
     onUnknownRoute: (_) => const Redirect('/'),
     routes: {
-      '/': (route) => const MaterialPage(
+      '/': (route) => const IndexedPage(
             child: AdminPage(),
+            paths: ['/users', '/warehouses', '/products'],
+          ),
+      '/users': (route) => const MaterialPage(
+            child: UsersPage(),
+          ),
+      '/warehouses': (route) => const MaterialPage(
+            child: WarehousesPage(),
+          ),
+      '/products': (route) => const MaterialPage(
+            child: ProductsPage(),
           ),
     },
   );
@@ -132,9 +145,6 @@ class RouteService {
       '/contracts/add': (route) => const MaterialPage(
             child: AddNewContractPage(),
           ),
-      // '/contracts/expiringContracts': (route) => const MaterialPage(
-      //       child: ExpiringContractsPage(),
-      //     ),
       '/supplies': (route) => const MaterialPage(
             child: SuppliesPage(),
           ),

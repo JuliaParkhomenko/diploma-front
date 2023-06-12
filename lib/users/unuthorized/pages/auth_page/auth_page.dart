@@ -6,12 +6,25 @@ import 'package:flutter/material.dart';
 import 'package:diploma_frontend/constants/constants.dart' as constants;
 import 'package:get_it/get_it.dart';
 
-class AuthPage extends StatelessWidget {
+class AuthPage extends StatefulWidget {
   const AuthPage({super.key});
 
   @override
+  State<AuthPage> createState() => _AuthPageState();
+}
+
+class _AuthPageState extends State<AuthPage> {
+  final SignInValidator validator = GetIt.instance<SignInValidator>();
+
+  @override
+  void dispose() {
+    print('dispose');
+    validator.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final SignInValidator validator = GetIt.instance<SignInValidator>();
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: Column(
@@ -77,19 +90,14 @@ class AuthPage extends StatelessWidget {
             height: 30,
           ),
           StreamBuilder(
-            stream: validator.submitValid,
-            builder: (_, snapshot) {
-              return StreamBuilder(
-                stream: validator.buttonAvailable,
-                builder: (_, AsyncSnapshot<bool> available) {
-                  return SignInButton(
-                    onPressed: () async {
-                      await validator.signIn(context);
-                    },
-                    valid: snapshot.error == null,
-                    tapped: available.data ?? false,
-                  );
+            stream: validator.buttonAvailable,
+            builder: (_, AsyncSnapshot<bool> available) {
+              return SignInButton(
+                onPressed: () async {
+                  await validator.signIn(context);
                 },
+                valid: true,
+                tapped: available.data ?? false,
               );
             },
           ),
