@@ -13,6 +13,8 @@ extension UrgencyConverter on String {
         return Urgency.urgently;
       case 'not urgent':
         return Urgency.notUrgent;
+      case 'notUrgent':
+        return Urgency.notUrgent;
       default:
         return Urgency.urgently;
     }

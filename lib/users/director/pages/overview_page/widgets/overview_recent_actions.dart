@@ -1,3 +1,5 @@
+// ignore_for_file: use_decorated_box
+
 import 'package:diploma_frontend/blocs/user_action/user_action_cubit.dart';
 import 'package:diploma_frontend/blocs/warehouse/warehouse_cubit.dart';
 import 'package:diploma_frontend/services/language_service/app_localization.dart';
@@ -12,7 +14,6 @@ class OverviewRecentActions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 800,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(17),
         gradient: LinearGradient(

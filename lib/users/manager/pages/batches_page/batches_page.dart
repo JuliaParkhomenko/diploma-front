@@ -117,10 +117,9 @@ class _BatchesPageState extends State<BatchesPage> {
               ),
               const SizedBox(height: 16),
               OrderedBatchesView(
+                selected: cubit.orderedBatch?.batchId ?? -1,
                 onClick: (value) {
-                  if (value) {
-                    setState(() {});
-                  }
+                  setState(() {});
                 },
               ),
               const SizedBox(height: 16),

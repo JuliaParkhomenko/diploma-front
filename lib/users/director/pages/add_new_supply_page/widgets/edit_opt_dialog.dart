@@ -54,7 +54,6 @@ class _EditOptDialogState extends State<EditOptDialog> {
                 ),
               ),
               const SizedBox(height: 40),
-              Container(),
               // SizedBox(
               //   width: 350,
               //   child: Row(

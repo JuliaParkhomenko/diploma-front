@@ -1,8 +1,16 @@
+// ignore_for_file: use_build_context_synchronously
+
+import 'package:diploma_frontend/blocs/batch/batch_cubit.dart';
+import 'package:diploma_frontend/blocs/ordered_batches/ordered_batches_cubit.dart';
+import 'package:diploma_frontend/blocs/warehouse/warehouse_cubit.dart';
+import 'package:diploma_frontend/services/service_locator.dart';
 import 'package:diploma_frontend/users/manager/pages/ordered_batch_page/widgets/date_picker_textfield.dart';
-import 'package:diploma_frontend/users/manager/pages/ordered_batch_page/widgets/receive_batch_button.dart';
 import 'package:diploma_frontend/services/language_service/app_localization.dart';
 import 'package:diploma_frontend/constants/constants.dart' as constants;
+import 'package:diploma_frontend/users/manager/pages/widgets/info_overlay.dart';
+import 'package:diploma_frontend/widgets/default_add_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:routemaster/routemaster.dart';
 
 class ReceiveBatchRow extends StatefulWidget {
@@ -60,7 +68,7 @@ class _ReceiveBatchRowState extends State<ReceiveBatchRow> {
                       child: DatePickerTextField(
                         controller: productionDateController,
                         onDateTimeChanged: (value) {
-                          //TODO
+                          prodDate = value;
                         },
                       ),
                     ),
@@ -85,7 +93,7 @@ class _ReceiveBatchRowState extends State<ReceiveBatchRow> {
                       child: DatePickerTextField(
                         controller: expirationDateController,
                         onDateTimeChanged: (value) {
-                          //TODO
+                          expDate = value;
                         },
                       ),
                     ),
@@ -136,14 +144,43 @@ class _ReceiveBatchRowState extends State<ReceiveBatchRow> {
             const SizedBox(height: 64),
             Align(
               alignment: Alignment.centerRight,
-              child: ReceiveBatchButton(
-                batchId: widget.batchId ??
-                    int.parse(Routemaster.of(context)
-                        .currentRoute
-                        .pathParameters['id']!),
-                expirationDate: expDate,
-                productionDate: prodDate,
-                notificationDate: int.parse(reminders.text),
+              child: DefaultAddButton(
+                buttonText: 'Receive batch',
+                onTap: () async {
+                  final int batchId = widget.batchId ??
+                      int.parse(
+                        Routemaster.of(context)
+                            .currentRoute
+                            .pathParameters['id']!,
+                      );
+                  await ServiceLocator.batchRepository.receiveBatch(
+                    batchId: batchId,
+                    productionTime: prodDate,
+                    expirationTime: expDate,
+                    notificationDate: int.parse(reminders.text),
+                  );
+
+                  if (Routemaster.of(context).currentRoute.fullPath ==
+                      '/batches') {
+                    final OrderedBatchesCubit orderedBatchCubit =
+                        BlocProvider.of(context);
+                    orderedBatchCubit.clear();
+                    final WarehouseCubit warehouseCubit =
+                        BlocProvider.of(context);
+                    await orderedBatchCubit
+                        .fetchBatches(warehouseCubit.selectedWarehouseIndex);
+                    showInfoPrikol(
+                        'Batch №{BATCH_ID} has successfully received!'
+                            .tr(context)
+                            .replaceAll('{BATCH_ID}', batchId.toString()),
+                        context);
+                  } else {
+                    final BatchCubit cubit = BlocProvider.of(context);
+                    cubit.clear();
+                    Routemaster.of(context).replace(
+                        '/stocks/product/${Routemaster.of(context).currentRoute.pathParameters['name']}/received/$batchId');
+                  }
+                },
               ),
             ),
           ],

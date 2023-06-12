@@ -6,8 +6,10 @@ import 'package:diploma_frontend/constants/constants.dart' as constants;
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class OrderedBatchesView extends StatelessWidget {
-  final Function(bool) onClick;
-  const OrderedBatchesView({super.key, required this.onClick});
+  final Function(int) onClick;
+  final int selected;
+  const OrderedBatchesView(
+      {super.key, required this.onClick, required this.selected});
 
   @override
   Widget build(BuildContext context) {
@@ -47,14 +49,12 @@ class OrderedBatchesView extends StatelessWidget {
                           final OrderedBatchesCubit cubit =
                               BlocProvider.of(context);
                           cubit.orderedBatch = batch;
-                          onClick(true);
+                          onClick(index);
                         },
                         child: Container(
                           width: size.width * .72,
                           height: 60,
-                          color: index % 2 != 0
-                              ? Colors.white
-                              : constants.Colors.greyTable,
+                          color: getColor(index, batch.batchId),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -79,6 +79,14 @@ class OrderedBatchesView extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Color getColor(int index, int batchId) {
+    if (selected == batchId) {
+      return Colors.orange;
+    } else {
+      return index % 2 != 0 ? Colors.white : constants.Colors.greyTable;
+    }
   }
 
   Widget getTitle(Size size, String title, {bool bold = false}) {

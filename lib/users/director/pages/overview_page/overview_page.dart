@@ -10,7 +10,7 @@ class OverviewPage extends StatelessWidget {
     return const Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        OverviewRecentActions(),
+        Expanded(child: OverviewRecentActions()),
         SizedBox(width: 16),
         OverviewExpiringContracts(),
       ],

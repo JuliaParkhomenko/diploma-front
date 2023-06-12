@@ -1,9 +1,12 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:diploma_frontend/blocs/kind/kind_cubit.dart';
 import 'package:diploma_frontend/blocs/product/product_cubit.dart';
 import 'package:diploma_frontend/blocs/warehouse/warehouse_cubit.dart';
 import 'package:diploma_frontend/enums/urgency.dart';
 import 'package:diploma_frontend/models/category.dart';
 import 'package:diploma_frontend/models/product.dart';
+import 'package:diploma_frontend/services/service_locator.dart';
 import 'package:diploma_frontend/users/manager/pages/application_page/widgets/amount_textfield.dart';
 import 'package:diploma_frontend/users/manager/pages/application_page/widgets/kind_dropdown.dart';
 import 'package:diploma_frontend/users/manager/pages/application_page/widgets/note_textfield.dart';
@@ -11,6 +14,7 @@ import 'package:diploma_frontend/users/manager/pages/application_page/widgets/pr
 import 'package:diploma_frontend/users/manager/pages/application_page/widgets/send_button.dart';
 import 'package:diploma_frontend/users/manager/pages/application_page/widgets/urgency_dropdown.dart';
 import 'package:diploma_frontend/services/language_service/app_localization.dart';
+import 'package:diploma_frontend/users/manager/pages/widgets/info_overlay.dart';
 import 'package:flutter/material.dart';
 import 'package:diploma_frontend/constants/constants.dart' as constants;
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,7 +33,7 @@ class _ApplicationPageState extends State<ApplicationPage> {
   Urgency urgency = Urgency.notUrgent;
 
   Product currentProduct = Product(
-    id: 1,
+    id: 0,
     category: Category(
       id: 1,
       name: '',
@@ -41,7 +45,6 @@ class _ApplicationPageState extends State<ApplicationPage> {
   );
   @override
   Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
@@ -78,9 +81,6 @@ class _ApplicationPageState extends State<ApplicationPage> {
                           fontFamily: 'OpenSans',
                         ),
                       ),
-                      // const SizedBox(
-                      //   width: 20,
-                      // ),
                       BlocBuilder<ProductCubit, ProductState>(
                           builder: (context, state) {
                         if (state is ProductInitial) {
@@ -103,7 +103,10 @@ class _ApplicationPageState extends State<ApplicationPage> {
                               //print(productInd);
                               final KindCubit cubit =
                                   BlocProvider.of<KindCubit>(context);
-                              cubit.fetchKind(productInd);
+                              cubit.fetchKind(state.products
+                                  .firstWhere(
+                                      (element) => element.id == productInd)
+                                  .id);
                               setState(() {
                                 //TODO: index!=id
                                 currentProduct = state.products.firstWhere(
@@ -149,7 +152,7 @@ class _ApplicationPageState extends State<ApplicationPage> {
                         if (state is KindInitial) {
                           final KindCubit cubit =
                               BlocProvider.of<KindCubit>(context);
-                          cubit.fetchKind(1);
+                          cubit.fetchKind(0);
                           return IgnorePointer(
                             child: KindDropdown(
                               onChange: (_) {},
@@ -312,17 +315,22 @@ class _ApplicationPageState extends State<ApplicationPage> {
             child: Align(
               alignment: Alignment.centerRight,
               child: SendButton(
-                warehouseId: BlocProvider.of<WarehouseCubit>(context)
-                    .selectedWarehouseIndex,
-                productId: currentProduct.id,
-                amount: int.tryParse(amountController.text) ?? 0,
-                kind: kind ?? '',
-                urgency: urgency,
-                note: noteController.text,
-                onTap: (_) {
+                onTap: () async {
+                  await ServiceLocator.warehouseRepository.addAplication(
+                    warehouseId: BlocProvider.of<WarehouseCubit>(context)
+                        .selectedWarehouseIndex,
+                    productId: currentProduct.id,
+                    amount: int.tryParse(amountController.text) ?? 0,
+                    kind: kind ?? '',
+                    urgency: urgency,
+                    note: noteController.text,
+                    context: context,
+                  );
+                  showInfoPrikol(
+                      'Application sent successfully'.tr(context), context);
                   final KindCubit kindCubit =
                       BlocProvider.of<KindCubit>(context);
-                  kindCubit.fetchKind(1);
+                  await kindCubit.fetchKind(1);
                   final ProductCubit productCubit =
                       BlocProvider.of<ProductCubit>(context);
                   noteController.clear();
@@ -341,7 +349,7 @@ class _ApplicationPageState extends State<ApplicationPage> {
                       measurement: '',
                     );
                   });
-                  productCubit.fetchProducts();
+                  await productCubit.fetchProducts();
                 },
               ),
             ),

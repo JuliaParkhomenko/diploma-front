@@ -5,11 +5,13 @@ import 'package:diploma_frontend/constants/constants.dart' as constants;
 
 class DefaultCustomTable extends StatelessWidget {
   final DefaultTableHeader header;
+  final DefaultTableHeader? subHeader;
   final List<DefaultTableItem> items;
 
   const DefaultCustomTable({
     super.key,
     required this.header,
+    this.subHeader,
     required this.items,
   });
 
@@ -26,6 +28,20 @@ class DefaultCustomTable extends StatelessWidget {
                     shrinkWrap: true,
                     itemCount: items.length,
                     itemBuilder: (context, index) {
+                      if (index == 0 && subHeader != null) {
+                        return Column(
+                          children: [
+                            subHeader!,
+                            Container(
+                              height: 60,
+                              color: index % 2 != 0
+                                  ? Colors.white
+                                  : constants.Colors.greyTable,
+                              child: items[index],
+                            ),
+                          ],
+                        );
+                      }
                       return Container(
                         height: 60,
                         color: index % 2 != 0
