@@ -7,20 +7,20 @@ import 'package:flutter/material.dart';
 import 'package:diploma_frontend/constants/constants.dart' as constants;
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class EditOptDialog extends StatefulWidget {
+class AddEditOptDialog extends StatefulWidget {
   final OptModel optModel;
   final Function(OptModel) onChange;
-  const EditOptDialog({
+  const AddEditOptDialog({
     super.key,
     required this.onChange,
     required this.optModel,
   });
 
   @override
-  State<EditOptDialog> createState() => _EditOptDialogState();
+  State<AddEditOptDialog> createState() => _AddEditOptDialogState();
 }
 
-class _EditOptDialogState extends State<EditOptDialog> {
+class _AddEditOptDialogState extends State<AddEditOptDialog> {
   late OptModel optModel = widget.optModel;
 
   @override
@@ -44,7 +44,7 @@ class _EditOptDialogState extends State<EditOptDialog> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Editing batch'.tr(context),
+                'Add batch'.tr(context),
                 style: const TextStyle(
                   color: constants.Colors.subtitleTextColor,
                   fontSize: 18,
@@ -80,7 +80,6 @@ class _EditOptDialogState extends State<EditOptDialog> {
                             onChange: (value) {
                               setState(() {
                                 optModel.contract = value;
-                                optModel.price = value.pricePerUnit;
                               });
                             },
                             categories: state.contracts,
@@ -93,7 +92,7 @@ class _EditOptDialogState extends State<EditOptDialog> {
               Align(
                 alignment: Alignment.centerRight,
                 child: DefaultAddButton(
-                  buttonText: 'Edit',
+                  buttonText: 'Add',
                   onTap: () async {
                     widget.onChange(optModel);
                     Navigator.pop(context);

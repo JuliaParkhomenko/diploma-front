@@ -62,13 +62,10 @@ class _ApplicationsPageState extends State<ApplicationsPage> {
               ApplicationButton(
                 onTap: () {
                   if (selectedIdx.isNotEmpty) {
-                    //TODO : ASDADASDASDADS
-
                     selectedOpt = List.generate(
                       selectedIdx.length,
                       (i) => OptModel(
                         application: selectedIdx[i],
-                        percentage: 10,
                         price: null,
                       ),
                     );

@@ -1,5 +1,8 @@
 import 'dart:convert';
+import 'dart:developer';
 
+import 'package:diploma_frontend/models/optimization.dart';
+import 'package:diploma_frontend/models/requests/opt_request.dart';
 import 'package:diploma_frontend/models/statistics.dart';
 import 'package:diploma_frontend/models/user.dart';
 import 'package:diploma_frontend/repositories/statistics/base_statistics_repository.dart';
@@ -67,6 +70,43 @@ class StatisticsRepository implements BaseStatisticsRepository {
       }
       return null;
     } catch (e) {
+      return null;
+    }
+  }
+
+  @override
+  Future<List<Optimization>?> optimization({
+    required List<OptRequest> opt,
+  }) async {
+    try {
+      final User? user = await _database.getUser();
+      final Uri url = Uri.parse(
+        'https://restaurant-warehouse.azurewebsites.net/api/Optimization',
+      );
+      final Map<String, String> headers = {
+        'accept': '*/*',
+        'Content-Type': 'application/json-patch+json',
+        'Authorization': 'Bearer ${user!.token}'
+      };
+
+      final body = jsonEncode(opt.map((e) {
+        return e.toJson();
+      }).toList());
+
+      final response = await http.post(url, headers: headers, body: body);
+
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        return data.map<Optimization>((e) {
+          return Optimization.fromJson(e);
+        }).toList();
+      } else if (response.statusCode == 401) {
+        await ServiceLocator.database.clear();
+        await ServiceLocator.appStateService.logIn();
+      }
+      return null;
+    } catch (error) {
+      log(error.toString());
       return null;
     }
   }

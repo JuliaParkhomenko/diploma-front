@@ -1,3 +1,5 @@
+import 'package:diploma_frontend/models/optimization.dart';
+import 'package:diploma_frontend/models/requests/opt_request.dart';
 import 'package:diploma_frontend/models/statistics.dart';
 
 abstract class BaseStatisticsRepository {
@@ -9,5 +11,9 @@ abstract class BaseStatisticsRepository {
     bool? ordered,
     bool? used,
     bool? writtenOff,
+  });
+
+  Future<List<Optimization>?> optimization({
+    required List<OptRequest> opt,
   });
 }

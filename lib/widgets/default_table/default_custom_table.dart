@@ -1,3 +1,5 @@
+// ignore_for_file: use_colored_box
+
 import 'package:diploma_frontend/widgets/default_table/default_table_header.dart';
 import 'package:diploma_frontend/widgets/default_table/default_table_item.dart';
 import 'package:flutter/material.dart';
@@ -5,13 +7,11 @@ import 'package:diploma_frontend/constants/constants.dart' as constants;
 
 class DefaultCustomTable extends StatelessWidget {
   final DefaultTableHeader header;
-  final DefaultTableHeader? subHeader;
   final List<DefaultTableItem> items;
 
   const DefaultCustomTable({
     super.key,
     required this.header,
-    this.subHeader,
     required this.items,
   });
 
@@ -28,22 +28,7 @@ class DefaultCustomTable extends StatelessWidget {
                     shrinkWrap: true,
                     itemCount: items.length,
                     itemBuilder: (context, index) {
-                      if (index == 0 && subHeader != null) {
-                        return Column(
-                          children: [
-                            subHeader!,
-                            Container(
-                              height: 60,
-                              color: index % 2 != 0
-                                  ? Colors.white
-                                  : constants.Colors.greyTable,
-                              child: items[index],
-                            ),
-                          ],
-                        );
-                      }
                       return Container(
-                        height: 60,
                         color: index % 2 != 0
                             ? Colors.white
                             : constants.Colors.greyTable,

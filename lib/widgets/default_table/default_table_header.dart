@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 
 class DefaultTableHeader extends StatelessWidget {
   final List<String> headers;
+  final Color? color;
   const DefaultTableHeader({
     super.key,
+    this.color,
     required this.headers,
   });
 
@@ -14,30 +16,23 @@ class DefaultTableHeader extends StatelessWidget {
 
     return Container(
       height: 60,
-      color: Colors.white,
+      color: color ?? Colors.white,
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: List.generate(
           headers.length,
-          (index) => Container(
-            alignment: Alignment.centerLeft,
-            width: (size.width * 0.72 - 24) / headers.length,
-            child: Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Text(
-                    headers[index].tr(context),
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'OpenSans',
-                      color: Colors.black,
-                    ),
-                  ),
+          (index) => SizedBox(
+            width: size.width * 0.72 / headers.length,
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Text(
+                headers[index].tr(context),
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'OpenSans',
+                  color: Colors.black,
                 ),
-                const Expanded(
-                  child: SizedBox(),
-                ),
-              ],
+              ),
             ),
           ),
         ),
