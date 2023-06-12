@@ -17,23 +17,27 @@ class DefaultCustomTable extends StatelessWidget {
   Widget build(BuildContext context) {
     return items.isEmpty
         ? header
-        : Column(
-            children: [
-              header,
-              ListView.builder(
-                shrinkWrap: true,
-                itemCount: items.length,
-                itemBuilder: (context, index) {
-                  return Container(
-                    height: 60,
-                    color: index % 2 != 0
-                        ? Colors.white
-                        : constants.Colors.greyTable,
-                    child: items[index],
-                  );
-                },
-              ),
-            ],
+        : Expanded(
+            child: Column(
+              children: [
+                header,
+                Expanded(
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: items.length,
+                    itemBuilder: (context, index) {
+                      return Container(
+                        height: 60,
+                        color: index % 2 != 0
+                            ? Colors.white
+                            : constants.Colors.greyTable,
+                        child: items[index],
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
           );
   }
 }

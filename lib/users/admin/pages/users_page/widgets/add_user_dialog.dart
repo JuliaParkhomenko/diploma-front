@@ -10,17 +10,31 @@ import 'package:diploma_frontend/constants/constants.dart' as constants;
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AddUserDialog extends StatefulWidget {
-  const AddUserDialog({super.key});
+  final String fullName;
+  final Role role;
+  final String email;
+  final String password;
+  final bool edit;
+  final int id;
+  const AddUserDialog({
+    super.key,
+    this.id = 0,
+    required this.edit,
+    this.fullName = '',
+    this.email = '',
+    this.password = '',
+    this.role = Role.admin,
+  });
 
   @override
   State<AddUserDialog> createState() => _AddUserDialogState();
 }
 
 class _AddUserDialogState extends State<AddUserDialog> {
-  String fullName = '';
-  Role role = Role.admin;
-  String email = '';
-  String password = '';
+  late String fullName = widget.fullName;
+  late Role role = widget.role;
+  late String email = widget.email;
+  late String password = widget.password;
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +79,7 @@ class _AddUserDialogState extends State<AddUserDialog> {
                           width: 200,
                           height: 42,
                           child: DialogTextfield(
-                            initialValue: '',
+                            initialValue: fullName,
                             hintText: 'Full name',
                             onChanged: (value) => fullName = value,
                           ),
@@ -81,6 +95,7 @@ class _AddUserDialogState extends State<AddUserDialog> {
                         Text('Role'.tr(context)),
                         const SizedBox(width: 15),
                         RoleDropDown(
+                          initialRole: role,
                           onChange: (value) => role = value,
                         ),
                       ],
@@ -105,7 +120,7 @@ class _AddUserDialogState extends State<AddUserDialog> {
                           width: 200,
                           height: 42,
                           child: DialogTextfield(
-                            initialValue: '',
+                            initialValue: email,
                             hintText: 'Email',
                             onChanged: (value) => email = value,
                           ),
@@ -124,7 +139,7 @@ class _AddUserDialogState extends State<AddUserDialog> {
                           width: 200,
                           height: 42,
                           child: DialogTextfield(
-                            initialValue: '',
+                            initialValue: password,
                             hintText: 'Password',
                             onChanged: (value) => password = value,
                           ),
@@ -138,20 +153,22 @@ class _AddUserDialogState extends State<AddUserDialog> {
               Align(
                 alignment: Alignment.centerRight,
                 child: DefaultAddButton(
-                  buttonText: 'Add new',
+                  buttonText: widget.edit ? 'Edit' : 'Add new',
                   onTap: () async {
-                    final AdminUser user = AdminUser(
-                      id: 0,
-                      fullName: fullName,
-                      email: email,
-                      role: role,
-                    );
-                    final UsersCubit cubit = BlocProvider.of(context);
-                    await cubit
-                        .addUser(user: user, password: password)
-                        .then((value) {
-                      Navigator.pop(context);
-                    });
+                    if (!widget.edit) {
+                      final AdminUser user = AdminUser(
+                        id: 0,
+                        fullName: fullName,
+                        email: email,
+                        role: role,
+                      );
+                      final UsersCubit cubit = BlocProvider.of(context);
+                      await cubit
+                          .addUser(user: user, password: password)
+                          .then((value) {
+                        Navigator.pop(context);
+                      });
+                    } else {}
                   },
                 ),
               ),

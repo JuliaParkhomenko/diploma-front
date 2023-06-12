@@ -2,9 +2,11 @@ import 'package:diploma_frontend/enums/role.dart';
 import 'package:flutter/material.dart';
 
 class RoleDropDown extends StatefulWidget {
+  final Role initialRole;
   final Function(Role) onChange;
   const RoleDropDown({
     super.key,
+    required this.initialRole,
     required this.onChange,
   });
 
@@ -24,6 +26,7 @@ class _RoleDropDownState extends State<RoleDropDown> {
         'label': i.getName(),
       });
     }
+
     super.initState();
   }
 

@@ -16,7 +16,11 @@ class Warehouse {
       id: json['id'],
       name: json['name'],
       address: json['address'],
-      manager: json['managers'][0]['fullName'],
+      manager: json['managers'] == null
+          ? null
+          : (json['managers'] as List).isEmpty
+              ? null
+              : json['managers'][0]['fullName'],
     );
   }
 }

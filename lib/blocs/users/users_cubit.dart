@@ -28,4 +28,13 @@ class UsersCubit extends Cubit<UsersState> {
       await fetchUsers();
     } catch (_) {}
   }
+
+  Future<void> updateUser({
+    required AdminUser user,
+    String? password,
+  }) async {
+    try {
+      // await _repository.
+    } catch (_) {}
+  }
 }

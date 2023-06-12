@@ -58,4 +58,8 @@ class WarehouseCubit extends Cubit<WarehouseState> {
       await fetchWarehousesForAdmin();
     } catch (_) {}
   }
+
+  void clear() {
+    emit(WarehouseInitial());
+  }
 }

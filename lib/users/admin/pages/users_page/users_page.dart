@@ -43,7 +43,7 @@ class UsersPage extends StatelessWidget {
               ),
               DefaultAddButton(
                 buttonText: 'Add user',
-                onTap: () async => _openAddDialog(context),
+                onTap: () async => _openAddDialog(context, edit: false),
               ),
             ],
           ),
@@ -79,12 +79,17 @@ class UsersPage extends StatelessWidget {
     );
   }
 
-  Future<void> _openAddDialog(BuildContext context) async {
+  Future<void> _openAddDialog(
+    BuildContext context, {
+    required bool edit,
+  }) async {
     await showDialog(
       context: context,
       useRootNavigator: true,
       builder: (context) {
-        return const AddUserDialog();
+        return AddUserDialog(
+          edit: edit,
+        );
       },
     );
   }

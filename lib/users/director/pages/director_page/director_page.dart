@@ -7,8 +7,20 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:routemaster/routemaster.dart';
 import 'package:diploma_frontend/constants/constants.dart' as constants;
 
-class DirectorPage extends StatelessWidget {
+class DirectorPage extends StatefulWidget {
   const DirectorPage({super.key});
+
+  @override
+  State<DirectorPage> createState() => _DirectorPageState();
+}
+
+class _DirectorPageState extends State<DirectorPage> {
+  @override
+  void initState() {
+    final WarehouseCubit cubit = BlocProvider.of(context);
+    cubit.clear();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
