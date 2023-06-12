@@ -7,6 +7,7 @@ class Application {
   final String kind;
   final String urgency;
   final String note;
+  final int productId;
   final String status;
   final int userId;
   final String userName;
@@ -16,6 +17,7 @@ class Application {
   Application({
     required this.id,
     required this.stockId,
+    required this.productId,
     required this.amount,
     required this.productName,
     required this.productMeasurement,
@@ -38,6 +40,7 @@ class Application {
       productMeasurement: json['productMeasurement'],
       kind: json['kind'],
       urgency: json['urgency'],
+      productId: json['productId'],
       note: json['note'],
       status: json['status'],
       userId: json['userId'],
@@ -57,6 +60,7 @@ class Application {
       'kind': kind,
       'urgency': urgency,
       'note': note,
+      'productId': productId,
       'status': status,
       'userId': userId,
       'userName': userName,

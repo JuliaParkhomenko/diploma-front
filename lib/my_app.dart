@@ -7,6 +7,7 @@ import 'package:diploma_frontend/blocs/expiring_contracts/expiring_contracts_cub
 import 'package:diploma_frontend/blocs/kind/kind_cubit.dart';
 import 'package:diploma_frontend/blocs/localization/localization_cubit.dart';
 import 'package:diploma_frontend/blocs/manager/manager_cubit.dart';
+import 'package:diploma_frontend/blocs/opt_contract/opt_contract_cubit.dart';
 import 'package:diploma_frontend/blocs/ordered_batches/ordered_batches_cubit.dart';
 import 'package:diploma_frontend/blocs/product/product_cubit.dart';
 import 'package:diploma_frontend/blocs/specific_product/specific_product_cubit.dart';
@@ -98,6 +99,11 @@ class _MyAppState extends State<MyApp> {
         BlocProvider<ManagerCubit>(
           create: (context) => ManagerCubit(
             ServiceLocator.userRepository,
+          ),
+        ),
+        BlocProvider<OptContractCubit>(
+          create: (context) => OptContractCubit(
+            ServiceLocator.productRepository,
           ),
         ),
         BlocProvider<CategoryCubit>(

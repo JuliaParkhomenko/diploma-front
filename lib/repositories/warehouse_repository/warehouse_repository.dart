@@ -302,7 +302,7 @@ class WarehouseRepository implements BaseWarehouseRepository {
   }
 
   @override
-  Future<void> declineApplications({required List<int> ids}) async {
+  Future<void> declineApplications({required List<Application> ids}) async {
     try {
       final User? user = await _database.getUser();
       final Uri url = Uri.parse(
@@ -316,7 +316,9 @@ class WarehouseRepository implements BaseWarehouseRepository {
       };
 
       final body = jsonEncode({
-        'applicationIds': ids,
+        'applicationIds': ids.map<int>((e) {
+          return e.id;
+        }).toList(),
       });
 
       final response = await http.post(url, headers: headers, body: body);

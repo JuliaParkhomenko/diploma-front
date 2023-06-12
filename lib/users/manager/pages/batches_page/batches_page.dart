@@ -42,6 +42,11 @@ class _BatchesPageState extends State<BatchesPage> {
     return BlocBuilder<OrderedBatchesCubit, OrderedBatchesState>(
       builder: (context, state) {
         final OrderedBatchesCubit cubit = BlocProvider.of(context);
+
+        if (state is OrderedBatchesInitial) {
+          final WarehouseCubit warehouseCubit = BlocProvider.of(context);
+          cubit.fetchBatches(warehouseCubit.selectedWarehouseIndex);
+        }
         return Padding(
           padding: const EdgeInsets.all(16),
           child: Column(

@@ -48,7 +48,7 @@ abstract class BaseWarehouseRepository {
     required bool past,
   });
 
-  Future<void> declineApplications({required List<int> ids});
+  Future<void> declineApplications({required List<Application> ids});
 }
 
 // ————▄▀▀▀▄░————

@@ -1,28 +1,11 @@
-import 'package:diploma_frontend/blocs/supply_contracts/supply_contracts_cubit.dart';
 import 'package:diploma_frontend/constants/constants.dart' as constants;
-import 'package:diploma_frontend/models/supply_contract.dart';
 import 'package:diploma_frontend/services/language_service/app_localization.dart';
 import 'package:diploma_frontend/users/director/pages/expiring_contracts_page/widgets/expiring_contracts_table.dart';
-import 'package:diploma_frontend/widgets/default_table/default_custom_table.dart';
-import 'package:diploma_frontend/widgets/default_table/default_table_header.dart';
-import 'package:diploma_frontend/widgets/default_table/default_table_item.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:routemaster/routemaster.dart';
 
 class ExpiringContractsPage extends StatelessWidget {
   const ExpiringContractsPage({super.key});
-
-  static const DefaultTableHeader _header = DefaultTableHeader(
-    headers: [
-      'Contract number',
-      'Supplier',
-      'Min amount',
-      'Max amount',
-      'Start date',
-      'End date',
-    ],
-  );
 
   @override
   Widget build(BuildContext context) {

@@ -1,4 +1,7 @@
 import 'package:diploma_frontend/blocs/application/application_cubit.dart';
+import 'package:diploma_frontend/models/application.dart';
+import 'package:diploma_frontend/models/opt_model.dart';
+import 'package:diploma_frontend/users/director/pages/add_new_supply_page/helper/opt_helper.dart';
 import 'package:diploma_frontend/users/director/pages/applications_page/widgets/application_button.dart';
 import 'package:diploma_frontend/users/director/pages/applications_page/widgets/application_switcher.dart';
 import 'package:diploma_frontend/users/director/pages/applications_page/widgets/application_table.dart';
@@ -7,6 +10,7 @@ import 'package:diploma_frontend/services/service_locator.dart';
 import 'package:flutter/material.dart';
 import 'package:diploma_frontend/constants/constants.dart' as constants;
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:routemaster/routemaster.dart';
 
 class ApplicationsPage extends StatefulWidget {
   const ApplicationsPage({super.key});
@@ -17,10 +21,9 @@ class ApplicationsPage extends StatefulWidget {
 
 class _ApplicationsPageState extends State<ApplicationsPage> {
   bool past = false;
-  List<int> selectedIdx = [];
+  List<Application> selectedIdx = [];
   @override
   Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
     return Padding(
       padding: const EdgeInsets.all(15),
       child: Column(
@@ -57,7 +60,21 @@ class _ApplicationsPageState extends State<ApplicationsPage> {
               ),
               const SizedBox(width: 128),
               ApplicationButton(
-                onTap: () {},
+                onTap: () {
+                  if (selectedIdx.isNotEmpty) {
+                    //TODO : ASDADASDASDADS
+
+                    selectedOpt = List.generate(
+                      selectedIdx.length,
+                      (i) => OptModel(
+                        application: selectedIdx[i],
+                        percentage: 10,
+                        price: null,
+                      ),
+                    );
+                    Routemaster.of(context).push('/supplies/add');
+                  }
+                },
                 text: 'Order'.tr(context),
                 color: constants.Colors.main,
               ),

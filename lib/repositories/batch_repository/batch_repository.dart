@@ -24,9 +24,26 @@ class BatchRepository implements BaseBatchRepository {
     try {
       final User? user = await _database.getUser();
 
-      final Uri url = Uri.parse(
-        'https://restaurant-warehouse.azurewebsites.net/api/Batch/forStock?stockId=$id&batchId=$batchId&kind=$kind&maker=$maker&status=$status',
-      );
+      String url =
+          'https://restaurant-warehouse.azurewebsites.net/api/Batch/forStock?stockId=$id';
+
+      if (batchId != '') {
+        url += '&batchId=$batchId';
+      }
+
+      if (kind != '') {
+        url += '&kind=$kind';
+      }
+
+      if (maker != '') {
+        url += '&maker=$maker';
+      }
+
+      if (status != '') {
+        url += '&status=$status';
+      }
+
+      final Uri uri = Uri.parse(url);
 
       final Map<String, String> headers = {
         'accept': '*/*',
@@ -34,7 +51,7 @@ class BatchRepository implements BaseBatchRepository {
         'Authorization': 'Bearer ${user!.token}'
       };
 
-      final response = await http.get(url, headers: headers);
+      final response = await http.get(uri, headers: headers);
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
         return data.map<Batch>((e) {
@@ -189,9 +206,22 @@ class BatchRepository implements BaseBatchRepository {
     try {
       final User? user = await _database.getUser();
 
-      final Uri url = Uri.parse(
-        'https://restaurant-warehouse.azurewebsites.net/api/Batch/orderedBatches?warehouseId=$warehouseId&productName=$productName&batchId=$batchId&kind=$kind',
-      );
+      String url =
+          'https://restaurant-warehouse.azurewebsites.net/api/Batch/orderedBatches?warehouseId=$warehouseId';
+
+      if (productName != '') {
+        url += '&productName=$productName';
+      }
+
+      if (batchId != '') {
+        url += '&batchId=$batchId';
+      }
+
+      if (kind != '') {
+        url += '&kind=$kind';
+      }
+
+      final Uri uri = Uri.parse(url);
 
       final Map<String, String> headers = {
         'accept': '*/*',
@@ -199,7 +229,7 @@ class BatchRepository implements BaseBatchRepository {
         'Authorization': 'Bearer ${user!.token}'
       };
 
-      final response = await http.get(url, headers: headers);
+      final response = await http.get(uri, headers: headers);
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
         return data.map<OrderedBatch>((e) {

@@ -48,9 +48,10 @@ class _StocksPageState extends State<StocksPage> {
                 child: SearchTextfield(
                   hintText: 'Search by name'.tr(context),
                   onChanged: (value) async {
-                    final StockCubit cubit =
+                    final StockCubit stockCubit =
                         BlocProvider.of<StockCubit>(context);
-                    await cubit.fetchStocks(3, value);
+                    await stockCubit.fetchStocks(
+                        cubit.selectedWarehouseIndex, value);
                   },
                 ),
               ),

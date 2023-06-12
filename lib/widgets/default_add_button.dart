@@ -5,8 +5,10 @@ import 'package:diploma_frontend/constants/constants.dart' as constants;
 class DefaultAddButton extends StatelessWidget {
   final Function() onTap;
   final String buttonText;
+  final bool isActive;
   const DefaultAddButton({
     super.key,
+    this.isActive = true,
     required this.buttonText,
     required this.onTap,
   });
@@ -14,10 +16,12 @@ class DefaultAddButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      onPressed: onTap,
+      onPressed: isActive ? onTap : null,
       style: ButtonStyle(
         overlayColor: MaterialStateProperty.all(Colors.green.withOpacity(0.7)),
-        backgroundColor: MaterialStateProperty.all(constants.Colors.main),
+        backgroundColor: MaterialStateProperty.all(
+          isActive ? constants.Colors.main : Colors.grey,
+        ),
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
           RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),

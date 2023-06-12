@@ -26,12 +26,14 @@ class _SpecificProductTableState extends State<SpecificProductTable> {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
-
     return BlocBuilder<SpecificProductCubit, SpecificProductState>(
       builder: (BuildContext context, SpecificProductState state) {
+        final SpecificProductCubit cubit =
+            BlocProvider.of<SpecificProductCubit>(context);
+        if (state is SpecificProductInitial) {
+          cubit.fetchBatches(widget.stockId);
+        }
         if (state is SpecificProductLoading) {
-          final SpecificProductCubit cubit =
-              BlocProvider.of<SpecificProductCubit>(context);
           return Align(
             alignment: Alignment.topCenter,
             child: SizedBox(

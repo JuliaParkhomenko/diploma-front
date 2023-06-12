@@ -8,7 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:diploma_frontend/constants/constants.dart' as constants;
 
 class ApplicationTable extends StatefulWidget {
-  final Function(List<int>) indexChanges;
+  final Function(List<Application>) indexChanges;
   final String name;
   final bool past;
   const ApplicationTable({
@@ -153,10 +153,10 @@ class _ApplicationTableState extends State<ApplicationTable> {
       });
     }
 
-    final List<int> result = [];
+    final List<Application> result = [];
 
     for (final i in list) {
-      result.add(i.id);
+      result.add(i);
     }
 
     widget.indexChanges(result);
