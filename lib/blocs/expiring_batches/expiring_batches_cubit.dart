@@ -23,7 +23,6 @@ class ExpiringBatchesCubit extends Cubit<ExpiringBatchesState> {
     }
   }
 
-//TODO: Yuliia`s question. Do we need this function?
   void clear() {
     emit(ExpiringBatchesInitial());
   }
