@@ -27,7 +27,7 @@ class ReceivedHistoryWidget extends StatelessWidget {
           ),
         ),
         SizedBox(
-          height: 230, //(size.height - 132) * .4,
+          height: 180, //(size.height - 132) * .4,
           child: ListView.builder(
             itemCount: batches.length,
             itemBuilder: (context, index) {
