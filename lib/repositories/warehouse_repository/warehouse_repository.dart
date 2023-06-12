@@ -3,7 +3,6 @@ import 'dart:developer';
 
 import 'package:diploma_frontend/models/application.dart';
 import 'package:diploma_frontend/models/stock.dart';
-import 'package:diploma_frontend/models/storage.dart';
 import 'package:diploma_frontend/models/user.dart';
 import 'package:diploma_frontend/models/user_action.dart';
 import 'package:diploma_frontend/models/warehouse.dart';
@@ -80,11 +79,42 @@ class WarehouseRepository implements BaseWarehouseRepository {
   }
 
   @override
+  Future<List<Warehouse>?> getWarehousesForAdmin() async {
+    try {
+      final User? user = await _database.getUser();
+      final Uri url = Uri.parse(
+        'https://restaurant-warehouse.azurewebsites.net/api/Warehouse/forAdmin',
+      );
+      final Map<String, String> headers = {
+        'accept': '*/*',
+        'Content-Type': 'application/json-patch+json',
+        'Authorization': 'Bearer ${user!.token}'
+      };
+      final response = await http.get(url, headers: headers);
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        return data.map<Warehouse>((e) {
+          return Warehouse.fromJson(e);
+        }).toList();
+      } else if (response.statusCode == 401) {
+        await ServiceLocator.database.clear();
+        await ServiceLocator.appStateService.logIn();
+      }
+      return null;
+    } catch (e) {
+      log(e.toString());
+      return null;
+    }
+  }
+
+  @override
   Future<int?> add({
     required String name,
     required String address,
-    required List<String> managers,
-    required List<Storage> storages,
+    required int manager,
+    required int maxFamount,
+    required int maxCamount,
+    required int maxFridgeAmount,
   }) async {
     try {
       final User? user = await Database().getUser();
@@ -102,10 +132,10 @@ class WarehouseRepository implements BaseWarehouseRepository {
       final body = jsonEncode({
         'name': name,
         'address': address,
-        'managers': managers,
-        'storages': storages.map((e) {
-          return e.toJson();
-        }).toList(),
+        'managers': [manager],
+        'freezerMax': maxFamount,
+        'fridgeMax': maxFridgeAmount,
+        'containersMax': maxCamount,
       });
 
       final response = await http.post(url, headers: headers, body: body);

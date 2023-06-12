@@ -47,6 +47,39 @@ class UserRepository extends BaseUserRepository {
   }
 
   @override
+  Future<List<AdminUser>?> getManagers() async {
+    try {
+      final User? user = await _database.getUser();
+
+      final Uri url = Uri.parse(
+        'https://restaurant-warehouse.azurewebsites.net/api/User/managers',
+      );
+
+      final Map<String, String> headers = {
+        'accept': '*/*',
+        'Content-Type': 'application/json-patch+json',
+        'Authorization': 'Bearer ${user!.token}'
+      };
+
+      final response = await http.get(url, headers: headers);
+
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        return data.map<AdminUser>((e) {
+          return AdminUser.fromJson(e);
+        }).toList();
+      } else if (response.statusCode == 401) {
+        await ServiceLocator.database.clear();
+        await ServiceLocator.appStateService.logIn();
+      }
+      return null;
+    } catch (e) {
+      log(e.toString());
+      return null;
+    }
+  }
+
+  @override
   Future<void> addUser({
     required AdminUser aUser,
     required String password,

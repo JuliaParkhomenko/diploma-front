@@ -2,8 +2,10 @@ class Warehouse {
   final int id;
   final String name;
   final String address;
+  final String? manager;
 
   Warehouse({
+    this.manager,
     required this.id,
     required this.name,
     required this.address,
@@ -14,6 +16,7 @@ class Warehouse {
       id: json['id'],
       name: json['name'],
       address: json['address'],
+      manager: json['managers'][0]['fullName'],
     );
   }
 }

@@ -25,4 +25,37 @@ class WarehouseCubit extends Cubit<WarehouseState> {
       emit(WarehouseError(e.toString()));
     }
   }
+
+  Future<void> fetchWarehousesForAdmin() async {
+    try {
+      emit(WarehouseLoading());
+      final List<Warehouse>? warehouses =
+          await _repository.getWarehousesForAdmin();
+
+      emit(WarehouseLoaded(warehouses!));
+    } catch (e) {
+      emit(WarehouseError(e.toString()));
+    }
+  }
+
+  Future<void> addWarehouse({
+    required String name,
+    required String address,
+    required num manager,
+    required num maxFamount,
+    required num maxCamount,
+    required num maxFridgeAmount,
+  }) async {
+    try {
+      await _repository.add(
+        name: name,
+        address: address,
+        manager: manager.toInt(),
+        maxFamount: maxFamount.toInt(),
+        maxCamount: maxCamount.toInt(),
+        maxFridgeAmount: maxFridgeAmount.toInt(),
+      );
+      await fetchWarehousesForAdmin();
+    } catch (_) {}
+  }
 }

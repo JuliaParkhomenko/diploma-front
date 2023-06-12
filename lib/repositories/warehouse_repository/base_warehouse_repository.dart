@@ -1,7 +1,6 @@
 import 'package:diploma_frontend/enums/urgency.dart';
 import 'package:diploma_frontend/models/application.dart';
 import 'package:diploma_frontend/models/stock.dart';
-import 'package:diploma_frontend/models/storage.dart';
 import 'package:diploma_frontend/models/user_action.dart';
 import 'package:diploma_frontend/models/warehouse.dart';
 import 'package:flutter/material.dart';
@@ -17,9 +16,13 @@ abstract class BaseWarehouseRepository {
   Future<int?> add({
     required String name,
     required String address,
-    required List<String> managers, //email
-    required List<Storage> storages,
+    required int manager,
+    required int maxFamount,
+    required int maxCamount,
+    required int maxFridgeAmount,
   });
+
+  Future<List<Warehouse>?> getWarehousesForAdmin();
 
   Future<void> assignManager({
     required int warehouseId,
