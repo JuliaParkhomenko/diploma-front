@@ -66,9 +66,7 @@ class _ManagerBodyState extends State<ManagerBody> {
                   width: size.width,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(17),
-                    color: getColor(indexedPage.index)
-                        ? constants.Colors.managerWarehouseMain.withOpacity(0.6)
-                        : null,
+                    color: getColor(indexedPage.index),
                   ),
                   height: size.height - 105,
                   padding: getPadding(),
@@ -92,18 +90,26 @@ class _ManagerBodyState extends State<ManagerBody> {
       return EdgeInsets.zero;
     }
 
+    if (Routemaster.of(context).currentRoute.path.contains('reminder')) {
+      return EdgeInsets.zero;
+    }
+
     return const EdgeInsets.all(15);
   }
 
-  bool getColor(int index) {
+  Color? getColor(int index) {
     if (index == 0) {
-      return false;
+      return null;
     }
 
     if (Routemaster.of(context).currentRoute.path.contains('received')) {
-      return false;
+      return null;
     }
 
-    return true;
+    if (Routemaster.of(context).currentRoute.path.contains('reminder')) {
+      return null;
+    }
+
+    return constants.Colors.managerWarehouseMain.withOpacity(0.6);
   }
 }

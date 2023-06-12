@@ -11,50 +11,53 @@ class ExpiredBatchesTable extends StatelessWidget {
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
 
-    return Column(
-      children: [
-        Container(
-          width: size.width,
-          color: constants.Colors.greyTable,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              getTitle(size, 'Batch'.tr(context), bold: true),
-              getTitle(size, 'Product'.tr(context), bold: true),
-              getTitle(size, 'Amount'.tr(context), bold: true),
-              getTitle(size, 'Expiration date'.tr(context), bold: true),
-            ],
+    return Expanded(
+      child: Column(
+        children: [
+          Container(
+            width: size.width,
+            color: constants.Colors.greyTable,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                getTitle(size, 'Batch'.tr(context), bold: true),
+                getTitle(size, 'Product'.tr(context), bold: true),
+                getTitle(size, 'Amount'.tr(context), bold: true),
+                getTitle(size, 'Expiration date'.tr(context), bold: true),
+              ],
+            ),
           ),
-        ),
-        SizedBox(
-          height: size.height * .72, //(size.height - 132) * .4,
-          child: ListView.builder(
-            itemCount: expiredBatches.length,
-            itemBuilder: (context, index) {
-              final ExpiringBatch expiredBatch = expiredBatches[index];
+          Flexible(
+            child: ListView.builder(
+              shrinkWrap: true,
+              itemCount: expiredBatches.length,
+              itemBuilder: (context, index) {
+                final ExpiringBatch expiredBatch = expiredBatches[index];
 
-              return Container(
-                width: size.width * .72,
-                color:
-                    index % 2 == 0 ? Colors.white : constants.Colors.greyTable,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    getTitle(size, expiredBatch.batchId.toString()),
-                    getTitle(size, expiredBatch.productName),
-                    getTitle(size, expiredBatch.amount.toString()),
-                    getTitle(
-                        size,
-                        expiredBatch.expirationDate
-                            .toString()
-                            .substring(0, 10)),
-                  ],
-                ),
-              );
-            },
+                return Container(
+                  width: size.width * .72,
+                  color: index % 2 == 0
+                      ? Colors.white
+                      : constants.Colors.greyTable,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      getTitle(size, expiredBatch.batchId.toString()),
+                      getTitle(size, expiredBatch.productName),
+                      getTitle(size, expiredBatch.amount.toString()),
+                      getTitle(
+                          size,
+                          expiredBatch.expirationDate
+                              .toString()
+                              .substring(0, 10)),
+                    ],
+                  ),
+                );
+              },
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 

@@ -11,58 +11,61 @@ class ExpiringBatchesTable extends StatelessWidget {
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
 
-    return Column(
-      children: [
-        Container(
-          width: size.width,
-          color: constants.Colors.greyTable,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              getTitle(size, 'Batch'.tr(context), bold: true),
-              getTitle(size, 'Product'.tr(context), bold: true),
-              getTitle(size, 'Amount'.tr(context), bold: true),
-              getTitle(size, 'Use in days'.tr(context), bold: true),
-              getTitle(size, 'Expiration date'.tr(context), bold: true),
-            ],
+    return Expanded(
+      child: Column(
+        children: [
+          Container(
+            width: size.width,
+            color: constants.Colors.greyTable,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                getTitle(size, 'Batch'.tr(context), bold: true),
+                getTitle(size, 'Product'.tr(context), bold: true),
+                getTitle(size, 'Amount'.tr(context), bold: true),
+                getTitle(size, 'Use in days'.tr(context), bold: true),
+                getTitle(size, 'Expiration date'.tr(context), bold: true),
+              ],
+            ),
           ),
-        ),
-        SizedBox(
-          height: size.height * .72, //(size.height - 132) * .4,
-          child: ListView.builder(
-            itemCount: expiringBatches.length,
-            itemBuilder: (context, index) {
-              final ExpiringBatch expiringBatch = expiringBatches[index];
+          Flexible(
+            child: ListView.builder(
+              shrinkWrap: true,
+              itemCount: expiringBatches.length,
+              itemBuilder: (context, index) {
+                final ExpiringBatch expiringBatch = expiringBatches[index];
 
-              return Container(
-                width: size.width * .72,
-                color:
-                    index % 2 == 0 ? Colors.white : constants.Colors.greyTable,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    getTitle(size, expiringBatch.batchId.toString()),
-                    getTitle(size, expiringBatch.productName),
-                    getTitle(size, expiringBatch.amount.toString()),
-                    getTitle(
-                        size,
-                        (expiringBatch.expirationDate
-                                .difference(DateTime.now())
-                                .inDays)
-                            .toString()
-                            .split('.')[0]),
-                    getTitle(
-                        size,
-                        expiringBatch.expirationDate
-                            .toString()
-                            .substring(0, 10)),
-                  ],
-                ),
-              );
-            },
+                return Container(
+                  width: size.width * .72,
+                  color: index % 2 == 0
+                      ? Colors.white
+                      : constants.Colors.greyTable,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      getTitle(size, expiringBatch.batchId.toString()),
+                      getTitle(size, expiringBatch.productName),
+                      getTitle(size, expiringBatch.amount.toString()),
+                      getTitle(
+                          size,
+                          (expiringBatch.expirationDate
+                                  .difference(DateTime.now())
+                                  .inDays)
+                              .toString()
+                              .split('.')[0]),
+                      getTitle(
+                          size,
+                          expiringBatch.expirationDate
+                              .toString()
+                              .substring(0, 10)),
+                    ],
+                  ),
+                );
+              },
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
