@@ -17,6 +17,13 @@ class SuppliesTable extends StatefulWidget {
 }
 
 class _SuppliesTableState extends State<SuppliesTable> {
+  @override
+  void initState() {
+    final BatchSupplyCubit cubit = BlocProvider.of(context);
+    cubit.featchSupplies();
+    super.initState();
+  }
+
   int? selectedId;
   @override
   Widget build(BuildContext context) {
