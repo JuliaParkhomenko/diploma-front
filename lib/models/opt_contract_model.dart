@@ -1,12 +1,12 @@
 class OptContractModel {
-  final int id;
-  final int supplyContractId;
-  final int productId;
-  final String kind;
-  final String maker;
-  final int pricePerUnit;
-  final int minAmount;
-  final int maxAmount;
+  int id;
+  int supplyContractId;
+  int productId;
+  String kind;
+  String maker;
+  int pricePerUnit;
+  int minAmount;
+  int maxAmount;
 
   OptContractModel({
     required this.id,

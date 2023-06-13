@@ -10,26 +10,11 @@ part 'statistics_state.dart';
 class StatisticsCubit extends Cubit<StatisticsState> {
   final StatisticsRepository _repository;
   StatisticsCubit(this._repository) : super(StatisticsInitial());
-  Future<void> fetchStatistics({
-    int? warehouseId,
-    int? productId,
-    DateTime? dateFrom,
-    DateTime? dateTo,
-    bool ordered = false,
-    bool used = false,
-    bool writtenOff = false,
-  }) async {
+  Future<void> fetchStatistics(int warehouseId) async {
     try {
       emit(StatisticsLoading());
-      final Statistics? statistics = await _repository.product(
-        warehouseId: warehouseId,
-        productId: productId,
-        dateFrom: dateFrom,
-        dateTo: dateTo,
-        ordered: ordered,
-        used: used,
-        writtenOff: writtenOff,
-      );
+      final List<Statistics>? statistics =
+          await _repository.product(warehouseId: warehouseId);
       emit(StatisticsLoaded(statistics!));
     } catch (_) {
       log(_.toString());

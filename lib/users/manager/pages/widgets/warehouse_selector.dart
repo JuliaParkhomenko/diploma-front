@@ -1,5 +1,6 @@
 import 'package:diploma_frontend/blocs/expiring_batches/expiring_batches_cubit.dart';
 import 'package:diploma_frontend/blocs/ordered_batches/ordered_batches_cubit.dart';
+import 'package:diploma_frontend/blocs/statistics/statistics_cubit.dart';
 import 'package:diploma_frontend/blocs/stock/stock_cubit.dart';
 import 'package:diploma_frontend/blocs/user_action/user_action_cubit.dart';
 import 'package:diploma_frontend/blocs/warehouse/warehouse_cubit.dart';
@@ -35,6 +36,7 @@ class _WarehouseSelectorState extends State<WarehouseSelector> {
     orderedBatchesCubit.fetchBatches(widget.warehouses.first.id);
     final UserActionCubit userActionCubit =
         BlocProvider.of<UserActionCubit>(context);
+
     userActionCubit.fetchUserActions(widget.warehouses.first.id);
     super.initState();
   }
@@ -112,6 +114,8 @@ class _WarehouseSelectorState extends State<WarehouseSelector> {
           userActionCubit.fetchUserActions(
             BlocProvider.of<WarehouseCubit>(context).selectedWarehouseIndex,
           );
+          final StatisticsCubit statisticsCubit = BlocProvider.of(context);
+          statisticsCubit.fetchStatistics(cubit.selectedWarehouseIndex);
           orderedBatchesCubit.fetchBatches(int.parse(newValue));
           setState(() {
             value = newValue;

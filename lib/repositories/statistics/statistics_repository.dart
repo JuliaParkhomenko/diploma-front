@@ -15,54 +15,26 @@ class StatisticsRepository implements BaseStatisticsRepository {
   StatisticsRepository(this._database);
 
   @override
-  Future<Statistics?> product({
-    int? warehouseId,
-    int? productId,
-    DateTime? dateFrom,
-    DateTime? dateTo,
-    bool? ordered,
-    bool? used,
-    bool? writtenOff,
-  }) async {
+  Future<List<Statistics>?> product({required int warehouseId}) async {
     try {
       final User? user = await _database.getUser();
-      String url =
-          'https://restaurant-warehouse.azurewebsites.net/api/Statistics/product?';
-      /*if (warehouseId != null) {
-        url += 'WarehouseId=$warehouseId';
-      }
-      if (productId != null) {
-        url += '&ProductId=$productId';
-      }
-      if (dateFrom != null) {
-        url += '&DateFrom=$dateFrom';
-      }
-      if (dateTo != null) {
-        url += '&DateTo=$dateTo';
-      }
-      if (ordered != null) {
-        url += '&Ordered=$ordered';
-      }
-      if (used != null) {
-        url += '&Used=$used';
-      }
-      if (writtenOff != null) {
-        url += '&WrittenOff=$writtenOff';
-      }*/
-      url +=
-          'WarehouseId=3&ProductId=1&DateFrom=05-05-2020&DateTo=05-07-2023&Ordered=true&Used=true&WrittenOff=true';
-      final Uri uri = Uri.parse(url);
+
+      final Uri uri = Uri.parse(
+          'https://restaurant-warehouse.azurewebsites.net/api/Statistics/general?WarehouseId=$warehouseId');
+
       final Map<String, String> headers = {
         'accept': '*/*',
         'Content-Type': 'application/json-patch+json',
         'Authorization': 'Bearer ${user!.token}'
       };
 
-      final response = await http.post(uri, headers: headers);
-      print(response.body);
+      final response = await http.get(uri, headers: headers);
+
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
-        return Statistics.fromJson(data);
+        return data.map<Statistics>((e) {
+          return Statistics.fromJson(e);
+        }).toList();
       }
       if (response.statusCode == 401) {
         await ServiceLocator.database.clear();

@@ -21,7 +21,7 @@ dependencies:
   loading_animation_widget: ^1.2.0+4
   translit: ^2.0.1
   intl: ^0.18.0
-  fl_chart: ^0.62.0
+  syncfusion_flutter_charts: ^21.2.9
   rxdart: ^0.27.7
   popup_menu_2: ^0.0.7
   get_it: ^7.6.0

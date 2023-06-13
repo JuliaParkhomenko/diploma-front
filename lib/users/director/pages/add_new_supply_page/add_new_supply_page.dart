@@ -200,8 +200,8 @@ class _AddNewSupplyPageState extends State<AddNewSupplyPage> {
               child: DefaultAddButton(
                 buttonText: 'Apply',
                 onTap: () {
-                  selectedOpt.clear();
-                  for (final i in optimizationHelpers) {
+                  for (final i in selectedOpt) {
+                    // i.contract = optimizationHelpers.first.
                     // selectedOpt.add(
                     // OptModel(
                     //   contract: OptContractModel(

@@ -77,17 +77,7 @@ class _AuthPageState extends State<AuthPage> {
             },
           ),
           const SizedBox(
-            height: 30,
-          ),
-          Text(
-            'Forgot your password?'.tr(context),
-            style: const TextStyle(
-              decoration: TextDecoration.underline,
-              fontFamily: 'OpenSans',
-            ),
-          ),
-          const SizedBox(
-            height: 30,
+            height: 60,
           ),
           StreamBuilder(
             stream: validator.buttonAvailable,

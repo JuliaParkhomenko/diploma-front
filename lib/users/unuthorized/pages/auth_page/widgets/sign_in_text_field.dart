@@ -19,7 +19,9 @@ class SignInTextField extends StatelessWidget {
     return TextField(
       onChanged: onChanged,
       decoration: InputDecoration(
-        prefixIcon: const Icon(Icons.lock),
+        prefixIcon: Icon(
+          obscureText ? Icons.lock : Icons.email,
+        ),
         hintText: hintText, // Placeholder text
         border: const OutlineInputBorder(),
         focusedBorder: OutlineInputBorder(

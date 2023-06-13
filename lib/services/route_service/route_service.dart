@@ -8,8 +8,7 @@ import 'package:diploma_frontend/users/director/pages/contracts_page/contracts_p
 import 'package:diploma_frontend/users/director/pages/expiring_contracts_page/expiring_contracts_page.dart';
 import 'package:diploma_frontend/users/director/pages/overview_page/overview_page.dart'
     as directorOverviewPage;
-import 'package:diploma_frontend/users/director/pages/statistics_page/statistics_page.dart'
-    as directorStatisticsPage;
+
 import 'package:diploma_frontend/users/director/pages/suppliers_page/suppliers_page.dart';
 import 'package:diploma_frontend/users/director/pages/supplies_page/supplies_page.dart';
 import 'package:diploma_frontend/users/admin/pages/admin_page/admin_page.dart';
@@ -26,8 +25,7 @@ import 'package:diploma_frontend/users/manager/pages/received_batch_page/receive
 import 'package:diploma_frontend/users/manager/pages/reminders_page/reminders_page.dart';
 import 'package:diploma_frontend/users/manager/pages/specific_product/specific_product_page.dart';
 import 'package:diploma_frontend/users/manager/pages/splash_page/splash_page.dart';
-import 'package:diploma_frontend/users/manager/pages/statistics_page/statistics_page.dart'
-    as managerStatisticsPage;
+import 'package:diploma_frontend/users/manager/pages/statistics_page/statistics_page.dart';
 import 'package:diploma_frontend/users/manager/pages/stocks_page/stocks_page.dart';
 import 'package:flutter/material.dart';
 import 'package:routemaster/routemaster.dart';
@@ -106,7 +104,7 @@ class RouteService {
             child: RemindersPage(),
           ),
       '/statistics': (route) => const MaterialPage(
-            child: managerStatisticsPage.StatisticsPage(),
+            child: StatisticsPage(),
           ),
       '/application': (route) => const MaterialPage(
             child: ApplicationPage(),
@@ -155,7 +153,7 @@ class RouteService {
             child: ApplicationsPage(),
           ),
       '/statistics': (route) => const MaterialPage(
-            child: directorStatisticsPage.StatisticsPage(),
+            child: StatisticsPage(),
           ),
     },
   );
