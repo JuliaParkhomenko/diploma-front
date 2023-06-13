@@ -32,8 +32,8 @@ class _RemindersPageState extends State<RemindersPage>
           gradient: LinearGradient(
             colors: [
               controller.index == 0
-                  ? Colors.orange.withOpacity(.2)
-                  : Colors.red.withOpacity(.2),
+                  ? Colors.orange.withOpacity(.25)
+                  : Colors.red.withOpacity(.25),
               controller.index == 0
                   ? Colors.orangeAccent.withOpacity(.5)
                   : Colors.redAccent.withOpacity(.5),
@@ -42,48 +42,51 @@ class _RemindersPageState extends State<RemindersPage>
         ),
         height: size.height - 105,
         padding: const EdgeInsets.all(15),
-        child: Column(
-          children: [
-            SizedBox(
-              height: 32,
-              child: TabBar(
-                controller: controller,
-                tabs: [
-                  Tab(
-                    child: Text(
-                      'Expiration date is coming up'.tr(context),
-                      style: const TextStyle(
-                        color: Colors.black,
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              SizedBox(
+                height: 32,
+                child: TabBar(
+                  controller: controller,
+                  tabs: [
+                    Tab(
+                      child: Text(
+                        'Expiration date is coming up'.tr(context),
+                        style: const TextStyle(
+                          color: Colors.black,
+                        ),
                       ),
                     ),
-                  ),
-                  Tab(
-                    child: Text(
-                      'Expiration date has passed'.tr(context),
-                      style: const TextStyle(
-                        color: Colors.black,
+                    Tab(
+                      child: Text(
+                        'Expiration date has passed'.tr(context),
+                        style: const TextStyle(
+                          color: Colors.black,
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-            Expanded(
-              child: TabBarView(
-                controller: controller,
-                children: const [
-                  Padding(
-                    padding: EdgeInsets.only(top: 18),
-                    child: ExpiringBatchesWidget(),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 18),
-                    child: ExpiredBatchesWidget(),
-                  ),
-                ],
+              Expanded(
+                child: TabBarView(
+                  controller: controller,
+                  children: const [
+                    Padding(
+                      padding: EdgeInsets.only(top: 18),
+                      child: ExpiringBatchesWidget(),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 18),
+                      child: ExpiredBatchesWidget(),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

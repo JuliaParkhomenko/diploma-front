@@ -115,5 +115,13 @@
     "Min amount batch":"Min amount batch",
     "Max amount batch":"Max amount batch",
     "Adding contract condition": "Adding contract condition",
-    "Order": "Order"
+    "Order": "Order",
+    "Expiration date is coming up":"Expiration date is coming up",
+    "Expiration date has passed": "Expiration date has passed",
+    "Total cost": "Total cost",
+    "Optimize": "Optimize",
+    "Active application": "Active applications",
+    "Past application": "Past applications",
+    "Decline": "Decline",
+    "Manager": "Manager"
 }

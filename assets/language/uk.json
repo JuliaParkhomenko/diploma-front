@@ -115,5 +115,13 @@
     "Min amount batch":"Мін обсяг партії",
     "Max amount batch":"Макс обсяг партії",
     "Adding contract condition": "Додавання умов контракту",
-    "Order": "Замовити"
+    "Order": "Замовити",
+    "Expiration date is coming up":"Термін придатності майже сплинув",
+    "Expiration date has passed": "Термін придатності сплинув",
+    "Total cost": "Загальна вартість",
+    "Optimize": "Оптимізувати",
+    "Active application": "Активні запити",
+    "Past application": "Минулі запити",
+    "Decline": "Відхилити",
+    "Manager": "Менеджер"
 }
