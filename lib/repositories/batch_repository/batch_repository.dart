@@ -4,6 +4,7 @@ import 'package:diploma_frontend/models/batch.dart';
 import 'package:diploma_frontend/models/batch_supply.dart';
 import 'package:diploma_frontend/models/expiring_batch.dart';
 import 'package:diploma_frontend/models/ordered_batch.dart';
+import 'package:diploma_frontend/models/requests/opt_request.dart';
 import 'package:diploma_frontend/models/user.dart';
 import 'package:diploma_frontend/repositories/batch_repository/base_batch_repository.dart';
 import 'package:diploma_frontend/services/database/database.dart';
@@ -349,6 +350,36 @@ class BatchRepository implements BaseBatchRepository {
     } catch (e) {
       log(e.toString());
       return null;
+    }
+  }
+
+  @override
+  Future<void> addBatch({required List<OptRequest> requests}) async {
+    try {
+      final User? user = await _database.getUser();
+
+      final Uri url = Uri.parse(
+        'https://restaurant-warehouse.azurewebsites.net/api/Batch/add',
+      );
+
+      final Map<String, String> headers = {
+        'accept': '*/*',
+        'Content-Type': 'application/json-patch+json',
+        'Authorization': 'Bearer ${user!.token}'
+      };
+
+      final body = jsonEncode(requests.map((e) {
+        return e.toJson();
+      }).toList());
+
+      final response = await http.post(url, headers: headers, body: body);
+
+      if (response.statusCode == 401) {
+        await ServiceLocator.database.clear();
+        await ServiceLocator.appStateService.logIn();
+      }
+    } catch (e) {
+      log(e.toString());
     }
   }
 }

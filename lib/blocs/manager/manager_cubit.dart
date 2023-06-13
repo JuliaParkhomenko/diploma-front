@@ -15,4 +15,8 @@ class ManagerCubit extends Cubit<ManagerState> {
       emit(ManagerLoaded(managers!));
     } catch (_) {}
   }
+
+  void clear() {
+    emit(ManagerInitial());
+  }
 }

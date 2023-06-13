@@ -1,3 +1,4 @@
+import 'package:diploma_frontend/services/language_service/app_localization.dart';
 import 'package:flutter/material.dart';
 
 class ApplicationSwitcher extends StatefulWidget {
@@ -14,7 +15,9 @@ class _ApplicationSwitcherState extends State<ApplicationSwitcher> {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Text(past ? 'Past' : 'Active'),
+        Text(
+          past ? 'Past'.tr(context) : 'Active'.tr(context),
+        ),
         Switch(
           value: past,
           onChanged: (value) {

@@ -1,4 +1,5 @@
 import 'package:diploma_frontend/services/app_state_service/app_state_service.dart';
+import 'package:diploma_frontend/services/bloc_service/bloc_service.dart';
 import 'package:diploma_frontend/services/service_locator.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -29,7 +30,7 @@ class DestinationWidget extends StatelessWidget {
         onTap: () async {
           if (pageIndex == -1) {
             await ServiceLocator.database.clear();
-            // ignore: use_build_context_synchronously
+            BlocService().clearCubits(context);
             await Provider.of<AppStateService>(context, listen: false).logIn();
           }
 

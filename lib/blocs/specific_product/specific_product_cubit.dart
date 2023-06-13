@@ -37,6 +37,10 @@ class SpecificProductCubit extends Cubit<SpecificProductState> {
     }
   }
 
+  void clear() {
+    emit(SpecificProductInitial());
+  }
+
   void filterBatches(SpecificProductFilter filter, List<Batch> list) {
     if (filter == SpecificProductFilter.amountDown) {
       list.sort((a, b) => b.amount.compareTo(a.amount));

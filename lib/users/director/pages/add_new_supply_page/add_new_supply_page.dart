@@ -1,11 +1,15 @@
 import 'package:diploma_frontend/blocs/opt_contract/opt_contract_cubit.dart';
 import 'package:diploma_frontend/models/application.dart';
+import 'package:diploma_frontend/models/opt_contract_model.dart';
+import 'package:diploma_frontend/models/opt_model.dart';
 import 'package:diploma_frontend/models/optimization.dart';
 import 'package:diploma_frontend/models/requests/opt_request.dart';
 import 'package:diploma_frontend/services/language_service/app_localization.dart';
 import 'package:diploma_frontend/services/service_locator.dart';
 import 'package:diploma_frontend/users/director/pages/add_new_supply_page/helper/opt_helper.dart';
+import 'package:diploma_frontend/users/director/pages/add_new_supply_page/widgets/add_opt_dialog.dart';
 import 'package:diploma_frontend/users/director/pages/add_new_supply_page/widgets/edit_opt_dialog.dart';
+import 'package:diploma_frontend/users/manager/pages/widgets/info_overlay.dart';
 import 'package:diploma_frontend/widgets/default_add_button.dart';
 import 'package:diploma_frontend/widgets/default_table/default_custom_table.dart';
 import 'package:diploma_frontend/widgets/default_table/default_table_header.dart';
@@ -61,7 +65,9 @@ class _AddNewSupplyPageState extends State<AddNewSupplyPage> {
                 children: [
                   DefaultAddButton(
                     buttonText: 'Add new',
-                    onTap: () {},
+                    onTap: () async {
+                      await showAddDialog();
+                    },
                   ),
                   const SizedBox(width: 15),
                   DefaultAddButton(
@@ -98,7 +104,16 @@ class _AddNewSupplyPageState extends State<AddNewSupplyPage> {
                   DefaultAddButton(
                     isActive: selectedOpt.isNotEmpty,
                     buttonText: 'Order',
-                    onTap: () {},
+                    onTap: () async {
+                      await ServiceLocator.batchRepository
+                          .addBatch(
+                            requests: fromOptModel(selectedOpt),
+                          )
+                          .then((value) => showInfoPrikol(
+                                'Batches were successfully ordered',
+                                context,
+                              ));
+                    },
                   ),
                 ],
               ),
@@ -200,20 +215,59 @@ class _AddNewSupplyPageState extends State<AddNewSupplyPage> {
               child: DefaultAddButton(
                 buttonText: 'Apply',
                 onTap: () {
-                  for (final i in selectedOpt) {
-                    // i.contract = optimizationHelpers.first.
-                    // selectedOpt.add(
-                    // OptModel(
-                    //   contract: OptContractModel(
-                    //     id: i.
-                    //   ),
-                    //   application: Application(
-                    //     id: i.applicationId ,
-                    //   ),
-                    //   price: i.price,
-                    // ),
-                    // );
+                  final List<OptModel> result = [];
+                  int i = 0;
+                  for (; i < selectedOpt.length; i++) {
+                    OptModel opt = selectedOpt[i];
+                    opt = OptModel.fromOptimization(
+                      opt,
+                      optimizationHelpers[i],
+                    );
+                    result.add(opt);
+                    i++;
                   }
+                  i--;
+                  if (optimizationHelpers.length > i) {
+                    for (; i < optimizationHelpers.length; i++) {
+                      final Optimization optimization = optimizationHelpers[i];
+                      result.add(
+                        OptModel(
+                          price: optimization.price,
+                          contract: OptContractModel(
+                            id: optimization.conditionId,
+                            supplyContractId: -1,
+                            productId: optimization.productId ?? -1,
+                            kind: optimization.kind,
+                            maker: optimization.maker,
+                            pricePerUnit: optimization.price,
+                            minAmount: optimization.minAmount,
+                            maxAmount: optimization.maxAmount,
+                          ),
+                          application: Application(
+                            id: optimization.applicationId ?? -1,
+                            stockId: -1,
+                            productId: optimization.productId ?? -1,
+                            amount: optimization.amount,
+                            productName: optimization.productName,
+                            productMeasurement: '',
+                            kind: '',
+                            urgency: '',
+                            note: '',
+                            status: '',
+                            userId: -1,
+                            userName: '',
+                            warehouseId: optimization.warehouseId,
+                            warehouseName: optimization.warehouseName,
+                          ),
+                        ),
+                      );
+                    }
+                  }
+
+                  setState(() {
+                    selectedOpt = result;
+                    optimizationHelpers.clear();
+                  });
                 },
               ),
             ),
@@ -236,6 +290,24 @@ class _AddNewSupplyPageState extends State<AddNewSupplyPage> {
             });
           },
           optModel: selectedOpt[index],
+        );
+      },
+    );
+  }
+
+  Future<void> showAddDialog() async {
+    final OptContractCubit cubit = BlocProvider.of(context);
+    cubit.clear();
+    await showDialog(
+      context: context,
+      useRootNavigator: true,
+      builder: (context) {
+        return AddOptDialog(
+          onChange: (value) {
+            setState(() {
+              selectedOpt.add(value);
+            });
+          },
         );
       },
     );

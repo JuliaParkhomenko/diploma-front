@@ -19,6 +19,10 @@ class UsersCubit extends Cubit<UsersState> {
     }
   }
 
+  void clear() {
+    emit(UsersInitial());
+  }
+
   Future<void> addUser({
     required AdminUser user,
     required String password,

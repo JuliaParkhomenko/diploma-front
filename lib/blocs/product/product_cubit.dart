@@ -25,4 +25,8 @@ class ProductCubit extends Cubit<ProductState> {
       await fetchProducts();
     } catch (_) {}
   }
+
+  void clear() {
+    emit(ProductInitial());
+  }
 }

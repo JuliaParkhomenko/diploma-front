@@ -61,6 +61,8 @@ class _ApplicationsPageState extends State<ApplicationsPage> {
               const SizedBox(width: 128),
               ApplicationButton(
                 onTap: () {
+                  selectedOpt.clear();
+                  optimizationHelpers.clear();
                   if (selectedIdx.isNotEmpty) {
                     selectedOpt = List.generate(
                       selectedIdx.length,
@@ -69,6 +71,7 @@ class _ApplicationsPageState extends State<ApplicationsPage> {
                         price: null,
                       ),
                     );
+
                     Routemaster.of(context).push('/supplies/add');
                   }
                 },

@@ -1,4 +1,5 @@
 import 'package:diploma_frontend/blocs/batch_supply/batch_supply_cubit.dart';
+import 'package:diploma_frontend/users/director/pages/add_new_supply_page/helper/opt_helper.dart';
 import 'package:diploma_frontend/users/manager/pages/stocks_page/widgets/search_textfield.dart';
 import 'package:diploma_frontend/services/language_service/app_localization.dart';
 import 'package:diploma_frontend/widgets/default_add_button.dart';
@@ -63,6 +64,8 @@ class _SuppliesFiltersState extends State<SuppliesFilters> {
           DefaultAddButton(
             buttonText: 'Add new',
             onTap: () {
+              selectedOpt.clear();
+              optimizationHelpers.clear();
               Routemaster.of(context).push('/supplies/add');
             },
           ),
