@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:diploma_frontend/blocs/application/application_cubit.dart';
 import 'package:diploma_frontend/models/application.dart';
 import 'package:diploma_frontend/models/opt_model.dart';
@@ -28,7 +30,6 @@ class _ApplicationsPageState extends State<ApplicationsPage> {
       padding: const EdgeInsets.all(15),
       child: Column(
         children: [
-          //TODO add to lang
           Row(
             children: [
               Text(

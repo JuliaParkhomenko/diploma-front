@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:diploma_frontend/blocs/supplier/supplier_cubit.dart';
 import 'package:diploma_frontend/blocs/supply_contracts/supply_contracts_cubit.dart';
 import 'package:diploma_frontend/services/service_locator.dart';

@@ -37,8 +37,6 @@ class _BatchesPageState extends State<BatchesPage> {
 
   @override
   Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
-
     return BlocBuilder<OrderedBatchesCubit, OrderedBatchesState>(
       builder: (context, state) {
         final OrderedBatchesCubit cubit = BlocProvider.of(context);

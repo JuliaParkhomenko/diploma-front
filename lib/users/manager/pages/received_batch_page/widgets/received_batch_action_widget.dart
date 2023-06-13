@@ -89,6 +89,7 @@ class _ReceivedBatchActionWidgetState extends State<ReceivedBatchActionWidget> {
                   await ServiceLocator.batchRepository.useBatch(
                       id: widget.batch.id,
                       amount: int.tryParse(controller.text) ?? 0);
+                  // ignore: use_build_context_synchronously
                   final BatchCubit cubit = BlocProvider.of(context);
                   cubit.clear();
                 },

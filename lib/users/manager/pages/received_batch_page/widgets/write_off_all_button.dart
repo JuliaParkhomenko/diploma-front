@@ -16,6 +16,7 @@ class WriteOffAllButton extends StatelessWidget {
     return InkWell(
       onTap: () async {
         await ServiceLocator.batchRepository.writeOffAll(id: id);
+        // ignore: use_build_context_synchronously
         final BatchCubit cubit = BlocProvider.of(context);
         cubit.clear();
       },
@@ -24,12 +25,10 @@ class WriteOffAllButton extends StatelessWidget {
         height: 40,
         width: 160,
         decoration: BoxDecoration(
-          //TODO change color
           color: Colors.redAccent,
           border: Border.all(),
           borderRadius: BorderRadius.circular(10),
         ),
-        //TODO add style
         child: Text(
           'Write off all'.tr(context),
           style: const TextStyle(color: Colors.white),

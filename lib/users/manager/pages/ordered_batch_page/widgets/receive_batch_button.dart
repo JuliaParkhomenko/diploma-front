@@ -64,7 +64,6 @@ class ReceiveBatchButton extends StatelessWidget {
           border: Border.all(),
           borderRadius: BorderRadius.circular(10),
         ),
-        //TODO add style (what I should change)
         child: Text(
           'Receive batch'.tr(context),
           style: const TextStyle(color: Colors.white),

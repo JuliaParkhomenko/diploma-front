@@ -33,8 +33,6 @@ class _SpecificProductPageState extends State<SpecificProductPage> {
 
   @override
   Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
-
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(

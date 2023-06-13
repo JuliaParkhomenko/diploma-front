@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:diploma_frontend/models/product.dart';
 import 'package:diploma_frontend/repositories/product_repository/product_repository.dart';
+// ignore: depend_on_referenced_packages
 import 'package:meta/meta.dart';
 
 part 'product_state.dart';

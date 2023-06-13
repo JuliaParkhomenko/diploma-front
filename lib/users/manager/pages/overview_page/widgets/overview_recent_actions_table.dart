@@ -1,3 +1,5 @@
+// ignore_for_file: use_colored_box
+
 import 'package:diploma_frontend/enums/action_status.dart';
 import 'package:diploma_frontend/enums/action_type.dart';
 import 'package:diploma_frontend/models/user_action.dart';

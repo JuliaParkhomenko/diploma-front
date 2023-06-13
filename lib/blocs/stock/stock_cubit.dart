@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:diploma_frontend/enums/stocks_filter.dart';
 import 'package:diploma_frontend/models/stock.dart';
 import 'package:diploma_frontend/repositories/warehouse_repository/warehouse_repository.dart';
+// ignore: depend_on_referenced_packages
 import 'package:meta/meta.dart';
 
 part 'stock_state.dart';

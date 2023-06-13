@@ -108,7 +108,6 @@ class _ApplicationPageState extends State<ApplicationPage> {
                                       (element) => element.id == productInd)
                                   .id);
                               setState(() {
-                                //TODO: index!=id
                                 currentProduct = state.products.firstWhere(
                                     (element) => element.id == productInd);
                               });

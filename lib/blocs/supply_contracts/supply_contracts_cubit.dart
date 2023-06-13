@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:diploma_frontend/models/supply_contract.dart';
 import 'package:diploma_frontend/repositories/supplier_repository/supplier_repository.dart';
+// ignore: depend_on_referenced_packages
 import 'package:meta/meta.dart';
 
 part 'supply_contracts_state.dart';

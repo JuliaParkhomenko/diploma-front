@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:diploma_frontend/models/expiring_batch.dart';
 import 'package:diploma_frontend/repositories/batch_repository/batch_repository.dart';
+// ignore: depend_on_referenced_packages
 import 'package:meta/meta.dart';
 
 part 'expiring_batches_state.dart';

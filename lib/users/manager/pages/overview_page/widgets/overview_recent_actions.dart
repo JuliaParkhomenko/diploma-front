@@ -13,7 +13,7 @@ class OverviewRecentActions extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.zero,
-      padding: const EdgeInsets.all(0),
+      padding: EdgeInsets.zero,
       width: 800,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(17),

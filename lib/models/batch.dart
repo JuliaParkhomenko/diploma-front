@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_null_aware_operators
+
 import 'package:diploma_frontend/enums/action_status.dart';
 import 'package:diploma_frontend/models/batch_audit.dart';
 import 'package:flutter/material.dart';

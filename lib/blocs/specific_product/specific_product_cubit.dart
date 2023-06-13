@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:diploma_frontend/enums/specific_product_filter.dart';
 import 'package:diploma_frontend/models/batch.dart';
 import 'package:diploma_frontend/repositories/batch_repository/batch_repository.dart';
+// ignore: depend_on_referenced_packages
 import 'package:meta/meta.dart';
 
 part 'specific_product_state.dart';

@@ -7,7 +7,7 @@ import 'package:diploma_frontend/users/director/pages/applications_page/applicat
 import 'package:diploma_frontend/users/director/pages/contracts_page/contracts_page.dart';
 import 'package:diploma_frontend/users/director/pages/expiring_contracts_page/expiring_contracts_page.dart';
 import 'package:diploma_frontend/users/director/pages/overview_page/overview_page.dart'
-    as directorOverviewPage;
+    as director_overview_page;
 
 import 'package:diploma_frontend/users/director/pages/suppliers_page/suppliers_page.dart';
 import 'package:diploma_frontend/users/director/pages/supplies_page/supplies_page.dart';
@@ -20,7 +20,7 @@ import 'package:diploma_frontend/users/unuthorized/pages/landing_page/landing_pa
 import 'package:diploma_frontend/users/manager/pages/manager_page/manager_page.dart';
 import 'package:diploma_frontend/users/manager/pages/ordered_batch_page/ordered_batch_page.dart';
 import 'package:diploma_frontend/users/manager/pages/overview_page/overview_page.dart'
-    as managerOverviewPage;
+    as manager_overview_page;
 import 'package:diploma_frontend/users/manager/pages/received_batch_page/received_batch_page.dart';
 import 'package:diploma_frontend/users/manager/pages/reminders_page/reminders_page.dart';
 import 'package:diploma_frontend/users/manager/pages/specific_product/specific_product_page.dart';
@@ -74,7 +74,7 @@ class RouteService {
             ],
           ),
       '/overview': (route) => const MaterialPage(
-            child: managerOverviewPage.OverviewPage(),
+            child: manager_overview_page.OverviewPage(),
           ),
       '/stocks': (route) => const MaterialPage(
             child: StocksPage(),
@@ -127,7 +127,7 @@ class RouteService {
             ],
           ),
       '/overview': (route) => const MaterialPage(
-            child: directorOverviewPage.OverviewPage(),
+            child: director_overview_page.OverviewPage(),
           ),
       '/overview/expiringContracts': (route) => const MaterialPage(
             child: ExpiringContractsPage(),

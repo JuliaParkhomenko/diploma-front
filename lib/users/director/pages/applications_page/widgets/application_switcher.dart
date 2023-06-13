@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_positional_boolean_parameters
+
 import 'package:diploma_frontend/services/language_service/app_localization.dart';
 import 'package:flutter/material.dart';
 

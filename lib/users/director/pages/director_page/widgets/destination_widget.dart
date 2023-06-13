@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:diploma_frontend/services/app_state_service/app_state_service.dart';
 import 'package:diploma_frontend/services/bloc_service/bloc_service.dart';
 import 'package:diploma_frontend/services/service_locator.dart';

@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_positional_boolean_parameters
+
 import 'package:diploma_frontend/blocs/supply_contracts/supply_contracts_cubit.dart';
 import 'package:diploma_frontend/users/manager/pages/stocks_page/widgets/search_textfield.dart';
 import 'package:diploma_frontend/services/language_service/app_localization.dart';

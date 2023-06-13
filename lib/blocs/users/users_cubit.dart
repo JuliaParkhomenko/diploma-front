@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:diploma_frontend/models/admin_user.dart';
 import 'package:diploma_frontend/repositories/user_repository/user_repository.dart';
+// ignore: depend_on_referenced_packages
 import 'package:meta/meta.dart';
 
 part 'users_state.dart';

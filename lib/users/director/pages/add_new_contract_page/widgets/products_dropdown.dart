@@ -22,7 +22,6 @@ class _ProductsDropdownState extends State<ProductsDropdown> {
   final List<Map<String, String>> products = [];
   @override
   void initState() {
-    print(value);
     for (final i in widget.products) {
       products.add({
         'value': i.id.toString(),

@@ -15,7 +15,6 @@ class OrderedBatchPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
     final String productName =
         Routemaster.of(context).currentRoute.pathParameters['name'].toString();
 

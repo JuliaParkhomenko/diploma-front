@@ -18,7 +18,6 @@ class _AuthPageState extends State<AuthPage> {
 
   @override
   void dispose() {
-    print('dispose');
     validator.dispose();
     super.dispose();
   }

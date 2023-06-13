@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:diploma_frontend/models/statistics.dart';
 import 'package:diploma_frontend/repositories/statistics/statistics_repository.dart';
+// ignore: depend_on_referenced_packages
 import 'package:meta/meta.dart';
 
 part 'statistics_state.dart';

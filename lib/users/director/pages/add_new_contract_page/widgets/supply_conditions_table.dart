@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_bool_literals_in_conditional_expressions
+// ignore_for_file: avoid_bool_literals_in_conditional_expressions, unnecessary_statements
 
 import 'package:diploma_frontend/users/director/pages/add_new_contract_page/widgets/edit_conditions_dialog.dart';
 import 'package:diploma_frontend/models/supply_condition.dart';

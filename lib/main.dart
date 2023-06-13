@@ -10,7 +10,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   ServiceLocator.setupLocators();
   if (kDebugMode) {
-    await Database().getUser().then((value) => print(value?.token));
+    await Database().getUser().then((value) => debugPrint(value?.token));
   }
 
   runApp(

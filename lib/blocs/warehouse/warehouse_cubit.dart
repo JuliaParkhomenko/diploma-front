@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:diploma_frontend/models/warehouse.dart';
 import 'package:diploma_frontend/repositories/warehouse_repository/warehouse_repository.dart';
+// ignore: depend_on_referenced_packages
 import 'package:meta/meta.dart';
 
 part 'warehouse_state.dart';
