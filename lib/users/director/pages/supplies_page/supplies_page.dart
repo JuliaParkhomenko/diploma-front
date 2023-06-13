@@ -4,9 +4,15 @@ import 'package:diploma_frontend/services/language_service/app_localization.dart
 import 'package:flutter/material.dart';
 import 'package:diploma_frontend/constants/constants.dart' as constants;
 
-class SuppliesPage extends StatelessWidget {
+class SuppliesPage extends StatefulWidget {
   const SuppliesPage({super.key});
 
+  @override
+  State<SuppliesPage> createState() => _SuppliesPageState();
+}
+
+class _SuppliesPageState extends State<SuppliesPage> {
+  int? supplyId;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -26,8 +32,16 @@ class SuppliesPage extends StatelessWidget {
           const SizedBox(
             height: 17,
           ),
-          const SuppliesFilters(),
-          const SuppliesTable(),
+          SuppliesFilters(
+            supplyId: supplyId,
+          ),
+          SuppliesTable(
+            onSelected: (value) {
+              setState(() {
+                supplyId = value;
+              });
+            },
+          ),
         ],
       ),
     );

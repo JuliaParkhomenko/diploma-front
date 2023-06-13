@@ -16,8 +16,8 @@ class OptModel {
   factory OptModel.fromOptimization(OptModel opt, Optimization optimization) {
     return OptModel(
       contract: OptContractModel(
-        id: -1,
-        supplyContractId: -1,
+        id: 0,
+        supplyContractId: opt.contract?.id ?? 0,
         productId: opt.application.productId,
         kind: opt.application.kind,
         maker: optimization.maker,
@@ -31,14 +31,14 @@ class OptModel {
         warehouseName: optimization.warehouseName,
         urgency: '',
         userId: -1,
-        id: optimization.applicationId ?? -1,
+        id: optimization.applicationId ?? 0,
         kind: '',
         note: '',
         productId: opt.application.productId,
         productMeasurement: '',
         productName: opt.application.productName,
         status: '',
-        stockId: -1,
+        stockId: 0,
         userName: '',
       ),
       price: optimization.price,

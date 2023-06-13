@@ -6,7 +6,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:diploma_frontend/constants/constants.dart' as constants;
 
 class SuppliesTable extends StatefulWidget {
-  const SuppliesTable({super.key});
+  final Function(int?) onSelected;
+  const SuppliesTable({
+    super.key,
+    required this.onSelected,
+  });
 
   @override
   State<SuppliesTable> createState() => _SuppliesTableState();
@@ -249,10 +253,12 @@ class _SuppliesTableState extends State<SuppliesTable> {
       onPressed: () async {
         if (selectedId == item.id) {
           setState(() {
+            widget.onSelected(null);
             selectedId = null;
           });
         } else {
           setState(() {
+            widget.onSelected(item.id);
             selectedId = item.id;
           });
         }

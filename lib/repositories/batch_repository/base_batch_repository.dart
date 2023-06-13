@@ -40,4 +40,6 @@ abstract class BaseBatchRepository {
     required int warehouseId,
     required int amount,
   });
+
+  Future<void> sendSupplyPdf({required int supplyId});
 }

@@ -382,4 +382,30 @@ class BatchRepository implements BaseBatchRepository {
       log(e.toString());
     }
   }
+
+  @override
+  Future<void> sendSupplyPdf({required int supplyId}) async {
+    try {
+      final User? user = await _database.getUser();
+
+      final Uri url = Uri.parse(
+        'https://restaurant-warehouse.azurewebsites.net/api/Batch/sendSupplyPdf?supplyId=$supplyId',
+      );
+
+      final Map<String, String> headers = {
+        'accept': '*/*',
+        'Content-Type': 'application/json-patch+json',
+        'Authorization': 'Bearer ${user!.token}'
+      };
+
+      final response = await http.get(url, headers: headers);
+
+      if (response.statusCode == 401) {
+        await ServiceLocator.database.clear();
+        await ServiceLocator.appStateService.logIn();
+      }
+    } catch (e) {
+      log(e.toString());
+    }
+  }
 }

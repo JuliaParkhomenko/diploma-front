@@ -1,3 +1,4 @@
+import 'package:diploma_frontend/blocs/batch_supply/batch_supply_cubit.dart';
 import 'package:diploma_frontend/blocs/opt_contract/opt_contract_cubit.dart';
 import 'package:diploma_frontend/models/application.dart';
 import 'package:diploma_frontend/models/opt_contract_model.dart';
@@ -113,6 +114,9 @@ class _AddNewSupplyPageState extends State<AddNewSupplyPage> {
                                 'Batches were successfully ordered',
                                 context,
                               ));
+                      final BatchSupplyCubit cubit = BlocProvider.of(context);
+                      await cubit.featchSupplies();
+                      Routemaster.of(context).push('/supplies');
                     },
                   ),
                 ],
